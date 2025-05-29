@@ -10,6 +10,8 @@
 
   </head>
 <body>
+  <!-- Contenedor del header (se carga dinámicamente con JS externo) -->
+  <div id="header-container"></div>
     <!-- Botón para volver atrás -->
     <div class="col-2 col-md-1 text-start">
         <div class="back-arrow" onclick="goBack()">
@@ -98,5 +100,7 @@ function goBack() {
 }
 
 </script>
+ <!-- JS que carga el header dinámicamente -->
+ <script src="./../public/js/scriptsDOM.js"></script>
 </body>
 </html>

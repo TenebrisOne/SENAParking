@@ -4,24 +4,24 @@
 <head>
     <!-- Definición de la codificación de caracteres para la página -->
     <meta charset="UTF-8">
-    
+
     <!-- Definición del viewport para hacer la página responsive (adaptable a distintos tamaños de pantalla) -->
     <meta name="viewport" content="width=, initial-scale=1.0">
-    
+
     <!-- Metadatos adicionales sobre el autor y el curso -->
     <meta name="author" content="AdsoDeveloperSolutions801">
     <meta name="course" content="ADSO 2873801">
-    
+
     <!-- Favicon para el ícono en la pestaña del navegador -->
     <link rel="icon" type="x-icon" href="../public/images/favicon.ico">
-    
+
     <!-- Enlace al archivo de estilo de Bootstrap (para diseño responsivo y componentes predefinidos) -->
     <!-- Enlace al archivo de Bootstrap para proporcionar estilos prediseñados -->
     <link rel="stylesheet" href="../public/css/bootstrap.min.css">
-    
+
     <!-- Enlace al archivo de estilos personalizados -->
     <link rel="stylesheet" href="../public/css/styles_dashboard.css">
-    
+
     <!-- Título de la página que aparecerá en la pestaña del navegador -->
     <title>Administrador DASHBOARD | SENAParking</title>
 </head>
@@ -29,6 +29,7 @@
 <body>
     <!-- Contenedor donde se insertará el header dinámicamente -->
     <div id="header-container"></div>
+
 
     <!-- Contenedor principal con un diseño de rejilla (Bootstrap) -->
     <div class="container-fluid">
@@ -81,19 +82,19 @@
                         </li>
 
                         <!-- Item de navegación para cerrar sesión -->
-<li class="nav-item btn btn-secondary mt-1">
-    <a class="nav-link" href="/ruta/a/cerrar_sesion.html">
-        <!-- Ícono de cerrar sesión usando SVG -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round" class="feather feather-log-out">
-            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-            <polyline points="16 17 21 12 16 7" />
-            <line x1="21" y1="12" x2="9" y2="12" />
-        </svg>
-        Cerrar sesión
-    </a>
-</li>
+                        <li class="nav-item btn btn-secondary mt-1">
+                            <a class="nav-link" href="/ruta/a/cerrar_sesion.html">
+                                <!-- Ícono de cerrar sesión usando SVG -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-log-out">
+                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                                    <polyline points="16 17 21 12 16 7" />
+                                    <line x1="21" y1="12" x2="9" y2="12" />
+                                </svg>
+                                Cerrar sesión
+                            </a>
+                        </li>
 
 
                         <!--<li class="nav-item btn btn-secondary mt-1">
@@ -110,7 +111,7 @@
                             </a>
                         </li> -->
 
-                        
+
 
                     </ul>
                 </div>
@@ -132,7 +133,8 @@
                             <div class="card card-resumen-general bg-resumen-usuarios-sistema">
                                 <div class="card-body">
                                     <h5 class="card-title">Usuarios del Sistema</h5>
-                                    <p class="card-text font-weight-bold" style="font-size: 1.5em;" id="total-usuarios-sistema">15</p>
+                                    <p class="card-text font-weight-bold" style="font-size: 1.5em;"
+                                        id="total-usuarios-sistema">15</p>
                                 </div>
                             </div>
                         </div>
@@ -141,7 +143,8 @@
                             <div class="card card-resumen-general bg-resumen-usuarios-parqueadero">
                                 <div class="card-body">
                                     <h5 class="card-title">Usuarios Parqueadero</h5>
-                                    <p class="card-text font-weight-bold" style="font-size: 1.5em;" id="total-usuarios-parqueadero">150</p>
+                                    <p class="card-text font-weight-bold" style="font-size: 1.5em;"
+                                        id="total-usuarios-parqueadero">150</p>
                                 </div>
                             </div>
                         </div>
@@ -149,7 +152,8 @@
                             <div class="card card-resumen-general bg-resumen-accesos-hoy">
                                 <div class="card-body">
                                     <h5 class="card-title">Accesos Hoy</h5>
-                                    <p class="card-text font-weight-bold" style="font-size: 1.5em;" id="accesos-hoy">50</p>
+                                    <p class="card-text font-weight-bold" style="font-size: 1.5em;" id="accesos-hoy">50
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -157,7 +161,8 @@
                             <div class="card card-resumen-general bg-resumen-salidas-hoy">
                                 <div class="card-body">
                                     <h5 class="card-title">Salidas Hoy</h5>
-                                    <p class="card-text font-weight-bold" style="font-size: 1.5em;" id="salidas-hoy">45</p>
+                                    <p class="card-text font-weight-bold" style="font-size: 1.5em;" id="salidas-hoy">45
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -188,19 +193,22 @@
                                                 <td>admin1</td>
                                                 <td>Administrador</td>
                                                 <td><button class="btn btn-sm btn-outline-secondary">Editar</button>
-                                                    <button class="btn btn-sm btn-outline-danger">Eliminar</button></td>
+                                                    <button class="btn btn-sm btn-outline-danger">Eliminar</button>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>supervisor1</td>
                                                 <td>Supervisor</td>
                                                 <td><button class="btn btn-sm btn-outline-secondary">Editar</button>
-                                                    <button class="btn btn-sm btn-outline-danger">Eliminar</button></td>
+                                                    <button class="btn btn-sm btn-outline-danger">Eliminar</button>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>guardia1</td>
                                                 <td>Guardia</td>
                                                 <td><button class="btn btn-sm btn-outline-secondary">Editar</button>
-                                                    <button class="btn btn-sm btn-outline-danger">Eliminar</button></td>
+                                                    <button class="btn btn-sm btn-outline-danger">Eliminar</button>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -239,15 +247,15 @@
     </div>
 
     <!-- Función para llamar al Header dinámico -->
-    <script src="./frontend/public/js/scriptsDOM.js"></script>
-    
+    <script src="./../public/js/scriptsDOM.js"></script>
+
     <!-- Scripts para las dependencias de Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="../public/js/bootstrap.min.js"></script>
-    
+
     <!-- Otro script personalizado -->
-    <script src="script.js"></script>
+
 </body>
 
 </html>

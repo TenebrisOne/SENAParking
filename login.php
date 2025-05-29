@@ -8,7 +8,6 @@
     <meta name="course" content="ADSO 2873801">
     <link rel="icon" type="image/x-icon" href="./frontend/public/images/favicon.ico">
     <link rel="stylesheet" href="./frontend/public/css/styles.css">
-
     
     <link href="./frontend/public/css/bootstrap.min.css" rel="stylesheet">
     <meta name="theme-color" content="#000000">
@@ -18,10 +17,9 @@
 
 <body class="bg-login">
 
-
     <!-- Contenedor para el header -->
     <div id="header-container"></div>
-
+    
     
     <!-- Logo SENA -->
     <img src="./frontend/public/images/logo_sena.png" alt="Logo SENA"
@@ -113,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     
     <!-- Scripts -->
-    <script src="./frontend/public/js/scriptsDOM.js"></script>
+    <script src="/frontend/public/js/scriptsDOM.js"></script>
     <script src="./frontend/public/js/validacion_login.js"></script>
 </body>
 

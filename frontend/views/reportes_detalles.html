@@ -7,6 +7,8 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+  <!-- Contenedor del header (se carga dinámicamente con JS externo) -->
+  <div id="header-container"></div>
 <div class="container mt-5">
   <h2 id="tituloUsuario">Detalle del Usuario</h2>
 
@@ -90,5 +92,7 @@
     return h * 60 + m;
   }
 </script>
+ <!-- JS que carga el header dinámicamente -->
+<script src="./../public/js/scriptsDOM.js"></script>
 </body>
 </html>

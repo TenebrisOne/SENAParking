@@ -1,50 +1,55 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Reportes Generales del Parqueadero</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
-<div class="container mt-5">
-  <h2 class="mb-4">Reportes Generales del Parqueadero</h2>
 
-  <!-- Información resumida -->
-  <div class="row text-center mb-4">
-    <div class="col-md-3">
-      <div class="card bg-light">
-        <div class="card-body">
-          <h5>Vehículos Entraron</h5>
-          <p class="fs-4 fw-bold" id="vehiculosEntrada">120</p>
+<body>
+
+  <!-- Contenedor del header (se carga dinámicamente con JS externo) -->
+  <div id="header-container"></div>
+  <div class="container mt-5">
+    <h2 class="mb-4">Reportes Generales del Parqueadero</h2>
+
+    <!-- Información resumida -->
+    <div class="row text-center mb-4">
+      <div class="col-md-3">
+        <div class="card bg-light">
+          <div class="card-body">
+            <h5>Vehículos Entraron</h5>
+            <p class="fs-4 fw-bold" id="vehiculosEntrada">120</p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card bg-light">
-        <div class="card-body">
-          <h5>Vehículos Salieron</h5>
-          <p class="fs-4 fw-bold" id="vehiculosSalida">100</p>
+      <div class="col-md-3">
+        <div class="card bg-light">
+          <div class="card-body">
+            <h5>Vehículos Salieron</h5>
+            <p class="fs-4 fw-bold" id="vehiculosSalida">100</p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card bg-light">
-        <div class="card-body">
-          <h5>Ocupación al final del dia(%)</h5>
-          <p class="fs-4 fw-bold" id="ocupacion">17%</p>
+      <div class="col-md-3">
+        <div class="card bg-light">
+          <div class="card-body">
+            <h5>Ocupación al final del dia(%)</h5>
+            <p class="fs-4 fw-bold" id="ocupacion">17%</p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-3">
-      <div class="card bg-light">
-        <div class="card-body">
-          <h5>Usuarios Nuevos</h5>
-          <p class="fs-4 fw-bold" id="usuariosNuevos">12</p>
+      <div class="col-md-3">
+        <div class="card bg-light">
+          <div class="card-body">
+            <h5>Usuarios Nuevos</h5>
+            <p class="fs-4 fw-bold" id="usuariosNuevos">12</p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-3">
+      <div class="col-md-3">
         <div class="card bg-light">
           <div class="card-body">
             <h5>Pico de ocupacion</h5>
@@ -52,93 +57,96 @@
           </div>
         </div>
       </div>
-  </div>
-
-  <!-- Eventos activos -->
-  <div class="alert alert-info text-center" role="alert">
-    Evento activo: <strong>Feria de Tecnología 2025</strong>
-  </div>
-
-
-  <!-- Selector de fecha -->
-<div class="row mb-4">
-    <div class="col-md-4">
-      <label for="fechaReporte" class="form-label">Seleccionar fecha:</label>
-      <input type="date" id="fechaReporte" class="form-control">
     </div>
+
+    <!-- Eventos activos -->
+    <div class="alert alert-info text-center" role="alert">
+      Evento activo: <strong>Feria de Tecnología 2025</strong>
+    </div>
+
+
+    <!-- Selector de fecha -->
+    <div class="row mb-4">
+      <div class="col-md-4">
+        <label for="fechaReporte" class="form-label">Seleccionar fecha:</label>
+        <input type="date" id="fechaReporte" class="form-control">
+      </div>
+    </div>
+
+
+    <!-- Gráficas -->
+    <div class="row">
+      <div class="col-md-6">
+        <canvas id="graficoEntradasSalidas"></canvas>
+      </div>
+      <div class="col-md-6">
+        <canvas id="graficoReservados"></canvas>
+      </div>
+    </div>
+
+    <!-- Botón para volver a detalle del usuario -->
+    <div class="text-end mt-4">
+      <a href="reportes_detalles.html" class="btn btn-secondary">Volver a Detalle del Usuario</a>
+    </div>
+
   </div>
 
-  
-  <!-- Gráficas -->
-  <div class="row">
-    <div class="col-md-6">
-      <canvas id="graficoEntradasSalidas"></canvas>
-    </div>
-    <div class="col-md-6">
-      <canvas id="graficoReservados"></canvas>
-    </div>
-  </div>
-
-  <!-- Botón para volver a detalle del usuario -->
-<div class="text-end mt-4">
-  <a href="reportes_detalles.html" class="btn btn-secondary">Volver a Detalle del Usuario</a>
-</div>
-
-</div>
-
-<script>
-  // Gráfico de Entradas vs Salidas
-  const ctx1 = document.getElementById('graficoEntradasSalidas').getContext('2d');
-  const grafico1 = new Chart(ctx1, {
-    type: 'bar',
-    data: {
-      labels: ['Entradas', 'Salidas'],
-      datasets: [{
-        label: 'Cantidad de Vehículos',
-        data: [120, 100],
-        backgroundColor: ['#0d6efd', '#dc3545']
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        title: { display: true, text: 'Flujo de Vehículos' }
+  <script>
+    // Gráfico de Entradas vs Salidas
+    const ctx1 = document.getElementById('graficoEntradasSalidas').getContext('2d');
+    const grafico1 = new Chart(ctx1, {
+      type: 'bar',
+      data: {
+        labels: ['Entradas', 'Salidas'],
+        datasets: [{
+          label: 'Cantidad de Vehículos',
+          data: [120, 100],
+          backgroundColor: ['#0d6efd', '#dc3545']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          title: { display: true, text: 'Flujo de Vehículos' }
+        }
       }
-    }
-  });
+    });
 
-  // Gráfico de puestos reservados
-  const ctx2 = document.getElementById('graficoReservados').getContext('2d');
-  const grafico2 = new Chart(ctx2, {
-    type: 'doughnut',
-    data: {
-      labels: ['Reservados Usados', 'Reservados Libres'],
-      datasets: [{
-        data: [8, 2],
-        backgroundColor: ['#198754', '#ffc107']
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        title: { display: true, text: 'Uso de Puestos Reservados' }
+    // Gráfico de puestos reservados
+    const ctx2 = document.getElementById('graficoReservados').getContext('2d');
+    const grafico2 = new Chart(ctx2, {
+      type: 'doughnut',
+      data: {
+        labels: ['Reservados Usados', 'Reservados Libres'],
+        datasets: [{
+          data: [8, 2],
+          backgroundColor: ['#198754', '#ffc107']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          title: { display: true, text: 'Uso de Puestos Reservados' }
+        }
       }
-    }
-  });
+    });
 
 
-  document.getElementById('fechaReporte').addEventListener('change', function () {
-    const fechaSeleccionada = this.value;
-    console.log("Fecha seleccionada:", fechaSeleccionada);
+    document.getElementById('fechaReporte').addEventListener('change', function () {
+      const fechaSeleccionada = this.value;
+      console.log("Fecha seleccionada:", fechaSeleccionada);
 
-    // Aquí puedes hacer una solicitud a tu API o backend para obtener los datos del día seleccionado
-    // Ejemplo ficticio:
-    // fetch(`/api/reporte?fecha=${fechaSeleccionada}`)
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     actualizarGraficos(data);
-    //   });
-  });
-</script>
+      // Aquí puedes hacer una solicitud a tu API o backend para obtener los datos del día seleccionado
+      // Ejemplo ficticio:
+      // fetch(`/api/reporte?fecha=${fechaSeleccionada}`)
+      //   .then(res => res.json())
+      //   .then(data => {
+      //     actualizarGraficos(data);
+      //   });
+    });
+  </script>
+   <!-- JS que carga el header dinámicamente -->
+<script src="./../public/js/scriptsDOM.js"></script>
 </body>
+
 </html>
