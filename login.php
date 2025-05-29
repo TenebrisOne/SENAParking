@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="AdsoDeveloperSolutions801">
     <meta name="course" content="ADSO 2873801">
-    <link rel="icon" type="image/x-icon" href="../public/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="./frontend/public/images/favicon.ico">
     <link rel="stylesheet" href="./frontend/public/css/styles.css">
     
     <link href="./frontend/public/css/bootstrap.min.css" rel="stylesheet">
