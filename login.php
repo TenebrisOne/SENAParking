@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="AdsoDeveloperSolutions801">
     <meta name="course" content="ADSO 2873801">
-    <link rel="icon" type="image/x-icon" href="./frontend/public/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../public/images/favicon.ico">
     <link rel="stylesheet" href="./frontend/public/css/styles.css">
     
     <link href="./frontend/public/css/bootstrap.min.css" rel="stylesheet">
@@ -18,8 +18,8 @@
 <body class="bg-login">
 
     <!-- Contenedor para el header -->
-    <div id="header-container"></div>
-    
+    <div id="header-containerIdx"></div>
+    z
     
     <!-- Logo SENA -->
     <img src="./frontend/public/images/logo_sena.png" alt="Logo SENA"
@@ -111,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     
     <!-- Scripts -->
-    <script src="/frontend/public/js/scriptsDOM.js"></script>
+    <script src="./frontend/public/js/scriptsDOM.js"></script>
     <script src="./frontend/public/js/validacion_login.js"></script>
 </body>
 
