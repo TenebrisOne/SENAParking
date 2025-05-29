@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="AdsoDeveloperSolutions801">
+    <meta name="course" content="ADSO 2873801">
+
+    <!-- Enlace a Bootstrap (si lo estás utilizando) -->
+    <link href="./frontend/public/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Favicon (ícono en la pestaña del navegador) -->
+    <link rel="icon" type="x-icon" href=".frontend/public/images/favicon.ico">
+    <title>HEADER | SENAParking</title>
+
+    <style>
+        /* ====== Estilos del Header y Menú ====== */
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #4CAF50;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .left {
+            display: flex;
+            align-items: center;
+            margin-left: 15px;
+            text-align: left;
+        }
+
+        .logo {
+            width: 60px;
+            margin-right: 15px;
+        }
+
+        .app-name h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .app-name p {
+            margin: 0;
+            font-size: 14px;
+            color: #e8e8e8;
+        }
+
+        .right {
+            text-align: right;
+        }
+
+        .right p {
+            margin: 5px 0;
+        }
+
+        .right span {
+            font-weight: bold;
+        }
+
+        
+    </style>
+
+
+<body>
+    <script src="./frontend/public/js/header_functions.js"></script>
+    <!-- Header Reutilizable -->
+    <header class="header">
+        <div class="left">
+            <img src="./frontend/public/images/logo.png" alt="Logo" class="logo">
+            <div class="app-name">
+                <h1>SenaParking</h1>
+                <p>DeveloperSOLUTIONS801</p>
+            </div>
+        </div>
+
+    
+    </header>
+
+
+
+</body>
+
+</html>
