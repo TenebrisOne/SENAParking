@@ -25,9 +25,10 @@ CREATE TABLE tb_userSys (
 	id_rol INT NOT NULL,
 	tipo_documento ENUM('cedula_ciudadania', 'tarjeta_identidad', 'cedula_extranjeria', 'pasaporte', 'otro') NOT NULL,
 	numero_documento VARCHAR(20) NOT NULL,
-	nombre_completo VARCHAR(155) NOT NULL,
+	nombres_sys VARCHAR(20) NOT NULL,
+	apellidos_sys VARCHAR(20) NOT NULL,
 	correo VARCHAR(100) NOT NULL UNIQUE,
-	password_hash VARCHAR(255) NOT NULL,
+	password VARCHAR(255) NOT NULL,
 	FOREIGN KEY (id_rol) REFERENCES tb_roles(id_rol),
 	UNIQUE (tipo_documento, numero_documento)
 ) ENGINE=InnoDB;
@@ -37,8 +38,9 @@ CREATE TABLE tb_userPark (
 	tipo_user ENUM ('servidor_público', 'contratista', 'trabajador_oficial', 'visitante_autorizado', 'aprendiz', 'instructor') NOT NULL,
 	tipo_documento ENUM('cedula_ciudadania', 'tarjeta_identidad', 'cedula_extranjeria', 'pasaporte', 'otro') NOT NULL,
 	numero_documento VARCHAR(20) NOT NULL,
-	nombre_completo VARCHAR(155) NOT NULL, 
-	edificio VARCHAR(100) NOT NULL,
+	nombres_park VARCHAR(20) NOT NULL,
+	apellidos_park VARCHAR(20) NOT NULL,
+	edificio ENUM('CMD', 'CGI', 'CENIGRAF') NOT NULL,
 	tarjeta_propiedad VARCHAR(100),
 	numero_contacto VARCHAR(20),
 	UNIQUE (tipo_documento, numero_documento)
