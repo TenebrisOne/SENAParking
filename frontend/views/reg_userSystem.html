@@ -18,15 +18,14 @@
 <body>
     <!-- Contenedor donde se insertará el header -->
     <div id="header-container"></div>
-    
+
     <!-- Logo SENA -->
     <img src="../public/images/logo_sena.png" alt="Logo SENA"
         style="position: absolute; top: 100px; right: 70px; width: 100px;">
 
     <!--Carros decorativos-->
     <img src="../public/images/backgrounds/Image.png" alt="Auto decorativo izquierdo" class="car-left">
-    <img src="../public/images/backgrounds/Image.png" alt="Auto decorativo inferior izquierdo"
-        class="car-bottom-left">
+    <img src="../public/images/backgrounds/Image.png" alt="Auto decorativo inferior izquierdo" class="car-bottom-left">
 
     <!-- Flecha de retroceso -->
     <div class="col-2 col-md-1 text-start">
@@ -39,7 +38,7 @@
     <!-- Formulario -->
     <div class="register-container">
 
-        <form class="formulario" id="formulario">
+        <form class="formulario" id="formulario" action="guardar_usuario.php" method="POST">
             <!--Fila del grid de Bootstrap con margen inferior de 3-->
             <div class="row mb-3">
                 <div class="col-12" id="grupo__nombre"> <!-- Columna de 12 espacios-->
@@ -58,6 +57,18 @@
                         placeholder="Ingrese sus apellidos" required>
                     <p class="formulario__input-error">El apellido tiene que ser de 4 a 16 dígitos y solo puede contener
                         letras.</p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-12" id="grupo__tipdoc">
+                    <label for="tipdoc" class="form-label">Tipo de Documento:</label>
+                    <select class="form-select" id="tipdoc" name="tipdoc" required>
+                        <option value="" selected disabled>Seleccione el tipo de documento</option>
+                        <option value="cc">Cedula de Ciudadania</option>
+                        <option value="ce">Cedula de Extranjeria</option>
+                        <option value="ps">Pasaporte</option>
+                        <option value="pep">Permiso Especial de Permanencia</option>
+                    </select>
                 </div>
             </div>
             <div class="row mb-3">
