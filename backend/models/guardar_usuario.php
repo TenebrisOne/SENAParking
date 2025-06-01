@@ -31,7 +31,7 @@ $stmt->bind_param("sssssssss", $rol, $tipo_documento, $documento, $nombre, $apel
 if ($stmt->execute()) {
     echo "<script>
         alert('Usuario registrado exitosamente');
-        window.location.href = '/SENAParking/frontend/views/dashboard_admin.html'; // Redirige de vuelta al formulario
+        window.location.href = '/SENAParking/frontend/views/dashboard_admin.html'; // Redirige de vuelta al dashboard
     </script>";
 } else {
     echo "<script>
