@@ -147,7 +147,14 @@
 
 
 <body>
-    <script src="./frontend/public/js/header_functions.js"></script>
+    <script src="../frontend/public/js/header_functions.js"></script>
+
+    <script>
+        function accion3() {
+            window.location.href = "../../../frontend/views/layouts/logout.php";
+}
+
+    </script>
     <!-- Header Reutilizable -->
     <header class="header">
         <div class="left">
