@@ -61,6 +61,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
 
     $conn = new mysqli("localhost", "root", "", "senaparking_db");
+    
+    require_once __DIR__ . '/./backend/models/ActividadModel.php';
+    $actividadModel = new ActividadModel($conn);
+
+    
 
     if ($conn->connect_error) {
         die("Error de conexión: " . $conn->connect_error);
@@ -70,6 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("s", $correo);
     $stmt->execute();
     $result = $stmt->get_result();
+    
 
     if ($result->num_rows > 0) {
         $usuario = $result->fetch_assoc();
@@ -78,6 +84,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             session_start();
             $_SESSION['correo'] = $correo;
             $_SESSION['nombre'] = $usuario['nombre']; // opcional
+
+        // ✅ Aquí usamos el modelo para registrar la actividad
+        $actividadModel->registrarActividad($usuario['id_userSys'], 'login');
 
             switch ($usuario['id_rol']) {
                 case '1':
