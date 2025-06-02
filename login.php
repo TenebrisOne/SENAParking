@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['nombre'] = $usuario['nombre']; // opcional
 
         // ✅ Aquí usamos el modelo para registrar la actividad
-        $actividadModel->registrarActividad($usuario['id_userSys'], 'login');
+        $actividadModel->registrarActividad($usuario['id_userSys'], 'Inicio de sesion');
 
             switch ($usuario['id_rol']) {
                 case '1':
