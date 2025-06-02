@@ -43,4 +43,9 @@ function eliminarUsuario(idUserSys) {
             .catch(error => console.error("Error al eliminar usuario:", error));
     }
 }
+//Funcion que envia a editar un usuario.
+function editarUsuario(idUserSys) {
+    window.location.href = `/SENAParking/frontend/views/editar_usuario.html?id=${idUserSys}`;
+
+}
 
