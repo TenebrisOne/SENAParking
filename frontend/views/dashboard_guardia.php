@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+// Mostrar vista dependiendo del estado de la sesion
+if ($_SESSION["rol"] != 2) {
+        header("Location: /github/SENAParking/login.php");
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="es"> <!-- Establece el idioma de la página web como español -->
 <head>
