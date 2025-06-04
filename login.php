@@ -1,3 +1,26 @@
+<?php
+session_start();
+
+// Mostrar vista dependiendo del estado de la sesion
+if (isset($_SESSION["nombre"])) {
+    // Si hay una sesion activa, mostrar el paner pricipal
+    switch ($_SESSION["rol"]) {
+        case '1':
+            header("Location: ./frontend/views/dashboard_admin.php");
+            break;
+        case '2':
+            header("Location: ./frontend/views/dashboard_supervisor.html");
+            break;
+        case '3':
+            header("Location: ./frontend/views/dashboard_guardia.html");
+            break;
+    }
+} else {
+    // Si no hay sesion, mostrar la pagina de inicio de sesión
+    require_once "./login.php";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -8,7 +31,7 @@
     <meta name="course" content="ADSO 2873801">
     <link rel="icon" type="image/x-icon" href="./frontend/public/images/favicon.ico">
     <link rel="stylesheet" href="./frontend/public/css/styles.css">
-    
+
     <link href="./frontend/public/css/bootstrap.min.css" rel="stylesheet">
     <meta name="theme-color" content="#000000">
     <meta http-equiv="refresh" content="60">
@@ -20,7 +43,7 @@
     <!-- Contenedor para el header -->
     <div id="header-containerIdx"></div>
     z
-    
+
     <!-- Logo SENA -->
     <img src="./frontend/public/images/logo_sena.png" alt="Logo SENA"
         style="position: absolute; top: 100px; right: 70px; width: 100px;">
@@ -55,10 +78,10 @@
 
         <a href="/forgot-password" class="text-muted mt-3" style="font-size: 14px;">¿Olvidaste tu contraseña?</a>
 
-    <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $correo = $_POST["correo"];
-    $password = $_POST["password"];
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $correo = $_POST["correo"];
+            $password = $_POST["password"];
 
     $conn = new mysqli("localhost", "root", "", "senaparking_db");
     
@@ -67,9 +90,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     
 
-    if ($conn->connect_error) {
-        die("Error de conexión: " . $conn->connect_error);
-    }
+            if ($conn->connect_error) {
+                die("Error de conexión: " . $conn->connect_error);
+            }
 
     $stmt = $conn->prepare("SELECT * FROM tb_userSys WHERE correo = ?");
     $stmt->bind_param("s", $correo);
@@ -98,32 +121,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 case '3':
                     header("Location: /SENAParking/frontend/views/dashboard_guardia.html");
                     break;
+
+
+                    // Redirigir a archivo HTML
+                    /*header("Location: /SENAParking/frontend/views/dashboard_admin.html");*/
+                    exit();
+                } else {
+                    echo "<p style='color:red;'>Contraseña incorrecta</p>";
+                }
+            } else {
+                echo "<p style='color:red;'>Usuario no encontrado</p>";
+
             }
 
-                
-            // Redirigir a archivo HTML
-            /*header("Location: /SENAParking/frontend/views/dashboard_admin.html");*/
-            exit();
-        } else {
-            echo "<p style='color:red;'>Contraseña incorrecta</p>";
+            $conn->close();
         }
-    } else {
-        echo "<p style='color:red;'>Usuario no encontrado</p>";
-    }
-
-    $conn->close();
-}
-?>
+        ?>
 
 
     </div>
 
-    
+
     <!-- Scripts -->
     <script src="./frontend/public/js/scriptsDOM.js"></script>
     <script src="./frontend/public/js/validacion_login.js"></script>
 </body>
 
 </html>
-
-
