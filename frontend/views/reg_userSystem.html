@@ -18,28 +18,27 @@
 <body>
     <!-- Contenedor donde se insertará el header -->
     <div id="header-container"></div>
-    
+
     <!-- Logo SENA -->
     <img src="../public/images/logo_sena.png" alt="Logo SENA"
         style="position: absolute; top: 100px; right: 70px; width: 100px;">
 
     <!--Carros decorativos-->
     <img src="../public/images/backgrounds/Image.png" alt="Auto decorativo izquierdo" class="car-left">
-    <img src="../public/images/backgrounds/Image.png" alt="Auto decorativo inferior izquierdo"
-        class="car-bottom-left">
+    <img src="../public/images/backgrounds/Image.png" alt="Auto decorativo inferior izquierdo" class="car-bottom-left">
 
     <!-- Flecha de retroceso -->
     <div class="col-2 col-md-1 text-start">
         <div class="back-arrow" onclick="goBack()">
             <i class="fas fa-arrow-left"></i>
-            <a class="nav-link" href="../frontend/views/dashboard_admin.html"></a>
+            <a class="nav-link" href="/SENAParking/frontend/views/dashboard_admin.html"></a>
         </div>
     </div>
 
     <!-- Formulario -->
     <div class="register-container">
 
-        <form class="formulario" id="formulario">
+        <form class="formulario" id="formulario" action="/SENAParking/backend/models/guardar_usuario.php" method="POST">
             <!--Fila del grid de Bootstrap con margen inferior de 3-->
             <div class="row mb-3">
                 <div class="col-12" id="grupo__nombre"> <!-- Columna de 12 espacios-->
@@ -61,6 +60,18 @@
                 </div>
             </div>
             <div class="row mb-3">
+                <div class="col-12" id="grupo__tipdoc">
+                    <label for="tipdoc" class="form-label">Tipo de Documento:</label>
+                    <select class="form-select" id="tipdoc" name="tipdoc" required>
+                        <option value="" selected disabled>Seleccione el tipo de documento</option>
+                        <option value="1">Cedula de Ciudadania</option>
+                        <option value="2">Cedula de Extranjeria</option>
+                        <option value="3">Pasaporte</option>
+                        <option value="4">Permiso Especial de Permanencia</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col-12" id="grupo__documento">
                     <label for="cedula" class="form-label">Documento:</label>
                     <input type="text" class="form-control formulario__input" name="documento" id="documento"
@@ -74,9 +85,9 @@
                     <label for="rol" class="form-label">Rol:</label>
                     <select class="form-select" id="rol" name="rol" required>
                         <option value="" selected disabled>Selecciona el rol</option>
-                        <option value="aprendiz">Administrador</option>
-                        <option value="instructor">Supervisor</option>
-                        <option value="administrador">Guarda de Seguridad</option>
+                        <option value="1">Administrador</option>
+                        <option value="2">Supervisor</option>
+                        <option value="3">Guarda de Seguridad</option>
                     </select>
                     <p class="formulario__input-error">El usuario tiene que ser de 4 a 16 dígitos y solo puede contener
                         letras.</p>
@@ -85,7 +96,7 @@
             <div class="row mb-3">
                 <div class="col-12" id="grupo__correo">
                     <label for="email" class="form-label">Correo Electronico:</label>
-                    <input type="email" class="form-control formulario__input" name="correo" id="correo_electronico"
+                    <input type="email" class="form-control formulario__input" name="correo" id="correo"
                         placeholder="Email" required>
                     <p class="formulario__input-error">El correo solo puede contener letras, numeros, puntos, guiones y
                         guion bajo.</p>
@@ -94,7 +105,7 @@
             <div class="row mb-3">
                 <div class="col-12" id="grupo__numero">
                     <label for="numero" class="form-label">Número contacto:</label>
-                    <input type="numero" class="form-control formulario__input" name="numero" id="numero_contacto"
+                    <input type="numero" class="form-control formulario__input" name="numero" id="numero"
                         placeholder="Numero" required>
                     <p class="formulario__input-error">El numero tiene que ser de 7 a 14 digitos y solo puede contener
                         numeros.</p>
@@ -103,7 +114,7 @@
             <div class="row mb-3">
                 <div class="col-12" id="grupo__usuario">
                     <label for="usurio" class="form-label">Nombre Usuario:</label>
-                    <input type="usuario" class="form-control formulario__input" name="usuario" id="nombre_usuario"
+                    <input type="usuario" class="form-control formulario__input" name="usuario" id="usuario"
                         placeholder="Usuario" required>
                     <p class="formulario__input-error">El nombre tiene que ser de 4 a 16 dígitos y solo puede contener
                         letras, numeros.</p>
@@ -118,15 +129,16 @@
                 </div>
             </div>
             <br>
-            <button type="submit" class="btn sign-in-btn">Ingresar</button>
-    </div>
+            <button type="submit" class="btn sign-in-btn">Registrar</button>
+        </div>
     </form>
 
     <!-- Cargar el header-->
     <script src="./../public/js/scriptsDOM.js"></script>
 
-    <!-- llama al archivo de lavidacion del formulario -->
-    <script src="/frontend/public/js/validacion_user_system.js"></script>
+    <!-- llama al archivo de validacion del formulario -->
+    <script src="../frontend/public/js/validacion_user_system.js"></script>
+
 
 </body>
 

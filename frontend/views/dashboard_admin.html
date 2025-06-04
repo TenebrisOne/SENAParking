@@ -64,7 +64,8 @@ if ($_SESSION["rol"] != 1) {
                         </li>
                         <!-- Ítems similares con otros iconos y textos, cada uno corresponde a una opción en la barra lateral -->
                         <li class="nav-item btn btn-secondary mt-1">
-                            <a class="nav-link" href="/frontend/views/reg_userSystem.html">
+                            <!--Cambio ruta localhost, se agrega SENAParking a la navegacion del boton-->
+                            <a class="nav-link" href="/SENAParking/frontend/views/reg_userSystem.html">
                                 <!-- Icono de usuarios -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -79,7 +80,7 @@ if ($_SESSION["rol"] != 1) {
                         </li>
                         <!-- Se repiten ítems similares para las secciones de reportes y configuración -->
                         <li class="nav-item btn btn-secondary mt-1">
-                            <a class="nav-link" href="/frontend/views/reportes.html">
+                            <a class="nav-link" href="/SENAParking/frontend/views/reportes_generales.html">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" class="feather feather-bar-chart-2">
@@ -120,7 +121,6 @@ if ($_SESSION["rol"] != 1) {
                                 Configuración
                             </a>
                         </li> -->
-
 
 
                     </ul>
@@ -197,32 +197,14 @@ if ($_SESSION["rol"] != 1) {
                                                 <th>Acciones</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <!-- Ejemplo de filas de usuarios con opciones para editar y eliminar -->
-                                            <tr>
-                                                <td>admin1</td>
-                                                <td>Administrador</td>
-                                                <td><button class="btn btn-sm btn-outline-secondary">Editar</button>
-                                                    <button class="btn btn-sm btn-outline-danger">Eliminar</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>supervisor1</td>
-                                                <td>Supervisor</td>
-                                                <td><button class="btn btn-sm btn-outline-secondary">Editar</button>
-                                                    <button class="btn btn-sm btn-outline-danger">Eliminar</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>guardia1</td>
-                                                <td>Guardia</td>
-                                                <td><button class="btn btn-sm btn-outline-secondary">Editar</button>
-                                                    <button class="btn btn-sm btn-outline-danger">Eliminar</button>
-                                                </td>
-                                            </tr>
+                                        <tbody id="tablaUsuarios">
+                                            <!-- Aquí se insertarán los usuarios dinámicamente -->
                                         </tbody>
                                     </table>
-                                    <button class="btn btn-registrar-usuario btn-sm">Registrar Nuevo Usuario</button>
+                                    <!--Cambio ruta localhost, se agrega SENAParking a la navegacion del boton-->
+                                    <button type="button"
+                                        onclick="window.location.href='/SENAParking/frontend/views/reg_userSystem.html'"
+                                        class="btn btn-registrar-usuario btn-sm">Registrar Nuevo Usuario </button>
                                 </div>
                             </div>
                         </div>
@@ -262,9 +244,10 @@ if ($_SESSION["rol"] != 1) {
     <!-- Scripts para las dependencias de Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="./../public/js/bootstrap.min.js"></script>
+    <script src="../public/js/bootstrap.min.js"></script>
 
     <!-- Otro script personalizado -->
+    <script src="../public/js/usuarios.js"></script>
 
 </body>
 
