@@ -107,6 +107,7 @@ if (isset($_SESSION["nombre"])) {
                 session_start();
                 $_SESSION['correo'] = $correo;
                 $_SESSION['nombre'] = $usuario['nombre']; // opcional
+                $_SESSION['rol'] = $usuario['id_rol'];
 
                 // ✅ Aquí usamos el modelo para registrar la actividad
                 $actividadModel->registrarActividad($usuario['id_userSys'], 'Inicio de sesion');
