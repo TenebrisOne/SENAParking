@@ -130,7 +130,7 @@ if (isset($_SESSION["nombre"])) {
                     echo "<p style='color:red;'>Contraseña incorrecta</p>";
             }
         } else {
-           echo "<p style='color:red;'>Usuario no encontrado</p>";
+            echo "<p style='color:red;'>Usuario no encontrado</p>";
 
         }
 
