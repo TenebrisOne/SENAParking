@@ -42,7 +42,7 @@ if (isset($_SESSION["nombre"])) {
 
     <!-- Contenedor para el header -->
     <div id="header-containerIdx"></div>
-    z
+    
 
     <!-- Logo SENA -->
     <img src="./frontend/public/images/logo_sena.png" alt="Logo SENA"
