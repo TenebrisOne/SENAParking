@@ -1,51 +1,52 @@
-fetch("/SENAParking/backend/models/mostrar_usuarios.php")
+document.addEventListener("DOMContentLoaded", function () {
+    fetch('/SENAParking/backend/models/UsuarioSistemaModel.php')
+        .then(response => response.json())
+        .then(data => {
+            let tablaUsuarios = document.getElementById("tablaUsuarios");
+            tablaUsuarios.innerHTML = ""; // ✅ Limpiar la tabla antes de agregar filas
+
+            // Definir la equivalencia de IDs con los nombres de los roles
+            const roles = { 1: "Administrador", 2: "Supervisor", 3: "Guardia de Seguridad" };
+
+            data.forEach(usuario => {
+                let rolNombre = roles[usuario.id_rol] || "Desconocido"; // ✅ Convertir ID en nombre de rol
+                let estadoBoton = usuario.estado === "activo" ? "Deshabilitar" : "Habilitar";
+                let estadoClase = usuario.estado === "activo" ? "btn-danger" : "btn-success";
+
+                let fila = `<tr>
+                                <td>${usuario.username}</td>
+                                <td>${rolNombre}</td>
+                                <td>
+                                <label class="switch">
+    <input type="checkbox" onchange="cambiarEstado(this, ${usuario.id_userSys}, '${usuario.estado}')" ${usuario.estado === 'activo' ? 'checked' : ''}>
+    <span class="slider"></span>
+                                </label>
+                                </td>
+                            </tr>`;
+                tablaUsuarios.innerHTML += fila;
+            });
+        })
+        .catch(error => console.error("Error al obtener los usuarios:", error));
+});
+
+function cambiarEstado(checkbox, id_userSys, estadoActual) {
+    let nuevoEstado = checkbox.checked ? "activo" : "inactivo";
+
+    fetch('/SENAParking/backend/models/UsuarioSistemaModel.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id_userSys: id_userSys, estado: nuevoEstado })
+    })
     .then(response => response.json())
     .then(data => {
-        const tablaUsuarios = document.getElementById("tablaUsuarios");
-        tablaUsuarios.innerHTML = ""; // Limpia la tabla antes de actualizar
-
-        data.forEach(usuario => {
-            const row = document.createElement("tr");
-
-            row.innerHTML = `
-                <td>${usuario.username}</td>
-                <td>${obtenerRol(usuario.id_rol)}</td>
-                <td>
-                    <button class="btn btn-sm btn-outline-secondary" onclick="editarUsuario(${usuario.id_userSys})">Editar</button>
-                    <button class="btn btn-sm btn-outline-danger" onclick="eliminarUsuario(${usuario.id_userSys})">Eliminar</button>
-                </td>
-            `;
-
-            tablaUsuarios.appendChild(row);
-        });
+        if (data.success) {
+            console.log("Estado cambiado correctamente.");
+        } else {
+            console.error("Error al cambiar estado:", data.error);
+        }
     })
-    .catch(error => console.error("Error al cargar usuarios:", error));
-
-// Función para traducir el ID del rol al nombre correspondiente
-function obtenerRol(idRol) {
-    const roles = {
-        1: "Administrador",
-        2: "Supervisor",
-        3: "Guarda de Seguridad"
-    };
-    return roles[idRol] || "Desconocido";
+    .catch(error => console.error("Error al cambiar estado:", error));
 }
 
-// Función para eliminar usuario
-function eliminarUsuario(idUserSys) {
-    if (confirm("¿Seguro que deseas eliminar este usuario?")) {
-        fetch(`/SENAParking/backend/models/eliminar_usuario.php?id=${idUserSys}`, { method: "GET" })
-            .then(response => response.json())
-            .then(data => {
-                alert(data.message);
-                location.reload(); // Recargar la página después de eliminar
-            })
-            .catch(error => console.error("Error al eliminar usuario:", error));
-    }
-}
-//Funcion que envia a editar un usuario.
-function editarUsuario(idUserSys) {
-    window.location.href = `/SENAParking/frontend/views/editar_usuario.html?id=${idUserSys}`;
 
-}
 
