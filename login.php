@@ -42,7 +42,7 @@ if (isset($_SESSION["nombre"])) {
 
     <!-- Contenedor para el header -->
     <div id="header-containerIdx"></div>
-    z
+    
 
     <!-- Logo SENA -->
     <img src="./frontend/public/images/logo_sena.png" alt="Logo SENA"
@@ -107,6 +107,7 @@ if (isset($_SESSION["nombre"])) {
                 session_start();
                 $_SESSION['correo'] = $correo;
                 $_SESSION['nombre'] = $usuario['nombre']; // opcional
+                $_SESSION['rol'] = $usuario['id_rol'];
 
                 // ✅ Aquí usamos el modelo para registrar la actividad
                 $actividadModel->registrarActividad($usuario['id_userSys'], 'Inicio de sesion');
@@ -129,7 +130,7 @@ if (isset($_SESSION["nombre"])) {
                     echo "<p style='color:red;'>Contraseña incorrecta</p>";
             }
         } else {
-           echo "<p style='color:red;'>Usuario no encontrado</p>";
+            echo "<p style='color:red;'>Usuario no encontrado</p>";
 
         }
 

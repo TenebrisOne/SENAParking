@@ -1,4 +1,4 @@
- <?php
+<?php
 // backend/controllers/PermisosController.php (o inclúyelo en tus paneles de control)
 
 function hasPermission($required_role_id) {
