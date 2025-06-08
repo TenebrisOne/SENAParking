@@ -38,7 +38,7 @@
     <!-- Formulario -->
     <div class="register-container">
 
-        <form class="formulario" id="formulario" action="/SENAParking/backend/models/guardar_usuario.php" method="POST">
+        <form class="formulario" id="formulario" action="/SENAParking/backend/models/UsuarioSistemaModel.php" method="POST">
             <!--Fila del grid de Bootstrap con margen inferior de 3-->
             <div class="row mb-3">
                 <div class="col-12" id="grupo__nombre"> <!-- Columna de 12 espacios-->
@@ -136,6 +136,28 @@
     <!-- Cargar el header-->
     <script src="./../public/js/scriptsDOM.js"></script>
 
+    <script>
+        document.getElementById("formulario").addEventListener("submit", function (event) {
+            event.preventDefault();
+    
+            const datos = new FormData(this); // ✅ Captura los datos del formulario correctamente
+    
+            fetch('/SENAParking/backend/models/UsuarioSistemaModel.php', {
+                method: 'POST',
+                body: datos
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message); // ✅ Muestra el mensaje correcto
+                if (data.success) {
+                    window.location.href = "dashboard_admin.html";
+                }
+            })
+            .catch(error => console.error("Error al registrar usuario:", error));
+        });
+    </script>
+    
+    
     <!-- llama al archivo de validacion del formulario -->
     <script src="../frontend/public/js/validacion_user_system.js"></script>
 

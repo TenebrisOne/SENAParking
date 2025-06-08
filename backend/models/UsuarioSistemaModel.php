@@ -8,24 +8,32 @@ class Usuario {
         $this->conexion = $conexion;
     }
 
-    // Método para registrar usuarios con las columnas correctas
+    // ✅ Registrar usuarios con estado por defecto "activo"
     public function registrarUsuario($nombres_sys, $apellidos_sys, $tipo_documento, $numero_documento, $id_rol, $correo, $numero_contacto, $username, $password) {
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO tb_usersys (nombres_sys, apellidos_sys, tipo_documento, numero_documento, id_rol, correo, numero_contacto, username, password) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO tb_usersys (nombres_sys, apellidos_sys, tipo_documento, numero_documento, id_rol, correo, numero_contacto, username, password, estado) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'activo')"; // ✅ Estado por defecto: activo
 
         $stmt = $this->conexion->prepare($sql);
         if ($stmt) {
             $stmt->bind_param("sssisssss", $nombres_sys, $apellidos_sys, $tipo_documento, $numero_documento, $id_rol, $correo, $numero_contacto, $username, $passwordHash);
-            return $stmt->execute();
+            $resultado = $stmt->execute();
+
+            if ($resultado) {
+                echo json_encode(["success" => true, "message" => "Usuario registrado correctamente"]);
+            } else {
+                echo json_encode(["success" => false, "message" => "Error al registrar usuario"]);
+            }
+            exit();
         } else {
-            return false;
+            echo json_encode(["success" => false, "message" => "Error en la consulta SQL"]);
+            exit();
         }
     }
 
-    // Método para obtener los usuarios con todas las columnas necesarias
+    // ✅ Obtener usuarios y su estado
     public function obtenerUsuarios() {
-        $sql = "SELECT id_userSys, nombres_sys, id_rol, username, correo, estado FROM tb_usersys"; // ✅ Incluimos estado
+        $sql = "SELECT id_userSys, nombres_sys, id_rol, username, correo, estado FROM tb_usersys"; 
         $resultado = $this->conexion->query($sql);
 
         if ($resultado->num_rows > 0) {
@@ -33,7 +41,7 @@ class Usuario {
             while ($fila = $resultado->fetch_assoc()) {
                 $usuarios[] = $fila;
             }
-            header('Content-Type: application/json'); // ✅ Formato JSON
+            header('Content-Type: application/json');
             echo json_encode($usuarios);
             exit();
         } else {
@@ -43,45 +51,45 @@ class Usuario {
         }
     }
 
-    // Método para cambiar el estado del usuario (activo o inactivo)
+    // ✅ Cambiar estado (habilitar/deshabilitar usuario)
     public function cambiarEstadoUsuario($id_userSys, $nuevoEstado) {
         $sql = "UPDATE tb_usersys SET estado = ? WHERE id_userSys = ?";
         $stmt = $this->conexion->prepare($sql);
         if ($stmt) {
             $stmt->bind_param("si", $nuevoEstado, $id_userSys);
-            return $stmt->execute();
+            $resultado = $stmt->execute();
+
+            if ($resultado) {
+                echo json_encode(["success" => true, "message" => "Estado actualizado correctamente"]);
+            } else {
+                echo json_encode(["success" => false, "message" => "Error al cambiar estado"]);
+            }
+            exit();
         } else {
-            return false;
+            echo json_encode(["success" => false, "message" => "Error en la consulta SQL"]);
+            exit();
         }
     }
 }
 
-// ✅ Manejo de solicitudes POST fuera de la clase
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $datos = json_decode(file_get_contents("php://input"), true);
-
-    if (isset($datos["id_userSys"]) && isset($datos["estado"])) {
-        $id_userSys = $datos["id_userSys"];
-        $nuevoEstado = $datos["estado"];
-
-        require_once '../config/conexion.php'; // ✅ Asegurar conexión aquí
-        $usuarioModel = new Usuario($conn);
-        $resultado = $usuarioModel->cambiarEstadoUsuario($id_userSys, $nuevoEstado);
-
-        echo json_encode(["success" => $resultado]);
-        exit();
-    } else {
-        echo json_encode(["success" => false, "error" => "Datos incompletos"]);
-        exit();
-    }
+// ✅ Procesar registro desde el formulario
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"])) {
+    $usuarioModel = new Usuario($conn);
+    $usuarioModel->registrarUsuario($_POST["nombre"], $_POST["apellido"], $_POST["tipdoc"], $_POST["documento"], $_POST["rol"], $_POST["correo"], $_POST["numero"], $_POST["usuario"], $_POST["contrasena"]);
 }
 
-// ✅ Manejo de solicitudes GET para obtener usuarios
-require_once '../config/conexion.php';
-$usuarioModel = new Usuario($conn);
+// ✅ Procesar cambio de estado desde el dashboard
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id_userSys"])) {
+    $usuarioModel = new Usuario($conn);
+    $usuarioModel->cambiarEstadoUsuario($_POST["id_userSys"], $_POST["estado"]);
+}
 
+// ✅ Obtener usuarios para el dashboard
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    $usuarioModel = new Usuario($conn);
     echo json_encode($usuarioModel->obtenerUsuarios());
     exit();
 }
 ?>
+
+

@@ -3,24 +3,22 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(response => response.json())
         .then(data => {
             let tablaUsuarios = document.getElementById("tablaUsuarios");
-            tablaUsuarios.innerHTML = ""; // ✅ Limpiar la tabla antes de agregar filas
+            tablaUsuarios.innerHTML = ""; 
 
-            // Definir la equivalencia de IDs con los nombres de los roles
             const roles = { 1: "Administrador", 2: "Supervisor", 3: "Guardia de Seguridad" };
 
             data.forEach(usuario => {
-                let rolNombre = roles[usuario.id_rol] || "Desconocido"; // ✅ Convertir ID en nombre de rol
-                let estadoBoton = usuario.estado === "activo" ? "Deshabilitar" : "Habilitar";
-                let estadoClase = usuario.estado === "activo" ? "btn-danger" : "btn-success";
+                let rolNombre = roles[usuario.id_rol] || "Desconocido";
+                let checked = usuario.estado === "activo" ? "checked" : "";
 
                 let fila = `<tr>
                                 <td>${usuario.username}</td>
                                 <td>${rolNombre}</td>
                                 <td>
-                                <label class="switch">
-    <input type="checkbox" onchange="cambiarEstado(this, ${usuario.id_userSys}, '${usuario.estado}')" ${usuario.estado === 'activo' ? 'checked' : ''}>
-    <span class="slider"></span>
-                                </label>
+                                    <label class="switch">
+                                        <input type="checkbox" onchange="cambiarEstado(${usuario.id_userSys}, this.checked)" ${checked}>
+                                        <span class="slider"></span>
+                                    </label>
                                 </td>
                             </tr>`;
                 tablaUsuarios.innerHTML += fila;
@@ -29,24 +27,19 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => console.error("Error al obtener los usuarios:", error));
 });
 
-function cambiarEstado(checkbox, id_userSys, estadoActual) {
-    let nuevoEstado = checkbox.checked ? "activo" : "inactivo";
+function cambiarEstado(id_userSys, isChecked) {
+    let nuevoEstado = isChecked ? "activo" : "inactivo";
 
     fetch('/SENAParking/backend/models/UsuarioSistemaModel.php', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id_userSys: id_userSys, estado: nuevoEstado })
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ id_userSys: id_userSys, estado: nuevoEstado })
     })
     .then(response => response.json())
     .then(data => {
-        if (data.success) {
-            console.log("Estado cambiado correctamente.");
-        } else {
-            console.error("Error al cambiar estado:", data.error);
-        }
+        alert(data.message); // ✅ Muestra mensaje de actualización correcta
+        location.reload();
     })
     .catch(error => console.error("Error al cambiar estado:", error));
 }
-
-
 
