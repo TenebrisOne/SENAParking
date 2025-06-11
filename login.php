@@ -1,26 +1,3 @@
-<?php
-session_start();
-
-// Mostrar vista dependiendo del estado de la sesion
-if (isset($_SESSION["nombre"])) {
-    // Si hay una sesion activa, mostrar el paner pricipal
-    switch ($_SESSION["rol"]) {
-        case '1':
-            header("Location: ./frontend/views/dashboard_admin.php");
-            break;
-        case '2':
-            header("Location: ./frontend/views/dashboard_supervisor.html");
-            break;
-        case '3':
-            header("Location: ./frontend/views/dashboard_guardia.html");
-            break;
-    }
-} else {
-    // Si no hay sesion, mostrar la pagina de inicio de sesión
-    require_once "./login.php";
-}
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 
