@@ -177,6 +177,30 @@ if ($_SESSION["rol"] != 1) {
                             </div>
                         </div>
                     </div>
+                    <!-- Reportes generales con enlaces a diferentes reportes -->
+                    <div class="col-md-6">
+                        <div class="card card-reportes-generales">
+                            <div class="card-header">
+                                Reportes Generales
+                            </div>
+                            <div class="card-body">
+                                <p class="text-muted">Acceso a los diferentes reportes generados por el sistema.</p>
+                                <!-- Lista de enlaces a los reportes -->
+                                <ul class="list-group">
+                                    <li class="list-group-item-reporte"><a href="#">Historial Completo de Accesos y
+                                            Salidas</a></li>
+                                    <li class="list-group-item-reporte"><a href="#">Reporte de Actividad por Usuario
+                                            del Sistema</a></li>
+                                    <li class="list-group-item-reporte"><a href="#">Reporte de Ocupación por Franja
+                                            Horaria</a></li>
+                                    <li class="list-group-item-reporte"><a href="#">Reporte de Usuarios del
+                                            Parqueadero Registrados</a></li>
+                                </ul>
+                                <button class="btn btn-sm btn-outline-secondary mt-2">Generar Reporte
+                                    Personalizado</button>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- Filas para la gestión de usuarios y los reportes -->
                     <div class="row">
@@ -208,27 +232,55 @@ if ($_SESSION["rol"] != 1) {
                                 </div>
                             </div>
                         </div>
-                        <!-- Reportes generales con enlaces a diferentes reportes -->
+                        <!-- Filas para la gestión de usuarios y los reportes -->
                         <div class="col-md-6">
-                            <div class="card card-reportes-generales">
+                            <div class="card card-gestion-usuarios">
                                 <div class="card-header">
-                                    Reportes Generales
+                                    Gestión de Usuarios del Parqueadero
                                 </div>
                                 <div class="card-body">
-                                    <p class="text-muted">Acceso a los diferentes reportes generados por el sistema.</p>
-                                    <!-- Lista de enlaces a los reportes -->
-                                    <ul class="list-group">
-                                        <li class="list-group-item-reporte"><a href="#">Historial Completo de Accesos y
-                                                Salidas</a></li>
-                                        <li class="list-group-item-reporte"><a href="#">Reporte de Actividad por Usuario
-                                                del Sistema</a></li>
-                                        <li class="list-group-item-reporte"><a href="#">Reporte de Ocupación por Franja
-                                                Horaria</a></li>
-                                        <li class="list-group-item-reporte"><a href="#">Reporte de Usuarios del
-                                                Parqueadero Registrados</a></li>
-                                    </ul>
-                                    <button class="btn btn-sm btn-outline-secondary mt-2">Generar Reporte
-                                        Personalizado</button>
+                                    <p class="text-muted">Administrar los usuarios con acceso al parqueadero (servidor
+                                        público, contratista,
+                                        trabajador oficial, visitante autorizado, aprendiz).</p>
+                                    <!-- Tabla con la lista de usuarios -->
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombres</th>
+                                                <th>Vehículo</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tablaUsuariosparqueadero">
+                                            <!-- Aquí se insertarán los usuarios dinámicamente -->
+                                            <!-- Ejemplo de filas de usuarios con opciones para editar y eliminar -->
+                                            <tr>
+                                                <td>Pablo Rojas</td>
+                                                <td>Carro</td>
+                                                <td><button class="btn btn-sm btn-outline-secondary">Editar</button>
+                                                    <button class="btn btn-sm btn-outline-danger">Eliminar</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Pedro Ruiz</td>
+                                                <td>Moto</td>
+                                                <td><button class="btn btn-sm btn-outline-secondary">Editar</button>
+                                                    <button class="btn btn-sm btn-outline-danger">Eliminar</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Pepito Perez</td>
+                                                <td>Bicicleta</td>
+                                                <td><button class="btn btn-sm btn-outline-secondary">Editar</button>
+                                                    <button class="btn btn-sm btn-outline-danger">Eliminar</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <!--Cambio ruta localhost, se agrega SENAParking a la navegacion del boton-->
+                                    <button type="button"
+                                        onclick="window.location.href='/SENAParking/frontend/views/reg_userParking.html'"
+                                        class="btn btn-registrar-usuario btn-sm">Registrar Nuevo Usuario </button>
                                 </div>
                             </div>
                         </div>
@@ -248,7 +300,7 @@ if ($_SESSION["rol"] != 1) {
 
     <!-- Otro script personalizado -->
     <script src="../public/js/usuarios.js"></script>
-    
+
 
 </body>
 
