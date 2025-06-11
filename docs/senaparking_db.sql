@@ -7,6 +7,11 @@ CREATE TABLE tb_roles (
 	nombre VARCHAR(50) NOT NULL UNIQUE
 ) ENGINE=InnoDB;
 
+INSERT INTO `tb_roles` (`id_rol`, `nombre`) VALUES
+(1, 'admin'),
+(3, 'guardia'),
+(2, 'supervisor');
+
 CREATE TABLE tb_permisos (
 	id_permiso INT AUTO_INCREMENT PRIMARY KEY,
 	nombre VARCHAR(50) NOT NULL UNIQUE
@@ -20,18 +25,21 @@ CREATE TABLE tb_rol_permisos (
 	FOREIGN KEY (id_permiso) REFERENCES tb_permisos(id_permiso) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
-CREATE TABLE tb_userSys (
-	id_userSys INT AUTO_INCREMENT PRIMARY KEY, 
-	id_rol INT NOT NULL,
-	tipo_documento ENUM('cedula_ciudadania', 'tarjeta_identidad', 'cedula_extranjeria', 'pasaporte', 'otro') NOT NULL,
-	numero_documento VARCHAR(20) NOT NULL,
-	nombres_sys VARCHAR(20) NOT NULL,
-	apellidos_sys VARCHAR(20) NOT NULL,
-	correo VARCHAR(100) NOT NULL UNIQUE,
-	password VARCHAR(255) NOT NULL,
-	FOREIGN KEY (id_rol) REFERENCES tb_roles(id_rol),
-	UNIQUE (tipo_documento, numero_documento)
-) ENGINE=InnoDB;
+CREATE TABLE `tb_usersys` (
+  `id_userSys` int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  `id_rol` int(11) NOT NULL,
+  tipo_documento ENUM('cedula_ciudadania', 'tarjeta_identidad', 'cedula_extranjeria', 'pasaporte', 'otro') NOT NULL,
+  `numero_documento` varchar(20) NOT NULL,
+  `nombres_sys` varchar(20) NOT NULL,
+  `apellidos_sys` varchar(20) NOT NULL,
+  `numero_contacto` varchar(14) NOT NULL,
+  `username` varchar(16) NOT NULL,
+  `correo` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `estado` enum('activo','inactivo') DEFAULT 'activo',
+  FOREIGN KEY (id_rol) REFERENCES tb_roles(id_rol),
+  UNIQUE (tipo_documento, numero_documento)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE tb_userPark (
 	id_userPark INT AUTO_INCREMENT PRIMARY KEY,
