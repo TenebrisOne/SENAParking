@@ -21,7 +21,7 @@
     <!-- Contenedor donde se insertará el header -->
     <div id="header-container"></div>
 
-        <!-- Logo SENA -->
+    <!-- Logo SENA -->
     <img src="../public/images/logo_sena.png" alt="Logo SENA"
         style="position: absolute; top: 100px; right: 70px; width: 100px;">
     </div>
@@ -32,20 +32,27 @@
     </div>
 
     <div class="register-container">
+        
+        
 
-        <form action="" class="formulario" id="formulario">
+        <form class="formulario" id="formulario"
+            action="/SENAParking/backend/controllers/UsuarioParqueaderoController.php" method="POST">
             <div class="row mb-3">
                 <!--Campo para solicitar el nombre-->
                 <div class="col-md-6" id="grupo__nombre"><!--Divide en columnas para alinear los campos-->
                     <label for="nombre" class="form-label">Nombre:</label>
-                    <input type="text" class="form-control formulario__input" name="nombre" id="nombre" placeholder="Ingrese sus nombres" required>
-                    <p class="formulario__input-error">El nombre tiene que ser de 4 a 16 dígitos y solo debe contener letras.</p>
+                    <input type="text" class="form-control formulario__input" name="nombre" id="nombre"
+                        placeholder="Ingrese sus nombres" required>
+                    <p class="formulario__input-error">El nombre tiene que ser de 4 a 16 dígitos y solo debe contener
+                        letras.</p>
                 </div>
                 <!--Campo para solicitar el apellido-->
                 <div class="col-md-6" id="grupo__apellido">
                     <label for="apellido" class="form-label">Apellido:</label>
-                    <input type="text" class="form-control formulario__input" name="apellido" id="apellido" placeholder="Ingrese sus apellidos" required>
-                    <p class="formulario__input-error">El apellido tiene que ser de 4 a 16 dígitos y solo puede contener letras.</p>
+                    <input type="text" class="form-control formulario__input" name="apellido" id="apellido"
+                        placeholder="Ingrese sus apellidos" required>
+                    <p class="formulario__input-error">El apellido tiene que ser de 4 a 16 dígitos y solo puede contener
+                        letras.</p>
                 </div>
             </div>
             <div class="row mb-3">
@@ -54,7 +61,7 @@
                     <label for="tipo_documento" class="form-label formulario__input">Tipo de documento:</label>
                     <select class="form-select" id="tipo_documento" name="tipo_documento" required>
                         <option value="" selected disabled>Seleccione tipo de documento</option>
-                        <option value="Cedula">Cédula</option>
+                        <option value="Cedula_ciudadania">Cédula de Ciudadania</option>
                         <option value="Cedula_extranjeria">Cédula de Extranjeria</option>
                         <option value="Pasaporte">Pasaporte</option>
                         <option value="Tarjeta_identidad">Tarjeta Identidad</option>
@@ -64,8 +71,10 @@
                 <!--Campo para solicitar el documento-->
                 <div class="col-md-6" id="grupo__documento">
                     <label for="id" class="form-label">Documento:</label>
-                    <input type="text" class="form-control formulario__input" name="documento" id="documento" placeholder="Ingrese su documento" required>
-                    <p class="formulario__input-error">El documento tiene que ser de 6 a 10 dígitos y solo puede contener numeros.</p>
+                    <input type="text" class="form-control formulario__input" name="documento" id="documento"
+                        placeholder="Ingrese su documento" required>
+                    <p class="formulario__input-error">El documento tiene que ser de 6 a 10 dígitos y solo puede
+                        contener numeros.</p>
                 </div>
             </div>
             <div class="row mb-3">
@@ -74,13 +83,16 @@
                     <label for="tarjeta_propiedad" class="form-label">Tarjeta de propiedad:</label>
                     <input type="text" class="form-control formulario__input" name="tarjeta" id="tarjeta_propiedad"
                         placeholder="Ingrese tarjeta de propiedad">
-                    <p class="formulario__input-error">La tarjeta de propiedad tiene que ser de 12 dígitos y solo puede contener numeros.</p>
+                    <p class="formulario__input-error">La tarjeta de propiedad tiene que ser de 12 dígitos y solo puede
+                        contener numeros.</p>
                 </div>
                 <!--Campo para solicitar el correo-->
                 <div class="col-md-6" id="grupo__correo">
                     <label for="correo_institucional" class="form-label">Correo:</label>
-                    <input type="email" class="form-control formulario__input" name="correo" id="correo_institucional" placeholder="Ingrese el correo">
-                    <p class="formulario__input-error">El correo solo puede contener letras, numeros, puntos, guiones y guion bajo.</p>
+                    <input type="email" class="form-control formulario__input" name="correo" id="correo_institucional"
+                        placeholder="Ingrese el correo">
+                    <p class="formulario__input-error">El correo solo puede contener letras, numeros, puntos, guiones y
+                        guion bajo.</p>
                 </div>
             </div>
             <div class="row mb-3" id="grupo__numero">
@@ -89,18 +101,20 @@
                     <label for="numero_contacto" class="form-label">Número contacto:</label>
                     <input type="text" class="form-control formulario__input" name="numero" id="numero_contacto"
                         placeholder="Ingrese número de contacto">
-                    <p class="formulario__input-error">El numero de contacto tiene que ser de 7 a 14 digitos y solo puede contener numeros.</p>
+                    <p class="formulario__input-error">El numero de contacto tiene que ser de 7 a 14 digitos y solo
+                        puede contener numeros.</p>
                 </div>
                 <!--Campo para solicitar el tipo de usuario-->
                 <div class="col-md-6">
                     <label for="tipo_usuario" class="form-label">Tipo de usuario:</label>
                     <select class="form-select" id="tipo_usuario" name="tipo_usuario" required>
                         <option value="" selected disabled>Seleccione tipo de usuario</option>
-                        <option value="Servidor público">Servidor público</option>
-                        <option value="Contratista">Contratista</option>
-                        <option value="Trabajador Oficial">Trabajador Oficial</option>
-                        <option value="Visitante Autorizado">Visitante Autorizado</option>
-                        <option value="Aprendiz">Aprendiz</option>
+                        <option value="servidor_público">Servidor público</option>
+                        <option value="contratista">Contratista</option>
+                        <option value="trabajador_oficial">Trabajador Oficial</option>
+                        <option value="visitante_autorizado">Visitante Autorizado</option>
+                        <option value="aprendiz">Aprendiz</option>
+                        <option value="instructor">Instructor</option>
                     </select>
                     <p class="formulario__input-error">ingrese un tipo de usuario</p>
                 </div>
@@ -112,6 +126,18 @@
                     <input type="time" class="form-control formulario__input" name="hora_entrada" id="hora_entrada">
                     <p class="formulario__input-error">ingrese la hora de entrada</p>
                 </div>
+                <div class="col-md-6" id="grupo__edificio">
+                    <label for="edificio" class="form-label">Centro:</label>
+                    <select class="form-select" id="edificio" name="edificio" required>
+                        <option value="" selected disabled>Seleccione una opción</option>
+                        <option value="CMD">Centro de Diseño y Metrología</option>
+                        <option value="CGI">Centro de Gestión Industrial</option>
+                        <option value="CENIGRAF">Cenigraf</option>
+
+                    </select>
+                    <p class="formulario__input-error">Por favor seleccione un edificio.</p>
+                </div>
+
             </div><br>
 
             <!-- Botón Confirmar -->
@@ -120,7 +146,8 @@
             </div>
         </form>
     </div>
-    
+
+    </script>
     <!-- Cargar el footer-->
     <!-- Función para llamar al Header-->
     <script src="./../public/js/scriptsDOM.js"></script>
