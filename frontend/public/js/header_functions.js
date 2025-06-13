@@ -10,6 +10,7 @@ function accion2() {
     // Puedes redirigir, abrir modal, etc.
 }
 
-function accion3() {
-    window.location.href = 'https://ejemplo.com';
+function CerrarSesion() {
+    window.location.href = '/logout.php';
 }
+
