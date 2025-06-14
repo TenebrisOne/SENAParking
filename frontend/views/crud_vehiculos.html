@@ -59,25 +59,8 @@
     </style>
 </head>
 <body class="bg-light">
+    <div id="header-container"></div>
     <div class="container-fluid">
-        <!-- Header -->
-        <div class="header-section">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-auto">
-                        <button class="btn btn-light btn-sm" onclick="goBack()">
-                            <i class="fas fa-arrow-left me-2"></i>Volver
-                        </button>
-                    </div>
-                    <div class="col">
-                        <h2 class="mb-0">
-                            <i class="fas fa-car me-3"></i>Gestión de Vehículos
-                        </h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="container">
             <!-- Toggle Section -->
             <div class="toggle-section">
@@ -282,6 +265,10 @@
             </div>
         </div>
     </div>
+
+
+    <!-- Función para llamar al Header dinámico -->
+    <script src="./../public/js/scriptsDOM.js"></script>
 
     <!-- Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
