@@ -150,7 +150,7 @@
             .then(data => {
                 alert(data.message); // ✅ Muestra el mensaje correcto
                 if (data.success) {
-                    window.location.href = "../frontend/dashboard_admin.html";
+                    window.location.href = "../dashboard_admin.html";
                 }
             })
             .catch(error => console.error("Error al registrar usuario:", error));
@@ -160,8 +160,6 @@
     
     <!-- llama al archivo de validacion del formulario -->
     <script src="../frontend/public/js/validacion_user_system.js"></script>
-    <script src="../frontend/public/js/usuario.js"></script>
-
 
 </body>
 
