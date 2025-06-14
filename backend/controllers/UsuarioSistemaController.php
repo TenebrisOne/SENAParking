@@ -1,6 +1,6 @@
 <?php
-require_once 'conexion.php';
-require_once 'UsuarioSistemaModel.php';
+require_once '../config/conexion.php';
+require_once '../models/UsuarioSistemaModel.php';
 
 // Crear conexión
 $usuarioModel = new Usuario($conn);

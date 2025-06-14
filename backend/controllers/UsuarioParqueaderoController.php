@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     );
 
     if ($resultado) {
-        header("Location: ../views/dashboard_admin.html?registro=exitoso");
+        header("Location: /SenaParking/frontend/views/dashboard_admin.html?registro=exitoso");
         exit();
     } else {
         echo "Error al registrar el usuario.";

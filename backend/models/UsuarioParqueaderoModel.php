@@ -15,9 +15,15 @@ class UsuarioParqueadero {
             $resultado = $stmt->execute();
 
             if ($resultado) {
-                echo json_encode(["success" => true, "message" => "Usuario registrado correctamente"]);
+                echo'<script type="text/javascript">
+                alert("Usuario registrado con éxito");
+                window.location.href="../../frontend/views/dashboard_admin.html";
+                </script>';
             } else {
-                echo json_encode(["success" => false, "message" => "Error al registrar usuario"]);
+                echo'<script type="text/javascript">
+                alert("Error al registrar usuario");
+                window.location.href="../../frontend/views/reg_userParking.html";
+                </script>';
             }
             exit();
         } else {
