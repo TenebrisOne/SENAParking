@@ -5,25 +5,23 @@ require_once '../models/UsuarioParqueaderoModel.php';
 $usuarioParkingModel = new UsuarioParqueadero($conn);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nombre           = $_POST["nombre"] ?? "";
-    $apellido         = $_POST["apellido"] ?? "";
-    $tipo_documento   = $_POST["tipo_documento"] ?? "";
-    $documento        = $_POST["documento"] ?? "";
-    $tipo_usuario     = $_POST["tipo_usuario"] ?? "";
-    $tarjeta          = $_POST["tarjeta"] ?? "";
-    $numero           = $_POST["numero"] ?? "";
-    $edificio         = $_POST["edificio"] ?? "";
+    $nombre = trim($_POST['nombre'] ?? '');
+    $apellido = trim($_POST['apellido'] ?? '');
+    $tipdoc = trim($_POST['tipdoc'] ?? '');
+    $documento = trim($_POST['documento'] ?? '');
+    $tarjeta = trim($_POST['tarjeta'] ?? '');
+    $correo = trim($_POST['correo'] ?? '');
+    $numero = trim($_POST['numero'] ?? '');
+    $tipuser = trim($_POST['tipuser'] ?? '');
+    $hora_entrada = trim($_POST['hora_entrada'] ?? '');
+    $centro = trim($_POST['centro'] ?? '');
 
-    $resultado = $usuarioParkingModel->registrarUsuario(
-        $tipo_usuario, $tipo_documento, $documento,
-        $nombre, $apellido, $edificio, $tarjeta, $numero
-    );
+    $resultado = $usuarioModel->registrarUsuario($tipuser,$tipdoc,$documento,$nombre,$apellido,$centro,$tarjeta,$correo,$numero,$hora_entrada);
 
-    if ($resultado) {
-        header("Location: /SenaParking/frontend/views/dashboard_admin.html?registro=exitoso");
-        exit();
+    if ($resultado == true) {
+        echo "Usuario registrado correctamente.";
     } else {
-        echo "Error al registrar el usuario.";
+        echo $resultado;
     }
 }
 ?>

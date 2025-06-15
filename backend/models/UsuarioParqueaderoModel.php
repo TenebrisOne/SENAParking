@@ -6,29 +6,17 @@ class UsuarioParqueadero {
         $this->conexion = $conexion;
     }
 
-    public function registrarUsuario($tipo_user, $tipo_documento, $numero_documento, $nombres, $apellidos, $edificio, $tarjeta_propiedad, $numero_contacto) {
-        $sql = "INSERT INTO tb_userpark (tipo_user,tipo_documento,numero_documento,nombres_park,apellidos_park,edificio,tarjeta_propiedad,numero_contacto) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    public function registrarUsuario($tipo_user, $tipo_documento, $numero_documento, $nombres, $apellidos, $edificio, $tarjeta_propiedad, $numero_contacto, $hora_entrada) {
+        $sql = "INSERT INTO tb_userpark (tipo_user,tipo_documento,numero_documento,nombres_park,apellidos_park,edificio,tarjeta_propiedad,numero_contacto,hora_entrada) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         $stmt = $this->conexion->prepare($sql);
         if ($stmt) {
-            $stmt->bind_param("ssssssss", $tipo_user, $tipo_documento, $numero_documento, $nombres, $apellidos, $edificio, $tarjeta_propiedad, $numero_contacto);
+            $stmt->bind_param("sssssssss", $tipo_user, $tipo_documento, $numero_documento, $nombres, $apellidos, $edificio, $tarjeta_propiedad, $numero_contacto, $hora_entrada);
             $resultado = $stmt->execute();
 
-            if ($resultado) {
-                echo'<script type="text/javascript">
-                alert("Usuario registrado con éxito");
-                window.location.href="../../frontend/views/dashboard_admin.html";
-                </script>';
-            } else {
-                echo'<script type="text/javascript">
-                alert("Error al registrar usuario");
-                window.location.href="../../frontend/views/reg_userParking.html";
-                </script>';
-            }
-            exit();
+            return $resultado;
         } else {
-            echo json_encode(["success" => false, "message" => "Error en la consulta SQL"]);
-            exit();
+            return "Ocurrió un error al registrar el usuario.";
         }
     }
 }

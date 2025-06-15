@@ -13,9 +13,24 @@ const expresiones = {
 const campos = {
    nombre: false,
    apellido: false,
+   documento: false,
    tarjeta: false,
    correo: false,
    numero: false
+}
+
+const validarcampo = (expresiones, input, campo) => {
+   if (expresiones.test(input.value)) {
+      document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-incorrecto');
+      document.getElementById(`grupo__${campo}`).classList.add('formulario__grupo-correcto');
+      document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.remove('formulario__input-error-activo');
+      campos[campo] = true;
+   } else {
+      document.getElementById(`grupo__${campo}`).classList.add('formulario__grupo-incorrecto');
+      document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-correcto');
+      document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.add('formulario__input-error-activo');
+      campos[campo] = false;
+   }
 }
 
 const validarformulario = (e) => {
@@ -41,27 +56,57 @@ const validarformulario = (e) => {
    }
 }
 
-const validarcampo = (expresiones, input, campo) => {
-   if (expresiones.test(input.value)) {
-      document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-incorrecto');
-      document.getElementById(`grupo__${campo}`).classList.add('formulario__grupo-correcto');
-      document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.remove('formulario__input-error-activo');
-      campos[campo] = true;
-   } else {
-      document.getElementById(`grupo__${campo}`).classList.add('formulario__grupo-incorrecto');
-      document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-correcto');
-      document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.add('formulario__input-error-activo');
-      campos[campo] = false;
-   }
-}
-
 inputs.forEach((input)=>{
    input.addEventListener('keyup', validarformulario);
    input.addEventListener('blur', validarformulario);
 })
 
-formulario.addEventListener('submit', (e)=>{
+formulario.addEventListener('submit', (e) => {
    e.preventDefault();
+
+   alert("funciona")
+
+   if (campos.nombre && campos.apellido && campos.documento && campos.tarjeta && campos.correo && campos.numero) {
+
+      const nombre = document.getElementById('nombre').value.trim();
+      const apellido = document.getElementById('apellido').value.trim();
+      const tipdoc = document.getElementById('tipdoc').value.trim();
+      const documento = document.getElementById('documento').value.trim();
+      const tarjeta = document.getElementById('tarjeta_propiedad').value.trim();
+      const correo = document.getElementById('correo').value.trim();
+      const numero = document.getElementById('numero').value.trim();
+      const tipuser = document.getElementById('tipo_usuario').value.trim();
+      const hora_entrada = document.getElementById('hora_entrada').value.trim();
+      const centro = document.getElementById('edificio').value.trim();
+
+      const formData = new FormData();
+      formData.append('nombre', nombre);
+      formData.append('apellido', apellido);
+      formData.append('tipdoc', tipdoc);
+      formData.append('documento', documento);
+      formData.append('tarjeta', tarjeta);
+      formData.append('correo', correo);
+      formData.append('numero', numero);
+      formData.append('tipuser', tipuser);
+      formData.append('hora_entrada', hora_entrada);
+      formData.append('centro', centro);
+
+      fetch('../../../SENAParking/backend/controllers/UsuarioParqueaderoController.php', {
+         method: 'POST',
+         body: formData
+      })
+
+         .then(response => response.text())
+         .then(data => {
+            alert(data);
+            window.location.href="../views/dashboard_admin.html";
+         })
+         .catch(error => {
+            alert(error);
+            window.location.href="../views/dashboard_admin.html";
+         });
+      formulario.reset();
+   }
 });
 
 //=== funcion para redirigir al dashboard_supervisor desde la flecha de retroceso !

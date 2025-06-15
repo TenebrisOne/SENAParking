@@ -32,11 +32,7 @@
     </div>
 
     <div class="register-container">
-        
-        
-
-        <form class="formulario" id="formulario"
-            action="/SENAParking/backend/controllers/UsuarioParqueaderoController.php" method="POST">
+        <form id="formulario" class="formulario">
             <div class="row mb-3">
                 <!--Campo para solicitar el nombre-->
                 <div class="col-md-6" id="grupo__nombre"><!--Divide en columnas para alinear los campos-->
@@ -133,13 +129,10 @@
                         <option value="CMD">Centro de Diseño y Metrología</option>
                         <option value="CGI">Centro de Gestión Industrial</option>
                         <option value="CENIGRAF">Cenigraf</option>
-
                     </select>
                     <p class="formulario__input-error">Por favor seleccione un edificio.</p>
                 </div>
-
-            </div><br>
-
+            </div>
             <!-- Botón Confirmar -->
             <div class="text-center">
                 <button type="submit" class="btn btn-confirmar">Confirmar</button>
@@ -147,13 +140,12 @@
         </form>
     </div>
 
-    </script>
     <!-- Cargar el footer-->
     <!-- Función para llamar al Header-->
     <script src="./../public/js/scriptsDOM.js"></script>
 
     <!-- llama al archivo de lavidacion del formulario -->
-    <script src="/frontend/public/js/validacion_user_parking.js"></script>
+    <script src="../public/js/validacion_user_parking.js"></script>
 
 </body>
 
