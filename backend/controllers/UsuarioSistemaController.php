@@ -16,12 +16,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usuario = $_POST["usuario"];
     $contrasena = $_POST["contrasena"];
 
-    // Registrar usuario
-    if ($usuarioModel->registrarUsuario($nombre, $apellido, $tipdoc, $documento, $rol, $correo, $numero, $usuario, $contrasena)) {
-        header("Location: ../views/dashboard_admin.html?registro=exitoso");
-        exit();
+    $resultado = $usuarioModel->registrarUsuario($nombre,$apellido,$tipdoc,$documento,$rol,$correo,$numero,$usuario,$contrasena);
+
+    if ($resultado === true) {
+        echo "Usuario registrado correctamente.";
     } else {
-        echo "Error al registrar el usuario.";
+        echo $resultado;
     }
 }
 ?>

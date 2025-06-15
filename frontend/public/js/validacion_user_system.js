@@ -67,45 +67,51 @@ inputs.forEach((input) => {
 });
 
 formulario.addEventListener('submit', (e) => {
-   e.preventDefault();
+	e.preventDefault();
 
-   const todosValidos = Object.values(campos).every(valor => valor === true);
+	const terminos = document.getElementById('terminos');
+	if(campos.nombre && campos.apellido && campos.documento && campos.correo && campos.numero && campos.usuario && campos.contrasena && terminos.checked ){
+		formulario.reset();
 
-   if (todosValidos) {
-      const formData = new FormData(formulario);
+      const nombre = document.getElementById('grupo__nombre').value.trim();
+      const apellido = document.getElementById('grupo__apellido').value.trim();
+      const tipdoc = document.getElementById('grupo__tipdoc').value.trim();
+      const documento = document.getElementById('grupo__documento').value.trim();
+      const rol = document.getElementById('grupo__rol').value.trim();
+      const correo = document.getElementById('grupo__correo').value.trim();
+      const numero = document.getElementById('grupo__nomero').value.trim();
+      const usuario = document.getElementById('grupo__usuario').value.trim();
+      const contrasena = document.getElementById('grupo__contrasena').value.trim();
 
-      fetch('guardar_usuario.php', {
-         method: 'POST',
-         body: formData
+      const formData = new FormData();
+         formData.append('nombre', nombre);
+         formData.append('apellido', apellido);
+         formData.append('tipdoc', tipdoc);
+         formData.append('documento', documento);
+         formData.append('rol', rol);
+         formData.append('correo', correo);
+         formData.append('numero', numero);
+         formData.append('usuario', usuario);
+         formData.append('contrasena', contrasena);
+
+      fetch('../../backend/controllers/UsuarioSistemaController.php', {
+      method: 'POST',
+      body: formData
       })
+
       .then(response => response.text())
+
       .then(data => {
-         alert(data);
-
-         if (data.includes("exitosamente")) {
-            formulario.reset();
-
-            // Limpiar estilos y estados
-            Object.keys(campos).forEach(campo => {
-               const grupo = document.getElementById(`grupo__${campo}`);
-               grupo.classList.remove('formulario__grupo-correcto', 'formulario__grupo-incorrecto');
-               campos[campo] = false;
-            });
-         }
+         document.getElementById('mensaje').textContent = data;
       })
       .catch(error => {
-         alert('Error al enviar el formulario. Intente nuevamente.');
-         console.error(error);
+         console.error('Error:', error);
+         document.getElementById('mensaje').textContent = 'Error al enviar el formulario.';
       });
 
-   } else {
-      alert("Por favor complete correctamente todos los campos.");
-   }
-
-   if (validacionesCorrectas) {
-      formulario.submit(); // Asegúrate de tener esto si usas preventDefault
-  }
-  
+	} else {
+		document.getElementById('formulario__mensaje').classList.add('formulario__mensaje-activo');
+	}
 });
 
 // Flecha de retroceso

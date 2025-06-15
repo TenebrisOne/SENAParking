@@ -1,5 +1,4 @@
 <?php
-require_once '../config/conexion.php'; // ✅ Ajustamos la ruta de conexión
 
 class Usuario {
     private $conexion;
@@ -16,21 +15,11 @@ class Usuario {
 
         $stmt = $this->conexion->prepare($sql);
         if ($stmt) {
-            $stmt->bind_param("sssisssss", $nombres_sys, $apellidos_sys, $tipo_documento, $numero_documento, $id_rol, $correo, $numero_contacto, $username, $passwordHash);
+            $stmt->bind_param("sssssssss", $nombres_sys, $apellidos_sys, $tipo_documento, $numero_documento, $id_rol, $correo, $numero_contacto, $username, $passwordHash);
             $resultado = $stmt->execute();
 
-            if ($resultado) {
-                echo'<script type="text/javascript">
-                alert("Usuario registrado con éxito");
-                window.location.href="../../frontend/views/dashboard_admin.html";
-                </script>';
-            } else {
-                echo'<script type="text/javascript">
-                alert("Error al registrar usuario");
-                window.location.href="../../frontend/views/reg_userSystem.html";
-                </script>';
-            }
-            exit();
+            return $resultado;
+            
         } else {
             echo json_encode(["success" => false, "message" => "Error en la consulta SQL"]);
             exit();
