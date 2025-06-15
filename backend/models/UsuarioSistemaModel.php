@@ -1,4 +1,5 @@
 <?php
+require_once '../config/conexion.php';
 
 class Usuario {
     private $conexion;
@@ -21,8 +22,7 @@ class Usuario {
             return $resultado;
             
         } else {
-            echo json_encode(["success" => false, "message" => "Error en la consulta SQL"]);
-            exit();
+            return "Ocurrió un error al registrar el usuario.";
         }
     }
 
@@ -67,11 +67,6 @@ class Usuario {
     }
 }
 
-// ✅ Procesar registro desde el formulario
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["usuario"])) {
-    $usuarioModel = new Usuario($conn);
-    $usuarioModel->registrarUsuario($_POST["nombre"], $_POST["apellido"], $_POST["tipdoc"], $_POST["documento"], $_POST["rol"], $_POST["correo"], $_POST["numero"], $_POST["usuario"], $_POST["contrasena"]);
-}
 
 // ✅ Procesar cambio de estado desde el dashboard
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id_userSys"])) {
