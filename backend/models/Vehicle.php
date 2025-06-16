@@ -2,7 +2,7 @@
 class Vehicle {
     private $conn;
     private $table_name = "tb_vehiculos";
-    private $user_park_table = "tb_userPark"; // Nueva propiedad para la tabla de usuarios
+    private $user_park_table = "tb_userPark"; 
 
     public $id_vehiculo;
     public $id_userPark;
@@ -10,8 +10,8 @@ class Vehicle {
     public $tipo;
     public $modelo;
     public $color;
-    public $nombres_park; // Para el nombre del propietario
-    public $apellidos_park; // Para el apellido del propietario
+    public $nombres_park;
+    public $apellidos_park; 
 
     public function __construct($db) {
         $this->conn = $db;
@@ -26,17 +26,17 @@ class Vehicle {
                     v.tipo, 
                     v.modelo, 
                     v.color, 
-                    up.nombres_park,    -- Añadimos el nombre del propietario
-                    up.apellidos_park   -- Añadimos el apellido del propietario
+                    up.nombres_park,    
+                    up.apellidos_park   
                   FROM 
                     " . $this->table_name . " v
                   JOIN 
                     " . $this->user_park_table . " up 
                   ON 
-                    v.id_userPark = up.id_userPark"; // Unimos por id_userPark
+                    v.id_userPark = up.id_userPark"; 
         
         if (!empty($search_term)) {
-            // La búsqueda ahora será por nombre o apellido del propietario, o por placa
+            
             $query .= " WHERE 
                             up.nombres_park LIKE :search_term 
                             OR up.apellidos_park LIKE :search_term 

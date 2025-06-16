@@ -1,5 +1,4 @@
 <?php
-// Habilitar errores para depuración (eliminar en producción)
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -24,7 +23,6 @@ if ($num > 0) {
     $vehicles_arr["data"] = array();
 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        // Extract extrae las variables del array $row, incluyendo nombres_park y apellidos_park
         extract($row);
         $vehicle_item = array(
             "id_vehiculo" => $id_vehiculo,
@@ -33,7 +31,7 @@ if ($num > 0) {
             "tipo" => $tipo,
             "modelo" => $modelo,
             "color" => $color,
-            "propietario_nombre_completo" => $nombres_park . ' ' . $apellidos_park, // Combina nombre y apellid
+            "propietario_nombre_completo" => $nombres_park . ' ' . $apellidos_park,
         );
         array_push($vehicles_arr["data"], $vehicle_item);
     }
