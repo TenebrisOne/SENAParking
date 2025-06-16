@@ -5,23 +5,23 @@ require_once '../models/UsuarioSistemaModel.php';
 // Crear conexión
 $usuarioModel = new Usuario($conn);
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nombre = $_POST["nombre"];
-    $apellido = $_POST["apellido"];
-    $tipdoc = $_POST["tipdoc"];
-    $documento = $_POST["documento"];
-    $rol = $_POST["rol"];
-    $correo = $_POST["correo"];
-    $numero = $_POST["numero"];
-    $usuario = $_POST["usuario"];
-    $contrasena = $_POST["contrasena"];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $nombre = trim($_POST['nombre'] ?? '');
+    $apellido = trim($_POST['apellido'] ?? '');
+    $tipdoc = trim($_POST['tipdoc'] ?? '');
+    $documento = trim($_POST['documento'] ?? '');
+    $rol = trim($_POST['rol'] ?? '');
+    $correo = trim($_POST['correo'] ?? '');
+    $numero = trim($_POST['numero'] ?? '');
+    $usuario = trim($_POST['usuario'] ?? '');
+    $contrasena = trim($_POST['contrasena'] ?? '');
 
-    // Registrar usuario
-    if ($usuarioModel->registrarUsuario($nombre, $apellido, $tipdoc, $documento, $rol, $correo, $numero, $usuario, $contrasena)) {
-        header("Location: ../views/dashboard_admin.html?registro=exitoso");
-        exit();
+    $resultado = $usuarioModel->registrarUsuario($nombre,$apellido,$tipdoc,$documento,$rol,$correo,$numero,$usuario,$contrasena);
+
+    if ($resultado == true) {
+        echo "Usuario registrado correctamente.";
     } else {
-        echo "Error al registrar el usuario.";
+        echo $resultado;
     }
 }
 ?>
