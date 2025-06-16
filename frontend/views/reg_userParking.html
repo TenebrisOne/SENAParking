@@ -55,7 +55,7 @@
                 <!--Campo para solicitar el tipo de documento-->
                 <div class="col-md-6">
                     <label for="tipo_documento" class="form-label formulario__input">Tipo de documento:</label>
-                    <select class="form-select" id="tipo_documento" name="tipo_documento" required>
+                    <select class="form-select"  name="tipdoc" id="tipdoc" required>
                         <option value="" selected disabled>Seleccione tipo de documento</option>
                         <option value="Cedula_ciudadania">Cédula de Ciudadania</option>
                         <option value="Cedula_extranjeria">Cédula de Extranjeria</option>
@@ -85,7 +85,7 @@
                 <!--Campo para solicitar el correo-->
                 <div class="col-md-6" id="grupo__correo">
                     <label for="correo_institucional" class="form-label">Correo:</label>
-                    <input type="email" class="form-control formulario__input" name="correo" id="correo_institucional"
+                    <input type="email" class="form-control formulario__input" name="correo" id="correo"
                         placeholder="Ingrese el correo">
                     <p class="formulario__input-error">El correo solo puede contener letras, numeros, puntos, guiones y
                         guion bajo.</p>
@@ -95,7 +95,7 @@
                 <!--Campo para solicitar el núm de contacto-->
                 <div class="col-md-6"><!--Divide en columnas para alinear los campos-->
                     <label for="numero_contacto" class="form-label">Número contacto:</label>
-                    <input type="text" class="form-control formulario__input" name="numero" id="numero_contacto"
+                    <input type="text" class="form-control formulario__input" name="numero" id="numero"
                         placeholder="Ingrese número de contacto">
                     <p class="formulario__input-error">El numero de contacto tiene que ser de 7 a 14 digitos y solo
                         puede contener numeros.</p>
@@ -103,7 +103,7 @@
                 <!--Campo para solicitar el tipo de usuario-->
                 <div class="col-md-6">
                     <label for="tipo_usuario" class="form-label">Tipo de usuario:</label>
-                    <select class="form-select" id="tipo_usuario" name="tipo_usuario" required>
+                    <select class="form-select"  name="tipo_usuario" id="tipo_usuario" required>
                         <option value="" selected disabled>Seleccione tipo de usuario</option>
                         <option value="servidor_público">Servidor público</option>
                         <option value="contratista">Contratista</option>
@@ -124,7 +124,7 @@
                 </div>
                 <div class="col-md-6" id="grupo__edificio">
                     <label for="edificio" class="form-label">Centro:</label>
-                    <select class="form-select" id="edificio" name="edificio" required>
+                    <select class="form-select" name="edificio" id="edificio" required>
                         <option value="" selected disabled>Seleccione una opción</option>
                         <option value="CMD">Centro de Diseño y Metrología</option>
                         <option value="CGI">Centro de Gestión Industrial</option>

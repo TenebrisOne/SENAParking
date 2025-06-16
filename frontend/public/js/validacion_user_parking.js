@@ -64,8 +64,6 @@ inputs.forEach((input)=>{
 formulario.addEventListener('submit', (e) => {
    e.preventDefault();
 
-   alert("funciona")
-
    if (campos.nombre && campos.apellido && campos.documento && campos.tarjeta && campos.correo && campos.numero) {
 
       const nombre = document.getElementById('nombre').value.trim();
