@@ -2,11 +2,8 @@
 require_once '../config/conexion.php';
 require_once '../models/UsuarioSistemaModel.php';
 
-$database = new Database();
-$db = $database->getConnection();
 
-
-$usuarioModel = new Usuario($db);
+$usuarioModel = new Usuario($conn);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nombre = trim($_POST['nombre'] ?? '');
