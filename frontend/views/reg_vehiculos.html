@@ -44,13 +44,13 @@
         <h2>Registro de vehículos</h2>
 
         <div class="container mt-5">
-            <form id="formVehiculo" action="" method="POST" novalidate>
+            <form id="formVehiculo" novalidate>
                 <div class="row mb-3">
 
                     <!-- Columna izquierda -->
-                    <div class="col-md-6 text-end">
+                    <div class="col-md-6 text-start">
                         <!-- Campo Placa -->
-                        <label for="placa">Placa:</label>
+                        <label  for="placa">Placa:</label>
                         <input type="text" id="placa" name="placa" class="form-control mb-2" placeholder="Ingrese la placa" required>
                         <div class="invalid-feedback text-start">Formato inválido. Ej: ABC123</div>
 
@@ -107,7 +107,7 @@
     <script src="./../public/js/scriptsDOM.js"></script>
 
     <!-- Validación de formulario con Bootstrap + JS personalizado -->
-    <script src="/frontend/public/js/reg_vehiculos.js"></script>
+    <script src="../public/js/reg_vehiculos.js"></script>
 
 </body>
 </html>
