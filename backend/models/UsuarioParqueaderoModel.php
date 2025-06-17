@@ -10,26 +10,18 @@ class UsuarioParqueadero {
         $sql = "INSERT INTO tb_userpark (tipo_user, tipo_documento, numero_documento, nombres_park, apellidos_park, edificio, numero_contacto, estado)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->conexion->prepare($sql);
-
-        $tipo_user = trim($tipo_user);
-        $edificio = trim($edificio);
-
         $stmt->bind_param("ssssssss", $tipo_user, $tipo_documento, $numero_documento, $nombres, $apellidos, $edificio, $numero_contacto, $estado);
         return $stmt->execute();
     }
 
     public function obtenerUsuarios() {
-        $sql = "SELECT id_userPark, tipo_user, numero_documento, nombres_park, apellidos_park, estado
-                FROM tb_userpark
-                ORDER BY id_userPark DESC";
-
+        $sql = "SELECT id_userPark, nombres_park, apellidos_park, numero_documento, tipo_user, estado
+                FROM tb_userpark ORDER BY id_userPark DESC";
         $result = $this->conexion->query($sql);
         $usuarios = [];
-
         while ($row = $result->fetch_assoc()) {
             $usuarios[] = $row;
         }
-
         return $usuarios;
     }
 
@@ -39,6 +31,7 @@ class UsuarioParqueadero {
         return $stmt->execute();
     }
 }
+
 
 
 
