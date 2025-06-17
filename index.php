@@ -64,8 +64,7 @@ $url = explode('/', $url)[0]; // Solo tomamos la primera parte de la URL
 // Ruta al archivo de vista
 $ruta = "/frontend/views/$url.php";
 
-http_response_code(404);
-include "/404.html";
+
 
 // Verifica si existe la vista, si no, muestra error 404
 if (file_exists($ruta)) {
