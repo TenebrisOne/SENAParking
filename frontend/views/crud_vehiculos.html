@@ -228,7 +228,7 @@
             }
 
             // Debounce para evitar muchas búsquedas
-            clearTimeout(searchTimeout);
+            //clearTimeout(searchTimeout);
             searchTimeout = setTimeout(async () => {
                 if (searchTerm.trim() === '') {
                     displayVehicles(allVehicles); 

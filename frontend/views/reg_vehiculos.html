@@ -86,27 +86,13 @@
     <script src="../public/js/reg_vehiculos.js"></script>
     
     <script>
-
-        function addVehicle() {
-            window.location.href = '/reg_vehiculos.html'; // Asegúrate de que esta ruta sea correcta
-        }
-
-        // Función para editar vehículo
-        function editVehicle(event, vehicleId) {
-            event.stopPropagation(); // Evita que se dispare el evento de seleccionar la tarjeta
-            // Redirige a la nueva página de edición, pasando el ID del vehículo como parámetro de URL
-            window.location.href = `./edit_vehiculos.html?id=${vehicleId}`;
-        }
-
-
         document.addEventListener('DOMContentLoaded', function() {
             loadPropietarios(); // Call the function to load proprietors when the DOM is ready
-
-            // Example of goBack function (if not in scriptsDOM.js)
-            function goBack() {
-                window.history.back();
-            }
         });
+
+        function goBack() {
+                window.location.href = '/SENAParking/frontend/views/crud_vehiculos.html';
+        }
 
         async function loadPropietarios() {
             const propietarioSelect = document.getElementById('propietario');
