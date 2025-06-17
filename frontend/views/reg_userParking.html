@@ -66,23 +66,15 @@
                 </div>
                 <!--Campo para solicitar el documento-->
                 <div class="col-md-6" id="grupo__documento">
-                    <label for="id" class="form-label">Documento:</label>
+                    <label for="documento" class="form-label">Documento:</label>
                     <input type="text" class="form-control formulario__input" name="documento" id="documento"
                         placeholder="Ingrese su documento" required>
                     <p class="formulario__input-error">El documento tiene que ser de 6 a 10 dígitos y solo puede
                         contener numeros.</p>
                 </div>
             </div>
-            <div class="row mb-3">
-                <!--Campo para solicitar la tarjeta de propiedad-->
-                <div class="col-md-6" id="grupo__tarjeta">
-                    <label for="tarjeta_propiedad" class="form-label">Tarjeta de propiedad:</label>
-                    <input type="text" class="form-control formulario__input" name="tarjeta" id="tarjeta_propiedad"
-                        placeholder="Ingrese tarjeta de propiedad">
-                    <p class="formulario__input-error">La tarjeta de propiedad tiene que ser de 12 dígitos y solo puede
-                        contener numeros.</p>
-                </div>
                 <!--Campo para solicitar el correo-->
+                <div class="row mb-3">
                 <div class="col-md-6" id="grupo__correo">
                     <label for="correo_institucional" class="form-label">Correo:</label>
                     <input type="email" class="form-control formulario__input" name="correo" id="correo"
@@ -90,17 +82,17 @@
                     <p class="formulario__input-error">El correo solo puede contener letras, numeros, puntos, guiones y
                         guion bajo.</p>
                 </div>
-            </div>
-            <div class="row mb-3" id="grupo__numero">
                 <!--Campo para solicitar el núm de contacto-->
-                <div class="col-md-6"><!--Divide en columnas para alinear los campos-->
+                <div class="col-md-6" id="grupo__numero"><!--Divide en columnas para alinear los campos-->
                     <label for="numero_contacto" class="form-label">Número contacto:</label>
                     <input type="text" class="form-control formulario__input" name="numero" id="numero"
                         placeholder="Ingrese número de contacto">
                     <p class="formulario__input-error">El numero de contacto tiene que ser de 7 a 14 digitos y solo
                         puede contener numeros.</p>
                 </div>
+                </div>
                 <!--Campo para solicitar el tipo de usuario-->
+                <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="tipo_usuario" class="form-label">Tipo de usuario:</label>
                     <select class="form-select"  name="tipo_usuario" id="tipo_usuario" required>
@@ -112,15 +104,7 @@
                         <option value="aprendiz">Aprendiz</option>
                         <option value="instructor">Instructor</option>
                     </select>
-                    <p class="formulario__input-error">ingrese un tipo de usuario</p>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <!--Campo para solicitar la hora de entrada-->
-                <div class="col-md-6"><!--Divide en columnas para alinear los campos-->
-                    <label for="hora_entrada" class="form-label">Hora de entrada:</label>
-                    <input type="time" class="form-control formulario__input" name="hora_entrada" id="hora_entrada">
-                    <p class="formulario__input-error">ingrese la hora de entrada</p>
+                    <p class="formulario__input-error">Ingrese un tipo de usuario</p>
                 </div>
                 <div class="col-md-6" id="grupo__edificio">
                     <label for="edificio" class="form-label">Centro:</label>
@@ -146,6 +130,7 @@
 
     <!-- llama al archivo de lavidacion del formulario -->
     <script src="../public/js/validacion_user_parking.js"></script>
+
 
 </body>
 

@@ -6,17 +6,41 @@ class UsuarioParqueadero {
         $this->conexion = $conexion;
     }
 
-    public function registrarUsuario($tipo_user, $tipo_documento, $numero_documento, $nombres, $apellidos, $edificio, $tarjeta_propiedad, $numero_contacto, $hora_entrada) {
-        $sql = "INSERT INTO tb_userpark (tipo_user,tipo_documento,numero_documento,nombres_park,apellidos_park,edificio,tarjeta_propiedad,numero_contacto,hora_entrada) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
+    public function registrarUsuario($tipo_user, $tipo_documento, $numero_documento, $nombres, $apellidos, $edificio, $numero_contacto, $estado = 'activo') {
+        $sql = "INSERT INTO tb_userpark (tipo_user, tipo_documento, numero_documento, nombres_park, apellidos_park, edificio, numero_contacto, estado)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->conexion->prepare($sql);
-        if ($stmt) {
-            $stmt->bind_param("sssssssss", $tipo_user, $tipo_documento, $numero_documento, $nombres, $apellidos, $edificio, $tarjeta_propiedad, $numero_contacto, $hora_entrada);
-            $resultado = $stmt->execute();
 
-            return $resultado;
-        } else {
-            return "Ocurrió un error al registrar el usuario.";
+        $tipo_user = trim($tipo_user);
+        $edificio = trim($edificio);
+
+        $stmt->bind_param("ssssssss", $tipo_user, $tipo_documento, $numero_documento, $nombres, $apellidos, $edificio, $numero_contacto, $estado);
+        return $stmt->execute();
+    }
+
+    public function obtenerUsuarios() {
+        $sql = "SELECT id_userPark, tipo_user, numero_documento, nombres_park, apellidos_park, estado
+                FROM tb_userpark
+                ORDER BY id_userPark DESC";
+
+        $result = $this->conexion->query($sql);
+        $usuarios = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $usuarios[] = $row;
         }
+
+        return $usuarios;
+    }
+
+    public function cambiarEstado($id, $estado) {
+        $stmt = $this->conexion->prepare("UPDATE tb_userpark SET estado = ? WHERE id_userPark = ?");
+        $stmt->bind_param("si", $estado, $id);
+        return $stmt->execute();
     }
 }
+
+
+
+
+
