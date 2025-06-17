@@ -49,7 +49,6 @@ CREATE TABLE tb_userPark (
 	nombres_park VARCHAR(20) NOT NULL,
 	apellidos_park VARCHAR(20) NOT NULL,
 	edificio ENUM('CMD', 'CGI', 'CENIGRAF') NOT NULL,
-	tarjeta_propiedad VARCHAR(100),
 	numero_contacto VARCHAR(20),
 	UNIQUE (tipo_documento, numero_documento)
 ) ENGINE=InnoDB;
@@ -59,6 +58,7 @@ CREATE TABLE tb_vehiculos (
 	id_userPark INT NOT NULL,
 	placa VARCHAR(10) NOT NULL UNIQUE,
 	tipo ENUM('carro', 'moto', 'cicla', 'vehiculo_oficial', 'aula_movil') NOT NULL,
+	tarjeta_propiedad VARCHAR(100),
 	modelo VARCHAR(50),
 	color VARCHAR(50), 
 	FOREIGN KEY (id_userPark) REFERENCES tb_userPark(id_userPark) ON DELETE CASCADE 
@@ -67,7 +67,7 @@ CREATE TABLE tb_vehiculos (
 CREATE TABLE tb_accesos (
 	id_acceso INT AUTO_INCREMENT PRIMARY KEY,
 	id_vehiculo INT NOT NULL,
-	id_userSys INT NOT NULL, 
+	id_userPark INT NOT NULL, 
 	tipo_accion ENUM('ingreso','salida') NOT NULL,
 	fecha_hora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	espacio_asignado VARCHAR(10),
