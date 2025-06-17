@@ -51,7 +51,6 @@ CREATE TABLE tb_userPark (
 	edificio ENUM('CMD', 'CGI', 'CENIGRAF') NOT NULL,
 	tarjeta_propiedad VARCHAR(100),
 	numero_contacto VARCHAR(20),
-    hora_entrada varchar(50) NOT NULL,
 	UNIQUE (tipo_documento, numero_documento)
 ) ENGINE=InnoDB;
 
