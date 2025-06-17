@@ -51,3 +51,24 @@
 </body>
 
 </html>
+
+<?php
+
+// Obtiene el parámetro "url" de la URL
+$url = $_GET['url'] ?? 'inicio'; // Si no hay "url", carga la página de inicio
+
+// Sanitiza la URL (evita cargar archivos maliciosos)
+$url = trim($url, '/');
+$url = explode('/', $url)[0]; // Solo tomamos la primera parte de la URL
+
+// Ruta al archivo de vista
+$ruta = "vistas/$url.php";
+
+// Verifica si existe la vista, si no, muestra error 404
+if (file_exists($ruta)) {
+    include $ruta;
+} else {
+    include "./404.html";
+}
+
+?>

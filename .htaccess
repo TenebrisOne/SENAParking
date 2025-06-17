@@ -1,0 +1,35 @@
+# Habilita el motor de reescritura
+RewriteEngine On
+
+# Asegura que las URLs se redirijan a index.php si no son archivos o carpetas reales
+RewriteCond %{index.php} !-f
+RewriteCond %{index.php} !-d
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+
+# Establece index.php como la página por defecto
+DirectoryIndex index.php
+
+# No mostrar el listado de directorios
+Options -Indexes
+
+# Protege archivos sensibles (por ejemplo, .env o .htaccess mismo)
+<FilesMatch "^(\.env|\.htaccess|composer\.json|composer\.lock)$">
+  Order Allow,Deny
+  Deny from all
+</FilesMatch>
+
+# Activa compresión gzip (opcional para rendimiento)
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
+</IfModule>
+
+# Cacheo de archivos estáticos (opcional para mejorar performance)
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
