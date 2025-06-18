@@ -24,66 +24,76 @@
         style="position: absolute; top: 100px; right: 70px; width: 100px;">
 
     <div class="register-container">
-        <h2><center>Editar Usuario</h2></center>
-        <form action="" class="formulario" id="formulario">
-            <input type="hidden" id="id_userSys" name="id_userSys"><br>
+        <h2>
+            <center>Editar Usuario Parqueadero</center>
+        </h2>
+        <form class="formulario" id="formulario">
+            <input type="hidden" id="id_userPark" name="id_userPark" />
 
             <div class="row mb-3">
-                <div class="col-md-6" id="grupo__nombre"> 
+                <div class="col-md-6" id="grupo__nombre">
                     <label class="form-label">Nombres:</label>
-                    <input type="text" class="form-control formulario__input" name="nombre" id="editar-nombre">
+                    <input type="text" class="form-control" id="editar-nombre" name="nombre" />
                 </div>
-                <div class="col-md-6" id="grupo__apellido"> 
+                <div class="col-md-6" id="grupo__apellido">
                     <label class="form-label">Apellidos:</label>
-                    <input type="text" class="form-control formulario__input" name="apellido" id="editar-apellido">
+                    <input type="text" class="form-control" id="editar-apellido" name="apellido" />
                 </div>
             </div>
-
-            
             <div class="row mb-3">
-                <div class="col-md-6" id="grupo__documento"> 
+                <div class="col-md-6" id="grupo__tipdoc">
+                    <label class="form-label">Tipo de documento:</label>
+                    <select class="form-select" id="editar-tipdoc" name="tipdoc">
+                        <option value="">Seleccione tipo</option>
+                        <option value="cedula_ciudadania">Cédula de Ciudadanía</option>
+                        <option value="cedula_extranjeria">Cédula de Extranjería</option>
+                        <option value="otro">Pasaporte</option>
+                        <option value="tarjeta_identidad">Tarjeta Identidad</option>
+                      </select>
+                </div>
+                <div class="col-md-6" id="grupo__documento">
                     <label class="form-label">Documento:</label>
-                    <input type="text" class="form-control formulario__input" name="documento" id="editar-documento">
-                </div>
-                <div class="col-md-6" id="grupo__correo"> 
-                    <label class="form-label">Correo:</label>
-                    <input type="text" class="form-control formulario__input" name="correo" id="editar-correo">
+                    <input type="text" class="form-control" id="editar-documento" name="documento" />
                 </div>
             </div>
-
+            <div class="row mb-3">
+                <div class="col-md-6" id="grupo__numero">
+                    <label class="form-label">Teléfono:</label>
+                    <input type="text" class="form-control" id="editar-numero" name="numero" />
+                </div>
+                <div class="col-md-6" id="grupo__tipo_usuario">
+                    <label class="form-label">Tipo de Usuario:</label>
+                    <select class="form-select" id="editar-tipo_usuario" name="tipo_usuario">
+                        <option value="">Seleccione tipo</option>
+                        <option value="servidor_público">Servidor público</option>
+                        <option value="contratista">Contratista</option>
+                        <option value="trabajador_oficial">Trabajador Oficial</option>
+                        <option value="visitante_autorizado">Visitante Autorizado</option>
+                        <option value="aprendiz">Aprendiz</option>
+                        <option value="instructor">Instructor</option>
+                    </select>
+                </div>
                 <div class="row mb-3">
-                <div class="col-6" id="grupo__numero"> <!-- Columna de 12 espacios-->
-                    <label class="form-label">Télefono:</label>
-                    <input type="text" class="form-control formulario__input" name="numero" id="editar-numero">
-                </div>
-                <div class="col-6" id="grupo__usuario"> <!-- Columna de 12 espacios-->
-                    <label class="form-label">Usuario:</label>
-                    <input type="text" class="form-control formulario__input" name="usuario" id="editar-usuario">
+                    <div class="col-md-6" id="grupo__edificio">
+                        <label class="form-label">Centro:</label>
+                        <select class="form-select" id="editar-edificio" name="edificio">
+                            <option value="">Seleccione centro</option>
+                            <option value="CMD">Centro de Diseño y Metrología</option>
+                            <option value="CGI">Centro de Gestión Industrial</option>
+                            <option value="CENIGRAF">Cenigraf</option>
+                        </select>
+                    </div>
                 </div>
             </div>
-
-            <div class="col-md-6" id="grupo__rol"> <!-- Columna de 12 espacios-->
-                <label class="form-label">Rol:</label>
-                <select class="form-select" name="rol" id="editar-rol">
-                    <option value="1">Administrador</option>
-                    <option value="2">Supervisor</option>
-                    <option value="3">Guarda de Seguridad</option>
-                </select>
-            </div>
-            
-            <br>
 
             <button type="submit" class="btn btn-success">Guardar cambios</button>
-            <button type="button" class="btn btn-confirmar" onclick="window.location.href='dashboard_admin.html'">Cancelar</button>
+            <button type="button" class="btn btn-confirmar"
+                onclick="window.location.href='dashboard_admin.html'">Cancelar</button>
         </form>
     </div>
 
-
-    <!-- Cargar el header-->
-    <script src="./../public/js/scriptsDOM.js"></script>
-
-    <script src="../public/js/editar_usuario.js"></script>
-
+    <script src="../public/js/scriptsDOM.js"></script>
+    <script src="../public/js/editar_usuario_park.js"></script>
 </body>
 
 </html>
