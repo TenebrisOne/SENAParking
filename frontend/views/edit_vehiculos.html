@@ -70,7 +70,7 @@
 
                         <label for="modelo">Modelo:</label>
                         <input type="text" id="modelo" name="modelo" class="form-control mb-2" placeholder="Ingrese el modelo" required>
-                        <div class="invalid-feedback">El modelo debe estar entre 1900 y 2025</div>
+                        <div class="invalid-feedback">Longitud no puede superar 10</div>
                     </div>
                 </div>
 
@@ -80,9 +80,10 @@
         </div>
     </div>
 
-    <script src="./../public/js/scriptsDOM.js"></script>
-
     <script src="../public/js/reg_vehiculos.js"></script> 
+
+    <script src="../public/js/scriptsDOM.js"></script>
+
     
     <script>
          function goBack() {
@@ -92,7 +93,7 @@
             // Función para volver atrás
            
 
-            loadPropietarios(); // Cargar la lista de propietarios al inicio
+            loadPropietarios(); 
 
             // Obtener el ID del vehículo de la URL
             const urlParams = new URLSearchParams(window.location.search);
@@ -125,7 +126,7 @@
                         option.value = propietario.id_userPark;
                         option.textContent = propietario.nombre_completo;
                         if (selectedPropietarioId && propietario.id_userPark == selectedPropietarioId) {
-                            option.selected = true; // Seleccionar el propietario si coincide
+                            option.selected = true;
                         }
                         propietarioSelect.appendChild(option);
                     });
@@ -165,12 +166,12 @@
 
                 } else {
                     alert('Error al cargar los datos del vehículo: ' + (data.message || 'Vehículo no encontrado.'));
-                    //window.location.href = './crud_vehiculos.html';
+                    window.location.href = './crud_vehiculos.html';
                 }
             } catch (error) {
                 console.error('Error de conexión al cargar datos del vehículo:', error);
                 alert('Error de conexión al cargar los datos del vehículo. Asegúrate de que el servidor PHP esté funcionando.');
-                //window.location.href = './crud_vehiculos.html';
+                window.location.href = './crud_vehiculos.html';
             }
         }
     </script>

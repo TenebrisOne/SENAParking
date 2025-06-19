@@ -2,159 +2,134 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8"> <!-- Define la codificación de caracteres como UTF-8 -->
-    <meta name="viewport" content="width=, initial-scale=1.0"> <!-- Establece el ancho y escala de la vista para dispositivos móviles -->
-    <meta name="author" content="AdsoDeveloperSolutions801"> <!-- Define el autor de la página -->
-    <meta name="course" content="ADSO 2873801"> <!-- Define el curso asociado -->
-    <!-- Favicon que aparece en la pestaña del navegador -->
-    <link rel="icon" type="x-icon" href="../public/images/favicon.ico">
-    <!-- Enlace al archivo CSS de Bootstrap para aplicar estilos prediseñados -->
-    <!-- Enlace al archivo de Bootstrap para proporcionar estilos prediseñados -->
-    <link rel="stylesheet" href="../public/css/bootstrap.min.css">
-    <!-- Enlace a los estilos personalizados del proyecto -->
-    <link rel="stylesheet" href="../public/css/styles_dashboard.css"">
-  <title>Reportes Generales del Parqueadero</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes Generales | SENAParking</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../public/css/sityles_views.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .header-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem 0;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+        }
+
+        .card-metric {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+            min-height: 120px; /* Asegura un tamaño mínimo */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-metric h5 {
+            font-size: 1rem;
+            color: #6c757d;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-metric .value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #343a40;
+        }
+
+        .card-chart {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .date-filter-section {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+    </style>
 </head>
 
-<body>
+<body class="bg-light">
+    <div id="header-container"></div>
 
-  <!-- Contenedor del header (se carga dinámicamente con JS externo) -->
-  <div id="header-container"></div>
-  <div class="container mt-5">
-    <h2 class="mb-4">Reportes Generales del Parqueadero</h2>
+    <div class="container-fluid">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <button class="btn btn-secondary" onclick="goBack()">
+                    <i class="fas fa-arrow-left me-2"></i>
+                </button>
+                <img src="../public/images/logo_sena.png" alt="Logo SENA" style="width: 80px;">
+            </div>
 
-    <!-- Información resumida -->
-    <div class="row text-center mb-4">
-      <div class="col-md-3">
-        <div class="card bg-light">
-          <div class="card-body">
-            <h5>Vehículos Entraron</h5>
-            <p class="fs-4 fw-bold" id="vehiculosEntrada">120</p>
-          </div>
+            <div class="header-section text-center">
+                <h1 class="mb-2"><i class="fas fa-chart-line me-3"></i>Reportes Generales</h1>
+                <p class="lead">Métricas y estadísticas globales del parqueadero.</p>
+            </div>
+
+            <div class="date-filter-section">
+                <h5><i class="fas fa-calendar-alt me-2 text-primary"></i>Filtrar por Fecha</h5>
+                <form action="../../backend/controllers/GeneralReportController.php" method="GET" class="row g-3 align-items-end">
+                    <div class="col-md-5">
+                        <label for="startDate" class="form-label">Fecha Inicio</label>
+                        <input type="date" class="form-control" id="startDate" name="startDate" value="">
+                    </div>
+                    <div class="col-md-5">
+                        <label for="endDate" class="form-label">Fecha Fin</label>
+                        <input type="date" class="form-control" id="endDate" name="endDate" value="">
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary w-100">Aplicar Filtro</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="generalReportsContent">
+                <div class="text-center py-5">
+                   
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card bg-light">
-          <div class="card-body">
-            <h5>Vehículos Salieron</h5>
-            <p class="fs-4 fw-bold" id="vehiculosSalida">100</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card bg-light">
-          <div class="card-body">
-            <h5>Ocupación al final del dia(%)</h5>
-            <p class="fs-4 fw-bold" id="ocupacion">17%</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card bg-light">
-          <div class="card-body">
-            <h5>Usuarios Nuevos</h5>
-            <p class="fs-4 fw-bold" id="usuariosNuevos">12</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card bg-light">
-          <div class="card-body">
-            <h5>Pico de ocupacion</h5>
-            <p class="fs-4 fw-bold" id="picoOcupacion">80% 120 vehículos</p>
-          </div>
-        </div>
-      </div>
     </div>
 
-    <!-- Eventos activos -->
-    <div class="alert alert-info text-center" role="alert">
-      Evento activo: <strong>Feria de Tecnología 2025</strong>
-    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="../public/js/scriptsDOM.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof loadHeader === 'function') {
+                loadHeader();
+            }
 
+            // Precargar los valores de las fechas (si hay un filtro aplicado)
+            const urlParams = new URLSearchParams(window.location.search);
+            const startDateParam = urlParams.get('startDate');
+            const endDateParam = urlParams.get('endDate');
 
-    <!-- Selector de fecha -->
-    <div class="row mb-4">
-      <div class="col-md-4">
-        <label for="fechaReporte" class="form-label">Seleccionar fecha:</label>
-        <input type="date" id="fechaReporte" class="form-control">
-      </div>
-    </div>
+            if (startDateParam) {
+                document.getElementById('startDate').value = startDateParam;
+            }
+            if (endDateParam) {
+                document.getElementById('endDate').value = endDateParam;
+            }
+        });
 
-
-    <!-- Gráficas -->
-    <div class="row">
-      <div class="col-md-6">
-        <canvas id="graficoEntradasSalidas"></canvas>
-      </div>
-      <div class="col-md-6">
-        <canvas id="graficoReservados"></canvas>
-      </div>
-    </div>
-
-    <!-- Botón para volver a detalle del usuario -->
-    <div class="text-end mt-4">
-      <a href="reportes_detalles.html" class="btn btn-secondary">Ir a Detalle del Usuario</a>
-    </div>
-
-  </div>
-
-  <script>
-    // Gráfico de Entradas vs Salidas
-    const ctx1 = document.getElementById('graficoEntradasSalidas').getContext('2d');
-    const grafico1 = new Chart(ctx1, {
-      type: 'bar',
-      data: {
-        labels: ['Entradas', 'Salidas'],
-        datasets: [{
-          label: 'Cantidad de Vehículos',
-          data: [120, 100],
-          backgroundColor: ['#0d6efd', '#dc3545']
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          title: { display: true, text: 'Flujo de Vehículos' }
+        function goBack() {
+            window.history.back();
         }
-      }
-    });
-
-    // Gráfico de puestos reservados
-    const ctx2 = document.getElementById('graficoReservados').getContext('2d');
-    const grafico2 = new Chart(ctx2, {
-      type: 'doughnut',
-      data: {
-        labels: ['Reservados Usados', 'Reservados Libres'],
-        datasets: [{
-          data: [8, 2],
-          backgroundColor: ['#198754', '#ffc107']
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          title: { display: true, text: 'Uso de Puestos Reservados' }
-        }
-      }
-    });
-
-
-    document.getElementById('fechaReporte').addEventListener('change', function () {
-      const fechaSeleccionada = this.value;
-      console.log("Fecha seleccionada:", fechaSeleccionada);
-
-      // Aquí puedes hacer una solicitud a tu API o backend para obtener los datos del día seleccionado
-      // Ejemplo ficticio:
-      // fetch(`/api/reporte?fecha=${fechaSeleccionada}`)
-      //   .then(res => res.json())
-      //   .then(data => {
-      //     actualizarGraficos(data);
-      //   });
-    });
-  </script>
-   <!-- JS que carga el header dinámicamente -->
-<script src="./../public/js/scriptsDOM.js"></script>
+    </script>
 </body>
 
 </html>
