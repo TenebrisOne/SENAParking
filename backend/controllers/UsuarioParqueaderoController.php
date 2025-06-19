@@ -2,27 +2,67 @@
 require_once '../config/conexion.php';
 require_once '../models/UsuarioParqueaderoModel.php';
 
-$usuarioParkingModel = new UsuarioParqueadero($conn);
+$modelo = new UsuarioParqueadero($conn);
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nombre = trim($_POST['nombre'] ?? '');
-    $apellido = trim($_POST['apellido'] ?? '');
-    $tipdoc = trim($_POST['tipdoc'] ?? '');
-    $documento = trim($_POST['documento'] ?? '');
-    $tarjeta = trim($_POST['tarjeta'] ?? '');
-    $correo = trim($_POST['correo'] ?? '');
-    $numero = trim($_POST['numero'] ?? '');
-    $tipuser = trim($_POST['tipuser'] ?? '');
-    $hora_entrada = trim($_POST['hora_entrada'] ?? '');
-    $centro = trim($_POST['centro'] ?? '');
+// ✅ REGISTRAR USUARIO
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre']) && !isset($_POST['id_userPark'])) {
+    $nombre     = $_POST['nombre'];
+    $apellido   = $_POST['apellido'];
+    $tipdoc     = $_POST['tipdoc'];
+    $documento  = $_POST['documento'];
+    $numero     = $_POST['numero'];
+    $tipo_user  = $_POST['tipo_usuario'];
+    $edificio   = $_POST['edificio'];
+    $estado     = 'activo';
 
-    $resultado = $usuarioParkingModel->registrarUsuario($tipuser,$tipdoc,$documento,$nombre,$apellido,$centro,$tarjeta,$correo,$numero,$hora_entrada);
-
-    if ($resultado == true) {
-        echo "Usuario registrado correctamente.";
-    } else {
-        echo $resultado;
-    }
+    $resultado = $modelo->registrarUsuario($tipo_user, $tipdoc, $documento, $nombre, $apellido, $edificio, $numero, $estado);
+    echo $resultado ? "Usuario registrado correctamente." : "Error al registrar.";
+    exit;
 }
-?>
+
+// ✅ ACTUALIZAR USUARIO
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_userPark'])) {
+    $id         = $_POST['id_userPark'];
+    $nombre     = $_POST['nombre'];
+    $apellido   = $_POST['apellido'];
+    $tipdoc     = $_POST['tipdoc'];
+    $documento  = $_POST['documento'];
+    $numero     = $_POST['numero'];
+    $tipo_user  = $_POST['tipo_usuario'];
+    $edificio   = $_POST['edificio'];
+
+    $resultado = $modelo->actualizarUsuario($id, $tipo_user, $tipdoc, $documento, $nombre, $apellido, $edificio, $numero);
+    echo $resultado ? "Usuario actualizado correctamente." : "Error al actualizar.";
+    exit;
+}
+
+// ✅ CAMBIAR ESTADO
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && str_contains($_SERVER["CONTENT_TYPE"], "application/json")) {
+    $datos = json_decode(file_get_contents("php://input"), true);
+    $resultado = $modelo->cambiarEstado($datos['id_userPark'], $datos['estado']);
+
+    echo json_encode([
+        'success' => $resultado,
+        'message' => $resultado ? "Estado actualizado correctamente" : "Error al actualizar"
+    ]);
+    exit;
+}
+
+// ✅ CONSULTAR POR ID
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
+    $usuario = $modelo->obtenerUsuarioPorId($_GET['id']);
+    header('Content-Type: application/json');
+    echo json_encode($usuario);
+    exit;
+}
+
+// ✅ CONSULTAR TODOS
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $usuarios = $modelo->obtenerUsuarios();
+    header('Content-Type: application/json');
+    echo json_encode($usuarios);
+    exit;
+}
+
+
 
