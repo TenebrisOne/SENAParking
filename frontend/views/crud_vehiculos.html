@@ -218,7 +218,7 @@
         }
 
         // Buscar vehículos
-        function searchVehicles(searchTerm) {
+         function searchVehicles(searchTerm) {
             const clearButton = document.getElementById('clearSearch');
             
             if (searchTerm.length > 0) {
@@ -228,7 +228,7 @@
             }
 
             // Debounce para evitar muchas búsquedas
-            clearTimeout(searchTimeout);
+            //clearTimeout(searchTimeout);
             searchTimeout = setTimeout(async () => {
                 if (searchTerm.trim() === '') {
                     displayVehicles(allVehicles); 
@@ -239,7 +239,7 @@
                     showLoading(true);
                     // La URL apunta al controlador PHP que devuelve JSON
                     const response = await fetch(`../../backend/controllers/VehicleController.php?search=${encodeURIComponent(searchTerm)}`);
-                    const data = await response.json(); // Se sigue esperando JSON aquí
+                    const data = await response.json(); 
                     
                     if (data.success) {
                         displayVehicles(data.data);
@@ -258,7 +258,7 @@
         }
 
         // Limpiar búsqueda
-        function clearSearch() {
+       function clearSearch() {
             document.getElementById('searchInput').value = '';
             document.getElementById('clearSearch').style.display = 'none';
             loadVehicles(); // Recargar todos los vehículos
@@ -270,8 +270,7 @@
             if (selectedVehicle && selectedVehicle.element !== cardElement) {
                 selectedVehicle.element.classList.remove('selected');
             }
-            
-            // Toggle selección actual
+    
             if (cardElement.classList.contains('selected')) {
                 cardElement.classList.remove('selected');
                 selectedVehicle = null;
@@ -318,7 +317,7 @@
             // Crear un formulario para enviar los datos como POST
             const form = document.createElement('form');
             form.method = 'POST';
-            form.action = '../../backend/controllers/AccessController.php'; // Apunta al controlador de acceso
+            form.action = '../../backend/controllers/AccessController.php'; 
 
             const idVehiculoInput = document.createElement('input');
             idVehiculoInput.type = 'hidden';
@@ -333,7 +332,7 @@
             form.appendChild(tipoAccionInput);
 
             document.body.appendChild(form);
-            form.submit(); // Envía el formulario, lo que redirigirá la página
+            form.submit(); 
         }
 
         // Añadir nuevo vehículo
@@ -342,11 +341,9 @@
             window.location.href = '/SENAParking/frontend/views/reg_vehiculos.html';
         }
 
-        // Editar vehículo
+        // Función para editar vehículo
         function editVehicle(event, vehicleId) {
-            event.stopPropagation();
-            showAlert(`Editando vehículo ID: ${vehicleId}`, 'info');
-            // window.location.href = `/edit-vehicle/${vehicleId}`;
+            window.location.href = `./edit_vehiculos.html?id=${vehicleId}`;
         }
 
         // Funciones auxiliares
@@ -361,7 +358,6 @@
         }
 
         function showAlert(message, type = 'info') {
-            // Crear alerta Bootstrap
             const alertDiv = document.createElement('div');
             alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
             alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; max-width: 400px;';
@@ -372,7 +368,6 @@
             
             document.body.appendChild(alertDiv);
             
-            // Auto-remover después de 5 segundos
             setTimeout(() => {
                 if (alertDiv.parentNode) {
                     alertDiv.remove();
