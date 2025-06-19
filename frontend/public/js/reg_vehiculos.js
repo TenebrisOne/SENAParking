@@ -43,8 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const validarModelo = () => {
         const valor = parseInt(modelo.value.trim());
-        if (isNaN(valor) || valor < 1900 || valor > añoActual) {
-            mostrarError(modelo, `Entre 1900 y ${añoActual}`);
+        if (isNaN(valor)) {
+            mostrarError(modelo, `Carajo ${añoActual}`);
             return false;
         }
         limpiarError(modelo);
