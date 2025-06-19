@@ -168,7 +168,7 @@
                         </div>
                     </div>
                     <!-- Reportes generales con enlaces a diferentes reportes -->
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="card card-reportes-generales">
                             <div class="card-header">
                                 Reportes Generales
@@ -236,37 +236,16 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Nombres</th>
-                                                <th>Vehículo</th>
-                                                <th>Acciones</th>
+                                                <th>Nombre</th>
+                                                <th>Documento</th>
+                                                <th>Estado</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="tablaUsuariosparqueadero">
+                                        <tbody id="tablaUsuariosParqueadero">
                                             <!-- Aquí se insertarán los usuarios dinámicamente -->
-                                            <!-- Ejemplo de filas de usuarios con opciones para editar y eliminar -->
-                                            <tr>
-                                                <td>Pablo Rojas</td>
-                                                <td>Carro</td>
-                                                <td><button class="btn btn-sm btn-outline-secondary">Editar</button>
-                                                    <button class="btn btn-sm btn-outline-danger">Eliminar</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Pedro Ruiz</td>
-                                                <td>Moto</td>
-                                                <td><button class="btn btn-sm btn-outline-secondary">Editar</button>
-                                                    <button class="btn btn-sm btn-outline-danger">Eliminar</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Pepito Perez</td>
-                                                <td>Bicicleta</td>
-                                                <td><button class="btn btn-sm btn-outline-secondary">Editar</button>
-                                                    <button class="btn btn-sm btn-outline-danger">Eliminar</button>
-                                                </td>
-                                            </tr>
                                         </tbody>
                                     </table>
+
                                     <!--Cambio ruta localhost, se agrega SENAParking a la navegacion del boton-->
                                     <button type="button"
                                         onclick="window.location.href='/SENAParking/frontend/views/reg_userParking.html'"
@@ -290,6 +269,8 @@
 
     <!-- Otro script personalizado -->
     <script src="../public/js/usuarios.js"></script>
+    <script src="../public/js/usuariosParqueadero.js"></script>
+
 
 
 </body>

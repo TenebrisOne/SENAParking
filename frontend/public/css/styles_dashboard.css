@@ -343,7 +343,9 @@ input.form-control:focus {
     color: #000;
     border-bottom: 2px solid #00304D;
     font-weight: bold;
+    width: 100%; /* o 90% si quieres algo más controlado */
 }
+
 
 /* Botón registrar usuario */
 .btn-registrar-usuario {
