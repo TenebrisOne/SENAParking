@@ -5,7 +5,6 @@ const expresiones = {
    nombre: /^[a-zA-ZÀ-ÿ\s]{4,16}$/, // Letras, numeros, guion y guion_bajo
    apellido: /^[a-zA-ZÀ-ÿ\s]{4,16}$/, // Letras y espacios, pueden llevar acentos.
    documento: /^\d{6,10}$/, // 4 a 12 digitos.
-   correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
    numero: /^\d{7,10}$/ // 7 a 10 numeros.
 }
 
@@ -13,7 +12,6 @@ const campos = {
    nombre: false,
    apellido: false,
    documento: false,
-   correo: false,
    numero: false
 }
 
@@ -42,9 +40,6 @@ const validarformulario = (e) => {
       case "documento":
          validarcampo(expresiones.documento, e.target, 'documento');
          break;
-      case "correo":
-         validarcampo(expresiones.correo, e.target, 'correo');
-         break;
       case "numero":
          validarcampo(expresiones.numero, e.target, 'numero');
          break;
@@ -59,13 +54,12 @@ inputs.forEach((input)=>{
 formulario.addEventListener('submit', (e) => {
    e.preventDefault();
 
-   if (campos.nombre && campos.apellido && campos.documento && campos.correo && campos.numero) {
+   if (campos.nombre && campos.apellido && campos.documento && campos.numero) {
 
       const nombre = document.getElementById('nombre').value.trim();
       const apellido = document.getElementById('apellido').value.trim();
       const tipdoc = document.getElementById('tipdoc').value.trim();
       const documento = document.getElementById('documento').value.trim();
-      const correo = document.getElementById('correo').value.trim();
       const numero = document.getElementById('numero').value.trim();
       const tipuser = document.getElementById('tipo_usuario').value.trim();
       const centro = document.getElementById('edificio').value.trim();
@@ -75,7 +69,6 @@ formulario.addEventListener('submit', (e) => {
       formData.append('apellido', apellido);
       formData.append('tipdoc', tipdoc);
       formData.append('documento', documento);
-      formData.append('correo', correo);
       formData.append('numero', numero);
       formData.append('tipo_usuario', tipuser);
       formData.append('edificio', centro);

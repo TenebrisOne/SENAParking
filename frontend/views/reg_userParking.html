@@ -56,7 +56,7 @@
                 <!--Campo para solicitar el tipo de documento-->
                 <div class="col-md-6">
                     <label for="tipo_documento" class="form-label formulario__input">Tipo de documento:</label>
-                    <select class="form-select"  name="tipdoc" id="tipdoc" required>
+                    <select class="form-select" name="tipdoc" id="tipdoc" required>
                         <option value="" selected disabled>Seleccione tipo de documento</option>
                         <option value="cedula_ciudadania">Cédula de Ciudadania</option>
                         <option value="cedula_extranjeria">Cédula de Extranjeria</option>
@@ -74,16 +74,8 @@
                         contener numeros.</p>
                 </div>
             </div>
-                <!--Campo para solicitar el correo-->
-                <div class="row mb-3">
-                <div class="col-md-6" id="grupo__correo">
-                    <label for="correo_institucional" class="form-label">Correo:</label>
-                    <input type="email" class="form-control formulario__input" name="correo" id="correo"
-                        placeholder="Ingrese el correo">
-                    <p class="formulario__input-error">El correo solo puede contener letras, numeros, puntos, guiones y
-                        guion bajo.</p>
-                </div>
-                <!--Campo para solicitar el núm de contacto-->
+            <!--Campo para solicitar el núm de contacto-->
+            <div class="row mb-3">
                 <div class="col-md-6" id="grupo__numero"><!--Divide en columnas para alinear los campos-->
                     <label for="numero_contacto" class="form-label">Número contacto:</label>
                     <input type="text" class="form-control formulario__input" name="numero" id="numero"
@@ -91,12 +83,10 @@
                     <p class="formulario__input-error">El numero de contacto tiene que ser de 7 a 14 digitos y solo
                         puede contener numeros.</p>
                 </div>
-                </div>
                 <!--Campo para solicitar el tipo de usuario-->
-                <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="tipo_usuario" class="form-label">Tipo de usuario:</label>
-                    <select class="form-select"  name="tipo_usuario" id="tipo_usuario" required>
+                    <select class="form-select" name="tipo_usuario" id="tipo_usuario" required>
                         <option value="" selected disabled>Seleccione tipo de usuario</option>
                         <option value="servidor_público">Servidor público</option>
                         <option value="contratista">Contratista</option>
@@ -107,23 +97,25 @@
                     </select>
                     <p class="formulario__input-error">Ingrese un tipo de usuario</p>
                 </div>
-                <div class="col-md-6" id="grupo__edificio">
-                    <label for="edificio" class="form-label">Centro:</label>
-                    <select class="form-select" name="edificio" id="edificio" required>
-                        <option value="" selected disabled>Seleccione una opción</option>
-                        <option value="CMD">Centro de Diseño y Metrología</option>
-                        <option value="CGI">Centro de Gestión Industrial</option>
-                        <option value="CENIGRAF">Cenigraf</option>
-                    </select>
-                    <p class="formulario__input-error">Por favor seleccione un edificio.</p>
-                </div>
             </div>
+            <div class="col-md-6" id="grupo__edificio">
+                <label for="edificio" class="form-label">Centro:</label>
+                <select class="form-select" name="edificio" id="edificio" required>
+                    <option value="" selected disabled>Seleccione una opción</option>
+                    <option value="CMD">Centro de Diseño y Metrología</option>
+                    <option value="CGI">Centro de Gestión Industrial</option>
+                    <option value="CENIGRAF">Cenigraf</option>
+                </select>
+                <p class="formulario__input-error">Por favor seleccione un edificio.</p>
+            </div>
+            <br>
             <!-- Botón Confirmar -->
             <div class="text-center">
                 <button type="submit" class="btn btn-confirmar">Confirmar</button>
             </div>
         </form>
     </div>
+
 
     <!-- Cargar el footer-->
     <!-- Función para llamar al Header-->
