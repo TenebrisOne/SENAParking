@@ -178,7 +178,7 @@ if ($_SESSION["rol"] != 1) {
                         </div>
                     </div>
                     <!-- Reportes generales con enlaces a diferentes reportes -->
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="card card-reportes-generales">
                             <div class="card-header">
                                 Reportes Generales
@@ -245,17 +245,17 @@ if ($_SESSION["rol"] != 1) {
                                     <!-- Tabla con la lista de usuarios -->
                                     <table class="table table-striped">
                                         <thead>
-                                           <tr>
-                                              <th>Nombre</th>
-                                              <th>Documento</th>
-                                              <th>Estado</th>
-                                           </tr>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>Documento</th>
+                                                <th>Estado</th>
+                                            </tr>
                                         </thead>
                                         <tbody id="tablaUsuariosParqueadero">
-                                           <!-- Aquí se insertarán los usuarios dinámicamente -->
+                                            <!-- Aquí se insertarán los usuarios dinámicamente -->
                                         </tbody>
-                                     </table>
-                                     
+                                    </table>
+
                                     <!--Cambio ruta localhost, se agrega SENAParking a la navegacion del boton-->
                                     <button type="button"
                                         onclick="window.location.href='/SENAParking/frontend/views/reg_userParking.html'"
