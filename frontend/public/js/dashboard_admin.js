@@ -1,8 +1,9 @@
 // En este archivo js se hacen los llamados para poder reflejar los numeros en tiempo real en el dashboard_admin //
 function cargarDatosDashboard() {
-    fetch('../../../backend/controllers/dashboard_admin_controller.php') // Ruta desde frontend/views/
+    fetch('http://localhost/SENAPARKING/backend/controllers/dashboard_admin_controller.php') // Ruta desde frontend/views/
         .then(response => response.json())
         .then(data => {
+            console.log(data); // Aquí va, dentro del .then(), para ver los datos recibidos
             document.getElementById('total-usuarios-sistema').innerText = data.usuariosSistema;
             document.getElementById('total-usuarios-parqueadero').innerText = data.usuariosParqueadero;
             document.getElementById('accesos-hoy').innerText = data.ingresosHoy;

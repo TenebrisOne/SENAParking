@@ -2,6 +2,8 @@
 // Este archivo es para actualizar los numeros en tiempo real en el dashboar_admin.html //
 
 header("Content-Type: application/json");
+header("Access-Control-Allow-Origin: *"); // ⚠ Permite acceso desde cualquier origen
+header("Access-Control-Allow-Headers: Content-Type");
 include '../config/conexion.php'; // Ajusta si tu archivo conexión está en otro lado
 
 // Consulta: Usuarios del sistema
