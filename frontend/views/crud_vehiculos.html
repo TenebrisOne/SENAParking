@@ -106,12 +106,11 @@
         async function loadVehicles() {
             try {
                 showLoading(true);
-                // La URL apunta al controlador PHP que devuelve JSON
                 const response = await fetch('../../backend/controllers/VehicleController.php');
-                const data = await response.json(); // Se sigue esperando JSON aquí
+                const data = await response.json(); 
                 
                 if (data.success) {
-                    allVehicles = data.data; // Almacena todos los vehículos
+                    allVehicles = data.data; 
                     displayVehicles(allVehicles);
                 } else {
                     showError(data.message || 'Error al cargar vehículos');
