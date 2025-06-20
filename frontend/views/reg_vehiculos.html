@@ -32,7 +32,7 @@
     <img src="../public/images/logo_sena.png" alt="Logo SENA"
         style="position: absolute; top: 100px; right: 70px; width: 100px;">
     </div>
-    
+
     <!-- Botón para volver atrás -->
     <div class="back-arrow" onclick="goBack()">
         <i class="fas fa-arrow-left"></i>
@@ -44,14 +44,21 @@
         <h2>Registro de vehículos</h2>
 
         <div class="container mt-5">
-            <form id="formVehiculo" action="" method="POST" novalidate>
+            <form id="formVehiculo" novalidate>
                 <div class="row mb-3">
 
                     <!-- Columna izquierda -->
-                    <div class="col-md-6 text-end">
+                    <div class="col-md-6 text-start">
                         <!-- Campo Placa -->
                         <label for="placa">Placa:</label>
-                        <input type="text" id="placa" name="placa" class="form-control mb-2" placeholder="Ingrese la placa" required>
+                        <input type="text" id="placa" name="placa" class="form-control mb-2"
+                            placeholder="Ingrese la placa" required>
+                        <div class="invalid-feedback text-start">Formato inválido. Ej: ABC123</div>
+
+                        <!-- Campo Tarjeta de propiedad o Serial-->
+                        <label for="tarjeta_propiedad">Tarjeta de propiedad o Serial:</label>
+                        <input type="text" id="tarjeta_propiedad" name="tarjeta_propiedad" class="form-control mb-2"
+                            placeholder="Ingrese la Tarjeta de propiedad o el Serial" required>
                         <div class="invalid-feedback text-start">Formato inválido. Ej: ABC123</div>
 
                         <!-- Campo Tipo -->
@@ -81,23 +88,27 @@
                     <div class="col-md-6 text-start">
                         <!-- Campo Color -->
                         <label for="color">Color:</label>
-                        <input type="text" id="color" name="color" class="form-control mb-2" placeholder="Ingrese el color" required>
+                        <input type="text" id="color" name="color" class="form-control mb-2"
+                            placeholder="Ingrese el color" required>
                         <div class="invalid-feedback">El color debe tener al menos 3 caracteres</div>
 
                         <!-- Campo Modelo -->
                         <label for="modelo">Modelo:</label>
-                        <input type="text" id="modelo" name="modelo" class="form-control mb-2" placeholder="Ingrese el modelo" required>
+                        <input type="text" id="modelo" name="modelo" class="form-control mb-2"
+                            placeholder="Ingrese el modelo" required>
                         <div class="invalid-feedback">El modelo debe estar entre 1900 y 2025</div>
 
                         <!-- Campo Observaciones (sin validación) -->
                         <label for="observaciones">Observaciones:</label>
-                        <textarea id="observaciones" name="observaciones" class="form-control" style="resize: none;" placeholder="Ingrese una observacion"></textarea>
+                        <textarea id="observaciones" name="observaciones" class="form-control" style="resize: none;"
+                            placeholder="Ingrese una observacion"></textarea>
                     </div>
                 </div>
 
                 <!-- Botón de enviar -->
 
-                <input type="submit" value="Confirmar" onclick="window.location.href='/frontend/views/crud_vehiculos.html'" class="btn btn-primary">
+                <input type="submit" value="Confirmar"
+                    onclick="window.location.href='/frontend/views/crud_vehiculos.html'" class="btn btn-primary">
 
             </form>
         </div>
@@ -107,7 +118,8 @@
     <script src="./../public/js/scriptsDOM.js"></script>
 
     <!-- Validación de formulario con Bootstrap + JS personalizado -->
-    <script src="/frontend/public/js/reg_vehiculos.js"></script>
+    <script src="../public/js/reg_vehiculos.js"></script>
 
 </body>
+
 </html>

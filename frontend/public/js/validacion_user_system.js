@@ -69,43 +69,45 @@ inputs.forEach((input) => {
 formulario.addEventListener('submit', (e) => {
    e.preventDefault();
 
-   const todosValidos = Object.values(campos).every(valor => valor === true);
+   if (campos.nombre && campos.apellido && campos.documento && campos.correo && campos.numero && campos.usuario && campos.contrasena) {
 
-   if (todosValidos) {
-      const formData = new FormData(formulario);
+      const nombre = document.getElementById('nombre').value.trim();
+      const apellido = document.getElementById('apellido').value.trim();
+      const tipdoc = document.getElementById('tipdoc').value.trim();
+      const documento = document.getElementById('documento').value.trim();
+      const rol = document.getElementById('rol').value.trim();
+      const correo = document.getElementById('correo').value.trim();
+      const numero = document.getElementById('numero').value.trim();
+      const usuario = document.getElementById('usuario').value.trim();
+      const contrasena = document.getElementById('contrasena').value.trim();
 
-      fetch('guardar_usuario.php', {
+      const formData = new FormData();
+      formData.append('nombre', nombre);
+      formData.append('apellido', apellido);
+      formData.append('tipdoc', tipdoc);
+      formData.append('documento', documento);
+      formData.append('rol', rol);
+      formData.append('correo', correo);
+      formData.append('numero', numero);
+      formData.append('usuario', usuario);
+      formData.append('contrasena', contrasena);
+
+      fetch('../../../SENAParking/backend/controllers/UsuarioSistemaController.php', {
          method: 'POST',
          body: formData
       })
-      .then(response => response.text())
-      .then(data => {
-         alert(data);
 
-         if (data.includes("exitosamente")) {
-            formulario.reset();
-
-            // Limpiar estilos y estados
-            Object.keys(campos).forEach(campo => {
-               const grupo = document.getElementById(`grupo__${campo}`);
-               grupo.classList.remove('formulario__grupo-correcto', 'formulario__grupo-incorrecto');
-               campos[campo] = false;
-            });
-         }
-      })
-      .catch(error => {
-         alert('Error al enviar el formulario. Intente nuevamente.');
-         console.error(error);
-      });
-
-   } else {
-      alert("Por favor complete correctamente todos los campos.");
+         .then(response => response.text())
+         .then(data => {
+            alert(data);
+            window.location.href="../views/dashboard_admin.html";
+         })
+         .catch(error => {
+            alert(error);
+            window.location.href="../views/dashboard_admin.html";
+         });
+      formulario.reset();
    }
-
-   if (validacionesCorrectas) {
-      formulario.submit(); // Asegúrate de tener esto si usas preventDefault
-  }
-  
 });
 
 // Flecha de retroceso

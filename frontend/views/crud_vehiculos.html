@@ -6,63 +6,35 @@
     <title>Gestión de Vehículos</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
-        .vehicle-card {
-            transition: transform 0.2s, box-shadow 0.2s, border 0.2s;
-            cursor: pointer;
-            border: 2px solid transparent;
-        }
-        .vehicle-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        .vehicle-card.selected {
-            border: 2px solid #007bff;
-            background-color: #f8f9ff;
-        }
-        .status-toggle {
-            border-radius: 25px;
-        }
-        .vehicle-info {
-            border-left: 4px solid #007bff;
-            padding-left: 15px;
-        }
-        .btn-edit {
-            opacity: 0.8;
-            transition: opacity 0.2s;
-        }
-        .btn-edit:hover {
-            opacity: 1;
-        }
-        .header-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1.5rem 0;
-            margin-bottom: 2rem;
-        }
-        .toggle-section {
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        .vehicle-image {
-            flex-shrink: 0;
-            width: 80px;
-            height: 60px;
-        }
-        .vehicle-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    </style>
+    <link rel="stylesheet" href="../public/css/crudVehiculos.css">
 </head>
 <body class="bg-light">
     <div id="header-container"></div>
     <div class="container-fluid">
         <div class="container">
-            <!-- Toggle Section -->
+            <div class="search-section">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h5 class="mb-3 mb-md-0">
+                            <i class="fas fa-search me-2 text-primary"></i>
+                            Buscar Vehículos
+                        </h5>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="search-container">
+                            <input type="text" 
+                                   class="form-control search-input" 
+                                   id="searchInput"
+                                   placeholder="Buscar por propietario o placa..."
+                                   oninput="searchVehicles(this.value)">
+                            <button class="clear-search" id="clearSearch" onclick="clearSearch()">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="toggle-section">
                 <div class="row align-items-center">
                     <div class="col-md-6">
@@ -83,7 +55,6 @@
                 </div>
             </div>
 
-            <!-- Add Vehicle Button -->
             <div class="row mb-4">
                 <div class="col">
                     <button class="btn btn-success btn-lg" onclick="addNewVehicle()">
@@ -92,170 +63,22 @@
                 </div>
             </div>
 
-            <!-- Vehicles List -->
-            <div class="row" id="vehiclesList">
-                <!-- Vehicle Card 1 -->
-                <div class="col-12 mb-3">
-                    <div class="card vehicle-card h-100" onclick="selectVehicle(this, 'ABC-123')">
-                        <div class="card-body">
-                            <div class="d-flex align-items-start">
-                                <!-- Vehicle Image -->
-                                <div class="vehicle-image me-3">
-                                    <img src="https://via.placeholder.com/80x60/007bff/ffffff?text=CAR" alt="Vehicle" class="img-fluid rounded">
-                                </div>
-                                <!-- Vehicle Info -->
-                                <div class="vehicle-info flex-grow-1">
-                                    <div class="d-flex justify-content-between align-items-start mb-3">
-                                        <div class="flex-grow-1">
-                                            <h5 class="card-title mb-2">
-                                                <i class="fas fa-car text-primary me-2"></i>
-                                                ABC-123
-                                            </h5>
-                                            <p class="card-text mb-1">
-                                                <strong>Modelo:</strong> Toyota Corolla
-                                            </p>
-                                            <p class="card-text mb-1">
-                                                <strong>Color:</strong> Blanco
-                                            </p>
-                                            <p class="card-text mb-0">
-                                                <strong>Propietario:</strong> Juan Pérez
-                                            </p>
-                                        </div>
-                                        <button class="btn btn-outline-primary btn-sm btn-edit" onclick="editVehicle(event, 'ABC-123')">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                    </div>
-                                    <div class="mt-3">
-                                        <span class="badge bg-success">Activo</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="loading text-center" id="loadingIndicator">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Cargando...</span>
                 </div>
-
-                <!-- Vehicle Card 2 -->
-                <div class="col-12 mb-3">
-                    <div class="card vehicle-card h-100" onclick="selectVehicle(this, 'XYZ-789')">
-                        <div class="card-body">
-                            <div class="d-flex align-items-start">
-                                <!-- Vehicle Image -->
-                                <div class="vehicle-image me-3">
-                                    <img src="https://via.placeholder.com/80x60/28a745/ffffff?text=CAR" alt="Vehicle" class="img-fluid rounded">
-                                </div>
-                                <!-- Vehicle Info -->
-                                <div class="vehicle-info flex-grow-1">
-                                    <div class="d-flex justify-content-between align-items-start mb-3">
-                                        <div class="flex-grow-1">
-                                            <h5 class="card-title mb-2">
-                                                <i class="fas fa-car text-primary me-2"></i>
-                                                XYZ-789
-                                            </h5>
-                                            <p class="card-text mb-1">
-                                                <strong>Modelo:</strong> Honda Civic
-                                            </p>
-                                            <p class="card-text mb-1">
-                                                <strong>Color:</strong> Negro
-                                            </p>
-                                            <p class="card-text mb-0">
-                                                <strong>Propietario:</strong> María González
-                                            </p>
-                                        </div>
-                                        <button class="btn btn-outline-primary btn-sm btn-edit" onclick="editVehicle(event, 'XYZ-789')">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                    </div>
-                                    <div class="mt-3">
-                                        <span class="badge bg-success">Activo</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Vehicle Card 3 -->
-                <div class="col-12 mb-3">
-                    <div class="card vehicle-card h-100" onclick="selectVehicle(this, 'MOT-456')">
-                        <div class="card-body">
-                            <div class="d-flex align-items-start">
-                                <!-- Vehicle Image -->
-                                <div class="vehicle-image me-3">
-                                    <img src="https://via.placeholder.com/80x60/dc3545/ffffff?text=MOTO" alt="Vehicle" class="img-fluid rounded">
-                                </div>
-                                <!-- Vehicle Info -->
-                                <div class="vehicle-info flex-grow-1">
-                                    <div class="d-flex justify-content-between align-items-start mb-3">
-                                        <div class="flex-grow-1">
-                                            <h5 class="card-title mb-2">
-                                                <i class="fas fa-motorcycle text-primary me-2"></i>
-                                                MOT-456
-                                            </h5>
-                                            <p class="card-text mb-1">
-                                                <strong>Modelo:</strong> Yamaha R15
-                                            </p>
-                                            <p class="card-text mb-1">
-                                                <strong>Color:</strong> Azul
-                                            </p>
-                                            <p class="card-text mb-0">
-                                                <strong>Propietario:</strong> Carlos López
-                                            </p>
-                                        </div>
-                                        <button class="btn btn-outline-primary btn-sm btn-edit" onclick="editVehicle(event, 'MOT-456')">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                    </div>
-                                    <div class="mt-3">
-                                        <span class="badge bg-warning">En proceso</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Vehicle Card 4 -->
-                <div class="col-12 mb-3">
-                    <div class="card vehicle-card h-100" onclick="selectVehicle(this, 'TRK-321')">
-                        <div class="card-body">
-                            <div class="d-flex align-items-start">
-                                <!-- Vehicle Image -->
-                                <div class="vehicle-image me-3">
-                                    <img src="https://via.placeholder.com/80x60/6f42c1/ffffff?text=TRUCK" alt="Vehicle" class="img-fluid rounded">
-                                </div>
-                                <!-- Vehicle Info -->
-                                <div class="vehicle-info flex-grow-1">
-                                    <div class="d-flex justify-content-between align-items-start mb-3">
-                                        <div class="flex-grow-1">
-                                            <h5 class="card-title mb-2">
-                                                <i class="fas fa-truck text-primary me-2"></i>
-                                                TRK-321
-                                            </h5>
-                                            <p class="card-text mb-1">
-                                                <strong>Modelo:</strong> Ford F-150
-                                            </p>
-                                            <p class="card-text mb-1">
-                                                <strong>Color:</strong> Rojo
-                                            </p>
-                                            <p class="card-text mb-0">
-                                                <strong>Propietario:</strong> Ana Rodríguez
-                                            </p>
-                                        </div>
-                                        <button class="btn btn-outline-primary btn-sm btn-edit" onclick="editVehicle(event, 'TRK-321')">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                    </div>
-                                    <div class="mt-3">
-                                        <span class="badge bg-success">Activo</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <p class="mt-2">Cargando vehículos...</p>
             </div>
 
-            <!-- Continue Button -->
+            <div class="row" id="vehiclesList">
+                </div>
+
+            <div class="no-results d-none" id="noResults">
+                <i class="fas fa-search fa-3x mb-3"></i>
+                <h4>No se encontraron vehículos</h4>
+                <p>Intenta con otros términos de búsqueda</p>
+            </div>
+
             <div class="row mt-4 mb-5">
                 <div class="col-12 text-center">
                     <button class="btn btn-primary btn-lg px-5" onclick="continueProcess()">
@@ -266,102 +89,92 @@
         </div>
     </div>
 
-
-    <!-- Función para llamar al Header dinámico -->
-    <script src="./../public/js/scriptsDOM.js"></script>
-
-    <!-- Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     
     <script>
-        // Variable to store the currently selected vehicle
+        // Variables globales
         let selectedVehicle = null;
+        let allVehicles = []; 
 
-        // Select vehicle (only one at a time)
-        function selectVehicle(cardElement, plateNumber) {
-            // Remove selection from previously selected vehicle
-            if (selectedVehicle && selectedVehicle.element !== cardElement) {
-                selectedVehicle.element.classList.remove('selected');
-            }
-            
-            // Toggle current selection
-            if (cardElement.classList.contains('selected')) {
-                cardElement.classList.remove('selected');
-                selectedVehicle = null;
-            } else {
-                cardElement.classList.add('selected');
-                selectedVehicle = {
-                    element: cardElement,
-                    plateNumber: plateNumber
-                };
-            }
-            
-            console.log('Selected vehicle:', selectedVehicle ? selectedVehicle.plateNumber : 'None');
-        }
+        // Inicializar página
+        document.addEventListener('DOMContentLoaded', function() {
+            loadVehicles();
+            toggleMovement();
+        });
 
-        // Toggle movement status
-        function toggleMovement() {
-            const toggle = document.getElementById('movementToggle');
-            const statusText = document.getElementById('statusText');
-            
-            if (toggle.checked) {
-                statusText.textContent = 'Salida';
-                statusText.className = 'me-3 text-danger';
-            } else {
-                statusText.textContent = 'Entrada';
-                statusText.className = 'me-3 text-success';
+        // Cargar vehículos desde el backend
+        async function loadVehicles() {
+            try {
+                showLoading(true);
+                // La URL apunta al controlador PHP que devuelve JSON
+                const response = await fetch('../../backend/controllers/VehicleController.php');
+                const data = await response.json(); // Se sigue esperando JSON aquí
+                
+                if (data.success) {
+                    allVehicles = data.data; // Almacena todos los vehículos
+                    displayVehicles(allVehicles);
+                } else {
+                    showError(data.message || 'Error al cargar vehículos');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showError('Error de conexión al cargar vehículos. Asegúrate de que el servidor PHP esté funcionando.');
+            } finally {
+                showLoading(false);
             }
         }
 
-        // Go back to previous screen
-        function goBack() {
-            if (confirm('¿Estás seguro de que deseas volver a la pantalla anterior?')) {
-                // Aquí iría la lógica para volver a la pantalla anterior
-                alert('Volviendo a la pantalla anterior...');
-                // window.history.back(); // Opción alternativa
-            }
-        }
-
-        // Add new vehicle
-        function addNewVehicle() {
-            // Aquí iría la lógica para añadir un nuevo vehículo
-            alert('Redirigiendo a la pantalla de añadir nuevo vehículo...');
-            // window.location.href = '/add-vehicle'; // Ejemplo de redirección
-        }
-
-        // Edit vehicle
-        function editVehicle(event, plateNumber) {
-            // Prevent card selection when clicking edit button
-            event.stopPropagation();
+        // Mostrar vehículos en la interfaz
+        function displayVehicles(vehicles) {
+            const vehiclesList = document.getElementById('vehiclesList');
+            const noResults = document.getElementById('noResults');
             
-            // Aquí iría la lógica para editar el vehículo
-            alert(`Editando vehículo con placa: ${plateNumber}`);
-            // window.location.href = `/edit-vehicle/${plateNumber}`; // Ejemplo de redirección
-        }
-
-        // Continue process
-        function continueProcess() {
-            const toggle = document.getElementById('movementToggle');
-            const movementType = toggle.checked ? 'salida' : 'entrada';
-            
-            if (!selectedVehicle) {
-                alert('Por favor selecciona un vehículo para continuar.');
+            if (vehicles.length === 0) {
+                vehiclesList.innerHTML = '';
+                noResults.classList.remove('d-none');
                 return;
             }
             
-            if (confirm(`¿Continuar con el proceso de ${movementType} para el vehículo ${selectedVehicle.plateNumber}?`)) {
-                // Aquí iría la lógica para continuar con el proceso
-                alert(`Procesando ${movementType} del vehículo: ${selectedVehicle.plateNumber}`);
-                // Ejemplo de envío de datos o redirección
-            }
-        }
-
-        // Initialize page
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize toggle status
-            toggleMovement();
+            noResults.classList.add('d-none');
             
-            // Add some animation to cards on load
+            vehiclesList.innerHTML = vehicles.map(vehicle => `
+               <div class="col-12 mb-3">
+                <div class="card vehicle-card h-100" onclick="selectVehicle(this, ${vehicle.id_vehiculo}, '${vehicle.placa}')">
+                    <div class="card-body position-relative">
+                        <div class="d-flex align-items-start">
+                            <div class="vehicle-info flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div class="flex-grow-1">
+                                        <h5 class="card-title mb-2">
+                                            <i class="${getVehicleIcon(vehicle.tipo)} text-primary me-2"></i>
+                                            ${vehicle.placa}
+                                        </h5>
+                                        <p class="card-text mb-1">
+                                            <strong>Modelo:</strong> ${vehicle.modelo}
+                                        </p>
+                                        <p class="card-text mb-1">
+                                            <strong>Color:</strong> ${vehicle.color}
+                                        </p>
+                                        <p class="card-text mb-0">
+                                            <strong>Propietario:</strong> ${vehicle.propietario_nombre_completo}
+                                        </p>
+                                        <p class="card-text mb-0">
+                                            <span class="badge ${getStatusBadgeClass(vehicle.estado)}">${getStatusText(vehicle.estado)}</span>
+                                        </p>
+                                 
+                                    </div>
+                                    <button class="btn btn-outline-primary btn-sm btn-edit" onclick="editVehicle(event, ${vehicle.id_vehiculo})">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `).join('');
+
+            // Animar entrada de tarjetas
             const cards = document.querySelectorAll('.vehicle-card');
             cards.forEach((card, index) => {
                 card.style.opacity = '0';
@@ -372,7 +185,200 @@
                     card.style.transform = 'translateY(0)';
                 }, index * 100);
             });
-        });
+        }
+
+        // Funciones auxiliares para obtener iconos e imágenes
+        function getVehicleIcon(tipo) {
+            const icons = {
+                'carro': 'fas fa-car',
+                'moto': 'fas fa-motorcycle',
+                'camion': 'fas fa-truck',
+                'bicicleta': 'fas fa-bicycle'
+            };
+            return icons[tipo] || 'fas fa-car';
+        }
+
+        function getVehicleImage(tipo) {
+            const colors = {
+                'carro': '007bff',
+                'moto': 'dc3545',
+                'camion': '6f42c1',
+                'bicicleta': '28a745'
+            };
+            const text = tipo.toUpperCase().substring(0, 4);
+            return `https://via.placeholder.com/80x60/${colors[tipo] || '007bff'}/ffffff?text=${text}`;
+        }
+
+        function getStatusBadgeClass(estado) {
+            return estado === 'activo' ? 'bg-success' : 'bg-secondary';
+        }
+
+        function getStatusText(estado) {
+            return estado === 'activo' ? 'Activo' : 'Inactivo';
+        }
+
+        // Buscar vehículos
+        function searchVehicles(searchTerm) {
+            const clearButton = document.getElementById('clearSearch');
+            
+            if (searchTerm.length > 0) {
+                clearButton.style.display = 'block';
+            } else {
+                clearButton.style.display = 'none';
+            }
+
+            // Debounce para evitar muchas búsquedas
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(async () => {
+                if (searchTerm.trim() === '') {
+                    displayVehicles(allVehicles); 
+                    return;
+                }
+
+                try {
+                    showLoading(true);
+                    // La URL apunta al controlador PHP que devuelve JSON
+                    const response = await fetch(`../../backend/controllers/VehicleController.php?search=${encodeURIComponent(searchTerm)}`);
+                    const data = await response.json(); // Se sigue esperando JSON aquí
+                    
+                    if (data.success) {
+                        displayVehicles(data.data);
+                    } else {
+                        displayVehicles([]); 
+                        showAlert(data.message || 'No se encontraron resultados para la búsqueda.', 'info');
+                    }
+                } catch (error) {
+                    console.error('Error en búsqueda:', error);
+                    showAlert('Error de conexión durante la búsqueda. Intenta nuevamente.', 'danger');
+                    displayVehicles([]); 
+                } finally {
+                    showLoading(false);
+                }
+            }, 300);
+        }
+
+        // Limpiar búsqueda
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('clearSearch').style.display = 'none';
+            loadVehicles(); // Recargar todos los vehículos
+        }
+
+        // Seleccionar vehículo
+        function selectVehicle(cardElement, vehicleId, plateNumber) {
+            // Remover selección previa
+            if (selectedVehicle && selectedVehicle.element !== cardElement) {
+                selectedVehicle.element.classList.remove('selected');
+            }
+            
+            // Toggle selección actual
+            if (cardElement.classList.contains('selected')) {
+                cardElement.classList.remove('selected');
+                selectedVehicle = null;
+            } else {
+                cardElement.classList.add('selected');
+                selectedVehicle = {
+                    element: cardElement,
+                    id: vehicleId,
+                    plateNumber: plateNumber
+                };
+            }
+            
+            console.log('Vehículo seleccionado:', selectedVehicle);
+        }
+
+        // Toggle estado del movimiento
+        function toggleMovement() {
+            const toggle = document.getElementById('movementToggle');
+            const statusText = document.getElementById('statusText');
+            
+            if (toggle.checked) {
+                statusText.textContent = 'Salida';
+                statusText.className = 'me-3 text-danger fw-bold';
+            } else {
+                statusText.textContent = 'Entrada';
+                statusText.className = 'me-3 text-success fw-bold';
+            }
+        }
+
+        // Continuar proceso
+        async function continueProcess() {
+            if (!selectedVehicle) {
+                showAlert('Por favor selecciona un vehículo para continuar.', 'warning');
+                return;
+            }
+
+            const toggle = document.getElementById('movementToggle');
+            const movementType = toggle.checked ? 'salida' : 'ingreso';
+            
+            if (!confirm(`¿Continuar con el proceso de ${movementType} para el vehículo ${selectedVehicle.plateNumber}?`)) {
+                return;
+            }
+
+            // Crear un formulario para enviar los datos como POST
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '../../backend/controllers/AccessController.php'; // Apunta al controlador de acceso
+
+            const idVehiculoInput = document.createElement('input');
+            idVehiculoInput.type = 'hidden';
+            idVehiculoInput.name = 'id_vehiculo';
+            idVehiculoInput.value = selectedVehicle.id;
+            form.appendChild(idVehiculoInput);
+
+            const tipoAccionInput = document.createElement('input');
+            tipoAccionInput.type = 'hidden';
+            tipoAccionInput.name = 'tipo_accion';
+            tipoAccionInput.value = movementType;
+            form.appendChild(tipoAccionInput);
+
+            document.body.appendChild(form);
+            form.submit(); // Envía el formulario, lo que redirigirá la página
+        }
+
+        // Añadir nuevo vehículo
+        function addNewVehicle() {
+            showAlert('Redirigiendo a la pantalla de añadir nuevo vehículo...', 'info');
+            window.location.href = '/SENAParking/frontend/views/reg_vehiculos.html';
+        }
+
+        // Editar vehículo
+        function editVehicle(event, vehicleId) {
+            event.stopPropagation();
+            showAlert(`Editando vehículo ID: ${vehicleId}`, 'info');
+            // window.location.href = `/edit-vehicle/${vehicleId}`;
+        }
+
+        // Funciones auxiliares
+        function showLoading(show) {
+            const loader = document.getElementById('loadingIndicator');
+            loader.style.display = show ? 'block' : 'none';
+        }
+
+        function showError(message) {
+            console.error(message);
+            showAlert(message, 'danger');
+        }
+
+        function showAlert(message, type = 'info') {
+            // Crear alerta Bootstrap
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+            alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; max-width: 400px;';
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(alertDiv);
+            
+            // Auto-remover después de 5 segundos
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.remove();
+                }
+            }, 5000);
+        }
     </script>
 </body>
 </html>

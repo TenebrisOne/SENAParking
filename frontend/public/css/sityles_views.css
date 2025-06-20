@@ -167,6 +167,14 @@ input[type="submit"]:hover {
 	display: none;
 }
 
+.envio-exitoso {
+    display: none;
+}
+
+.formulario__mensaje-exito-activo {
+	display: block;
+}
+
 /* ----- -----  Estilos para Validacion ----- ----- */
 .formulario__grupo-correcto .formulario__validacion-estado {
 	color: #1ed12d;
