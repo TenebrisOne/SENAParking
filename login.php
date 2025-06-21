@@ -55,68 +55,58 @@
 
         <a href="/forgot-password" class="text-muted mt-3" style="font-size: 14px;">¿Olvidaste tu contraseña?</a>
 
-    <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $correo = $_POST["correo"];
-        $password = $_POST["password"];
+<?php
+session_start();
 
-        $conn = new mysqli("localhost", "root", "", "senaparking_db");
-    
-        require_once __DIR__ . '/./backend/models/ActividadModel.php';
-        $actividadModel = new ActividadModel($conn);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $correo = $_POST["correo"];
+    $password = $_POST["password"];
 
-    
+    $conn = new mysqli("localhost", "root", "", "senaparking_db");
 
-            if ($conn->connect_error) {
-                die("Error de conexión: " . $conn->connect_error);
-            }
+    require_once __DIR__ . '/./backend/models/ActividadModel.php';
+    $actividadModel = new ActividadModel($conn);
 
-        $stmt = $conn->prepare("SELECT * FROM tb_userSys WHERE correo = ?");
-        $stmt->bind_param("s", $correo);
-        $stmt->execute();
-        $result = $stmt->get_result();
-    
+    if ($conn->connect_error) {
+        die("Error de conexión: " . $conn->connect_error);
+    }
 
-        if ($result->num_rows > 0) {
-            $usuario = $result->fetch_assoc();
+    $stmt = $conn->prepare("SELECT * FROM tb_userSys WHERE correo = ?");
+    $stmt->bind_param("s", $correo);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-            if (password_verify($password, $usuario["password"])) {
-                session_start();
-                $_SESSION['correo'] = $correo;
-                $_SESSION['nombre'] = $usuario['nombre']; // opcional
-                $_SESSION['rol'] = $usuario['id_rol'];
+    if ($result->num_rows > 0) {
+        $usuario = $result->fetch_assoc();
 
-                // ✅ Aquí usamos el modelo para registrar la actividad
-                $actividadModel->registrarActividad($usuario['id_userSys'], 'Inicio de sesion');
+        if (password_verify($password, $usuario["password"])) {
+            $_SESSION['correo'] = $correo;
+            $_SESSION['nombre'] = $usuario['nombre'];
+            $_SESSION['rol'] = $usuario['id_rol'];
 
-                switch ($usuario['id_rol']) {
-                    case '1':
-                        header("Location: /SENAParking/frontend/views/dashboard_admin.html");
-                        break;
-                    case '2':
-                        header("Location: /SENAParking/frontend/views/dashboard_supervisor.html");
-                        break;
-                    case '3':
-                        header("Location: /SENAParking/frontend/views/dashboard_guardia.html");
-                        break;
+            $actividadModel->registrarActividad($usuario['id_userSys'], 'Inicio de sesion');
 
-                    }
-                        // Redirigir a archivo HTML
-                        /*header("Location: /SENAParking/frontend/views/dashboard_admin.html");*/
-            } else {
-                    echo "<p style='color:red;'>Contraseña incorrecta</p>";
+            switch ($usuario['id_rol']) {
+                case '1':
+                    header("Location: /SENAParking/frontend/views/dashboard_admin.html");
+                    exit();
+                case '2':
+                    header("Location: /SENAParking/frontend/views/dashboard_supervisor.html");
+                    exit();
+                case '3':
+                    header("Location: /SENAParking/frontend/views/dashboard_guardia.html");
+                    exit();
             }
         } else {
-            echo "<p style='color:red;'>Usuario no encontrado</p>";
-
+            $error = "Contraseña incorrecta";
         }
-
-            $conn->close();
+    } else {
+        $error = "Usuario no encontrado";
     }
+
+    $conn->close();
+}
 ?>
-
-
-    </div>
 
 
     <!-- Scripts -->

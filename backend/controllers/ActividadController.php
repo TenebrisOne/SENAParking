@@ -1,5 +1,8 @@
 <?php 
 
+require_once '../config/conexion.php';
+require_once '../models/UsuarioActividadModel.php';
+
 //Acá registramos quien consulta los reportes individuales
 $conn = new mysqli("localhost", "root", "", "senaparking_db");
     
@@ -76,7 +79,7 @@ require_once __DIR__ . '/./backend/models/ActividadModel.php';
 
 
 
-    
+
 //Acá registramos quien edita un vehículo
 
 $conn = new mysqli("localhost", "root", "", "senaparking_db");
