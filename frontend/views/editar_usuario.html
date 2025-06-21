@@ -73,11 +73,15 @@
             
             <br>
 
+        <form action="controllers/ActividadController.php" method="GET">
+            <input type="hidden" name="accion" value="editar_userSys">
             <button type="submit" class="btn btn-success">Guardar cambios</button>
+        </form>
             <button type="button" class="btn btn-confirmar" onclick="window.location.href='dashboard_admin.html'">Cancelar</button>
         </form>
     </div>
 
+    <a href="controllers/ActividadController.php?accion=editar_userSys">Edito a un usuario del sistema</a>   
 
     <!-- Cargar el header-->
     <script src="./../public/js/scriptsDOM.js"></script>

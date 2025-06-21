@@ -1,96 +1,53 @@
-<?php 
-
+<?php
 require_once '../config/conexion.php';
-require_once '../models/UsuarioActividadModel.php';
+require_once '../models/ActividadModel.php';
 
-//Acá registramos quien consulta los reportes individuales
-$conn = new mysqli("localhost", "root", "", "senaparking_db");
-    
-require_once __DIR__ . '/./backend/models/ActividadModel.php';
-        $actividadModel = new ActividadModel($conn);
+session_start();
+$usuario = $_SESSION['usuario']; // Asegúrate de tener el usuario en sesión
 
-    // ✅ Aquí usamos el modelo para registrar la actividad
-    $actividadModel->registrarActividad($usuario['id_userSys'], 'Consulta de reportes individuales');
+$actividadModel = new ActividadModel($conn);
 
+// Obtener la acción desde la URL o formulario
+$accion = $_GET['accion'] ?? $_POST['accion'] ?? '';
 
+switch ($accion) {
+    case 'consulta_individual':
+        $actividadModel->registrarActividad($usuario['id_userSys'], 'Consulta de reportes individuales');
+        include '../views/reporte_individual.php';
+        break;
 
+    case 'consulta_general':
+        $actividadModel->registrarActividad($usuario['id_userSys'], 'Consulta de reportes generales');
+        include '../views/reporte_general.php';
+        break;
 
-//Acá registramos quien consulta los reportes generales
+    case 'crear_vehiculo':
+        $actividadModel->registrarActividad($usuario['id_userSys'], 'Registro de vehiculo');
+        include '../views/crear_vehiculo.php';
+        break;
 
-$conn = new mysqli("localhost", "root", "", "senaparking_db");
-    
-require_once __DIR__ . '/./backend/models/ActividadModel.php';
-        $actividadModel = new ActividadModel($conn);
+    case 'crear_userSys':
+        $actividadModel->registrarActividad($usuario['id_userSys'], 'Registro de usuario del sistema');
+        include './../views/crear_userSys.php';
+        break;
 
-    // ✅ Aquí usamos el modelo para registrar la actividad
-    $actividadModel->registrarActividad($usuario['id_userSys'], 'Consulta de reportes generales');
+    case 'crear_userPark':
+        $actividadModel->registrarActividad($usuario['id_userSys'], 'Registro de un usuario del parqueadero');
+        include '../views/crear_userPark.php';
+        break;
 
+    case 'editar_userSys':
+        $actividadModel->registrarActividad($usuario['id_userSys'], 'Edicion de un usuario del sistema');
+        include '../views/editar_userSys.php';
+        break;
 
+    case 'editar_vehiculo':
+        $actividadModel->registrarActividad($usuario['id_userSys'], 'Edicion de un vehiculo');
+        include '../views/editar_vehiculo.php';
+        break;
 
-
-//Acá registramos quien crea un vehículo 
-
-$conn = new mysqli("localhost", "root", "", "senaparking_db");
-    
-require_once __DIR__ . '/./backend/models/ActividadModel.php';
-        $actividadModel = new ActividadModel($conn);
-
-    // ✅ Aquí usamos el modelo para registrar la actividad
-    $actividadModel->registrarActividad($usuario['id_userSys'], 'Registro de vehiculo');
-
-
-
-
-//Acá registramos quien crea un userSys 
-
-$conn = new mysqli("localhost", "root", "", "senaparking_db");
-    
-require_once __DIR__ . '/./backend/models/ActividadModel.php';
-        $actividadModel = new ActividadModel($conn);
-
-    // ✅ Aquí usamos el modelo para registrar la actividad
-    $actividadModel->registrarActividad($usuario['id_userSys'], 'Registro de usuario del sistema');
-
-
-
-
-//Acá registramos quien crea un userPark
-
-$conn = new mysqli("localhost", "root", "", "senaparking_db");
-    
-require_once __DIR__ . '/./backend/models/ActividadModel.php';
-        $actividadModel = new ActividadModel($conn);
-
-    // ✅ Aquí usamos el modelo para registrar la actividad
-    $actividadModel->registrarActividad($usuario['id_userSys'], 'Registro de un usuario del parqueadero');
-
-
-
-
-//Acá registramos quien edita un userSystem
-
-$conn = new mysqli("localhost", "root", "", "senaparking_db");
-    
-require_once __DIR__ . '/./backend/models/ActividadModel.php';
-        $actividadModel = new ActividadModel($conn);
-
-    // ✅ Aquí usamos el modelo para registrar la actividad
-    $actividadModel->registrarActividad($usuario['id_userSys'], 'Edicion de un usuario del sistema');
-
-
-
-
-//Acá registramos quien edita un vehículo
-
-$conn = new mysqli("localhost", "root", "", "senaparking_db");
-    
-require_once __DIR__ . '/./backend/models/ActividadModel.php';
-        $actividadModel = new ActividadModel($conn);
-
-    // ✅ Aquí usamos el modelo para registrar la actividad
-    $actividadModel->registrarActividad($usuario['id_userSys'], 'Edicion de un vehiculo');
-
-
-
+    default:
+        echo "Acción no válida.";
+        break;
+}
 ?>
-

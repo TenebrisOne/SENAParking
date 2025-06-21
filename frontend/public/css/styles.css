@@ -12,13 +12,29 @@ body {
 .bg-index {
     margin: 0;
     line-height: normal;
-    background: url('../images/backgrounds/bg_index.png') no-repeat center center / cover, lightgray;
+    background: url('../images/backgrounds/bg_index.png') repeat-x center / cover, lightgray;
     width: 100%;
     height: 100vh;
     flex-shrink: 0;
     position: relative;
     max-width: 100%;
     overflow: hidden;
+
+    animation: vaivenFondo 5s ease-in-out infinite;
+}
+
+@keyframes vaivenFondo {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 10px 0;
+    }
+
+    0% {
+        background-position: 5px 0;
+    }
 }
 
 /* Botones con animación */
@@ -39,13 +55,26 @@ body {
 .bg-login {
     margin: 0;
     line-height: normal;
-    background: url('../images/backgrounds/background_login.png') no-repeat center center / cover, lightgray;
+    background: url('../images/backgrounds/background_login.png') repeat-x center / cover, lightgray;
     width: 100%;
     height: 50vh;
     flex-shrink: 0;
     position: relative;
     max-width: 100%;
     overflow: hidden;
+
+    animation: moverFondo 25s linear infinite;
+}
+
+@keyframes moverFondo {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 1000px 0;
+        /* o ajusta según la dirección/velocidad que quieras */
+    }
 }
 
 .register-container {
@@ -124,70 +153,85 @@ body {
     cursor: pointer;
     border: 2px solid transparent;
 }
+
 .vehicle-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
+
 .vehicle-card.selected {
     border: 2px solid #007bff;
     background-color: #f8f9ff;
 }
+
 .status-toggle {
     border-radius: 25px;
 }
+
 .vehicle-info {
     border-left: 4px solid #007bff;
     padding-left: 15px;
 }
+
 .btn-edit {
     opacity: 0.8;
     transition: opacity 0.2s;
 }
+
 .btn-edit:hover {
     opacity: 1;
 }
+
 .header-section {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     padding: 1.5rem 0;
     margin-bottom: 2rem;
 }
+
 .toggle-section {
     background-color: #f8f9fa;
     border-radius: 10px;
     padding: 1.5rem;
     margin-bottom: 2rem;
 }
+
 .search-section {
     background-color: #ffffff;
     border-radius: 10px;
     padding: 1.5rem;
     margin-bottom: 2rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
+
 .vehicle-image {
     flex-shrink: 0;
     width: 80px;
     height: 60px;
 }
+
 .vehicle-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
+
 .loading {
     display: none;
 }
+
 .search-input {
     border-radius: 25px;
     padding: 0.75rem 1.5rem;
     border: 2px solid #e9ecef;
     transition: border-color 0.2s;
 }
+
 .search-input:focus {
     border-color: #007bff;
-    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
 }
+
 .clear-search {
     position: absolute;
     right: 15px;
@@ -199,14 +243,17 @@ body {
     cursor: pointer;
     display: none;
 }
+
 .search-container {
     position: relative;
 }
+
 .no-results {
     text-align: center;
     padding: 3rem;
     color: #6c757d;
 }
+
 .vehicle-status {
     position: absolute;
     top: 10px;
