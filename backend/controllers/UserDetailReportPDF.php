@@ -1,11 +1,5 @@
 <?php
-// backend/controllers/UserDetailReportPDF.php
-
-// Cargar Dompdf (ajusta la ruta según tu instalación: Composer o manual)
-// Si usas Composer:
-require_once '../../vendor/autoload.php';
-// Si instalaste manualmente en backend/lib/dompdf:
-// require_once '../../backend/lib/dompdf/autoload.inc.php'; // Ajusta la ruta si es necesario
+require_once '../lib/dompdf/autoload.inc.php'; 
 
 use Dompdf\Dompdf;
 use Dompdf\Options;
