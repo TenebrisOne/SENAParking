@@ -20,7 +20,7 @@ body {
     max-width: 100%;
     overflow: hidden;
 
-    animation: vaivenFondo 0.5s ease-in-out infinite;
+    animation: vaivenFondo 20s ease-in-out infinite;
 }
 
 @keyframes vaivenFondo {
@@ -28,16 +28,16 @@ body {
         background-position: 0 0;
     }
     20% {
-        background-position: -10px 0;
+        background-position: -5px 0;
     }
     40% {
-        background-position: 10px 0;
+        background-position: 5px 0;
     }
     60% {
-        background-position: -10px 0;
+        background-position: -5px 0;
     }
     80% {
-        background-position: 10px 0;
+        background-position: 5px 0;
     }
     100% {
         background-position: 0 0;
