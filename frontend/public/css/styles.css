@@ -20,7 +20,7 @@ body {
     max-width: 100%;
     overflow: hidden;
 
-    animation: vaivenFondo 20s ease-in-out infinite;
+    animation: vaivenFondo 5s ease-in-out infinite;
 }
 
 @keyframes vaivenFondo {

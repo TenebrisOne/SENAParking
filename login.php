@@ -53,7 +53,7 @@
             </div>
         </form>
 
-        <a href="/forgot-password" class="text-muted mt-3" style="font-size: 14px;">¿Olvidaste tu contraseña?</a>
+        <a href="./forgot_password.html" class="text-muted mt-3" style="font-size: 14px;">¿Olvidaste tu contraseña?</a>
 
 <?php
 session_start();
