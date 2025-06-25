@@ -70,7 +70,7 @@ $ruta = "/frontend/views/$url.php";
 if (file_exists($ruta)) {
     include $ruta;
 } else {
-    include "./404.html";
+    header ("./404.html");
 }
 
 ?>
