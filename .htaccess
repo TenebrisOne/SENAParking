@@ -26,3 +26,10 @@ Options -Indexes
     ExpiresByType text/css "access plus 1 month"
     ExpiresByType application/javascript "access plus 1 month"
 </IfModule>
+
+# Bloquear acceso directo a /includes/
+RewriteRule ^includes/ - [F,L]
+
+# Bloquear acceso a cualquier archivo .php dentro de /private/
+RewriteRule ^private/.*\.php$ - [F,L]
+

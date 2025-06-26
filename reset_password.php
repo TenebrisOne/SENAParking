@@ -52,19 +52,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restablecer contraseña</title>
-    <style>
-        body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; }
-        input { width: 100%; padding: 8px; box-sizing: border-box; }
-        button { padding: 10px 15px; background-color: #007bff; color: white; border: none; cursor: pointer; }
-        button:hover { background-color: #0056b3; }
-        .message { color: green; }
-        .error { color: red; }
-    </style>
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta name="author" content="AdsoDeveloperSolutions801">
+    <meta name="course" content="ADSO 2873801">
+    <!-- Favicon (ícono en la pestaña del navegador) -->
+    <link rel="icon" type="x-icon" href="./frontend/public/images/favicon.ico">
+    <!-- Enlace a Bootstrap -->
+    <link href="./frontend/public/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Enlace a estilos personalizados -->
+    <link rel="stylesheet" href="./frontend/public/css/styles.css">
+    <title>Olvidé mi contraseña</title>
 </head>
+
 <body>
     <h2>Restablecer contraseña</h2>
     <?php if ($error): ?>
