@@ -27,6 +27,11 @@ Options -Indexes
     ExpiresByType application/javascript "access plus 1 month"
 </IfModule>
 
+AddType application/x-httpd-php .html
+
+AddHandler application/x-httpd-php .html
+
+
 # Bloquear acceso directo a /includes/
 RewriteRule ^includes/ - [F,L]
 
