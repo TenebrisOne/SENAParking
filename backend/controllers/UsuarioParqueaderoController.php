@@ -2,10 +2,7 @@
 require_once '../config/conexion.php';
 require_once '../models/UsuarioParqueaderoModel.php';
 
-$database = new Database();
-$db = $database->getConnection();
-
-$usuarioParkingModel = new UsuarioParqueadero($db);
+$usuarioParkingModel = new UsuarioParqueadero($conn);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = trim($_POST['nombre'] ?? '');
@@ -22,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $resultado = $usuarioParkingModel->registrarUsuario($tipuser,$tipdoc,$documento,$nombre,$apellido,$centro,$tarjeta,$correo,$numero,$hora_entrada);
 
     if ($resultado == true) {
-        echo $conn;
+        echo "Usuario registrado correctamente.";
     } else {
         echo $resultado;
     }
