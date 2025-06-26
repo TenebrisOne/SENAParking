@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil | SENAParking</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../public/css/sityles_views.css">
+    <style>
+        .profile-card {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-top: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-header h1 {
+            color: #343a40;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-header p {
+            color: #6c757d;
+            font-size: 1.1rem;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #495057;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            padding: 0.75rem 1.5rem;
+            font-size: 1.1rem;
+            border-radius: 8px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        /* Para las alertas flotantes */
+        .alert-fixed {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            max-width: 400px;
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+    <div id="loadingIndicator" class="loading-overlay" style="display: none;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
+        </div>
+    </div>
+    <div id="header-container"></div>
+
+    <div class="container-fluid">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
+                <button class="btn btn-secondary" onclick="goBack()">
+                    <i class="fas fa-arrow-left me-2"></i>Volver
+                </button>
+                <img src="../public/images/logo_sena.png" alt="Logo SENA" style="width: 80px;">
+            </div>
+
+            <div class="profile-card">
+                <div class="profile-header">
+                    <i class="fas fa-user-circle fa-5x text-primary mb-3"></i>
+                    <h1>Mi Perfil</h1>
+                    <p class="lead">Edita tu información personal y de cuenta.</p>
+                </div>
+
+                <form id="profileForm">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="nombres" class="form-label">Nombres</label>
+                            <input type="text" class="form-control" id="nombres" name="nombres" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="apellidos" class="form-label">Apellidos</label>
+                            <input type="text" class="form-control" id="apellidos" name="apellidos" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="email" class="form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="id_rol" class="form-label">Rol</label>
+                            <select class="form-select" id="id_rol" name="id_rol" required>
+                                </select>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label for="estado" class="form-label">Estado</label>
+                            <select class="form-select" id="estado" name="estado" required>
+                                <option value="activo">Activo</option>
+                                <option value="inactivo">Inactivo</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="fecha_registro" class="form-label">Fecha de Registro</label>
+                            <input type="text" class="form-control" id="fecha_registro" name="fecha_registro" readonly>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-2"></i>Guardar Cambios
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="../public/js/scriptsDOM.js"></script>
+
+    <script>
+        const profileForm = document.getElementById('profileForm');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+
+        function showLoading(show) {
+            loadingIndicator.style.display = show ? 'flex' : 'none';
+        }
+
+        function showAlert(message, type = 'info') {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show alert-fixed`;
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            document.body.appendChild(alertDiv);
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.remove();
+                }
+            }, 5000);
+        }
+
+        async function loadProfile() {
+            showLoading(true);
+            // Ya no obtenemos el ID de la URL. El backend lo tomará de la sesión.
+            // Para probar sin login, puedes descomentar la línea de URLSearchParams y la URL en fetch,
+            // pero en producción es MUY recomendable NO usar el ID de la URL.
+            // const urlParams = new URLSearchParams(window.location.search);
+            // const userId = urlParams.get('id'); // Esto es solo para pruebas sin sesión
+
+            try {
+                // La URL de la solicitud ya no incluye el ID si el backend lo obtiene de la sesión
+                const response = await fetch(`../../backend/controllers/ProfileController.php`);
+                // Si estamos usando la opción de pasar ID por GET para pruebas (solo DEV), sería:
+                // const response = await fetch(`../../backend/controllers/ProfileController.php?id=${userId}`);
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    const user = data.user;
+                    document.getElementById('nombres').value = user.nombres;
+                    document.getElementById('apellidos').value = user.apellidos;
+                    document.getElementById('email').value = user.email;
+                    document.getElementById('estado').value = user.estado;
+                    document.getElementById('fecha_registro').value = user.fecha_registro;
+
+                    const rolSelect = document.getElementById('id_rol');
+                    rolSelect.innerHTML = '';
+                    data.roles.forEach(role => {
+                        const option = document.createElement('option');
+                        option.value = role.id_rol;
+                        option.textContent = role.nombre_rol;
+                        if (role.id_rol === user.id_rol) {
+                            option.selected = true;
+                        }
+                        rolSelect.appendChild(option);
+                    });
+
+                } else {
+                    showAlert(data.message || 'Error al cargar el perfil.', 'danger');
+                    // Si el error es de autorización (401), podrías redirigir al login
+                    if (response.status === 401) {
+                        // window.location.href = '../login.html'; // Redirigir al login
+                    }
+                }
+            } catch (error) {
+                console.error('Error fetching profile:', error);
+                showAlert('Error de conexión al cargar el perfil: ' + error.message, 'danger');
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        profileForm.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            showLoading(true);
+
+            // Ya no obtenemos el ID de la URL para la actualización.
+            // const urlParams = new URLSearchParams(window.location.search);
+            // const userId = urlParams.get('id'); // Esto es solo para pruebas sin sesión
+
+            // if (!userId) {
+            //     showAlert('ID de usuario no proporcionado.', 'danger');
+            //     showLoading(false);
+            //     return;
+            // }
+
+            const formData = {
+                nombres: document.getElementById('nombres').value,
+                apellidos: document.getElementById('apellidos').value,
+                email: document.getElementById('email').value,
+                id_rol: document.getElementById('id_rol').value,
+                estado: document.getElementById('estado').value
+            };
+
+            try {
+                // La URL de la solicitud ya no incluye el ID
+                const response = await fetch(`../../backend/controllers/ProfileController.php`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                // Si estamos usando la opción de pasar ID por GET para pruebas (solo DEV), sería:
+                // const response = await fetch(`../../backend/controllers/ProfileController.php?id=${userId}`, { ... });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    showAlert(data.message || 'Perfil actualizado con éxito.', 'success');
+                } else {
+                    showAlert(data.message || 'Error al actualizar el perfil.', 'danger');
+                    if (response.status === 401) {
+                        // window.location.href = '../login.html'; // Redirigir al login
+                    }
+                }
+            } catch (error) {
+                console.error('Error updating profile:', error);
+                showAlert('Error de conexión al actualizar el perfil: ' + error.message, 'danger');
+            } finally {
+                showLoading(false);
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof loadHeader === 'function') {
+                loadHeader();
+            }
+            loadProfile(); // Llama a la función para cargar el perfil
+        });
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+
+</html>
