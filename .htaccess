@@ -1,35 +1,53 @@
+# Activar el motor de reescritura de URLs
 RewriteEngine On
 
+# Redirigir todas las solicitudes que no sean archivos ni directorios existentes al index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
 
+# Establecer index.php como archivo por defecto
 DirectoryIndex index.php
 
+# Deshabilitar la visualización del contenido del directorio
 Options -Indexes
 
-<FilesMatch "^(\.env|\.htaccess|composer\.json|composer\.lock)$">
-  Order Allow,Deny
-  Deny from all
+# Restringir acceso a archivos sensibles
+<FilesMatch "^(?:\.env|\.htaccess|composer\.json|composer\.lock)$">
+  Require all denied
 </FilesMatch>
 
+# Comprimir tipos de contenido comunes si está habilitado mod_deflate
 <IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/x-javascript
 </IfModule>
 
+# Control de expiración de caché si está habilitado mod_expires
 <IfModule mod_expires.c>
-    ExpiresActive On
-    ExpiresByType image/jpg "access plus 1 year"
-    ExpiresByType image/jpeg "access plus 1 year"
-    ExpiresByType image/gif "access plus 1 year"
-    ExpiresByType image/png "access plus 1 year"
-    ExpiresByType text/css "access plus 1 month"
-    ExpiresByType application/javascript "access plus 1 month"
+  ExpiresActive On
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType application/x-javascript "access plus 1 month"
 </IfModule>
 
-# Bloquear acceso directo a /includes/
+# Bloquear acceso directo a la carpeta /includes/
 RewriteRule ^includes/ - [F,L]
 
 # Bloquear acceso a cualquier archivo .php dentro de /private/
 RewriteRule ^private/.*\.php$ - [F,L]
 
+# Permitir ejecutar PHP dentro de archivos .html y .htm
+AddType application/x-httpd-php .html .htm
+
+
+# Procesar archivos .html como PHP (para PHP-FPM)
+<IfModule proxy_fcgi_module>
+    AddHandler php-script .html .htm
+    <FilesMatch "\.(html|htm)$">
+        SetHandler php-script
+    </FilesMatch>
+</IfModule>
