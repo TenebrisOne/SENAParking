@@ -6,6 +6,8 @@ if ($_SESSION["rol"] != 1) {
     header("Location: /github/SENAParking/login.php");
 }
 
+// cargamos totales
+require_once __DIR__ . '/../../backend/controllers/MostrarDatosController.php';
 ?>
 
 <!DOCTYPE html>
@@ -138,98 +140,117 @@ if ($_SESSION["rol"] != 1) {
                 <!-- Contenido del panel de administración -->
                 <div id="dashboard-content">
                     <div class="row mb-4">
-                        <!-- Tarjetas de resumen que muestran estadísticas -->
+                        <!-- Tarjetas de resumen con formularios -->
                         <div class="col-md-3">
-                            <div class="card card-resumen-general bg-resumen-usuarios-sistema">
-                                <div class="card-body">
-                                    <h5 class="card-title">Usuarios del Sistema</h5>
-                                    <p class="card-text font-weight-bold" style="font-size: 1.5em;"
-                                        id="total-usuarios-sistema">15</p>
-                                </div>
-                            </div>
+                            <form method="POST">
+                                <input type="hidden" name="tipo" value="usuarios_sistema">
+                                <button type="submit" class="card card-resumen-general bg-resumen-usuarios-sistema border-0 w-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Usuarios del Sistema</h5>
+                                        <p class="card-text font-weight-bold" style="font-size: 1.5em;">
+                                            <?php echo isset($totalUsuariosSistema) ? $totalUsuariosSistema : 0; ?>
+                                        </p>
+                                    </div>
+                                </button>
+                            </form>
                         </div>
-                        <!-- Repetición de tarjetas para otros resúmenes -->
+
                         <div class="col-md-3">
-                            <div class="card card-resumen-general bg-resumen-usuarios-parqueadero">
-                                <div class="card-body">
-                                    <h5 class="card-title">Usuarios Parqueadero</h5>
-                                    <p class="card-text font-weight-bold" style="font-size: 1.5em;"
-                                        id="total-usuarios-parqueadero">150</p>
-                                </div>
-                            </div>
+                            <form method="POST">
+                                <input type="hidden" name="tipo" value="usuarios_parqueadero">
+                                <button type="submit" class="card card-resumen-general bg-resumen-usuarios-parqueadero border-0 w-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Usuarios Parqueadero</h5>
+                                        <p class="card-text font-weight-bold" style="font-size: 1.5em;">
+                                            <?php echo isset($totalUsuariosParqueadero) ? $totalUsuariosParqueadero : 0; ?>
+                                        </p>
+                                    </div>
+                                </button>
+                            </form>
                         </div>
+
                         <div class="col-md-3">
-                            <div class="card card-resumen-general bg-resumen-accesos-hoy">
-                                <div class="card-body">
-                                    <h5 class="card-title">Accesos Hoy</h5>
-                                    <p class="card-text font-weight-bold" style="font-size: 1.5em;" id="accesos-hoy">50
-                                    </p>
-                                </div>
-                            </div>
+                            <form method="POST">
+                                <input type="hidden" name="tipo" value="accesos_hoy">
+                                <button type="submit" class="card card-resumen-general bg-resumen-accesos-hoy border-0 w-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Accesos Hoy</h5>
+                                        <p class="card-text font-weight-bold" style="font-size: 1.5em;">
+                                            <?php echo isset($accesosHoy) ? $accesosHoy : 0; ?>
+                                        </p>
+                                    </div>
+                                </button>
+                            </form>
                         </div>
+
                         <div class="col-md-3">
-                            <div class="card card-resumen-general bg-resumen-salidas-hoy">
-                                <div class="card-body">
-                                    <h5 class="card-title">Salidas Hoy</h5>
-                                    <p class="card-text font-weight-bold" style="font-size: 1.5em;" id="salidas-hoy">45
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Reportes generales con enlaces a diferentes reportes -->
-                    <div class="col-md-12">
-                        <div class="card card-reportes-generales">
-                            <div class="card-header">
-                                Reportes Generales
-                            </div>
-                            <div class="card-body">
-                                <p class="text-muted">Acceso a los diferentes reportes generados por el sistema.</p>
-                                <!-- Lista de enlaces a los reportes -->
-                                <ul class="list-group">
-                                    <li class="list-group-item-reporte"><a href="#">Historial Completo de Accesos y
-                                            Salidas</a></li>
-                                    <li class="list-group-item-reporte"><a href="#">Reporte de Actividad por Usuario
-                                            del Sistema</a></li>
-                                    <li class="list-group-item-reporte"><a href="#">Reporte de Ocupación por Franja
-                                            Horaria</a></li>
-                                    <li class="list-group-item-reporte"><a href="#">Reporte de Usuarios del
-                                            Parqueadero Registrados</a></li>
-                                </ul>
-                                <button class="btn btn-sm btn-outline-secondary mt-2">Generar Reporte
-                                    Personalizado</button>
-                            </div>
+                            <form method="POST">
+                                <input type="hidden" name="tipo" value="salidas_hoy">
+                                <button type="submit" class="card card-resumen-general bg-resumen-salidas-hoy border-0 w-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Salidas Hoy</h5>
+                                        <p class="card-text font-weight-bold" style="font-size: 1.5em;">
+                                            <?php echo isset($salidasHoy) ? $salidasHoy : 0; ?>
+                                        </p>
+                                    </div>
+                                </button>
+                            </form>
                         </div>
                     </div>
 
-                    <!-- Filas para la gestión de usuarios y los reportes -->
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card card-gestion-usuarios">
-                                <div class="card-header">Gestión de Usuarios del Sistema</div>
-                                <div class="card-body">
-                                    <p class="text-muted">Administrar los usuarios con acceso al sistema (guardias, supervisores, administradores).</p>
-                                    <?php include 'tabla_usuarios.php'; ?>
-                                    <a href="/SENAParking/frontend/views/reg_userSystem.html" class="btn btn-registrar-usuario btn-sm mt-2">Registrar Nuevo Usuario</a>
+                    <!-- Reportes generales dinámicos -->
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <div class="card card-reportes-generales">
+                                <div class="card-header">
+                                    <?php echo isset($titulo) ? htmlspecialchars($titulo) : 'Reportes Generales'; ?>
                                 </div>
-                            </div>
-                        </div>
-                        <!-- Gestión de Usuarios del Parqueadero -->
-                        <div class="col-md-6">
-                            <div class="card card-gestion-usuarios">
-                                <div class="card-header">Gestión de Usuarios del Parqueadero</div>
                                 <div class="card-body">
-                                    <p class="text-muted">Administrar los usuarios con acceso al parqueadero (servidor público, contratista,
-                                        trabajador oficial, visitante autorizado, aprendiz).</p>
-                                    <?php include 'tabla_usuariosparqueadero.php'; ?>
-                                    <a href="/SENAParking/frontend/views/reg_userParking.html" class="btn btn-registrar-usuario btn-sm mt-2">Registrar Nuevo Usuario</a>
+                                    <p class="text-muted">Datos generados dinámicamente con base en la tarjeta seleccionada.</p>
+
+                                    <?php
+                                    if (isset($tabla) && !empty($tabla)) {
+                                        include __DIR__ . '/tabla_dinamica.php';
+                                    } else {
+                                        echo '<p class="text-muted">Selecciona una tarjeta para mostrar un reporte detallado.</p>';
+                                    }
+                                    ?>
+
+                                    <button class="btn btn-sm btn-outline-secondary mt-2">Generar Reporte Personalizado</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </main>
+
+                <!-- Filas para la gestión de usuarios y los reportes -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card card-gestion-usuarios">
+                            <div class="card-header">Gestión de Usuarios del Sistema</div>
+                            <div class="card-body">
+                                <p class="text-muted">Administrar los usuarios con acceso al sistema (guardias, supervisores, administradores).</p>
+                                <?php include 'tabla_usuarios.php'; ?>
+                                <a href="/SENAParking/frontend/views/reg_userSystem.html" class="btn btn-registrar-usuario btn-sm mt-2">Registrar Nuevo Usuario</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Gestión de Usuarios del Parqueadero -->
+                    <div class="col-md-6">
+                        <div class="card card-gestion-usuarios">
+                            <div class="card-header">Gestión de Usuarios del Parqueadero</div>
+                            <div class="card-body">
+                                <p class="text-muted">Administrar los usuarios con acceso al parqueadero (servidor público, contratista,
+                                    trabajador oficial, visitante autorizado, aprendiz).</p>
+                                <?php include 'tabla_usuariosparqueadero.php'; ?>
+                                <a href="/SENAParking/frontend/views/reg_userParking.html" class="btn btn-registrar-usuario btn-sm mt-2">Registrar Nuevo Usuario</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
+        </main>
+    </div>
     </div>
 
     <!-- Función para llamar al Header dinámico -->
