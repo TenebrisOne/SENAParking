@@ -70,6 +70,7 @@ CREATE TABLE tb_usersys (
 	PRIMARY KEY (id_userSys),
 	UNIQUE KEY uq_documento_sys (tipo_documento, numero_documento),
 	KEY idx_id_rol (id_rol),
+	KEY idx_corre (correo),
 	CONSTRAINT fk_usersys_rol FOREIGN KEY (id_rol) REFERENCES tb_roles(id_rol)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -114,7 +115,6 @@ CREATE TABLE tb_actividades (
 	CONSTRAINT fk_actividades_usersys FOREIGN KEY (id_userSys) REFERENCES tb_usersys(id_userSys)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-<<<<<<< HEAD
 
 CREATE TABLE password_resets (
 	id_PassRest INT AUTO_INCREMENT PRIMARY KEY,
@@ -124,8 +124,6 @@ CREATE TABLE password_resets (
     FOREIGN KEY (correo) REFERENCES tb_usersys(correo)
 );
 
-=======
->>>>>>> develop
 -- Insertar datos de prueba (solo ejemplo para tb_roles y tb_userPark)
 INSERT INTO tb_roles (nombre) VALUES
 ('admin'), ('supervisor'), ('guardia');
@@ -138,11 +136,7 @@ INSERT INTO `tb_usersys` (`id_userSys`, `id_rol`, `tipo_documento`, `numero_docu
 (2, 3, 'cedula_ciudadania', '46896435', 'Gustavo', 'Lopez', '1232456787', 'Gustavo', 'gustavo@gmail.com', '$2y$10$5tqAXXTpBoBBZ1BlXwkFm.QwsRIxVnhW/A.UwXDVIim/uRoiK.yO6', 'inactivo'),
 (3, 2, 'cedula_ciudadania', '1234567', 'Nicol', 'Barragan', '3145678971', 'Nicol', 'nicol@gmail.com', '$2y$10$eYjrfKF3EWvOCaGJObuO6eylAKRXqDdlK9Wyxe0cE8LYWXUXrPiN6', 'activo'),
 (4, 3, 'cedula_ciudadania', '12039458355', 'Pedro', 'Rojas', '3134567895', 'Pedro', 'pedro@gmail.com', '$2y$10$MwdltQErFs6496ORg8G0deiJLd8Ui9p9Y7BT1lWtlku.e3yUMquJu', 'activo'),
-<<<<<<< HEAD
 (6, 3, 'pasaporte', '1254896347', 'Ana', 'Sanchez', '3145879244', 'Ana', 'ana123@gmail.com', '$2y$10$L2rw2uo5Ppi81MMMm14L6eHvBB6Iluo5r37HuYoqh3fex6CdDkBKu', 'activo'),
-=======
-(6, 3, 'pasaporte', '1254896347', 'Ana', 'Sanchez', '3145879244', 'Ana', 'ana@gmail.com', '$2y$10$L2rw2uo5Ppi81MMMm14L6eHvBB6Iluo5r37HuYoqh3fex6CdDkBKu', 'activo'),
->>>>>>> develop
 (7, 1, 'cedula_ciudadania', '12547896', 'nikki', 'barragan', '3254964178', 'nikki', 'nikki@gmail.com', '$2y$10$PiTKnvOcLiiQ6xl1UVwWwOfacG9XpfAcurkNr6sJ.g7Iau/FzpVRa', 'activo'),
 (22, 1, 'cedula_ciudadania', '3215478965', 'Ana', 'Sanchez', '3298735577', 'Anita', 'ana@gmail.com', '$2y$10$7KTpiQCwYqdBnPwTPH7DK.CIgqX4URx4vXG0Ge.A4F5G6hw/VgLr.', 'activo'),
 (23, 1, 'cedula_extranjeria', '1234567891', 'Susana', 'Lopez', '32154874', 'susana', 'susana@gmail.com', '$2y$10$6Iq3VFdXR55qIlQC1.5R9OjM4u4bAPdCUBS34XDAn9BdGxtwvGRBK', 'activo'),
