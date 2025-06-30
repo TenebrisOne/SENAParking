@@ -91,7 +91,7 @@
 
                 switch ($usuario['id_rol']) {
                     case '1':
-                        header("Location: /SENAParking/frontend/views/dashboard_admin.html");
+                        header("Location: /SENAParking/frontend/views/dashboard_admin.php");
                         break;
                     case '2':
                         header("Location: /SENAParking/frontend/views/dashboard_supervisor.html");

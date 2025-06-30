@@ -426,3 +426,18 @@ input:checked + .slider {
 input:checked + .slider:before {
     transform: translateX(25px);
 }
+
+.btn-editar {
+    border: 2px solid purple;
+    color: purple;
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-editar:hover {
+    background-color: #71277A; 
+    color: white;
+    border-color: #71277A;
+}
+
+

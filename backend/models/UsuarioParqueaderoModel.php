@@ -6,6 +6,7 @@ class UsuarioParqueadero {
         $this->conexion = $conexion;
     }
 
+    // Registrar usuario del parqueadero
     public function registrarUsuario($tipo_user, $tipo_documento, $numero_documento, $nombres, $apellidos, $edificio, $numero_contacto, $estado = 'activo') {
         $sql = "INSERT INTO tb_userpark (tipo_user, tipo_documento, numero_documento, nombres_park, apellidos_park, edificio, numero_contacto, estado)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -14,9 +15,9 @@ class UsuarioParqueadero {
         return $stmt->execute();
     }
 
+    // Obtener todos los usuarios del parqueadero
     public function obtenerUsuarios() {
-        $sql = "SELECT id_userPark, nombres_park, apellidos_park, tipo_documento, numero_documento, tipo_user, edificio, numero_contacto, estado
-                FROM tb_userpark ORDER BY id_userPark DESC";
+        $sql = "SELECT * FROM tb_userpark";
         $result = $this->conexion->query($sql);
         $usuarios = [];
         while ($row = $result->fetch_assoc()) {
@@ -25,6 +26,15 @@ class UsuarioParqueadero {
         return $usuarios;
     }
 
+    // Cambiar estado (activo/inactivo)
+    public function cambiarEstado($id, $estado) {
+        $sql = "UPDATE tb_userpark SET estado = ? WHERE id_userPark = ?";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bind_param("si", $estado, $id);
+        return $stmt->execute();
+    }
+
+    // Obtener usuario por ID (para edición)
     public function obtenerUsuarioPorId($id) {
         $sql = "SELECT * FROM tb_userpark WHERE id_userPark = ?";
         $stmt = $this->conexion->prepare($sql);
@@ -33,22 +43,15 @@ class UsuarioParqueadero {
         return $stmt->get_result()->fetch_assoc();
     }
 
-    public function actualizarUsuario($id_userPark, $tipo_user, $tipo_documento, $numero_documento, $nombres, $apellidos, $edificio, $numero_contacto) {
-        $sql = "UPDATE tb_userpark SET 
-                    tipo_user = ?, tipo_documento = ?, numero_documento = ?, nombres_park = ?, apellidos_park = ?, edificio = ?, numero_contacto = ?
+    // Editar usuario
+    public function actualizarUsuario($id, $tipo_user, $tipo_documento, $numero_documento, $nombres, $apellidos, $edificio, $numero_contacto) {
+        $sql = "UPDATE tb_userpark SET tipo_user = ?, tipo_documento = ?, numero_documento = ?, nombres_park = ?, apellidos_park = ?, edificio = ?, numero_contacto = ?
                 WHERE id_userPark = ?";
         $stmt = $this->conexion->prepare($sql);
-        $stmt->bind_param("sssssssi", $tipo_user, $tipo_documento, $numero_documento, $nombres, $apellidos, $edificio, $numero_contacto, $id_userPark);
-        return $stmt->execute();
-    }
-
-    public function cambiarEstado($id, $estado) {
-        $stmt = $this->conexion->prepare("UPDATE tb_userpark SET estado = ? WHERE id_userPark = ?");
-        $stmt->bind_param("si", $estado, $id);
+        $stmt->bind_param("sssssssi", $tipo_user, $tipo_documento, $numero_documento, $nombres, $apellidos, $edificio, $numero_contacto, $id);
         return $stmt->execute();
     }
 }
-
 
 
 

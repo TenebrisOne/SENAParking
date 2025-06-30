@@ -206,60 +206,23 @@ if ($_SESSION["rol"] != 1) {
                     <div class="row">
                         <div class="col-md-6">
                             <div class="card card-gestion-usuarios">
-                                <div class="card-header">
-                                    Gestión de Usuarios del Sistema
-                                </div>
+                                <div class="card-header">Gestión de Usuarios del Sistema</div>
                                 <div class="card-body">
-                                    <p class="text-muted">Administrar los usuarios con acceso al sistema (guardias,
-                                        supervisores, administradores).</p>
-                                    <!-- Tabla con la lista de usuarios -->
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Usuario</th>
-                                                <th>Rol</th>
-                                                <th>Acciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tablaUsuarios">
-                                            <!-- Aquí se insertarán los usuarios dinámicamente -->
-                                        </tbody>
-                                    </table>
-                                    <!--Cambio ruta localhost, se agrega SENAParking a la navegacion del boton-->
-                                    <button type="button"
-                                        onclick="window.location.href='/SENAParking/frontend/views/reg_userSystem.html'"
-                                        class="btn btn-registrar-usuario btn-sm">Registrar Nuevo Usuario </button>
+                                    <p class="text-muted">Administrar los usuarios con acceso al sistema (guardias, supervisores, administradores).</p>
+                                    <?php include 'tabla_usuarios.php'; ?>
+                                    <a href="/SENAParking/frontend/views/reg_userSystem.html" class="btn btn-registrar-usuario btn-sm mt-2">Registrar Nuevo Usuario</a>
                                 </div>
                             </div>
                         </div>
-                        <!-- Filas para la gestión de usuarios y los reportes -->
+                        <!-- Gestión de Usuarios del Parqueadero -->
                         <div class="col-md-6">
                             <div class="card card-gestion-usuarios">
-                                <div class="card-header">
-                                    Gestión de Usuarios del Parqueadero
-                                </div>
+                                <div class="card-header">Gestión de Usuarios del Parqueadero</div>
                                 <div class="card-body">
-                                    <p class="text-muted">Administrar los usuarios con acceso al parqueadero (servidor
-                                        público, contratista,
+                                    <p class="text-muted">Administrar los usuarios con acceso al parqueadero (servidor público, contratista,
                                         trabajador oficial, visitante autorizado, aprendiz).</p>
-                                    <!-- Tabla con la lista de usuarios -->
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Nombre</th>
-                                                <th>Documento</th>
-                                                <th>Estado</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tablaUsuariosParqueadero">
-                                            <!-- Aquí se insertarán los usuarios dinámicamente -->
-                                        </tbody>
-                                    </table>
-
-                                    <!--Cambio ruta localhost, se agrega SENAParking a la navegacion del boton-->
-                                    <button type="button"
-                                        onclick="window.location.href='/SENAParking/frontend/views/reg_userParking.html'"
-                                        class="btn btn-registrar-usuario btn-sm">Registrar Nuevo Usuario </button>
+                                    <?php include 'tabla_usuariosparqueadero.php'; ?>
+                                    <a href="/SENAParking/frontend/views/reg_userParking.html" class="btn btn-registrar-usuario btn-sm mt-2">Registrar Nuevo Usuario</a>
                                 </div>
                             </div>
                         </div>
@@ -276,12 +239,6 @@ if ($_SESSION["rol"] != 1) {
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="../public/js/bootstrap.min.js"></script>
-
-    <!-- Otro script personalizado -->
-    <script src="../public/js/usuarios.js"></script>
-    <script src="../public/js/usuariosParqueadero.js"></script>
-
-
 
 </body>
 

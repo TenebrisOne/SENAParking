@@ -1,47 +1,41 @@
 <?php
-require_once '../config/conexion.php';
-require_once '../models/UsuarioSistemaModel.php';
+require_once('../config/conexion.php');
+require_once('../models/UsuarioSistemaModel.php');
 
 
 $usuarioModel = new Usuario($conn);
 
-// ✅ REGISTRAR USUARIO
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre']) && !isset($_POST['id_userSys'])) {
-    $nombre = $_POST['nombre'];
-    $apellido = $_POST['apellido'];
-    $tipdoc = $_POST['tipdoc'];
-    $documento = $_POST['documento'];
-    $rol = $_POST['rol'];
-    $correo = $_POST['correo'];
-    $numero = $_POST['numero'];
-    $usuario = $_POST['usuario'];
-    $contrasena = $_POST['contrasena'];
-    $estado = 'activo';
+// 🟢 Registro de usuario
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre'], $_POST['apellido'], $_POST['tipdoc'])) {
+    $registro = $usuarioModel->registrarUsuario(
+        $_POST['nombre'],
+        $_POST['apellido'],
+        $_POST['tipdoc'],
+        $_POST['documento'],
+        $_POST['rol'],
+        $_POST['correo'],
+        $_POST['numero'],
+        $_POST['usuario'],
+        $_POST['contrasena']
+    );
 
-    $resultado = $usuarioModel->registrarUsuario($nombre,$apellido,$tipdoc,$documento,$rol,$correo,$numero,$usuario,$contrasena, $estado);
-    echo $resultado ? "Usuario registrado con éxito" : "Error al registrar usuario.";
+    if ($registro) {
+        header("Location: ../../frontend/views/reg_userSystem.html?mensaje=Usuario registrado exitosamente");
+    } else {
+        header("Location: ../../frontend/views/reg_userSystem.html?mensaje=Error al registrar el usuario");
+    }
     exit;
 }
 
-// ✅ CAMBIAR ESTADO
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && str_contains($_SERVER["CONTENT_TYPE"], "application/json")) {
-    $datos = json_decode(file_get_contents("php://input"), true);
-    $resultado = $usuarioModel->cambiarEstadoUsuario($datos['id_userSys'], $datos['estado']);
+// 🟢 Cambio de estado del usuario (activo/inactivo)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_userSys'], $_POST['estado'])) {
+    $estado = $_POST['estado'] === 'activo' ? 'activo' : 'inactivo';
+    $id = intval($_POST['id_userSys']);
 
-    echo json_encode([
-        'success' => $resultado,
-        'message' => $resultado ? "Estado actualizado con éxito" : "Error al cambiar estado"
-    ]);
+    if ($usuarioModel->cambiarEstadoUsuario($id, $estado)) {
+        header("Location: ../../frontend/views/dashboard_admin.php?mensaje=Estado del usuario actualizado");
+    } else {
+        header("Location: ../../frontend/views/dashboard_admin.php?mensaje=Error al cambiar estado");
+    }
     exit;
 }
-
-// ✅ CONSULTAR TODOS
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $usuarios = $usuarioModel->obtenerUsuarios();
-    header('Content-Type: application/json');
-    echo json_encode($usuarios);
-    exit;
-}
-
-?>
-
