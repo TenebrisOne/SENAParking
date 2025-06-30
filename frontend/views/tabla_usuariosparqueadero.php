@@ -2,8 +2,8 @@
 require_once('../../backend/config/conexion.php');
 require_once('../../backend/models/UsuarioParqueaderoModel.php');
 
-$modelo = new UsuarioParqueadero($conn);
-$usuarios = $modelo->obtenerUsuarios();
+$usuarioPark = new UsuarioParqueadero($conn);
+$usuarios = $usuarioPark->obtenerUsuarios();
 ?>
 
 <table class="table table-striped">
