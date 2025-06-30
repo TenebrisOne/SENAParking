@@ -18,10 +18,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre']) && !isset($
     $registrado = $usuarioPark->registrarUsuario($tipo_user, $tipdoc, $documento, $nombre, $apellido, $edificio, $numero, $estado);
 
     if ($registrado) {
-        header("Location: ../../frontend/views/reg_userParking.html?mensaje=Usuario registrado exitosamente");
+       echo("Registro de usuario exitosamente");
         exit;
     } else {
-        header("Location: ../../frontend/views/reg_userParking.html?mensaje=Error al registrar el usuario");
+        echo("Error al registrar usuario");
         exit;
     }
 }

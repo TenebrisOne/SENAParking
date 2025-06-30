@@ -39,6 +39,18 @@ require_once __DIR__ . '/../../backend/controllers/MostrarDatosController.php';
 </head>
 
 <body>
+
+    <?php
+    if (isset($_GET['mensaje'])) {
+        echo "<script>
+            alert('" . htmlspecialchars($_GET['mensaje']) . "');
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.pathname);
+            }
+        </script>";
+    }
+    ?>
+
     <!-- Contenedor donde se insertará el header dinámicamente -->
     <div id="header-container"></div>
 
@@ -215,8 +227,6 @@ require_once __DIR__ . '/../../backend/controllers/MostrarDatosController.php';
                                         echo '<p class="text-muted">Selecciona una tarjeta para mostrar un reporte detallado.</p>';
                                     }
                                     ?>
-
-                                    <button class="btn btn-sm btn-outline-secondary mt-2">Generar Reporte Personalizado</button>
                                 </div>
                             </div>
                         </div>

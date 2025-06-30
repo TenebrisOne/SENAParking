@@ -18,11 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre'], $_POST['ape
         $_POST['usuario'],
         $_POST['contrasena']
     );
-
+    
     if ($registro) {
-        header("Location: ../../frontend/views/reg_userSystem.html?mensaje=Usuario registrado exitosamente");
+        echo("Registro de usuario exitosamente");
     } else {
-        header("Location: ../../frontend/views/reg_userSystem.html?mensaje=Error al registrar el usuario");
+        echo("Error al registrar usuario");
     }
     exit;
 }

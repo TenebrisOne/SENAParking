@@ -100,11 +100,11 @@ formulario.addEventListener('submit', (e) => {
          .then(response => response.text())
          .then(data => {
             alert(data);
-            window.location.href="../views/dashboard_admin.html";
+            window.location.href="./../views/dashboard_admin.php";
          })
          .catch(error => {
             alert(error);
-            window.location.href="../views/dashboard_admin.html";
+            window.location.href="./../views/dashboard_admin.php";
          });
       formulario.reset();
    }
@@ -112,5 +112,5 @@ formulario.addEventListener('submit', (e) => {
 
 // Flecha de retroceso
 function goBack() {
-   window.location.href = "/SENAParking/frontend/views/dashboard_admin.html";
+   window.location.href = "/SENAParking/frontend/views/dashboard_admin.php";
 }

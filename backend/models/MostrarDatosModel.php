@@ -40,7 +40,7 @@ class MostrarDatosModel {
 
     // Reportes dinámicos
     public function obtenerUsuariosSistema() {
-        $sql = "SELECT id_userSys, nombres_sys, apellidos_sys, numero_documento, id_rol FROM tb_usersys";
+        $sql = "SELECT id_userSys, nombres_sys, apellidos_sys, numero_documento FROM tb_usersys";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -54,14 +54,14 @@ class MostrarDatosModel {
     }
 
     public function obtenerAccesosHoy() {
-        $sql = "SELECT id_acceso, id_userSys, fecha_hora, tipo_accion FROM tb_accesos WHERE DATE(fecha_hora) = CURDATE()";
+        $sql = "SELECT id_acceso, id_userSys, id_vehiculo, fecha_hora, tipo_accion FROM tb_accesos WHERE DATE(fecha_hora) = CURDATE()";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function obtenerSalidasHoy() {
-        $sql = "SELECT id_acceso, id_userSys, fecha_hora, tipo_accion FROM tb_accesos WHERE DATE(fecha_hora) = CURDATE()";
+        $sql = "SELECT id_acceso, id_userSys, id_vehiculo, fecha_hora, tipo_accion FROM tb_accesos WHERE DATE(fecha_hora) = CURDATE()";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
