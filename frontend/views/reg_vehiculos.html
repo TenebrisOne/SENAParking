@@ -40,9 +40,6 @@
 
                     <div class="col-md-6 text-start">
 
-                        <label  for="placa">Placa:</label>
-                        <input type="text" id="placa" name="placa" class="form-control mb-2" placeholder="Ingrese la placa" required>
-
                         <!-- Campo Placa -->
                         <label for="placa">Placa:</label>
                         <input type="text" id="placa" name="placa" class="form-control mb-2"
@@ -82,31 +79,28 @@
 
                         <label for="modelo">Modelo:</label>
 
-                        <input type="text" id="modelo" name="modelo" class="form-control mb-2" placeholder="Ingrese el modelo" required>
-                        <div class="invalid-feedback">Longitud no puede ser superior a 10</div>
-
                         <input type="text" id="modelo" name="modelo" class="form-control mb-2"
                             placeholder="Ingrese el modelo" required>
                         <div class="invalid-feedback">El modelo debe estar entre 1900 y 2025</div>
 
 
                         <label for="observaciones">Observaciones:</label>
+                        <textarea id="observaciones" name="observaciones" class="form-control" style="resize: none;"
+                            placeholder="Ingrese una observacion"></textarea>
 
 
                     </div>
                 </div>
 
-                <input type="submit" value="Confirmar" class="btn btn-primary">
-
-                        <textarea id="observaciones" name="observaciones" class="form-control" style="resize: none;"
-                            placeholder="Ingrese una observacion"></textarea>
+                        
                     </div>
+                    
+                <input type="submit" value="Confirmar"
+                onclick="window.location.href='/frontend/views/crud_vehiculos.html'" class="btn btn-primary">
                 </div>
 
                 <!-- Botón de enviar -->
 
-                <input type="submit" value="Confirmar"
-                    onclick="window.location.href='/frontend/views/crud_vehiculos.html'" class="btn btn-primary">
 
             </form>
         </div>
