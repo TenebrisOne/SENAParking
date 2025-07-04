@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,20 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../public/css/crudVehiculos.css">
+    <link rel="stylesheet" href="../public/css/sityles_views.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body class="bg-light">
+
     <div id="header-container"></div>
+    <!-- Botón para volver atrás -->
+    <div class="back-arrow" onclick="goBack()">
+        <i class="fas fa-arrow-left"></i>
+        <a class="nav-link" href="../../frontend/views/dashboard_guardia.php"></a>
+    </div>
+
     <div class="container-fluid">
         <div class="container">
             <div class="search-section">
@@ -22,11 +34,8 @@
                     </div>
                     <div class="col-md-4">
                         <div class="search-container">
-                            <input type="text" 
-                                   class="form-control search-input" 
-                                   id="searchInput"
-                                   placeholder="Buscar por propietario o placa..."
-                                   oninput="searchVehicles(this.value)">
+                            <input type="text" class="form-control search-input" id="searchInput"
+                                placeholder="Buscar por propietario o placa..." oninput="searchVehicles(this.value)">
                             <button class="clear-search" id="clearSearch" onclick="clearSearch()">
                                 <i class="fas fa-times"></i>
                             </button>
@@ -47,7 +56,8 @@
                         <div class="d-flex align-items-center justify-content-md-end">
                             <span class="me-3" id="statusText">Entrada</span>
                             <div class="form-check form-switch form-check-reverse">
-                                <input class="form-check-input status-toggle" type="checkbox" id="movementToggle" onchange="toggleMovement()">
+                                <input class="form-check-input status-toggle" type="checkbox" id="movementToggle"
+                                    onchange="toggleMovement()">
                                 <label class="form-check-label" for="movementToggle"></label>
                             </div>
                         </div>
@@ -71,7 +81,7 @@
             </div>
 
             <div class="row" id="vehiclesList">
-                </div>
+            </div>
 
             <div class="no-results d-none" id="noResults">
                 <i class="fas fa-search fa-3x mb-3"></i>
@@ -90,14 +100,14 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    
+
     <script>
         // Variables globales
         let selectedVehicle = null;
-        let allVehicles = []; 
+        let allVehicles = [];
 
         // Inicializar página
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             loadVehicles();
             toggleMovement();
         });
@@ -109,7 +119,7 @@
                 // La URL apunta al controlador PHP que devuelve JSON
                 const response = await fetch('../../backend/controllers/VehicleController.php');
                 const data = await response.json(); // Se sigue esperando JSON aquí
-                
+
                 if (data.success) {
                     allVehicles = data.data; // Almacena todos los vehículos
                     displayVehicles(allVehicles);
@@ -128,15 +138,15 @@
         function displayVehicles(vehicles) {
             const vehiclesList = document.getElementById('vehiclesList');
             const noResults = document.getElementById('noResults');
-            
+
             if (vehicles.length === 0) {
                 vehiclesList.innerHTML = '';
                 noResults.classList.remove('d-none');
                 return;
             }
-            
+
             noResults.classList.add('d-none');
-            
+
             vehiclesList.innerHTML = vehicles.map(vehicle => `
                <div class="col-12 mb-3">
                 <div class="card vehicle-card h-100" onclick="selectVehicle(this, ${vehicle.id_vehiculo}, '${vehicle.placa}')">
@@ -218,9 +228,9 @@
         }
 
         // Buscar vehículos
-         function searchVehicles(searchTerm) {
+        function searchVehicles(searchTerm) {
             const clearButton = document.getElementById('clearSearch');
-            
+
             if (searchTerm.length > 0) {
                 clearButton.style.display = 'block';
             } else {
@@ -231,7 +241,7 @@
             //clearTimeout(searchTimeout);
             searchTimeout = setTimeout(async () => {
                 if (searchTerm.trim() === '') {
-                    displayVehicles(allVehicles); 
+                    displayVehicles(allVehicles);
                     return;
                 }
 
@@ -239,18 +249,18 @@
                     showLoading(true);
                     // La URL apunta al controlador PHP que devuelve JSON
                     const response = await fetch(`../../backend/controllers/VehicleController.php?search=${encodeURIComponent(searchTerm)}`);
-                    const data = await response.json(); 
-                    
+                    const data = await response.json();
+
                     if (data.success) {
                         displayVehicles(data.data);
                     } else {
-                        displayVehicles([]); 
+                        displayVehicles([]);
                         showAlert(data.message || 'No se encontraron resultados para la búsqueda.', 'info');
                     }
                 } catch (error) {
                     console.error('Error en búsqueda:', error);
                     showAlert('Error de conexión durante la búsqueda. Intenta nuevamente.', 'danger');
-                    displayVehicles([]); 
+                    displayVehicles([]);
                 } finally {
                     showLoading(false);
                 }
@@ -258,7 +268,7 @@
         }
 
         // Limpiar búsqueda
-       function clearSearch() {
+        function clearSearch() {
             document.getElementById('searchInput').value = '';
             document.getElementById('clearSearch').style.display = 'none';
             loadVehicles(); // Recargar todos los vehículos
@@ -270,7 +280,7 @@
             if (selectedVehicle && selectedVehicle.element !== cardElement) {
                 selectedVehicle.element.classList.remove('selected');
             }
-    
+
             if (cardElement.classList.contains('selected')) {
                 cardElement.classList.remove('selected');
                 selectedVehicle = null;
@@ -282,7 +292,7 @@
                     plateNumber: plateNumber
                 };
             }
-            
+
             console.log('Vehículo seleccionado:', selectedVehicle);
         }
 
@@ -290,7 +300,7 @@
         function toggleMovement() {
             const toggle = document.getElementById('movementToggle');
             const statusText = document.getElementById('statusText');
-            
+
             if (toggle.checked) {
                 statusText.textContent = 'Salida';
                 statusText.className = 'me-3 text-danger fw-bold';
@@ -309,7 +319,7 @@
 
             const toggle = document.getElementById('movementToggle');
             const movementType = toggle.checked ? 'salida' : 'ingreso';
-            
+
             if (!confirm(`¿Continuar con el proceso de ${movementType} para el vehículo ${selectedVehicle.plateNumber}?`)) {
                 return;
             }
@@ -317,7 +327,7 @@
             // Crear un formulario para enviar los datos como POST
             const form = document.createElement('form');
             form.method = 'POST';
-            form.action = '../../backend/controllers/AccessController.php'; 
+            form.action = '../../backend/controllers/AccessController.php';
 
             const idVehiculoInput = document.createElement('input');
             idVehiculoInput.type = 'hidden';
@@ -332,7 +342,7 @@
             form.appendChild(tipoAccionInput);
 
             document.body.appendChild(form);
-            form.submit(); 
+            form.submit();
         }
 
         // Añadir nuevo vehículo
@@ -365,15 +375,23 @@
                 ${message}
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             `;
-            
+
             document.body.appendChild(alertDiv);
-            
+
             setTimeout(() => {
                 if (alertDiv.parentNode) {
                     alertDiv.remove();
                 }
             }, 5000);
         }
+
+        //=== funcio para redirigir al dashboard_guardia desde la flecha de retroceso !
+        function goBack() {
+            window.location.href = "/frontend/views/dashboard_guardia.html";
+        }
+
     </script>
+    <script src="../public/js/scriptsDOM.js"></script>
 </body>
+
 </html>
