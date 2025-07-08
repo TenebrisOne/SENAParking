@@ -93,6 +93,6 @@ formulario.addEventListener('submit', (e) => {
 
 //=== funcion para redirigir al dashboard_supervisor desde la flecha de retroceso !
 function goBack() {
-   window.location.href = "/frontend/views/dashboard_guardia.html";
+   window.location.href = "/frontend/views/dashboard_admin.php";
 }
 

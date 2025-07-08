@@ -25,7 +25,7 @@ if (!$usuario) {
     <meta name="viewport" content="width=, initial-scale=1.0">
     <meta name="author" content="AdsoDeveloperSolutions801">
     <meta name="course" content="ADSO 2873801">
-    <title>Registro Usuarios del Sistema | SENAParking</title>
+    <title>Editar Usuarios del Sistema | SENAParking</title>
     <link href="../public/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" type="x-icon" href="../public/images/favicon.ico">
     <link rel="stylesheet" href="../public/css/sityles_views.css">

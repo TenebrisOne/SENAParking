@@ -39,7 +39,7 @@ if (!$usuario) {
         style="position: absolute; top: 100px; right: 70px; width: 100px;">
 
     <div class="register-container">
-        <h2><center>Editar Usuario Parqueadero</center></h2>
+        <h2><center>Editar Usuario Parqueadero</center></h2><br>
         <form class="formulario" method="POST" action="/SENAParking/backend/controllers/UsuarioParqueaderoController.php">
             <input type="hidden" name="id_userPark" value="<?= htmlspecialchars($usuario['id_userPark']) ?>">
 
