@@ -58,7 +58,7 @@ if (!$usuario) {
                 <div class="col-md-6">
                     <label class="form-label">Tipo de documento:</label>
                     <select class="form-select" name="tipdoc" required>
-                        <option value="">Seleccione tipo</option>
+                        <option value="">Seleccione tipo de documento</option>
                         <option value="cedula_ciudadania" <?= $usuario['tipo_documento'] == 'cedula_ciudadania' ? 'selected' : '' ?>>Cédula de Ciudadanía</option>
                         <option value="cedula_extranjeria" <?= $usuario['tipo_documento'] == 'cedula_extranjeria' ? 'selected' : '' ?>>Cédula de Extranjería</option>
                         <option value="otro" <?= $usuario['tipo_documento'] == 'otro' ? 'selected' : '' ?>>Pasaporte</option>

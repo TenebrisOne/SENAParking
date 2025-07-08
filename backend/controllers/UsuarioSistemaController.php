@@ -6,7 +6,7 @@ require_once('../models/UsuarioSistemaModel.php');
 $usuarioModel = new Usuario($conn);
 
 // 🟢 Registro de usuario
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre'], $_POST['apellido'], $_POST['tipdoc'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre']) && !isset($_POST['id_userSys'])) {
     $registro = $usuarioModel->registrarUsuario(
         $_POST['nombre'],
         $_POST['apellido'],
@@ -38,4 +38,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_userSys'], $_POST[
         header("Location: ../../frontend/views/dashboard_admin.php?mensaje=Error al cambiar estado");
     }
     exit;
+}
+
+// ✅ ACTUALIZAR USUARIO
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_userSys'])) {
+    $id         = $_POST['id_userSys'];
+    $nombre     = $_POST['nombre'];
+    $apellido   = $_POST['apellido'];
+    $tipdoc     = $_POST['tipdoc'];
+    $documento  = $_POST['documento'];
+    $numero     = $_POST['numero'];
+    $id_rol  = $_POST['rol'];
+    $correo   = $_POST['correo'];
+    $username  = $_POST['usuario'];
+
+
+    $resultado = $usuarioModel->actualizarUsuarioS($id, $nombre, $apellido, $tipdoc, $documento, $id_rol, $correo, $numero, $username);
+
+    if ($resultado) {
+        header('Location: /SENAParking/frontend/views/dashboard_admin.php?mensaje=Usuario editado correctamente');
+        exit;
+    } else {
+       header('Location: /SENAParking/frontend/views/dashboard_admin.php?mensaje=Error al editar usuario');
+        exit;
+   }
 }

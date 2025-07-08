@@ -1,5 +1,6 @@
 <?php
-class Usuario {
+class Usuario
+{
     private $conexion;
 
     public function __construct($conexion)
@@ -16,7 +17,7 @@ class Usuario {
 
         $stmt = $this->conexion->prepare($sql);
         $stmt->bind_param("ssssssssss", $nombres_sys, $apellidos_sys, $tipo_documento, $numero_documento, $id_rol, $correo, $numero_contacto, $username, $passwordHash, $estado);
-        
+
         return $stmt->execute();
     }
 
@@ -41,5 +42,24 @@ class Usuario {
 
         return $stmt->execute();
     }
+
+    // Obtener usuario por ID (para edición)
+    public function obtenerUsuarioSPorId($id)
+    {
+        $sql = "SELECT * FROM tb_usersys WHERE id_userSys = ?";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
+    }
+
+    // Editar usuario
+    public function actualizarUsuarioS($id, $nombres_sys, $apellidos_sys, $tipo_documento, $numero_documento, $id_rol, $correo, $numero_contacto, $username)
+    {
+        $sql = "UPDATE tb_usersys SET id_rol = ?, tipo_documento = ?, numero_documento = ?, nombres_sys = ?, apellidos_sys = ?, correo = ?, numero_contacto = ?, username = ?
+                    WHERE id_userSys = ?";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bind_param("ssssssssi", $id_rol, $tipo_documento, $numero_documento, $nombres_sys, $apellidos_sys, $correo, $numero_contacto, $username, $id);
+        return $stmt->execute();
+    }
 }
-?>
