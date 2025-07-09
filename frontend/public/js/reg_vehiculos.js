@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const validarPlaca = () => {
         const valor = placa.value.trim().toUpperCase();
         placa.value = valor; // Convertir a mayúsculas automáticamente
-        const regex = /^[A-Z]{3}\d{3}$/;
+        const regex = "/^[A-Z]{3}\d{3}$/";
         if (!regex.test(valor)) {
             mostrarError(placa, 'Formato inválido. Ej: ABC123');
             return false;

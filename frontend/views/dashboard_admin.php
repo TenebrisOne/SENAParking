@@ -94,7 +94,7 @@ require_once __DIR__ . '/../../backend/controllers/MostrarDatosController.php';
                         </li>
                         <!-- Se repiten ítems similares para las secciones de reportes y configuración -->
                         <li class="nav-item btn btn-secondary mt-1">
-                            <a class="nav-link" href="/SENAParking/frontend/views/reportes_generales.html">
+                            <a class="nav-link" href="/SENAParking/backend/controllers/ReportesUserController.php">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" class="feather feather-bar-chart-2">
@@ -270,6 +270,14 @@ require_once __DIR__ . '/../../backend/controllers/MostrarDatosController.php';
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="../public/js/bootstrap.min.js"></script>
+
+    <!-- Otro script personalizado -->
+    <script src="../public/js/usuarios.js"></script>
+    <script src="../public/js/usuariosParqueadero.js"></script>
+
+
+    <!-- Script de tu dashboard dinámico -->
+<script src="../public/js/dashboard_admin.js"></script>
 
 </body>
 
