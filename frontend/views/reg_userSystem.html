@@ -128,14 +128,16 @@
                     <p class="formulario__input-error">La contraseña tiene que ser de 4 a 12 dígitos.</p>
                 </div>
             </div>
-            <div>
+
+            <form action="controllers/ActividadController.php" method="GET">
+                <input type="hidden" name="accion" value="crear_userSys">
                 <button type="submit" class="btn sign-in-btn">Registrar</button>
-            </div>
+            </form>
 
         </form>
     </div>
     
-
+    
     <!-- Cargar el header-->
     <script src="./../public/js/scriptsDOM.js"></script>
     
