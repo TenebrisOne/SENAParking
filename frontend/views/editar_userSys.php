@@ -1,4 +1,16 @@
 <?php
+
+session_start();
+
+if (!isset($_SESSION['user_name'])) {
+    header("location: ../login.php");
+    exit();
+}
+
+if ($_SESSION["rol"] != 1) {
+    header("Location: ../../login.php");
+}
+
 require_once '../../backend/config/conexion.php';
 require_once '../../backend/models/UsuarioSistemaModel.php';
 

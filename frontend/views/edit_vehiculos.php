@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-// Mostrar vista dependiendo del estado de la sesion
-if ($_SESSION["rol"] != 1) {
-    header("Location: /SENAParking/login.php");
+if (!isset($_SESSION['rol'])) {
+    header("location: ../login.php");
+    exit();
 }
 
 // cargamos totales
@@ -101,7 +101,7 @@ require_once __DIR__ . '/../../backend/controllers/MostrarDatosController.php';
     
     <script>
          function goBack() {
-                window.location.href = './crud_vehiculos.html'; 
+                window.location.href = './crud_vehiculos.php'; 
             }
         document.addEventListener('DOMContentLoaded', function() {
             // Función para volver atrás
@@ -120,7 +120,7 @@ require_once __DIR__ . '/../../backend/controllers/MostrarDatosController.php';
             } else {
                 // Si no hay ID, quizás redirigir o mostrar un error
                 alert('No se especificó un ID de vehículo para editar.');
-                window.location.href = './crud_vehiculos.html'; // O a una página de error
+                window.location.href = './crud_vehiculos.php'; // O a una página de error
             }
         });
 
@@ -180,12 +180,12 @@ require_once __DIR__ . '/../../backend/controllers/MostrarDatosController.php';
 
                 } else {
                     alert('Error al cargar los datos del vehículo: ' + (data.message || 'Vehículo no encontrado.'));
-                    window.location.href = './crud_vehiculos.html';
+                    window.location.href = './crud_vehiculos.php';
                 }
             } catch (error) {
                 console.error('Error de conexión al cargar datos del vehículo:', error);
                 alert('Error de conexión al cargar los datos del vehículo. Asegúrate de que el servidor PHP esté funcionando.');
-                window.location.href = './crud_vehiculos.html';
+                window.location.href = './crud_vehiculos.php';
             }
         }
     </script>

@@ -1,5 +1,14 @@
 <?php
 session_start();
+
+if (!isset($_SESSION['rol'])) {
+    header("location: ../login.php");
+    exit();
+}
+?>
+
+<?php
+session_start();
 echo ($_SESSION['rol']);
 ?>
 
