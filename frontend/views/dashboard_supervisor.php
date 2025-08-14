@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+// Mostrar vista dependiendo del estado de la sesion
+if ($_SESSION["rol"] != 2) {
+        header("Location: /github/SENAParking/login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="es"> <!-- Define el idioma de la página como español -->
 <head>
@@ -89,7 +97,7 @@
                         </li>
 <!-- Elemento de navegación para cerrar sesión -->
 <li class="nav-item">
-    <a class="nav-link" href="/SENAParking/logout.php"">
+    <a class="nav-link" href="/SENAParking/logout.php">
         <!-- Ícono de cerrar sesión usando SVG -->
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -238,5 +246,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="/frontend/public/js/bootstrap.min.js"></script>
     <script src="script.js"></script>
+
+    <!-- script para que cuando se cierre la sesion refresque la ventana -->
+    <script src="../public/js/ref_cierre.js"></script>
 </body>
 </html>

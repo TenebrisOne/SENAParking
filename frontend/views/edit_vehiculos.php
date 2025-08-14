@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+// Mostrar vista dependiendo del estado de la sesion
+if ($_SESSION["rol"] != 1) {
+    header("Location: /SENAParking/login.php");
+}
+
+// cargamos totales
+require_once __DIR__ . '/../../backend/controllers/MostrarDatosController.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -179,5 +190,7 @@
         }
     </script>
 
+    <!-- script para que cuando se cierre la sesion refresque la ventana -->
+    <script src="../public/js/ref_cierre.js"></script>
 </body>
 </html>

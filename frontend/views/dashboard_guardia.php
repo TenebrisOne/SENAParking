@@ -2,7 +2,7 @@
 session_start();
 
 // Mostrar vista dependiendo del estado de la sesion
-if ($_SESSION["rol"] != 2) {
+if ($_SESSION["rol"] != 3) {
         header("Location: /github/SENAParking/login.php");
 }
 
@@ -225,5 +225,9 @@ if ($_SESSION["rol"] != 2) {
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="/frontend/public/js/bootstrap.min.js"></script>
     <script src="script.js"></script> <!-- Script principal -->
+
+    <!-- script para que cuando se cierre la sesion refresque la ventana -->
+    <script src="../public/js/ref_cierre.js"></script>
+
 </body>
 </html>

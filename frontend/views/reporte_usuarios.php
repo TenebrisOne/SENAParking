@@ -219,6 +219,10 @@
     </script>
     <!-- Función para llamar al Header-->
     <script src="./../public/js/scriptsDOM.js"></script>
+
+    <!-- script para que cuando se cierre la sesion refresque la ventana -->
+    <script src="../public/js/ref_cierre.js"></script>
+
 </body>
 
 </html>

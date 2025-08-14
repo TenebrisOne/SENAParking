@@ -70,6 +70,9 @@
     <!--Funcion para llamarla validacion-->
     <script src="/frontend/public/js/validacion_reg_accesos.js"></script>
 
+    <!-- script para que cuando se cierre la sesion refresque la ventana -->
+    <script src="../public/js/ref_cierre.js"></script>
+
 </body>
 
 </html>

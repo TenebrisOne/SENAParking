@@ -478,6 +478,9 @@
             window.history.back();
         }
     </script>
+
+    <!-- script para que cuando se cierre la sesion refresque la ventana -->
+    <script src="../public/js/ref_cierre.js"></script>
 </body>
 
 </html>

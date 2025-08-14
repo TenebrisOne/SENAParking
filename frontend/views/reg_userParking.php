@@ -124,6 +124,9 @@
     <!-- llama al archivo de lavidacion del formulario -->
     <script src="../public/js/validacion_user_parking.js"></script>
 
+    <!-- script para que cuando se cierre la sesion refresque la ventana -->
+    <script src="../public/js/ref_cierre.js"></script>
+
 
 </body>
 

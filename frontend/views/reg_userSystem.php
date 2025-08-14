@@ -1,3 +1,8 @@
+<?php
+session_start();
+echo ($_SESSION['rol']);
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -79,8 +84,10 @@
                     <label for="rol" class="form-label">Rol:</label>
                     <select class="form-select" id="rol" name="rol" required>
                         <option value="" selected disabled>Selecciona el rol</option>
+                        <?php if($_SESSION['rol'] == 1):?>
                         <option value="1">Administrador</option>
                         <option value="2">Supervisor</option>
+                        <?php endif;?>
                         <option value="3">Guarda de Seguridad</option>
                     </select>
                 </div>
@@ -130,6 +137,9 @@
     <!-- Cargar el header-->
     <script src="./../public/js/scriptsDOM.js"></script>
     <script src="../public/js/validacion_user_system.js"></script>
+
+    <!-- script para que cuando se cierre la sesion refresque la ventana -->
+    <script src="../public/js/ref_cierre.js"></script>
 
 </body>
 

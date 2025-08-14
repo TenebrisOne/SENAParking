@@ -3,7 +3,7 @@ session_start();
 
 // Mostrar vista dependiendo del estado de la sesion
 if ($_SESSION["rol"] != 1) {
-    header("Location: /github/SENAParking/login.php");
+    header("Location: /SENAParking/login.php");
 }
 
 // cargamos totales
@@ -241,7 +241,7 @@ require_once __DIR__ . '/../../backend/controllers/MostrarDatosController.php';
                             <div class="card-body">
                                 <p class="text-muted">Administrar los usuarios con acceso al sistema (guardias, supervisores, administradores).</p>
                                 <?php include 'tabla_usuarios.php'; ?>
-                                <a href="/SENAParking/frontend/views/reg_userSystem.html" class="btn btn-registrar-usuario btn-sm mt-2">Registrar Nuevo Usuario</a>
+                                <a href="/SENAParking/frontend/views/reg_userSystem.php" class="btn btn-registrar-usuario btn-sm mt-2">Registrar Nuevo Usuario</a>
                             </div>
                         </div>
                     </div>
@@ -253,7 +253,7 @@ require_once __DIR__ . '/../../backend/controllers/MostrarDatosController.php';
                                 <p class="text-muted">Administrar los usuarios con acceso al parqueadero (servidor público, contratista,
                                     trabajador oficial, visitante autorizado, aprendiz).</p>
                                 <?php include 'tabla_usuariosparqueadero.php'; ?>
-                                <a href="/SENAParking/frontend/views/reg_userParking.html" class="btn btn-registrar-usuario btn-sm mt-2">Registrar Nuevo Usuario</a>
+                                <a href="/SENAParking/frontend/views/reg_userParking.php" class="btn btn-registrar-usuario btn-sm mt-2">Registrar Nuevo Usuario</a>
                             </div>
                         </div>
                     </div>
@@ -278,6 +278,9 @@ require_once __DIR__ . '/../../backend/controllers/MostrarDatosController.php';
 
     <!-- Script de tu dashboard dinámico -->
 <script src="../public/js/dashboard_admin.js"></script>
+
+<!-- script para que cuando se cierre la sesion refresque la ventana -->
+<script src="../public/js/ref_cierre.js"></script>
 
 </body>
 
