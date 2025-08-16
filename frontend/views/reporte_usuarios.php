@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['rol'])) {
+    header("location: ../login.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -219,6 +228,10 @@
     </script>
     <!-- Función para llamar al Header-->
     <script src="./../public/js/scriptsDOM.js"></script>
+
+    <!-- script para que cuando se cierre la sesion refresque la ventana -->
+    <script src="../public/js/ref_cierre.js"></script>
+
 </body>
 
 </html>

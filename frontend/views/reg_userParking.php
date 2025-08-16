@@ -1,3 +1,17 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['rol'])) {
+    header("location: ../login.php");
+    exit();
+}
+
+if ($_SESSION['rol'] == 3) {
+    header("location: ../dashboard_guardia.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -123,6 +137,9 @@
 
     <!-- llama al archivo de lavidacion del formulario -->
     <script src="../public/js/validacion_user_parking.js"></script>
+
+    <!-- script para que cuando se cierre la sesion refresque la ventana -->
+    <script src="../public/js/ref_cierre.js"></script>
 
 
 </body>

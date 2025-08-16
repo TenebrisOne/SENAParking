@@ -1,5 +1,19 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['rol'])) {
+    header("location: ../../login.php");
+    exit();
+}
+
+// Mostrar vista dependiendo del estado de la sesion
+if ($_SESSION["rol"] != 2) {
+    header("Location: ../../login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="es"> <!-- Define el idioma de la página como español -->
+
 <head>
     <meta charset="UTF-8"> <!-- Define la codificación de caracteres como UTF-8 -->
     <meta name="viewport" content="width=, initial-scale=1.0"> <!-- Establece el ancho y escala de la vista para dispositivos móviles -->
@@ -21,7 +35,7 @@
 
     <div class="container-fluid"> <!-- Contenedor que ocupa todo el ancho disponible -->
         <div class="row"> <!-- Fila que contiene las columnas para el sidebar y el contenido principal -->
-            
+
             <!-- Sidebar (navegación lateral) del supervisor -->
             <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block sidebar sidebar-supervisor">
                 <div class="sidebar-sticky"> <!-- Estilo que asegura que el sidebar permanezca fijo durante el scroll -->
@@ -41,7 +55,7 @@
                         </li>
                         <!-- Elemento de navegación para registrar guardias -->
                         <li class="nav-item">
-                            <a class="nav-link" href="/SENAParking/frontend/views/reg_userSystem.html">
+                            <a class="nav-link" href="/SENAParking/frontend/views/reg_userSystem.php">
                                 <!-- Ícono de añadir usuario usando SVG -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -56,7 +70,7 @@
                         </li>
                         <!-- Elemento de navegación para los informes de los guardias -->
                         <li class="nav-item">
-                            <a class="nav-link" href="/SENAParking/frontend/views/reportes.html">
+                            <a class="nav-link" href="/SENAParking/frontend/views/reportes.php">
                                 <!-- Ícono de archivo de texto usando SVG -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -71,36 +85,36 @@
                             </a>
                         </li>
                         <!-- Elemento de navegación para la disponibilidad -->
+                        <!-- <li class="nav-item"> -->
+                        <!-- <a class="nav-link" href="#"> -->
+                        <!-- Ícono de lista usando SVG -->
+                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" -->
+                        <!-- fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" -->
+                        <!-- stroke-linejoin="round" class="feather feather-list"> -->
+                        <!-- <line x1="8" y1="6" x2="21" y2="6"></line> -->
+                        <!-- <line x1="8" y1="12" x2="21" y2="12"></line> -->
+                        <!-- <line x1="8" y1="18" x2="21" y2="18"></line> -->
+                        <!-- <line x1="3" y1="6" x2="3" y2="6"></line> -->
+                        <!-- <line x1="3" y1="12" x2="3" y2="12"></line> -->
+                        <!-- <line x1="3" y1="18" x2="3" y2="18"></line> -->
+                        <!-- </svg> -->
+                        <!-- Disponibilidad -->
+                        <!-- </a> -->
+                        <!-- </li> -->
+                        <!-- Elemento de navegación para cerrar sesión -->
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <!-- Ícono de lista usando SVG -->
+                            <a class="nav-link" href="/SENAParking/logout.php">
+                                <!-- Ícono de cerrar sesión usando SVG -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-list">
-                                    <line x1="8" y1="6" x2="21" y2="6"></line>
-                                    <line x1="8" y1="12" x2="21" y2="12"></line>
-                                    <line x1="8" y1="18" x2="21" y2="18"></line>
-                                    <line x1="3" y1="6" x2="3" y2="6"></line>
-                                    <line x1="3" y1="12" x2="3" y2="12"></line>
-                                    <line x1="3" y1="18" x2="3" y2="18"></line>
+                                    stroke-linejoin="round" class="feather feather-log-out">
+                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                                    <polyline points="16 17 21 12 16 7" />
+                                    <line x1="21" y1="12" x2="9" y2="12" />
                                 </svg>
-                                Disponibilidad
+                                Cerrar sesión
                             </a>
                         </li>
-<!-- Elemento de navegación para cerrar sesión -->
-<li class="nav-item">
-    <a class="nav-link" href="/SENAParking/logout.php"">
-        <!-- Ícono de cerrar sesión usando SVG -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round" class="feather feather-log-out">
-            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-            <polyline points="16 17 21 12 16 7" />
-            <line x1="21" y1="12" x2="9" y2="12" />
-        </svg>
-        Cerrar sesión
-    </a>
-</li>
                     </ul>
                 </div>
             </nav>
@@ -232,11 +246,15 @@
 
     <!-- Función para llamar al Header dinámicamente -->
     <script src="./../public/js/scriptsDOM.js"></script>
-    
+
     <!-- Otros scripts necesarios para la funcionalidad de la página -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="/frontend/public/js/bootstrap.min.js"></script>
     <script src="script.js"></script>
+
+    <!-- script para que cuando se cierre la sesion refresque la ventana -->
+    <script src="../public/js/ref_cierre.js"></script>
 </body>
+
 </html>

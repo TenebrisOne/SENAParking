@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['rol'])) {
+    header("location: ../login.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -87,6 +96,9 @@
     <script src="./../public/js/scriptsDOM.js"></script>
 
     <script src="../public/js/editar_usuario.js"></script>
+
+    <!-- script para que cuando se cierre la sesion refresque la ventana -->
+    <script src="../public/js/ref_cierre.js"></script>
 
 </body>
 

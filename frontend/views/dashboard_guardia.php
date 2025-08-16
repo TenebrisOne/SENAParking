@@ -1,22 +1,28 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['rol'])) {
+    header("location: ../../login.php");
+    exit();
+}
+
 // Mostrar vista dependiendo del estado de la sesion
-if ($_SESSION["rol"] != 2) {
-        header("Location: /github/SENAParking/login.php");
+if ($_SESSION["rol"] != 3) {
+    header("Location: ../../login.php");
 }
 
 ?>
 
 <!DOCTYPE html>
 <html lang="es"> <!-- Establece el idioma de la página web como español -->
+
 <head>
     <!-- Metaetiquetas para el encabezado del documento -->
     <meta charset="UTF-8"> <!-- Establece la codificación de caracteres -->
     <meta name="viewport" content="width=, initial-scale=1.0"> <!-- Define el ancho de la vista para dispositivos móviles -->
     <meta name="author" content="AdsoDeveloperSolutions801"> <!-- Define al autor de la página -->
     <meta name="course" content="ADSO 2873801"> <!-- Define el curso -->
-    
+
     <!-- Favicon que se muestra en la pestaña del navegador -->
     <link rel="icon" type="x-icon" href="../public/images/favicon.ico">
 
@@ -36,14 +42,14 @@ if ($_SESSION["rol"] != 2) {
 
     <div class="container-fluid"> <!-- Contenedor de toda la página -->
         <div class="row"> <!-- Fila principal con dos columnas: Sidebar y el contenido principal -->
-            
+
             <!-- Sidebar (navegación lateral) -->
-            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block sidebar sidebar-guardia"> 
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block sidebar sidebar-guardia">
                 <div class="sidebar-sticky"> <!-- Elemento que asegura que el sidebar se quede fijo cuando se hace scroll -->
                     <ul class="nav flex-column"> <!-- Lista de navegación -->
                         <!-- Item de navegación para el Dashboard -->
                         <li class="nav-item active">
-                            <a class="nav-link" href="/SENAParking/frontend/views/dashboard_guardia.html">
+                            <a class="nav-link" href="/SENAParking/frontend/views/dashboard_guardia.php">
                                 <!-- Ícono de Home (Casa) usando SVG -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -57,7 +63,7 @@ if ($_SESSION["rol"] != 2) {
 
                         <!-- Item de navegación para usuarios -->
                         <li class="nav-item">
-                            <a class="nav-link" href="/SENAParking/frontend/views/reg_userParking.html">
+                            <a class="nav-link" href="/SENAParking/frontend/views/reg_userParking.php">
                                 <!-- Ícono de usuarios usando SVG -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -68,13 +74,13 @@ if ($_SESSION["rol"] != 2) {
                                     <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                                 </svg>
                                 Usuarios
-                                
+
                             </a>
-                        </li> 
+                        </li>
 
                         <!-- Item de navegación para registrar acceso -->
                         <li class="nav-item">
-                            <a class="nav-link" href="/SENAParking/frontend/views/crud_vehiculos.html">
+                            <a class="nav-link" href="/SENAParking/frontend/views/crud_vehiculos.php">
                                 <!-- Ícono de log-in usando SVG -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -88,8 +94,8 @@ if ($_SESSION["rol"] != 2) {
                         <!-- Item de navegación para registrar salida -->
                         <!-- <li class="nav-item">
                             <a class="nav-link" href="/frontend/views/"> -->
-                                <!-- Ícono de log-out usando SVG -->
-                                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        <!-- Ícono de log-out usando SVG -->
+                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" class="feather feather-log-out">
                                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"></path>
@@ -100,7 +106,7 @@ if ($_SESSION["rol"] != 2) {
 
                         <!-- Item de navegación para ver disponibilidad -->
                         <li class="nav-item">
-                            <a class="nav-link" href="#"> 
+                            <a class="nav-link" href="#">
                                 <!-- Ícono de lista usando SVG -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -114,22 +120,22 @@ if ($_SESSION["rol"] != 2) {
                                 </svg>
                                 Disponibilidad
                             </a>
-                        </li> 
+                        </li>
 
                         <!-- Elemento de navegación para cerrar sesión -->
-<li class="nav-item">
-    <a class="nav-link" href="/SENAParking/logout.php"">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/SENAParking/logout.php"">
         <!-- Ícono de cerrar sesión usando SVG -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round" class="feather feather-log-out">
-            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-            <polyline points="16 17 21 12 16 7" />
-            <line x1="21" y1="12" x2="9" y2="12" />
-        </svg>
-        Cerrar sesión
-    </a>
-</li>
+        <svg xmlns=" http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-log-out">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                                <polyline points="16 17 21 12 16 7" />
+                                <line x1="21" y1="12" x2="9" y2="12" />
+                                </svg>
+                                Cerrar sesión
+                            </a>
+                        </li>
 
                     </ul>
                 </div>
@@ -225,5 +231,10 @@ if ($_SESSION["rol"] != 2) {
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="/frontend/public/js/bootstrap.min.js"></script>
     <script src="script.js"></script> <!-- Script principal -->
+
+    <!-- script para que cuando se cierre la sesion refresque la ventana -->
+    <script src="../public/js/ref_cierre.js"></script>
+
 </body>
+
 </html>

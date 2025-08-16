@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['rol'])) {
+    header("location: ../login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -107,7 +115,7 @@
         let allVehicles = [];
 
         // Inicializar página
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             loadVehicles();
             toggleMovement();
         });
@@ -348,12 +356,12 @@
         // Añadir nuevo vehículo
         function addNewVehicle() {
             showAlert('Redirigiendo a la pantalla de añadir nuevo vehículo...', 'info');
-            window.location.href = '/SENAParking/frontend/views/reg_vehiculos.html';
+            window.location.href = '/SENAParking/frontend/views/reg_vehiculos.php';
         }
 
         // Función para editar vehículo
         function editVehicle(event, vehicleId) {
-            window.location.href = `./edit_vehiculos.html?id=${vehicleId}`;
+            window.location.href = `./edit_vehiculos.php?id=${vehicleId}`;
         }
 
         // Funciones auxiliares
@@ -387,11 +395,13 @@
 
         //=== funcio para redirigir al dashboard_guardia desde la flecha de retroceso !
         function goBack() {
-            window.location.href = "/frontend/views/dashboard_guardia.html";
+            window.location.href = "/frontend/views/dashboard_guardia.php";
         }
-
     </script>
     <script src="../public/js/scriptsDOM.js"></script>
+
+    <!-- script para que cuando se cierre la sesion refresque la ventana -->
+    <script src="../public/js/ref_cierre.js"></script>
 </body>
 
 </html>
