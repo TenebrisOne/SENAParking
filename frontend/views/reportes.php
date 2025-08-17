@@ -2,130 +2,130 @@
 session_start();
 
 if (!isset($_SESSION['rol'])) {
-    header("location: ../login.php");
-    exit();
+  header("location: ../login.php");
+  exit();
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8"> <!-- Define la codificación de caracteres como UTF-8 -->
-    <meta name="viewport" content="width=, initial-scale=1.0"> <!-- Establece el ancho y escala de la vista para dispositivos móviles -->
-    <meta name="author" content="AdsoDeveloperSolutions801"> <!-- Define el autor de la página -->
-    <meta name="course" content="ADSO 2873801"> <!-- Define el curso asociado -->
-    <!-- Favicon que aparece en la pestaña del navegador -->
-    <link rel="icon" type="x-icon" href="../public/images/favicon.ico">
-    <!-- Enlace al archivo CSS de Bootstrap para aplicar estilos prediseñados -->
-    <!-- Enlace al archivo de Bootstrap para proporcionar estilos prediseñados -->
-    <link rel="stylesheet" href="../public/css/bootstrap.min.css">
-    <!-- Enlace a los estilos personalizados del proyecto -->
-    <link rel="stylesheet" href="../public/css/styles_dashboard.css"">
+  <meta charset="UTF-8"> <!-- Define la codificación de caracteres como UTF-8 -->
+  <meta name="viewport" content="width=, initial-scale=1.0"> <!-- Establece el ancho y escala de la vista para dispositivos móviles -->
+  <meta name="author" content="AdsoDeveloperSolutions801"> <!-- Define el autor de la página -->
+  <meta name="course" content="ADSO 2873801"> <!-- Define el curso asociado -->
+  <!-- Favicon que aparece en la pestaña del navegador -->
+  <link rel="icon" type="x-icon" href="../public/images/favicon.ico">
+  <!-- Enlace al archivo CSS de Bootstrap para aplicar estilos prediseñados -->
+  <!-- Enlace al archivo de Bootstrap para proporcionar estilos prediseñados -->
+  <link rel="stylesheet" href="../public/css/bootstrap.min.css">
+  <!-- Enlace a los estilos personalizados del proyecto -->
+  <link rel="stylesheet" href="../public/css/styles_dashboard.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>Reporte de Usuarios</title>
 
-    <title>Reporte de Usuarios</title>
+</head>
 
-  </head>
 <body>
   <!-- Contenedor del header (se carga dinámicamente con JS externo) -->
   <div id="header-container"></div>
-    <!-- Botón para volver atrás -->
-    <div class="col-2 col-md-1 text-start">
-        <div class="back-arrow" onclick="goBack()">
-            <i class="fas fa-arrow-left"></i>
-            <a class="nav-link" href="../frontend/views/dashboard_admin.html"></a>
-        </div>
+
+  <!-- Botón para volver atrás -->
+  <div class="back-arrow" onclick="goBack()">
+    <i class="fas fa-arrow-left"></i>
+    <a class="nav-link" href="../../frontend/views/dashboard_admin.php"></a>
+  </div>
+
+  <div class="container mt-5">
+    <h2 class="mb-4">Reporte de Usuarios</h2>
+
+    <!-- Filtro de búsqueda -->
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <input type="text" id="filtro" class="form-control" placeholder="Buscar por nombre o cédula...">
+      </div>
     </div>
 
-<div class="container mt-5">
-  <h2 class="mb-4">Reporte de Usuarios</h2>
+    <!-- Tabla de reportes -->
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped" id="tablaReportes">
+        <thead class="table-dark">
+          <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Cédula</th>
+            <th>Vehículo</th>
+            <th>Matrícula</th>
+            <th>Hora de Entrada</th>
+            <th>Hora de Salida</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Juan</td>
+            <td>Pérez</td>
+            <td>12345678</td>
+            <td>Carro</td>
+            <td>ABC123</td>
+            <td>08:00</td>
+            <td>17:00</td>
+            <td>
+              <a href="reportes_detalles.html?cedula=12345678" class="btn btn-primary btn-sm">Ver Detalle</a>
+            </td>
+          </tr>
+          <tr>
+            <td>María</td>
+            <td>López</td>
+            <td>87654321</td>
+            <td>Moto</td>
+            <td></td>
+            <td>09:00</td>
+            <td>18:00</td>
+            <td>
+              <a href="detalle.html?cedula=87654321" class="btn btn-primary btn-sm">Ver Detalle</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-  <!-- Filtro de búsqueda -->
-  <div class="row mb-3">
-    <div class="col-md-6">
-      <input type="text" id="filtro" class="form-control" placeholder="Buscar por nombre o cédula...">
+    <!-- Botón de navegación a reportes generales -->
+    <div class="text-end mt-4">
+      <a href="reportes_generales.html" class="btn btn-success">Ir a reportes generales</a>
     </div>
   </div>
 
-  <!-- Tabla de reportes -->
-  <div class="table-responsive">
-    <table class="table table-bordered table-striped" id="tablaReportes">
-      <thead class="table-dark">
-        <tr>
-          <th>Nombre</th>
-          <th>Apellido</th>
-          <th>Cédula</th>
-          <th>Vehículo</th>
-          <th>Matrícula</th>
-          <th>Hora de Entrada</th>
-          <th>Hora de Salida</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Juan</td>
-          <td>Pérez</td>
-          <td>12345678</td>
-          <td>Carro</td>
-          <td>ABC123</td>
-          <td>08:00</td>
-          <td>17:00</td>
-          <td>
-            <a href="reportes_detalles.html?cedula=12345678" class="btn btn-primary btn-sm">Ver Detalle</a>
-          </td>
-        </tr>
-        <tr>
-          <td>María</td>
-          <td>López</td>
-          <td>87654321</td>
-          <td>Moto</td>
-          <td></td>
-          <td>09:00</td>
-          <td>18:00</td>
-          <td>
-            <a href="detalle.html?cedula=87654321" class="btn btn-primary btn-sm">Ver Detalle</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Botón de navegación a reportes generales -->
-  <div class="text-end mt-4">
-    <a href="reportes_generales.html" class="btn btn-success">Ir a reportes generales</a>
-  </div>
-</div>
-
-<a href="controllers/ActividadController.php?accion=consulta_individual">Genero un reporte individual</a>
+  <a href="controllers/ActividadController.php?accion=consulta_individual"></a>
 
 
-<script>
-  document.getElementById('filtro').addEventListener('input', function () {
-    const filtro = this.value.toLowerCase();
-    const filas = document.querySelectorAll('#tablaReportes tbody tr');
-    filas.forEach(fila => {
-      const nombre = fila.cells[0].textContent.toLowerCase();
-      const cedula = fila.cells[2].textContent.toLowerCase();
-      if (nombre.includes(filtro) || cedula.includes(filtro)) {
-        fila.style.display = '';
-      } else {
-        fila.style.display = 'none';
-      }
+  <script>
+    document.getElementById('filtro').addEventListener('input', function() {
+      const filtro = this.value.toLowerCase();
+      const filas = document.querySelectorAll('#tablaReportes tbody tr');
+      filas.forEach(fila => {
+        const nombre = fila.cells[0].textContent.toLowerCase();
+        const cedula = fila.cells[2].textContent.toLowerCase();
+        if (nombre.includes(filtro) || cedula.includes(filtro)) {
+          fila.style.display = '';
+        } else {
+          fila.style.display = 'none';
+        }
+      });
     });
-  });
-  //=== funcion para redirigir al dashboard_admin desde la flecha de retroceso==//
-function goBack() {
-  window.location.href = "/frontend/views/dashboard_admin.html";
-}
+    //=== funcion para redirigir al dashboard_admin desde la flecha de retroceso==//
+    function goBack() {
+      window.location.href = "/frontend/views/dashboard_admin.html";
+    }
+  </script>
+  <!-- JS que carga el header dinámicamente -->
+  <script src="./../public/js/scriptsDOM.js"></script>
 
-</script>
- <!-- JS que carga el header dinámicamente -->
- <script src="./../public/js/scriptsDOM.js"></script>
-
- <!-- script para que cuando se cierre la sesion refresque la ventana -->
- <script src="../public/js/ref_cierre.js"></script>
+  <!-- script para que cuando se cierre la sesion refresque la ventana -->
+  <script src="../public/js/ref_cierre.js"></script>
 </body>
+
 </html>

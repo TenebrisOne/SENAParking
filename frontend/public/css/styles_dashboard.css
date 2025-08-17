@@ -273,7 +273,7 @@ input.form-control:focus {
 /* ====================== DASHBOARD ADMINISTRADOR ======================= */
 
 /* Estilos generales para efecto glassmorphism */
-.card, .list-group-item-reporte, .sidebar-admin {
+.list-group-item-reporte {
     backdrop-filter: blur(10px);
     background-color: rgba(255, 255, 255, 0.15);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
@@ -282,8 +282,10 @@ input.form-control:focus {
     transition: all 0.3s ease-in-out;
 }
 
-.card:hover, .list-group-item-reporte:hover {
+.card, .card:hover, .list-group-item-reporte:hover {
     transform: translateY(-4px);
+    border-radius: 10px;
+
 }
 
 /* Estilos del sidebar del administrador */

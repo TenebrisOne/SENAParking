@@ -1,5 +1,5 @@
 <?php
-// Este archivo es para actualizar los numeros en tiempo real en el dashboar_admin.html //
+// Este archivo es para actualizar los numeros en tiempo real en el dashboar_admin.php //
 
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *"); // ⚠ Permite acceso desde cualquier origen

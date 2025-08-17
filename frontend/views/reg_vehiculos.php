@@ -68,8 +68,7 @@ if (!isset($_SESSION['rol'])) {
                             <option value="Automóvil">Automóvil</option>
                             <option value="Motocicleta">Motocicleta</option>
                             <option value="Bicicleta">Bicicleta</option>
-                            <option value="Oficial">Oficial</option>
-                            <option value="Aula móvil">Aula móvil</option>
+                            <option value="Oficial">Vehiculo SENA</option>
                         </select>
                         <div class="invalid-feedback text-start">Seleccione un tipo de vehículo</div>
 
@@ -105,7 +104,7 @@ if (!isset($_SESSION['rol'])) {
                     </div>
                     
                 <input type="submit" value="Confirmar"
-                onclick="window.location.href='/frontend/views/crud_vehiculos.html'" class="btn btn-primary">
+                onclick="window.location.href='/frontend/views/crud_vehiculos.php'" class="btn btn-primary">
                 </div>
 
                 <!-- Botón de enviar -->
@@ -115,7 +114,7 @@ if (!isset($_SESSION['rol'])) {
         </div>
     </div>
 
-        <a href="controllers/ActividadController.php?accion=crear_vehiculo">Registro a un vehiculo</a>
+        <a href="controllers/ActividadController.php?accion=crear_vehiculo"></a>
 
     <!-- JS que carga el header dinámicamente -->
     <script src="./../public/js/scriptsDOM.js"></script>
@@ -128,7 +127,7 @@ if (!isset($_SESSION['rol'])) {
         });
 
         function goBack() {
-                window.location.href = '/SENAParking/frontend/views/crud_vehiculos.html';
+                window.location.href = '/SENAParking/frontend/views/crud_vehiculos.php';
         }
 
         async function loadPropietarios() {

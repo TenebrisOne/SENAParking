@@ -60,20 +60,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($vehicle->update()) {
             echo '<script type="text/javascript">';
             echo 'alert("Vehículo actualizado con éxito.");';
-            echo 'window.location.href="../../frontend/views/crud_vehiculos.html";'; // Redirige de vuelta a la lista
+            echo 'window.location.href="../../frontend/views/crud_vehiculos.php";'; // Redirige de vuelta a la lista
             echo '</script>';
             exit(); 
         } else {
             echo '<script type="text/javascript">';
             echo 'alert("Error al actualizar el vehículo. La placa podría ya existir o hay un problema con la base de datos.");';
-            echo 'window.location.href="../../frontend/views/crud_vehiculos.html";'; // Redirige de vuelta a la lista
+            echo 'window.location.href="../../frontend/views/crud_vehiculos.php";'; // Redirige de vuelta a la lista
             echo '</script>';
             exit(); 
         }
     } else {
         echo '<script type="text/javascript">';
         echo 'alert("Error: Por favor, complete todos los campos obligatorios para actualizar.");';
-        echo 'window.location.href="../../frontend/views/crud_vehiculos.html";'; // Redirige de vuelta a la lista
+        echo 'window.location.href="../../frontend/views/crud_vehiculos.php";'; // Redirige de vuelta a la lista
         echo '</script>';
         exit(); 
     }

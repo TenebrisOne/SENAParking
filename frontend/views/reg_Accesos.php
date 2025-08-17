@@ -66,7 +66,7 @@ if (!isset($_SESSION['rol'])) {
                 </div>
             </div>
             <div class="text-center">
-                <button type="button" onclick="window.location.href='./crud_vehiculos.html'" class="btn btn-confirmar">Confirmar</button>
+                <button type="button" onclick="window.location.href='./crud_vehiculos.php'" class="btn btn-confirmar">Confirmar</button>
             </div>
         </form>
     </div>

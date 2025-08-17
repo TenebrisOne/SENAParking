@@ -43,7 +43,7 @@ if ($_SESSION['rol'] == 3) {
     <!-- Botón para volver atrás -->
     <div class="back-arrow" onclick="goBack()">
         <i class="fas fa-arrow-left"></i>
-        <a class="nav-link" href="../../frontend/views/dashboard_admin.php"></a>
+        <a class="nav-link" href="/SENAParking/frontend/views/dashboard_admin.php"></a>
     </div>
 
     <div class="register-container">

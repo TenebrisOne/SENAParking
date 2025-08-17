@@ -64,7 +64,7 @@ if (!empty($id_vehiculo) && !empty($tipo_accion)) {
         $message = "Acceso registrado exitosamente para el vehículo ID: " . $id_vehiculo . ". Tipo: " . $tipo_accion . ". Espacio asignado: " . $access->espacio_asignado . ". Fecha: " . $access->fecha_hora;
         echo '<script type="text/javascript">';
         echo 'alert("' . $message . '");';
-        echo 'window.location.href="../../frontend/views/crud_vehiculos.html";';
+        echo 'window.location.href="../../frontend/views/crud_vehiculos.php";';
         echo '</script>';
         exit();
     } else {

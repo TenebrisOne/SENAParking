@@ -25,14 +25,14 @@ class MostrarDatosModel {
     }
 
     public function contarAccesosHoy() {
-        $sql = "SELECT COUNT(*) AS total FROM tb_accesos WHERE DATE(fecha_hora) = CURDATE()";
+        $sql = "SELECT COUNT(*) AS total FROM tb_accesos WHERE tipo_accion = 'ingreso' AND DATE(fecha_hora) = CURDATE()";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
     }
 
     public function contarSalidasHoy() {
-        $sql = "SELECT COUNT(*) AS total FROM tb_accesos WHERE DATE(fecha_hora) = CURDATE()";
+        $sql = "SELECT COUNT(*) AS total FROM tb_accesos WHERE tipo_accion = 'salida' AND DATE(fecha_hora) = CURDATE()";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
@@ -54,14 +54,14 @@ class MostrarDatosModel {
     }
 
     public function obtenerAccesosHoy() {
-        $sql = "SELECT id_acceso, id_userSys, id_vehiculo, fecha_hora, tipo_accion FROM tb_accesos WHERE DATE(fecha_hora) = CURDATE()";
+        $sql = "SELECT id_acceso, id_userSys, id_vehiculo, fecha_hora, tipo_accion FROM tb_accesos WHERE tipo_accion = 'ingreso' AND DATE(fecha_hora) = CURDATE()";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function obtenerSalidasHoy() {
-        $sql = "SELECT id_acceso, id_userSys, id_vehiculo, fecha_hora, tipo_accion FROM tb_accesos WHERE DATE(fecha_hora) = CURDATE()";
+        $sql = "SELECT id_acceso, id_userSys, id_vehiculo, fecha_hora, tipo_accion FROM tb_accesos WHERE tipo_accion = 'salida' AND DATE(fecha_hora) = CURDATE()";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

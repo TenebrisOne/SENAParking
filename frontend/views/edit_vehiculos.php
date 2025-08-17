@@ -94,7 +94,7 @@ require_once __DIR__ . '/../../backend/controllers/MostrarDatosController.php';
     </div>
 
     <script src="../public/js/reg_vehiculos.js"></script> 
-    <a href="controllers/ActividadController.php?accion=editar_vehiculo">Edito un vehiculo</a>
+    <a href="controllers/ActividadController.php?accion=editar_vehiculo"></a>
 
     <!-- JS que carga el header dinámicamente -->
     <script src="./../public/js/scriptsDOM.js"></script>

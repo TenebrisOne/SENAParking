@@ -31,27 +31,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($vehicle->create()) {
             echo '<script type="text/javascript">';
             echo 'alert("Vehículo registrado con éxito.");';
-            echo 'window.location.href="../../frontend/views/crud_vehiculos.html";';
+            echo 'window.location.href="../../frontend/views/crud_vehiculos.php";';
             echo '</script>';
             exit();
         } else {
             echo '<script type="text/javascript">';
             echo 'alert("Error al registrar el vehículo. La placa podría ya existir o hay un problema con la base de datos.");';
-            echo 'window.location.href="../../frontend/views/reg_vehiculos.html";';
+            echo 'window.location.href="../../frontend/views/reg_vehiculos.php";';
             echo '</script>';
             exit();
         }
     } else {
         echo '<script type="text/javascript">';
         echo 'alert("Error: Por favor, complete todos los campos obligatorios.");';
-        echo 'window.location.href="../../frontend/views/reg_vehiculos.html";';
+        echo 'window.location.href="../../frontend/views/reg_vehiculos.php";';
         echo '</script>';
         exit();
     }
 } else {
     echo '<script type="text/javascript">';
     echo 'alert("Acceso no permitido. Este script solo acepta solicitudes POST.");';
-    echo 'window.location.href="../../frontend/views/crud_vehiculos.html";';
+    echo 'window.location.href="../../frontend/views/crud_vehiculos.php";';
     echo '</script>';
     exit();
 }

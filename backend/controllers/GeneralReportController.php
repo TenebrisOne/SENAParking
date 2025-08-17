@@ -60,7 +60,7 @@ $dailyAccessData = $access->getDailyAccessStats($startDate, $endDate);
 $hourlyAccessData = $access->getHourlyAccessStats($startDate, $endDate);
 
 // --- Generación del HTML Dinámico ---
-$htmlContent = file_get_contents('../../frontend/views/reportes_generales.html');
+$htmlContent = file_get_contents('../../frontend/views/reportes_generales.php');
 $dynamicContent = '';
 
 // Inyectar valores de fecha en el formulario de filtro

@@ -7,11 +7,6 @@ if (!isset($_SESSION['rol'])) {
 }
 ?>
 
-<?php
-session_start();
-echo ($_SESSION['rol']);
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 

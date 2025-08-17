@@ -19,7 +19,7 @@ function hasPermission($required_role_id) {
     // que mapee roles a permisos específicos (ej. 'can_view_reports', 'can_edit_users')
 }
 
-function requirePermission($required_role_id, $redirect_page = '/SENAParking/index.html') {
+function requirePermission($required_role_id, $redirect_page = '/SENAParking/index.php') {
     if (!hasPermission($required_role_id)) {
         // Opcionalmente, establece un mensaje
         $_SESSION['message'] = "No tienes permiso para acceder a esta página.";

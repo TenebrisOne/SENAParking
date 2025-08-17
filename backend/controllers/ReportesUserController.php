@@ -54,7 +54,7 @@ try {
 // --- Generación del HTML Dinámico ---
 
 // 1. Cargar el contenido del archivo HTML estático
-$htmlContent = file_get_contents('../../frontend/views/reporte_usuarios.html');
+$htmlContent = file_get_contents('../../frontend/views/reporte_usuarios.php');
 
 // 2. Preparar el contenido dinámico para inyectar
 $tableRowsHtml = '';

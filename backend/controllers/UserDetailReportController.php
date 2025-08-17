@@ -43,7 +43,7 @@ if ($userId > 0) {
 }
 
 // --- Generación del HTML Dinámico ---
-$htmlContent = file_get_contents('../../frontend/views/reporte_usuario_detalle.html');
+$htmlContent = file_get_contents('../../frontend/views/reporte_usuario_detalle.php');
 $dynamicContent = '';
 
 if (!empty($user)) {
