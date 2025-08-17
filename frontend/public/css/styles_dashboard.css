@@ -151,8 +151,7 @@ input.form-control:focus {
     color: white;
     font-weight: 600;
     border-radius: 6px;
-    margin-bottom: 8px;
-    padding: 10px 15px;
+    padding: 10px 20px;
     transition: all 0.3s ease;
 }
 
@@ -164,6 +163,7 @@ input.form-control:focus {
 .sidebar-supervisor .nav-item.active .nav-link {
     background-color: #FFD700;
     color: #71277A;
+    margin-top: 15px
 }
 
 /* ✅ Header estilo limpio y profesional */
