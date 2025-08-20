@@ -15,6 +15,7 @@ $vehicle = new Vehicle($db);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $vehicle->placa = isset($_POST['placa']) ? $_POST['placa'] : '';
+    $vehicle->tarjeta_propiedad = isset($_POST['tarjeta_propiedad']) ? $_POST['tarjeta_propiedad'] : '';
     $vehicle->tipo = isset($_POST['tipo']) ? $_POST['tipo'] : '';
     $vehicle->id_userPark = isset($_POST['propietario']) ? $_POST['propietario'] : ''; 
     $vehicle->color = isset($_POST['color']) ? $_POST['color'] : '';
@@ -23,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (
         !empty($vehicle->placa) &&
+        !empty($vehicle->tarjeta_propiedad) &&
         !empty($vehicle->tipo) &&
         !empty($vehicle->id_userPark) &&
         !empty($vehicle->color) &&

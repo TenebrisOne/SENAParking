@@ -7,6 +7,7 @@ class Vehicle {
     public $id_vehiculo;
     public $id_userPark;
     public $placa;
+    public $tarjeta_propiedad;
     public $tipo;
     public $modelo;
     public $color;
@@ -23,6 +24,7 @@ class Vehicle {
                     v.id_vehiculo, 
                     v.id_userPark, 
                     v.placa, 
+                    v.tarjeta_propiedad,
                     v.tipo, 
                     v.modelo, 
                     v.color, 

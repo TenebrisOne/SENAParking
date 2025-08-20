@@ -9,6 +9,7 @@ class Vehicle {
     public $id_vehiculo; // Asegúrate de que esta propiedad exista
     public $id_userPark; 
     public $placa;
+    public $tarjeta_propiedad;
     public $tipo;
     public $modelo;
     public $color;
@@ -23,7 +24,8 @@ class Vehicle {
       $query = "SELECT 
                   v.id_vehiculo, 
                   v.id_userPark, 
-                  v.placa, 
+                  v.placa,
+                  v.tarjeta_propiedad,
                   v.tipo, 
                   v.modelo, 
                   v.color, 
@@ -49,6 +51,7 @@ class Vehicle {
       if ($row) {
           $this->id_userPark = $row['id_userPark'];
           $this->placa = $row['placa'];
+          $this->tarjeta_propiedad = $row['tarjeta_propiedad'];
           $this->tipo = $row['tipo'];
           $this->modelo = $row['modelo'];
           $this->color = $row['color'];
@@ -63,7 +66,8 @@ class Vehicle {
       $query = "SELECT 
                   v.id_vehiculo, 
                   v.id_userPark, 
-                  v.placa, 
+                  v.placa,
+                  v.tarjeta_propiedad, 
                   v.tipo, 
                   v.modelo, 
                   v.color, 
@@ -120,6 +124,7 @@ public function create() {
             SET
               id_userPark=:id_userPark,
               placa=:placa,
+              tarjeta_propiedad=:tarjeta_propiedad,
               tipo=:tipo,
               modelo=:modelo,
               color=:color";
@@ -128,12 +133,14 @@ public function create() {
 
   $this->id_userPark = htmlspecialchars(strip_tags($this->id_userPark));
   $this->placa = htmlspecialchars(strip_tags($this->placa));
+  $this->tarjeta_propiedad = htmlspecialchars(strip_tags($this->tarjeta_propiedad));
   $this->tipo = htmlspecialchars(strip_tags($this->tipo));
   $this->modelo = htmlspecialchars(strip_tags($this->modelo));
   $this->color = htmlspecialchars(strip_tags($this->color));
 
   $stmt->bindParam(":id_userPark", $this->id_userPark);
   $stmt->bindParam(":placa", $this->placa);
+  $stmt->bindParam(":tarjeta_propiedad", $this->tarjeta_propiedad);
   $stmt->bindParam(":tipo", $this->tipo);
   $stmt->bindParam(":modelo", $this->modelo);
   $stmt->bindParam(":color", $this->color);
@@ -175,6 +182,7 @@ public function update() {
             SET
               id_userPark=:id_userPark,
               placa=:placa,
+              tarjeta_propiedad=:tarjeta_propiedad,
               tipo=:tipo,
               modelo=:modelo,
               color=:color
@@ -186,6 +194,7 @@ public function update() {
   // Limpiar datos para la actualización final (si no se hizo ya)
   $this->id_userPark = htmlspecialchars(strip_tags($this->id_userPark));
   // La placa y el id_vehiculo ya están limpios de la verificación anterior
+  $this->tarjeta_propiedad = htmlspecialchars(strip_tags($this->tarjeta_propiedad));
   $this->tipo = htmlspecialchars(strip_tags($this->tipo));
   $this->modelo = htmlspecialchars(strip_tags($this->modelo));
   $this->color = htmlspecialchars(strip_tags($this->color));
@@ -193,6 +202,7 @@ public function update() {
   // Vincular valores
   $stmt->bindParam(":id_userPark", $this->id_userPark);
   $stmt->bindParam(":placa", $this->placa);
+  $stmt->bindParam(":tarjeta_propiedad", $this->tarjeta_propiedad);
   $stmt->bindParam(":tipo", $this->tipo);
   $stmt->bindParam(":modelo", $this->modelo);
   $stmt->bindParam(":color", $this->color);
@@ -211,6 +221,5 @@ public function update() {
 }
 
 
-   
 
 ?>

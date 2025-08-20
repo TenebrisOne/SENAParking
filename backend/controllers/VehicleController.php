@@ -28,6 +28,7 @@ if ($num > 0) {
             "id_vehiculo" => $id_vehiculo,
             "id_userPark" => $id_userPark,
             "placa" => $placa,
+            "tarjeta_propiedad" => $tarjeta_propiedad,
             "tipo" => $tipo,
             "modelo" => $modelo,
             "color" => $color,

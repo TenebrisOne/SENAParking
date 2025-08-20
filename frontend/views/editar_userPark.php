@@ -47,8 +47,18 @@ if (!$usuario) {
     <img src="../public/images/logo_sena.png" alt="Logo SENA"
         style="position: absolute; top: 100px; right: 70px; width: 100px;">
 
+    <!-- Flecha de retroceso -->
+    <div class="col-2 col-md-1 text-start">
+        <div class="back-arrow" onclick="goBack()">
+            <i class="fas fa-arrow-left"></i>
+            <a class="nav-link" href="../frontend/views/dashboard_admin.php"></a>
+        </div>
+    </div>
+
     <div class="register-container">
-        <h2><center>Editar Usuario Parqueadero</center></h2><br>
+        <h2>
+            <center>Editar Usuario Parqueadero</center>
+        </h2><br>
         <form class="formulario" method="POST" action="/SENAParking/backend/controllers/UsuarioParqueaderoController.php">
             <input type="hidden" name="id_userPark" value="<?= htmlspecialchars($usuario['id_userPark']) ?>">
 
@@ -121,4 +131,5 @@ if (!$usuario) {
     <!-- script para que cuando se cierre la sesion refresque la ventana -->
     <script src="../public/js/ref_cierre.js"></script>
 </body>
+
 </html>

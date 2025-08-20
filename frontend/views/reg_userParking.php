@@ -40,14 +40,18 @@ if ($_SESSION['rol'] == 3) {
         style="position: absolute; top: 100px; right: 70px; width: 100px;">
     </div>
 
-    <!-- Botón para volver atrás -->
-    <div class="back-arrow" onclick="goBack()">
-        <i class="fas fa-arrow-left"></i>
-        <a class="nav-link" href="/SENAParking/frontend/views/dashboard_admin.php"></a>
+    <!-- Flecha de retroceso -->
+    <div class="col-2 col-md-1 text-start">
+        <div class="back-arrow" onclick="goBack()">
+            <i class="fas fa-arrow-left"></i>
+            <a class="nav-link" href="/SENAParking/frontend/views/dashboard_admin.php"></a>
+        </div>
     </div>
 
     <div class="register-container">
-        <h2><center>Registrar Usuario Parqueadero</center></h2><br>
+        <h2>
+            <center>Registrar Usuario Parqueadero</center>
+        </h2><br>
         <form id="formulario" class="formulario">
             <div class="row mb-3">
                 <!--Campo para solicitar el nombre-->

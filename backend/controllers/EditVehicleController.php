@@ -22,6 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             "id_vehiculo" => $vehicle->id_vehiculo,
             "id_userPark" => $vehicle->id_userPark,
             "placa" => $vehicle->placa,
+            "tarjeta_propiedad" => $vehicle->tarjeta_propiedad,
             "tipo" => $vehicle->tipo,
             "modelo" => $vehicle->modelo,
             "color" => $vehicle->color,
@@ -43,6 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Recoger los datos del formulario (incluido el ID oculto)
     $vehicle->id_vehiculo = isset($_POST['id_vehiculo']) ? $_POST['id_vehiculo'] : '';
     $vehicle->placa = isset($_POST['placa']) ? $_POST['placa'] : '';
+    $vehicle->tarjeta_propiedad = isset($_POST['tarjeta_propiedad']) ? $_POST['tarjeta_propiedad'] : '';
     $vehicle->tipo = isset($_POST['tipo']) ? $_POST['tipo'] : '';
     $vehicle->id_userPark = isset($_POST['propietario']) ? $_POST['propietario'] : '';
     $vehicle->color = isset($_POST['color']) ? $_POST['color'] : '';
@@ -52,6 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (
         !empty($vehicle->id_vehiculo) &&
         !empty($vehicle->placa) &&
+        !empty($vehicle->tarjeta_propiedad) &&
         !empty($vehicle->tipo) &&
         !empty($vehicle->id_userPark) &&
         !empty($vehicle->color) &&

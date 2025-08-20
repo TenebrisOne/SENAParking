@@ -58,7 +58,7 @@ if (!$usuario) {
     <div class="col-2 col-md-1 text-start">
         <div class="back-arrow" onclick="goBack()">
             <i class="fas fa-arrow-left"></i>
-            <a class="nav-link" href="/SENAParking/frontend/views/dashboard_admin.php"></a>
+            <a class="nav-link" href="../frontend/views/dashboard_admin.php"></a>
         </div>
     </div>
 
