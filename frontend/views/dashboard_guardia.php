@@ -63,7 +63,7 @@ if ($_SESSION["rol"] != 3) {
 
                         <!-- Item de navegación para usuarios -->
                         <li class="nav-item">
-                            <a class="nav-link" href="/SENAParking/frontend/views/reg_userParking.php">
+                            <a class="nav-link" href="/frontend/views/reg_userParking.php">
                                 <!-- Ícono de usuarios usando SVG -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

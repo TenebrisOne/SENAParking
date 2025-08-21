@@ -14,6 +14,7 @@ body {
     background-color: #007832;
     color: #F6F6F6;
     padding-top: 20px;
+    min-height: 100vh;
 }
 
 .sidebar-guardia .nav-link {
