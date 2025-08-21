@@ -155,7 +155,7 @@ if (!isset($_SESSION['rol'])) {
 
             <div class="row mt-4 mb-5">
                 <div class="col-12 text-center">
-                    <a href="reporte_usuarios.html" class="btn btn-secondary btn-lg px-5">
+                    <a href="reporte_usuarios.php" class="btn btn-secondary btn-lg px-5">
                         <i class="fas fa-users me-2"></i>Volver a Reporte de Usuarios
                     </a>
                 </div>

@@ -33,7 +33,7 @@ if (!isset($_SESSION['rol'])) {
     <canvas id="graficoEstadia" width="400" height="200"></canvas>
   </div>
 
-  <a href="reportes.html" class="btn btn-secondary mt-4">Volver</a>
+  <a href="reportes.php" class="btn btn-secondary mt-4">Volver</a>
 </div>
 
 

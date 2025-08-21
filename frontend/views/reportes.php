@@ -74,7 +74,7 @@ if (!isset($_SESSION['rol'])) {
             <td>08:00</td>
             <td>17:00</td>
             <td>
-              <a href="reportes_detalles.html?cedula=12345678" class="btn btn-primary btn-sm">Ver Detalle</a>
+              <a href="reportes_detalles.php?cedula=12345678" class="btn btn-primary btn-sm">Ver Detalle</a>
             </td>
           </tr>
           <tr>
@@ -86,7 +86,7 @@ if (!isset($_SESSION['rol'])) {
             <td>09:00</td>
             <td>18:00</td>
             <td>
-              <a href="detalle.html?cedula=87654321" class="btn btn-primary btn-sm">Ver Detalle</a>
+              <a href="detalle.php?cedula=87654321" class="btn btn-primary btn-sm">Ver Detalle</a>
             </td>
           </tr>
         </tbody>
@@ -95,7 +95,7 @@ if (!isset($_SESSION['rol'])) {
 
     <!-- Botón de navegación a reportes generales -->
     <div class="text-end mt-4">
-      <a href="reportes_generales.html" class="btn btn-success">Ir a reportes generales</a>
+      <a href="reportes_generales.php" class="btn btn-success">Ir a reportes generales</a>
     </div>
   </div>
 
@@ -118,7 +118,7 @@ if (!isset($_SESSION['rol'])) {
     });
     //=== funcion para redirigir al dashboard_admin desde la flecha de retroceso==//
     function goBack() {
-      window.location.href = "/frontend/views/dashboard_admin.html";
+      window.location.href = "/frontend/views/dashboard_admin.php";
     }
   </script>
   <!-- JS que carga el header dinámicamente -->
