@@ -143,36 +143,8 @@ if ($_SESSION["rol"] != 2) {
                         </div>
                     </div>
 
-                    <!-- Fila de tarjetas para el registro de guardia y los informes -->
+                    <!-- Informes de actividades de los guardias -->
                     <div class="row">
-                        <!-- Registro de un nuevo guardia -->
-                        <div class="col-md-6">
-                            <div class="card card-registro-guardia">
-                                <div class="card-header">
-                                    Registro de Guardia
-                                </div>
-                                <div class="card-body">
-                                    <!-- Formulario para registrar un guardia -->
-                                    <form id="form-registro-guardia">
-                                        <div class="form-group">
-                                            <label for="nombre-guardia">Nombre:</label>
-                                            <input type="text" class="form-control" id="nombre-guardia" required> <!-- Campo de texto para el nombre -->
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="usuario-guardia">Usuario:</label>
-                                            <input type="text" class="form-control" id="usuario-guardia" required> <!-- Campo de texto para el usuario -->
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="password-guardia">Contraseña:</label>
-                                            <input type="password" class="form-control" id="password-guardia" required> <!-- Campo para ingresar la contraseña -->
-                                        </div>
-                                        <button type="submit" class="btn btn-registro-guardia">Registrar Guardia</button> <!-- Botón de registro -->
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Informes de actividades de los guardias -->
                         <div class="col-md-6">
                             <div class="card card-informes-guardias">
                                 <div class="card-header">
@@ -207,39 +179,65 @@ if ($_SESSION["rol"] != 2) {
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Detalles adicionales de la disponibilidad de cupos -->
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    Disponibilidad Detallada
-                                </div>
-                                <div class="card-body">
-                                    <p class="text-muted">Información detallada sobre la disponibilidad de cupos.</p>
-                                    <!-- Lista con información de las zonas y cupos disponibles -->
-                                    <ul class="list-group">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Zona A
-                                            <span class="badge badge-primary badge-pill">10/20</span> <!-- Cupos de la zona A -->
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Zona B
-                                            <span class="badge badge-warning badge-pill">15/30</span> <!-- Cupos de la zona B -->
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Motos
-                                            <span class="badge badge-success badge-pill">5/10</span> <!-- Cupos para motos -->
-                                        </li>
-                                    </ul>
-                                    <!-- Botón para ver más detalles sobre cada zona -->
-                                    <button class="btn btn-sm btn-outline-secondary mt-2">Ver Detalles por Zona</button>
+                        <!-- Detalles adicionales de la disponibilidad de cupos -->
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Disponibilidad Detallada
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="text-muted">Información detallada sobre la disponibilidad de cupos.</p>
+                                        <!-- Lista con información de las zonas y cupos disponibles -->
+                                        <ul class="list-group">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                Zona A
+                                                <span class="badge badge-primary badge-pill">10/20</span> <!-- Cupos de la zona A -->
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                Zona B
+                                                <span class="badge badge-warning badge-pill">15/30</span> <!-- Cupos de la zona B -->
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                Motos
+                                                <span class="badge badge-success badge-pill">5/10</span> <!-- Cupos para motos -->
+                                            </li>
+                                        </ul>
+                                        <!-- Botón para ver más detalles sobre cada zona -->
+                                        <!--<button class="btn btn-sm btn-outline-secondary mt-2">Ver Detalles por Zona</button>-->
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- Fila de tarjetas para el registro de guardia y los informes -->
+                <!--<div class="row">
+                        <!- Registro de un nuevo guardia 
+                        <div class="col-md-6">
+                            <div class="card card-registro-guardia">
+                                <div class="card-header">
+                                    Registro de Guardia
+                                </div>
+                                <div class="card-body">
+                                    <!-Formulario para registrar un guardia 
+                                    <form id="form-registro-guardia">
+                                        <div class="form-group">
+                                            <label for="nombre-guardia">Nombre:</label>
+                                            <input type="text" class="form-control" id="nombre-guardia" required> <!- Campo de texto para el nombre 
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="usuario-guardia">Usuario:</label>
+                                            <input type="text" class="form-control" id="usuario-guardia" required> <!- Campo de texto para el usuario
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password-guardia">Contraseña:</label>
+                                            <input type="password" class="form-control" id="password-guardia" required> <!- Campo para ingresar la contraseña 
+                                        </div>
+                                        <button type="submit" class="btn btn-registro-guardia">Registrar Guardia</button> <!- Botón de registro -->
+                <!-- </form>
+                                </div>
+                            </div>
+                        </div> -->
             </main>
         </div>
     </div>
