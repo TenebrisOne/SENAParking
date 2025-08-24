@@ -53,7 +53,7 @@ if (isset($_SESSION['rol'])) {
             <div class="row mb-3">
                 <div class="col-12"id="grupo__correo">
                     <label for="correo_electronico" class="form-label">Email:</label>
-                    <input type="email" class="form-control formulario__input" name="correo" id="correo_electronico" placeholder="Email" required>
+                    <input type="email" class="form-control formulario__input" name="correo" id="correo" placeholder="Email" required>
                     <p class="formulario__input-error">El correo solo puede contener letras, números, puntos, guiones y guión bajo.</p>
                 </div>
             </div>
@@ -65,7 +65,6 @@ if (isset($_SESSION['rol'])) {
                     <p class="formulario__input-error">La contraseña tiene que ser de 4 a 12 dígitos.</p>
                 </div>
             </div>
-
             <!-- Botón de envío -->
             <div class="row">
                 <div class="col-12">
