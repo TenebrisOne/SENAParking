@@ -29,8 +29,8 @@ if (isset($_SESSION['rol'])) {
     <meta name="author" content="AdsoDeveloperSolutions801">
     <meta name="course" content="ADSO 2873801">
     <link rel="icon" type="image/x-icon" href="./frontend/public/images/favicon.ico">
+    <link rel="stylesheet" href="./frontend/public/css/styles_validaciones.css">
     <link rel="stylesheet" href="./frontend/public/css/styles.css">
-    <link rel="stylesheet" href="./frontend/public/css/styles_validationes.css">
     <link href="./frontend/public/css/bootstrap.min.css" rel="stylesheet">
     <meta name="theme-color" content="#000000">
     <meta http-equiv="refresh" content="60">

@@ -26,6 +26,7 @@ if ($_SESSION['rol'] == 3) {
     <link href="../public/css/bootstrap.min.css" rel="stylesheet">
     <!-- Enlace a estilos personalizados -->
     <link rel="stylesheet" href="../public/css/sityles_views.css">
+    <link rel="stylesheet" href="../public/css/styles_validaciones.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <title>Registro de Usuarios | SENAParking</title>
