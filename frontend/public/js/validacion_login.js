@@ -11,17 +11,6 @@ const campos = {
    password: false
 }
 
-const validarformulario = (e) => {
-   switch (e.target.name) {
-      case "correo":
-         validarcampo(expresiones.correo, e.target, 'correo');
-         break;
-      case "password":
-         validarcampo(expresiones.password, e.target, 'password');
-         break;
-   }
-}
-
 const validarcampo = (expresiones, input, campo) => {
    if (expresiones.test(input.value)) {
       document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-incorrecto');
@@ -33,6 +22,17 @@ const validarcampo = (expresiones, input, campo) => {
       document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-correcto');
       document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.add('formulario__input-error-activo');
       campos[campo] = false;
+   }
+}
+
+const validarformulario = (e) => {
+   switch (e.target.name) {
+      case "correo":
+         validarcampo(expresiones.correo, e.target, 'correo');
+         break;
+      case "password":
+         validarcampo(expresiones.password, e.target, 'password');
+         break;
    }
 }
 

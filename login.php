@@ -49,18 +49,17 @@ if (isset($_SESSION['rol'])) {
 
     <!-- Contenedor de registro -->
     <div class="register-container">
-        <form method="POST" action="login_process.php">
-
-            <div class="row mb-3" id="grupo__correo">
-                <div class="col-12">
+        <form id="formulario" class="formulario">
+            <div class="row mb-3">
+                <div class="col-12"id="grupo__correo">
                     <label for="correo_electronico" class="form-label">Email:</label>
                     <input type="email" class="form-control formulario__input" name="correo" id="correo_electronico" placeholder="Email" required>
                     <p class="formulario__input-error">El correo solo puede contener letras, números, puntos, guiones y guión bajo.</p>
                 </div>
             </div>
 
-            <div class="row mb-3" id="grupo__password">
-                <div class="col-12">
+            <div class="row mb-3">
+                <div class="col-12" id="grupo__password">
                     <label for="password" class="form-label">Contraseña:</label>
                     <input type="password" class="form-control formulario__input" name="password" id="password" placeholder="Contraseña" required>
                     <p class="formulario__input-error">La contraseña tiene que ser de 4 a 12 dígitos.</p>
