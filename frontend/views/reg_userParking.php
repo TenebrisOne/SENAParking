@@ -99,7 +99,7 @@ if ($_SESSION['rol'] == 3) {
                 <div class="col-md-6" id="grupo__numero"><!--Divide en columnas para alinear los campos-->
                     <label for="numero_contacto" class="form-label">Número contacto:</label>
                     <input type="text" class="form-control formulario__input" name="numero" id="numero"
-                        placeholder="Ingrese número de contacto">
+                        placeholder="Ingrese número de contacto" required>
                     <p class="formulario__input-error">El numero de contacto tiene que ser de 7 a 14 digitos y solo
                         puede contener numeros.</p>
                 </div>
