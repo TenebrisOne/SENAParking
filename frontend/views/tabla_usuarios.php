@@ -1,9 +1,4 @@
 <?php
-require_once('../../backend/config/conexion.php');
-require_once('../../backend/models/UsuarioSistemaModel.php');
-
-$usuarioModel = new Usuario($conn);
-$usuarios = $usuarioModel->obtenerUsuarios();
 $roles = [1 => "Administrador", 2 => "Supervisor", 3 => "Guardia de Seguridad"];
 ?>
 
@@ -29,8 +24,8 @@ $roles = [1 => "Administrador", 2 => "Supervisor", 3 => "Guardia de Seguridad"];
                     <form action="../../backend/controllers/UsuarioSistemaController.php" method="POST">
                         <input type="hidden" name="id_userSys" value="<?= $usuario['id_userSys'] ?>">
                         <input type="hidden" name="estado" value="<?= $usuario['estado'] === 'activo' ? 'inactivo' : 'activo' ?>">
-                         <!-- Botón Editar -->
-                         <a href="editar_userSys.php?id=<?= $usuario['id_userSys'] ?>" class="btn btn-editar btn-sm">
+                        <!-- Botón Editar -->
+                        <a href="editar_userSys.php?id=<?= $usuario['id_userSys'] ?>" class="btn btn-editar btn-sm">
                             Editar
                         </a>
                         <label class="switch">

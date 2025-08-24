@@ -26,6 +26,21 @@ class UsuarioParqueadero {
         return $usuarios;
     }
 
+    public function obtenerUsuariosPaginados($limit, $offset) {
+        $sql = "SELECT * FROM tb_userpark ORDER BY id_userPark ASC LIMIT ? OFFSET ?";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bind_param("ii", $limit, $offset);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function contarUsuarios() {
+        $sql = "SELECT COUNT(*) as total FROM tb_userpark";
+        $resultado = $this->conexion->query($sql);
+        $fila = $resultado->fetch_assoc();
+        return $fila['total'];
+    }
+
     // Cambiar estado (activo/inactivo)
     public function cambiarEstado($id, $estado) {
         $sql = "UPDATE tb_userpark SET estado = ? WHERE id_userPark = ?";
