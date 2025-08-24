@@ -56,8 +56,6 @@ inputs.forEach((input) => {
 formulario.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  alert("Formulario enviado exitosamente!");
-
   if (
     campos.correo &&
     campos.password
@@ -78,13 +76,20 @@ formulario.addEventListener("submit", (e) => {
     )
       .then((response) => response.text())
       .then((data) => {
-        alert(data);
-        window.location.href = "./../views/dashboard_admin.php";
+        switch (data) {
+          case "1":
+            window.location.href = "frontend/views/dashboard_admin.php";
+            break;
+          case "2":
+            window.location.href = "frontend/views/dashboard_supervisor.php";
+            break;
+          case "3":
+            window.location.href = "frontend/views/dashboard_guardia.php";
+            break;
+          default:
+            alert(data);
+        }
       })
-      .catch((error) => {
-        alert(error);
-        window.location.href = "./../views/dashboard_admin.php";
-      });
     formulario.reset();
   }
 });
