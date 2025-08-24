@@ -8,17 +8,13 @@ const expresiones = {
   correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
   numero: /^\d{7,10}$/,
   usuario: /^[a-zA-Z0-9]{4,16}$/,
-  contrasena: /^.{4,12}$/,
 };
 
 const campos = {
-  nombre: false,
-  apellido: false,
-  documento: false,
-  correo: false,
-  numero: false,
-  usuario: false,
-  contrasena: false,
+  nombre: true,
+  apellido: true,
+  documento: true,
+  numero: true,
 };
 
 const validarcampo = (expresion, input, campo) => {
@@ -58,17 +54,8 @@ const validarformulario = (e) => {
     case "documento":
       validarcampo(expresiones.documento, e.target, "documento");
       break;
-    case "correo":
-      validarcampo(expresiones.correo, e.target, "correo");
-      break;
     case "numero":
       validarcampo(expresiones.numero, e.target, "numero");
-      break;
-    case "usuario":
-      validarcampo(expresiones.usuario, e.target, "usuario");
-      break;
-    case "contrasena":
-      validarcampo(expresiones.contrasena, e.target, "contrasena");
       break;
   }
 };
@@ -85,34 +72,29 @@ formulario.addEventListener("submit", (e) => {
     campos.nombre &&
     campos.apellido &&
     campos.documento &&
-    campos.correo &&
-    campos.numero &&
-    campos.usuario &&
-    campos.contrasena
+    campos.numero
   ) {
+    const id_userPark = document.getElementById("id_userPark").value.trim();
     const nombre = document.getElementById("nombre").value.trim();
     const apellido = document.getElementById("apellido").value.trim();
     const tipdoc = document.getElementById("tipdoc").value.trim();
     const documento = document.getElementById("documento").value.trim();
-    const rol = document.getElementById("rol").value.trim();
-    const correo = document.getElementById("correo").value.trim();
     const numero = document.getElementById("numero").value.trim();
-    const usuario = document.getElementById("usuario").value.trim();
-    const contrasena = document.getElementById("contrasena").value.trim();
+    const tipo_usuario = document.getElementById("tipo_usuario").value.trim();
+    const edificio = document.getElementById("edificio").value.trim();
 
     const formData = new FormData();
+    formData.append("id_userPark", id_userPark);
     formData.append("nombre", nombre);
     formData.append("apellido", apellido);
     formData.append("tipdoc", tipdoc);
     formData.append("documento", documento);
-    formData.append("rol", rol);
-    formData.append("correo", correo);
     formData.append("numero", numero);
-    formData.append("usuario", usuario);
-    formData.append("contrasena", contrasena);
+    formData.append("tipo_usuario", tipo_usuario);
+    formData.append("edificio", edificio);
 
     fetch(
-      "../../../SENAParking/backend/controllers/UsuarioSistemaController.php",
+      "../../../SENAParking/backend/controllers/UsuarioParqueaderoController.php",
       {
         method: "POST",
         body: formData,
