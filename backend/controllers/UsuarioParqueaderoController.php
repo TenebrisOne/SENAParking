@@ -52,10 +52,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_userPark'])) {
     $resultado = $usuarioPark->actualizarUsuario($id, $tipo_user, $tipdoc, $documento, $nombre, $apellido, $edificio, $numero);
 
     if ($resultado) {
-        header('Location: /SENAParking/frontend/views/dashboard_admin.php?mensaje=Usuario editado correctamente');
+        echo("Usuario editado exitosamente");
         exit;
     } else {
-        header('Location: /SENAParking/frontend/views/dashboard_admin.php?mensaje=Error al editar usuario');
+        echo("Error al editar usuario");
         exit;
     }
 }

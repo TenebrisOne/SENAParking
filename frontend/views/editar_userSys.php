@@ -38,6 +38,7 @@ if (!$usuario) {
     <link href="../public/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" type="x-icon" href="../public/images/favicon.ico">
     <link rel="stylesheet" href="../public/css/sityles_views.css">
+    <link rel="stylesheet" href="../public/css/styles_validaciones.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -67,24 +68,28 @@ if (!$usuario) {
         <h2>
             <center>Editar Usuario Sistema</center>
         </h2><br>
-        <form class="formulario" method="POST" action="/SENAParking/backend/controllers/UsuarioSistemaController.php">
-            <input type="hidden" name="id_userSys" value="<?= htmlspecialchars($usuario['id_userSys']) ?>">
+        <form id="formulario" class="formulario">
+            <input type="hidden" name="id_userSys" id="id_userSys" value="<?= htmlspecialchars($usuario['id_userSys']) ?>">
 
             <div class="row mb-3">
-                <div class="col-md-6">
+                <div class="col-md-6" id="grupo__nombre">
                     <label for="nombre" class="form-label">Nombres:</label>
-                    <input type="text" class="form-control" name="nombre" value="<?= htmlspecialchars($usuario['nombres_sys']) ?>" required>
+                    <input type="text" class="form-control formulario__input" name="nombre" id="nombre"
+                        placeholder="Ingrese sus nombres" value="<?= htmlspecialchars($usuario['nombres_sys']) ?>" required>
+                    <p class="formulario__input-error">El nombre tiene que ser de 4 a 16 dígitos y solo puede contener letras.</p>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" id="grupo__apellido">
                     <label for="apellido" class="form-label">Apellidos:</label>
-                    <input type="text" class="form-control" name="apellido" value="<?= htmlspecialchars($usuario['apellidos_sys']) ?>" required>
+                    <input type="text" class="form-control formulario__input" name="apellido" id="apellido"
+                        placeholder="Ingrese sus apellidos" value="<?= htmlspecialchars($usuario['apellidos_sys']) ?>" required>
+                    <p class="formulario__input-error">El apellido tiene que ser de 4 a 16 dígitos y solo puede contener letras.</p>
                 </div>
             </div>
 
             <div class="row mb-3">
-                <div class="col-md-6">
+                <div class="col-md-6" id="grupo__tipdoc">
                     <label for="tipdoc" class="form-label">Tipo de Documento:</label>
-                    <select class="form-select" name="tipdoc" required>
+                    <select class="form-select" name="tipdoc" id="tipdoc" required>
                         <option value="">Seleccione el tipo de documento</option>
                         <option value="cedula_ciudadania" <?= $usuario['tipo_documento'] == 'cedula_ciudadania' ? 'selected' : '' ?>>Cédula de Ciudadanía</option>
                         <option value="cedula_extranjeria" <?= $usuario['tipo_documento'] == 'cedula_extranjeria' ? 'selected' : '' ?>>Cédula de Extranjería</option>
@@ -92,36 +97,44 @@ if (!$usuario) {
                         <option value="otro" <?= $usuario['tipo_documento'] == 'otro' ? 'selected' : '' ?>>Otros</option>
                     </select>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" id="grupo__documento">
                     <label for="cedula" class="form-label">Documento:</label>
-                    <input type="text" class="form-control" name="documento" value="<?= htmlspecialchars($usuario['numero_documento']) ?>" required>
+                    <input type="text" class="form-control formulario__input" name="documento" id="documento"
+                        placeholder="Ingrese el Documento" value="<?= htmlspecialchars($usuario['numero_documento']) ?>" required>
+                    <p class="formulario__input-error">El documento debe tener entre 6 y 10 dígitos y solo puede contener números.</p>
                 </div>
             </div>
 
             <div class="row mb-3">
-                <div class="col-md-6">
+                <div class="col-md-6" id="grupo__rol">
                     <label for="rol" class="form-label">Rol:</label>
-                    <select class="form-select" name="rol" required>
+                    <select class="form-select" name="rol" id="rol" required>
                         <option value="">Selecciona el rol</option>
                         <option value="1" <?= $usuario['id_rol'] == '1' ? 'selected' : '' ?>>Administrador</option>
                         <option value="2" <?= $usuario['id_rol'] == '2' ? 'selected' : '' ?>>Supervisor</option>
                         <option value="3" <?= $usuario['id_rol'] == '3' ? 'selected' : '' ?>>Guarda de Seguridad</option>
                     </select>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" id="grupo__correo">
                     <label for="email" class="form-label">Correo Electrónico:</label>
-                    <input type="email" class="form-control" name="correo" value="<?= htmlspecialchars($usuario['correo']) ?>" required>
+                    <input type="email" class="form-control formulario__input" name="correo" id="correo"
+                        placeholder="Email" value="<?= htmlspecialchars($usuario['correo']) ?>" required>
+                    <p class="formulario__input-error">El correo solo puede contener letras, números, puntos, guiones y guión bajo.</p>
                 </div>
             </div>
 
             <div class="row mb-3">
-                <div class="col-md-6">
+                <div class="col-md-6" id="grupo__numero">
                     <label for="numero" class="form-label">Número de Contacto:</label>
-                    <input type="text" class="form-control" name="numero" value="<?= htmlspecialchars($usuario['numero_contacto']) ?>" required>
+                    <input type="text" class="form-control formulario__input" name="numero" id="numero"
+                        placeholder="Número" value="<?= htmlspecialchars($usuario['numero_contacto']) ?>" required>
+                    <p class="formulario__input-error">El número tiene que ser de 7 a 14 dígitos y solo puede contener números.</p>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" id="grupo__usuario">
                     <label for="usuario" class="form-label">Nombre de Usuario:</label>
-                    <input type="text" class="form-control" name="usuario" value="<?= htmlspecialchars($usuario['username']) ?>" required>
+                    <input type="text" class="form-control formulario__input" name="usuario" id="usuario"
+                        placeholder="Usuario" value="<?= htmlspecialchars($usuario['username']) ?>" required>
+                    <p class="formulario__input-error">El nombre tiene que ser de 4 a 16 dígitos y solo puede contener letras y números.</p>
                 </div>
             </div>
 
@@ -132,13 +145,14 @@ if (!$usuario) {
                 </div>
             </div>-->
 
-                <button type="submit" class="btn btn-success">Guardar cambios</button>
-                <a href="dashboard_admin.php" class="btn btn-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-success">Guardar cambios</button>
+            <a href="dashboard_admin.php" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
 
     <!-- Cargar el header-->
     <script src="./../public/js/scriptsDOM.js"></script>
+    <script src="../public/js/validacion_editusersys.js"></script>
 
     <!-- script para que cuando se cierre la sesion refresque la ventana -->
     <script src="../public/js/ref_cierre.js"></script>

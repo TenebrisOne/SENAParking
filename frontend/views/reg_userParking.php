@@ -26,6 +26,7 @@ if ($_SESSION['rol'] == 3) {
     <link href="../public/css/bootstrap.min.css" rel="stylesheet">
     <!-- Enlace a estilos personalizados -->
     <link rel="stylesheet" href="../public/css/sityles_views.css">
+    <link rel="stylesheet" href="../public/css/styles_validaciones.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <title>Registro de Usuarios | SENAParking</title>
@@ -98,7 +99,7 @@ if ($_SESSION['rol'] == 3) {
                 <div class="col-md-6" id="grupo__numero"><!--Divide en columnas para alinear los campos-->
                     <label for="numero_contacto" class="form-label">Número contacto:</label>
                     <input type="text" class="form-control formulario__input" name="numero" id="numero"
-                        placeholder="Ingrese número de contacto">
+                        placeholder="Ingrese número de contacto" required>
                     <p class="formulario__input-error">El numero de contacto tiene que ser de 7 a 14 digitos y solo
                         puede contener numeros.</p>
                 </div>

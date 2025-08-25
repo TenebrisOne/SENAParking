@@ -18,11 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre']) && !isset($
         $_POST['usuario'],
         $_POST['contrasena']
     );
-    
+
     if ($registro) {
-        echo("Registro de usuario exitosamente");
+        echo ("Registro de usuario exitosamente");
     } else {
-        echo("Error al registrar usuario");
+        echo ("Error al registrar usuario");
     }
     exit;
 }
@@ -56,10 +56,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_userSys'])) {
     $resultado = $usuarioModel->actualizarUsuarioS($id, $nombre, $apellido, $tipdoc, $documento, $id_rol, $correo, $numero, $username);
 
     if ($resultado) {
-        header('Location: /SENAParking/frontend/views/dashboard_admin.php?mensaje=Usuario editado correctamente');
+        echo ("Usuario actualizado exitosamente");
         exit;
     } else {
-       header('Location: /SENAParking/frontend/views/dashboard_admin.php?mensaje=Error al editar usuario');
+        echo ("Error al actualizar usuario");
         exit;
-   }
+    }
 }

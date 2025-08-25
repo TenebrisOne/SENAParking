@@ -89,7 +89,7 @@ INSERT INTO `tb_actividades` (`id_activi`, `id_userSys`, `accion`, `fecha_hora`)
 (20, 1, 'Cierre de sesion', '2025-07-03 23:53:18'),
 (21, 1, 'Inicio de sesion', '2025-07-03 23:53:28'),
 (22, 1, 'Cierre de sesion', '2025-07-03 23:53:38'),
-(23, 2, 'Inicio de sesion', '2025-07-03 23:53:52'),;
+(23, 2, 'Inicio de sesion', '2025-07-03 23:53:52');
 
 -- --------------------------------------------------------
 

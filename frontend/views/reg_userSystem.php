@@ -19,6 +19,7 @@ if (!isset($_SESSION['rol'])) {
     <link href="../public/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" type="x-icon" href="../public/images/favicon.ico">
     <link rel="stylesheet" href="../public/css/sityles_views.css">
+    <link rel="stylesheet" href="../public/css/styles_validaciones.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
