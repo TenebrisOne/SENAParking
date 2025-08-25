@@ -40,28 +40,28 @@ class MostrarDatosModel {
 
     // Reportes dinámicos
     public function obtenerUsuariosSistema() {
-        $sql = "SELECT id_userSys, nombres_sys, apellidos_sys, numero_documento FROM tb_usersys";
+        $sql = "SELECT id_userSys AS Usuario, nombres_sys AS Nombres, apellidos_sys AS Apellidos, numero_documento FROM tb_usersys";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function obtenerUsuariosParqueadero() {
-        $sql = "SELECT id_userPark, nombres_park, apellidos_park, numero_documento, tipo_user, edificio FROM tb_userpark";
+        $sql = "SELECT id_userPark AS Usuario, nombres_park AS Nombres, apellidos_park AS Apellidos, numero_documento, tipo_user, edificio FROM tb_userpark";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function obtenerAccesosHoy() {
-        $sql = "SELECT id_acceso, id_userSys, id_vehiculo, fecha_hora, tipo_accion FROM tb_accesos WHERE tipo_accion = 'ingreso' AND DATE(fecha_hora) = CURDATE()";
+        $sql = "SELECT id_acceso AS Acceso, id_userSys AS Usuario, id_vehiculo AS Vehículo, fecha_hora, tipo_accion FROM tb_accesos WHERE tipo_accion = 'ingreso' AND DATE(fecha_hora) = CURDATE()";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function obtenerSalidasHoy() {
-        $sql = "SELECT id_acceso, id_userSys, id_vehiculo, fecha_hora, tipo_accion FROM tb_accesos WHERE tipo_accion = 'salida' AND DATE(fecha_hora) = CURDATE()";
+        $sql = "SELECT id_acceso AS Acceso, id_userSys AS Usuario, id_vehiculo AS Vehículo, fecha_hora, tipo_accion FROM tb_accesos WHERE tipo_accion = 'salida' AND DATE(fecha_hora) = CURDATE()";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

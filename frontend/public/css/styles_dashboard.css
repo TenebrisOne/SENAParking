@@ -289,6 +289,25 @@ input.form-control:focus {
 
 }
 
+.paginacion-sencilla {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.5rem;
+}
+
+.paginacion-sencilla a {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 0 0.5rem;
+    text-decoration: none;
+    color: #007bff;
+}
+
+.paginacion-sencilla a:hover {
+    color: #0056b3;
+}
+
 /* Estilos del sidebar del administrador */
 .sidebar-admin {
     background: rgba(0, 0, 0, 0.65);

@@ -1,11 +1,3 @@
-<?php
-require_once('../../backend/config/conexion.php');
-require_once('../../backend/models/UsuarioParqueaderoModel.php');
-
-$usuarioPark = new UsuarioParqueadero($conn);
-$usuarios = $usuarioPark->obtenerUsuarios();
-?>
-
 <table class="table table-striped">
     <thead>
         <tr>
@@ -15,7 +7,7 @@ $usuarios = $usuarioPark->obtenerUsuarios();
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($usuarios as $usuario): ?>
+        <?php foreach ($usuariosParqueadero as $usuario): ?>
             <tr>
                 <td><?= htmlspecialchars($usuario['nombres_park'] . ' ' . $usuario['apellidos_park']) ?></td>
                 <td><?= htmlspecialchars($usuario['numero_documento']) ?></td>
@@ -32,7 +24,6 @@ $usuarios = $usuarioPark->obtenerUsuarios();
                             <span class="slider round"></span>
                         </label>
                     </form>
-
                 </td>
             </tr>
         <?php endforeach; ?>
