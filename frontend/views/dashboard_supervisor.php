@@ -171,7 +171,7 @@ $totalPaginas = ceil($totalUsuarios / $usuariosPorPagina);
                                 </div>
                             </div>
                             <div class="card-body">
-                                <p class="text-muted">Administrar los usuarios con acceso al sistema (guardias, supervisores, administradores).</p>
+                                <p class="text-muted">Administrar los usuarios con acceso al sistema (guardias).</p>
                                 <?php include 'tabla_usuarios.php'; ?>
                                 <a href="/SENAParking/frontend/views/reg_userSystem.php" class="btn btn-registrar-usuario btn-sm mt-2">Registrar Nuevo Usuario</a>
                             </div>
