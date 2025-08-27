@@ -21,7 +21,7 @@ if (!isset($_SESSION['rol'])) {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .header-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #4CAF50 0%, #4CAF50 100%);
             color: white;
             padding: 1.5rem 0;
             margin-bottom: 2rem;
