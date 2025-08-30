@@ -33,24 +33,6 @@ class Usuario
 
         return $usuarios;
     }
-
-    // Contar total de usuarios
-    public function obtenerUsuariosPaginados($limit, $offset) {
-        $sql = "SELECT id_userSys, nombres_sys, apellidos_sys, id_rol, username, correo, estado FROM tb_usersys LIMIT ? OFFSET ?";
-        $stmt = $this->conexion->prepare($sql);
-        $stmt->bind_param("ii", $limit, $offset);
-        $stmt->execute();
-        $resultado = $stmt->get_result();
-        return $resultado->fetch_all(MYSQLI_ASSOC);
-    }
-    
-    // Obtener usuarios paginados
-    public function contarUsuarios() {
-        $sql = "SELECT COUNT(*) as total FROM tb_usersys";
-        $resultado = $this->conexion->query($sql);
-        $fila = $resultado->fetch_assoc();
-        return $fila['total'];
-    }
     
     public function cambiarEstadoUsuario($id, $estado)
     {

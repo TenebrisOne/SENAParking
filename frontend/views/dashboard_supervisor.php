@@ -10,22 +10,6 @@ if (!isset($_SESSION['rol'])) {
 if ($_SESSION["rol"] != 2) {
     header("Location: ../../login.php");
 }
-require_once('../../backend/config/conexion.php');
-require_once('../../backend/models/UsuarioSistemaModel.php');
-
-$usuarioModel = new Usuario($conn);
-// Configuración de paginación
-$usuariosPorPagina = 5;
-$paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
-$offset = ($paginaActual - 1) * $usuariosPorPagina;
-
-// Obtener usuarios de esta página
-$usuarios = $usuarioModel->obtenerUsuariosPaginados($usuariosPorPagina, $offset);
-
-// Obtener total de usuarios para calcular páginas
-$totalUsuarios = $usuarioModel->contarUsuarios();
-$totalPaginas = ceil($totalUsuarios / $usuariosPorPagina);
-
 ?>
 
 <!DOCTYPE html>

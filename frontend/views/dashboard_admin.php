@@ -14,35 +14,6 @@ if ($_SESSION["rol"] != 1) {
 // cargamos
 require_once __DIR__ . '/../../backend/controllers/MostrarDatosController.php';
 require_once('../../backend/config/conexion.php');
-require_once('../../backend/models/UsuarioSistemaModel.php');
-
-$usuarioModel = new Usuario($conn);
-// Configuración de paginación
-$usuariosPorPagina = 5;
-$paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
-$offset = ($paginaActual - 1) * $usuariosPorPagina;
-
-// Obtener usuarios de esta página
-$usuarios = $usuarioModel->obtenerUsuariosPaginados($usuariosPorPagina, $offset);
-
-// Obtener total de usuarios para calcular páginas
-$totalUsuarios = $usuarioModel->contarUsuarios();
-$totalPaginas = ceil($totalUsuarios / $usuariosPorPagina);
-
-require_once('../../backend/config/conexion.php');
-require_once('../../backend/models/UsuarioParqueaderoModel.php');
-
-$usuarioParqModel = new UsuarioParqueadero($conn);
-
-// Configuración de paginación
-$usuariosPorPagina = 5;
-$paginaActual = isset($_GET['pagina_parq']) ? (int)$_GET['pagina_parq'] : 1;
-$offset = ($paginaActual - 1) * $usuariosPorPagina;
-
-// Obtener usuarios paginados
-$usuariosParqueadero = $usuarioParqModel->obtenerUsuariosPaginados($usuariosPorPagina, $offset);
-$totalUsuarios = $usuarioParqModel->contarUsuarios();
-$totalPaginas = ceil($totalUsuarios / $usuariosPorPagina);
 ?>
 
 <!DOCTYPE html>
@@ -274,9 +245,6 @@ $totalPaginas = ceil($totalUsuarios / $usuariosPorPagina);
                         <div class="card card-gestion-usuarios">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h5 class="mb-0">Gestión de Usuarios del Sistema</h5>
-                                <div class="paginacion-sencilla">
-                                    <?php include __DIR__ . '/paginacion_usuariossis.php'; ?>
-                                </div>
                             </div>
                             <div class="card-body">
                                 <p class="text-muted">Administrar los usuarios con acceso al sistema (guardias, supervisores, administradores).</p>
@@ -290,9 +258,6 @@ $totalPaginas = ceil($totalUsuarios / $usuariosPorPagina);
                         <div class="card card-gestion-usuarios">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h5 class="mb-0">Gestión de Usuarios Parqueadero</h5>
-                                <div class="paginacion-sencilla">
-                                    <?php include __DIR__ . '/paginacion_usuariospark.php'; ?>
-                                </div>
                             </div>
                             <div class="card-body">
                                 <p class="text-muted">Administrar los usuarios con acceso al parqueadero (servidor público, contratista,
