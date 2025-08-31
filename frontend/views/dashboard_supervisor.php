@@ -7,9 +7,42 @@ if (!isset($_SESSION['rol'])) {
 }
 
 // Mostrar vista dependiendo del estado de la sesion
-if ($_SESSION["rol"] != 2) {
+if ($_SESSION["rol"] != 1) {
     header("Location: ../../login.php");
 }
+
+// cargamos
+require_once __DIR__ . '/../../backend/controllers/MostrarDatosController.php';
+require_once('../../backend/config/conexion.php');
+require_once('../../backend/models/UsuarioSistemaModel.php');
+
+$usuarioModel = new Usuario($conn);
+// Configuración de paginación
+$usuariosPorPagina = 5;
+$paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+$offset = ($paginaActual - 1) * $usuariosPorPagina;
+
+// Obtener usuarios de esta página
+$usuarios = $usuarioModel->obtenerUsuariosPaginados($usuariosPorPagina, $offset);
+
+// Obtener total de usuarios para calcular páginas
+$totalUsuarios = $usuarioModel->contarUsuarios();
+$totalPaginas = ceil($totalUsuarios / $usuariosPorPagina);
+
+require_once('../../backend/config/conexion.php');
+require_once('../../backend/models/UsuarioParqueaderoModel.php');
+
+$usuarioParqModel = new UsuarioParqueadero($conn);
+
+// Configuración de paginación
+$usuariosPorPagina = 5;
+$paginaActual = isset($_GET['pagina_parq']) ? (int)$_GET['pagina_parq'] : 1;
+$offset = ($paginaActual - 1) * $usuariosPorPagina;
+
+// Obtener usuarios paginados
+$usuariosParqueadero = $usuarioParqModel->obtenerUsuariosPaginados($usuariosPorPagina, $offset);
+$totalUsuarios = $usuarioParqModel->contarUsuarios();
+$totalPaginas = ceil($totalUsuarios / $usuariosPorPagina);
 ?>
 
 <!DOCTYPE html>
