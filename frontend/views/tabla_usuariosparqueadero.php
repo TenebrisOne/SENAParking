@@ -15,9 +15,6 @@ $usuarios = $usuarioPark->obtenerUsuarios();
     <title>Document</title>
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Enlace al archivo de estilos personalizados -->
     <link rel="stylesheet" href="../public/css/styles_dashboard.css">
     <!-- DataTables con Bootstrap 5 -->

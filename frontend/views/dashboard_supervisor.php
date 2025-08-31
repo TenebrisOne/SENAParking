@@ -150,14 +150,10 @@ if ($_SESSION["rol"] != 2) {
                         <div class="card card-gestion-usuarios">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h5 class="mb-0">Gestión de Usuarios del Sistema</h5>
-                                <div class="paginacion-sencilla">
-                                    <?php include __DIR__ . '/paginacion_usuariossis.php'; ?>
-                                </div>
                             </div>
                             <div class="card-body">
-                                <p class="text-muted">Administrar los usuarios con acceso al sistema (guardias).</p>
+                                <p class="text-muted">Administrar los usuarios con acceso al sistema (guardas de seguridad).</p>
                                 <?php include 'tabla_usuarios.php'; ?>
-                                <a href="/SENAParking/frontend/views/reg_userSystem.php" class="btn btn-registrar-usuario btn-sm mt-2">Registrar Nuevo Usuario</a>
                             </div>
                         </div>
                     </div>
