@@ -68,13 +68,14 @@ if (isset($_SESSION['rol'])) {
             <!-- Botón de envío -->
             <div class="row">
                 <div class="col-12">
-                    <button type="submit" class="btn btn-dark py-3 btn-hover" id="singbtn">Ingresar</button>
+                    <button type="submit" class="btn btn-dark py-2 btn-hover" id="singbtn">Ingresar</button>
                 </div>
             </div>
+            <a href="./forgot_password.html" class="text-muted mt-3" style="font-size: 14px;">¿Olvidaste tu contraseña?</a>
         </form>
     </div>
 
-    <a href="./forgot_password.html" class="text-muted mt-3" style="font-size: 14px;">¿Olvidaste tu contraseña?</a>
+
     <!-- Scripts -->
     <script src="./frontend/public/js/scriptsDOM.js"></script>
     <script src="./frontend/public/js/validacion_login.js"></script>

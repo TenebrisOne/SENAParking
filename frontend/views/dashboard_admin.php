@@ -225,7 +225,6 @@ require_once('../../backend/config/conexion.php');
                                 </div>
                                 <div class="card-body">
                                     <p class="text-muted">Datos generados dinámicamente con base en la tarjeta seleccionada.</p>
-
                                     <?php
                                     if (isset($tabla) && !empty($tabla)) {
                                         include __DIR__ . '/tabla_dinamica.php';
