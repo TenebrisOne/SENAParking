@@ -47,7 +47,7 @@ class MostrarDatosModel {
     }
 
     public function obtenerUsuariosParqueadero() {
-        $sql = "SELECT id_userPark AS Usuario, nombres_park AS Nombres, apellidos_park AS Apellidos, numero_documento, tipo_user, edificio FROM tb_userpark";
+        $sql = "SELECT id_userPark AS Usuario, nombres_park AS Nombres, apellidos_park AS Apellidos, numero_documento, tipo_user AS tipo_usuario, edificio FROM tb_userpark";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

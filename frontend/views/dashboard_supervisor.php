@@ -45,7 +45,6 @@ $totalUsuarios = $usuarioParqModel->contarUsuarios();
 $totalPaginas = ceil($totalUsuarios / $usuariosPorPagina);
 ?>
 
-
 <!DOCTYPE html>
 <html lang="es"> <!-- Define el idioma de la página como español -->
 
@@ -180,40 +179,17 @@ $totalPaginas = ceil($totalUsuarios / $usuariosPorPagina);
 
                     <!-- Informes de actividades de los guardias -->
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="card card-informes-guardias">
-                                <div class="card-header">
-                                    Informes de Actividades de Guardias
-                                </div>
-                                <div class="card-body">
-                                    <p class="text-muted">Resumen de actividades registradas por los guardias.</p>
-                                    <!-- Tabla con el resumen de entradas y salidas -->
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Guardia</th>
-                                                <th>Entradas</th>
-                                                <th>Salidas</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Guardia A</td>
-                                                <td>15</td>
-                                                <td>12</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Guardia B</td>
-                                                <td>20</td>
-                                                <td>18</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <!-- Botón para ver informe completo -->
-                                    <button class="btn btn-sm btn-outline-secondary">Ver Informe Completo</button>
-                                </div>
+                    <div class="col-md-6">
+                        <div class="card card-gestion-usuarios">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Gestión de Usuarios del Sistema</h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-muted">Administrar los usuarios con acceso al sistema (guardas de seguridad).</p>
+                                <?php include 'tabla_usuarios.php'; ?>
                             </div>
                         </div>
+                    </div>
                         <!-- Detalles adicionales de la disponibilidad de cupos -->
                             <div class="col-md-6">
                                 <div class="card">

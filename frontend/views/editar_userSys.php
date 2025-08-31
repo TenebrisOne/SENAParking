@@ -110,8 +110,10 @@ if (!$usuario) {
                     <label for="rol" class="form-label">Rol:</label>
                     <select class="form-select" name="rol" id="rol" required>
                         <option value="">Selecciona el rol</option>
+                        <?php if($_SESSION['rol'] == 1):?>
                         <option value="1" <?= $usuario['id_rol'] == '1' ? 'selected' : '' ?>>Administrador</option>
                         <option value="2" <?= $usuario['id_rol'] == '2' ? 'selected' : '' ?>>Supervisor</option>
+                        <?php endif; ?>
                         <option value="3" <?= $usuario['id_rol'] == '3' ? 'selected' : '' ?>>Guarda de Seguridad</option>
                     </select>
                 </div>
