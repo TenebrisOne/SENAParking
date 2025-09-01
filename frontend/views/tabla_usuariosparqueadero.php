@@ -44,10 +44,12 @@ $usuarios = $usuarioPark->obtenerUsuarios();
                             <a href="editar_userPark.php?id=<?= $usuario['id_userPark'] ?>" class="btn btn-editar btn-sm">
                                 Editar
                             </a>
+                            <?php if ($_SESSION['rol'] != 3): ?>
                             <label class="switch">
                                 <input type="checkbox" onchange="this.form.submit()" <?= $usuario['estado'] === 'activo' ? 'checked' : '' ?>>
                                 <span class="slider round"></span>
                             </label>
+                            <?php endif; ?>
                         </form>
 
                     </td>

@@ -166,26 +166,23 @@ if ($_SESSION["rol"] != 3) {
 
                         <!-- Tarjeta de Registro de Acceso -->
                         <div class="col-md-6">
-                            <div class="card card-registro-acceso">
-                                <div class="card-header">
-                                    Registro de Acceso
-                                </div>
-                                <div class="card-body">
-                                    <form id="form-acceso">
-                                        <div class="form-group">
-                                            <label for="placa-acceso">Placa del Vehículo:</label>
-                                            <input type="text" class="form-control" id="placa-acceso" required> <!-- Campo para ingresar la placa -->
-                                        </div>
-                                        <button type="submit" class="btn btn-registro-acceso">Registrar Entrada</button>
-                                    </form>
-                                </div>
+                        <div class="card card-gestion-usuarios">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Gestión de Usuarios Parqueadero</h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-muted">Administrar los usuarios con acceso al parqueadero (servidor público, contratista,
+                                    trabajador oficial, visitante autorizado, aprendiz).</p>
+                                <?php include 'tabla_usuariosparqueadero.php'; ?>
+                                <a href="/SENAParking/frontend/views/reg_userParking.php" class="btn btn-registrar-usuario btn-sm mt-2">Registrar Nuevo Usuario</a>
                             </div>
                         </div>
+                    </div>
                     </div>
 
                     <div class="row">
                         <!-- Tarjeta de Registro de Salida -->
-                        <div class="col-md-6">
+                        <!--<div class="col-md-6">
                             <div class="card card-registro-salida">
                                 <div class="card-header">
                                     Registro de Salida
@@ -194,16 +191,16 @@ if ($_SESSION["rol"] != 3) {
                                     <form id="form-salida">
                                         <div class="form-group">
                                             <label for="placa-salida">Placa del Vehículo:</label>
-                                            <input type="text" class="form-control" id="placa-salida" required> <!-- Campo para ingresar la placa -->
-                                        </div>
+                                            <input type="text" class="form-control" id="placa-salida" required> Campo para ingresar la placa -->
+                                       <!-- </div>
                                         <button type="submit" class="btn btn-registro-salida">Registrar Salida</button>
                                     </form>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Tarjeta de Usuarios Registrados -->
-                        <div class="col-md-6">
+                        Tarjeta de Usuarios Registrados -->
+                        <!--<div class="col-md-6">
                             <div class="card card-usuarios">
                                 <div class="card-header">
                                     Usuarios del Parqueadero
@@ -216,7 +213,7 @@ if ($_SESSION["rol"] != 3) {
                                     </ul>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </main>
