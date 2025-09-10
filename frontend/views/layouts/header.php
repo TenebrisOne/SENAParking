@@ -87,7 +87,7 @@ session_start();
             position: relative;
         }
 
-        .menu-button {
+        .menu-button.avatar {
             width: 60px;
             height: 60px;
             background-color: #007832;
@@ -151,6 +151,11 @@ session_start();
         .menu-items button:hover {
             background-color: rgba(230, 248, 248, 0.267);
         }
+
+        .menu-button.avatar:hover {
+    background-color: #357ABD;
+    }
+
     </style>
 
 
