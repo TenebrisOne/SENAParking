@@ -1,5 +1,5 @@
 // Cargar el contenido del header desde un archivo HTML externo
-fetch("./../views/layouts/header.html")
+fetch("./../views/layouts/header.php")
 
     .then(response => response.text())
     .then(data => {

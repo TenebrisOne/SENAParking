@@ -1,3 +1,11 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+session_start();
+}
+
+
+?>
+
 <!DOCTYPE html>
 
 <html lang="es">
@@ -159,7 +167,17 @@
         </div>
 
         <div class="menu-container">
-            <button class="menu-button">J</button>
+                <button 
+        class="menu-button avatar" 
+        title="<?php echo isset($_SESSION['nombre']) ? htmlspecialchars($_SESSION['nombre']) : ''; ?>"
+        aria-label="Menú del usuario <?php echo isset($_SESSION['nombre']) ? htmlspecialchars($_SESSION['nombre']) : ''; ?>"
+    ><?php
+        if (isset($_SESSION['nombre']) && !empty($_SESSION['nombre'])) {
+            echo strtoupper(substr($_SESSION['nombre'], 0, 1));
+        } else {
+            echo '';
+        }
+        ?></button>
             <div class="menu" id="menu">
                 <div class="menu-items">
                     <button onclick="accion1()">Ayuda</button>
