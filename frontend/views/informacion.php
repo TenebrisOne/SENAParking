@@ -254,7 +254,7 @@ if (!isset($_SESSION['rol'])) {
 <body>
     <div class="container">
         <!-- Flecha de retroceso -->
-        <a href="/frontend/views/" class="back-arrow">&#8678;</a>
+        <a href="./../login.php" class="back-arrow">&#8678;</a>
 
         <!-- Contenedor principal -->
         <div class="info-container">
@@ -288,7 +288,8 @@ if (!isset($_SESSION['rol'])) {
                 <p>
                     ¿Listo para llevar tu estacionamiento al siguiente nivel? Contáctanos:<br>
                     <a href="mailto:soporte@parqueadero.com">soporte@parqueadero.com</a><br>
-                    Teléfono: <span class="highlight">+123 456 7890</span>
+                    Teléfono: <span class="highlight">+123 456 7890</span><br>
+                    <a>v1.0-alfa</a>
                 </p>
             </div>
         </div>
