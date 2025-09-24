@@ -8,6 +8,9 @@ $totalUsuariosParqueadero = $modelo->contarUsuariosParqueadero();
 $accesosHoy = $modelo->contarAccesosHoy();
 $salidasHoy = $modelo->contarSalidasHoy();
 
+$actividades = $modelo->obtenerActividadesRecientes(); // puedes pasar un número si quieres otro límite
+
+
 // Reporte dinámico
 $tipo = $_POST['tipo'] ?? '';
 switch ($tipo) {
@@ -33,6 +36,8 @@ switch ($tipo) {
         break;
 }
 
-// No incluir la tabla aquí
+
+
+?>
 
 

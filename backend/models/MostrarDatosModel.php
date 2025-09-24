@@ -66,4 +66,22 @@ class MostrarDatosModel {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    // 🔹 NUEVA FUNCIÓN INTEGRADA: Actividades recientes
+public function obtenerActividadesRecientes($limite = 5) {
+    $sql = "SELECT 
+                a.id_userSys AS UsuarioID,
+                CONCAT(u.nombres_sys, ' ', u.apellidos_sys) AS Usuario,
+                a.accion AS Accion,
+                a.fecha_hora AS Fecha
+            FROM tb_actividades a
+            INNER JOIN tb_usersys u ON a.id_userSys = u.id_userSys WHERE id_rol = 3
+            ORDER BY a.fecha_hora DESC
+            LIMIT :limite";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':limite', (int)$limite, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
