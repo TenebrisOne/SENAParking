@@ -2,6 +2,8 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start(); // ✅ solo se ejecuta si no hay sesión activa
 }
+setlocale(LC_TIME, 'es_ES.UTF-8');
+date_default_timezone_set('America/Bogota');
 
 if (!isset($_SESSION['rol'])) {
     header("location: ../../login.php");
@@ -146,37 +148,37 @@ require_once('../../backend/config/conexion.php');
                                     <p class="mb-1"><strong class="text-danger">Ocupados:</strong> <span class="font-weight-bold" id="cupos-ocupados-sup">65</span></p>
                                     <p class="mb-0"><strong class="text-success">Disponibles:</strong> <span class="font-weight-bold" id="cupos-disponibles-sup">35</span></p> -->
 
-                                    
+
                                     <div class="card-body"
-                                    <div class="row mb-4">
-                                        <div class="card card-resumen-general bg-resumen-accesos-hoy border-0 w-100" >
+                                        <div class="row mb-4">
+                                        <div class="card card-resumen-general border-0 w-100" style="background: linear-gradient(135deg, #39A900, #66CC33);">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Usuarios Parqueadero</h5>
+                                                <p class="card-text font-weight-bold" style="font-size: 1.5em;">
+                                                    <?php echo isset($totalUsuariosParqueadero) ?       $totalUsuariosParqueadero : 0; ?>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card card-resumen-general border-0 w-100" style="background: linear-gradient(135deg, #FFD700, #FFEA80);">
                                         <div class="card-body">
-                                            <h5 class="card-title">Usuarios Parqueadero</h5>
+                                            <h5 class="card-title">Accesos Hoy</h5>
                                             <p class="card-text font-weight-bold" style="font-size: 1.5em;">
-                                                <?php echo isset($totalUsuariosParqueadero) ?       $totalUsuariosParqueadero : 0; ?>
+                                                <?php echo isset($accesosHoy) ? $accesosHoy : 0; ?>
                                             </p>
                                         </div>
                                     </div>
-                                    </div>
-
-                                    <div class="card card-resumen-general bg-resumen-salidas-hoy border-0 w-100">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Accesos Hoy</h5>
-                                        <p class="card-text font-weight-bold" style="font-size: 1.5em;">
-                                            <?php echo isset($accesosHoy) ? $accesosHoy : 0; ?>
-                                        </p>
-                                    </div>
-                                    </div>
 
 
-                                    <div class="card card-resumen-general bg-resumen-usuarios-parqueadero border-0 w-100">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Salidas Hoy</h5>
-                                        <p class="card-text font-weight-bold" style="font-size: 1.5em;">
-                                            <?php echo isset($salidasHoy) ? $salidasHoy : 0; ?>
-                                        </p>
+                                    <div class="card card-resumen-general border-0 w-100" style="background: linear-gradient(135deg, #71277A, #9B479D);">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Salidas Hoy</h5>
+                                            <p class="card-text font-weight-bold" style="font-size: 1.5em;">
+                                                <?php echo isset($salidasHoy) ? $salidasHoy : 0; ?>
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
                                 </div>
                             </div>
                         </div>
@@ -195,7 +197,7 @@ require_once('../../backend/config/conexion.php');
                                                 <tr>
                                                     <th style=" background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Usuario</th>
                                                     <th style=" background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Acción</th>
-                                                    <th style=" background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Fecha / Hora</th>
+                                                    <th style=" background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Fecha </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -203,7 +205,9 @@ require_once('../../backend/config/conexion.php');
                                                     <tr>
                                                         <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;"><?= htmlspecialchars($actividad['Usuario']) ?></td>
                                                         <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;"><?= htmlspecialchars($actividad['Accion']) ?></td>
-                                                        <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;"><?= htmlspecialchars($actividad['Fecha']) ?></td>
+                                                        <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;"><?= strftime("%d de %B de %Y - %I:%M %p", strtotime($actividad['Fecha'])) ?>
+
+                                                        </td>
                                                     </tr>
                                                 <?php endforeach; ?>
                                             </tbody>
