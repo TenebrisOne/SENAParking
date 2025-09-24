@@ -68,7 +68,7 @@ class MostrarDatosModel {
     }
 
     // 🔹 NUEVA FUNCIÓN INTEGRADA: Actividades recientes
-public function obtenerActividadesRecientes($limite = 5) {
+public function obtenerActividadesRecientes($limite = 7) {
     $sql = "SELECT 
                 a.id_userSys AS UsuarioID,
                 CONCAT(u.nombres_sys, ' ', u.apellidos_sys) AS Usuario,

@@ -146,8 +146,10 @@ require_once('../../backend/config/conexion.php');
                                     <p class="mb-1"><strong class="text-danger">Ocupados:</strong> <span class="font-weight-bold" id="cupos-ocupados-sup">65</span></p>
                                     <p class="mb-0"><strong class="text-success">Disponibles:</strong> <span class="font-weight-bold" id="cupos-disponibles-sup">35</span></p> -->
 
+                                    
+                                    <div class="card-body"
                                     <div class="row mb-4">
-                                        <div class="card card-resumen-general bg-resumen-usuarios-parqueadero border-0 w-100">
+                                        <div class="card card-resumen-general bg-resumen-accesos-hoy border-0 w-100" >
                                         <div class="card-body">
                                             <h5 class="card-title">Usuarios Parqueadero</h5>
                                             <p class="card-text font-weight-bold" style="font-size: 1.5em;">
@@ -157,7 +159,7 @@ require_once('../../backend/config/conexion.php');
                                     </div>
                                     </div>
 
-                                    <div class="card card-resumen-general bg-resumen-accesos-hoy border-0 w-100">
+                                    <div class="card card-resumen-general bg-resumen-salidas-hoy border-0 w-100">
                                     <div class="card-body">
                                         <h5 class="card-title">Accesos Hoy</h5>
                                         <p class="card-text font-weight-bold" style="font-size: 1.5em;">
@@ -167,7 +169,7 @@ require_once('../../backend/config/conexion.php');
                                     </div>
 
 
-                                    <div class="card card-resumen-general bg-resumen-salidas-hoy border-0 w-100">
+                                    <div class="card card-resumen-general bg-resumen-usuarios-parqueadero border-0 w-100">
                                     <div class="card-body">
                                         <h5 class="card-title">Salidas Hoy</h5>
                                         <p class="card-text font-weight-bold" style="font-size: 1.5em;">
@@ -180,7 +182,7 @@ require_once('../../backend/config/conexion.php');
                         </div>
 
                         <!-- Detalles adicionales de las actividades recientes -->
-                        <div class="col-md-7">
+                        <div class="col-md-8">
                             <div class="card card-cupos-resumen">
                                 <div class="card-header">
                                     Actividades de Usuarios
