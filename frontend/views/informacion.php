@@ -14,7 +14,7 @@ if (!isset($_SESSION['rol'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SENAParking - Información</title>
+    <title>Información | SENAParking</title>
     <meta name="author" content="AdsoDeveloperSolutions801">
     <meta name="course" content="ADSO 2873801">
     <!-- Favicon que aparece en la pestaña del navegador -->

@@ -12,7 +12,6 @@ $usuarios = $usuarioPark->obtenerUsuarios();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=
     , initial-scale=1.0">
-    <title>Document</title>
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <!-- Enlace al archivo de estilos personalizados -->

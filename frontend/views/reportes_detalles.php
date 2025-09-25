@@ -21,7 +21,7 @@ if (!isset($_SESSION['rol'])) {
     <link rel="stylesheet" href="../public/css/bootstrap.min.css">
     <!-- Enlace a los estilos personalizados del proyecto -->
     <link rel="stylesheet" href="../public/css/styles_dashboard.css"">
-    <title>Detalle del Usuario</title>
+    <title>Detalles de Usuario | SENAParking</title>
 </head>
 <body>
   <!-- Contenedor del header (se carga dinámicamente con JS externo) -->
