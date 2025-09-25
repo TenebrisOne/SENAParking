@@ -14,287 +14,344 @@ if (!isset($_SESSION['rol'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Información Dinámica - Sistema de Parqueadero</title>
+    <title>SENAParking - Información</title>
+    <meta name="author" content="AdsoDeveloperSolutions801">
+    <meta name="course" content="ADSO 2873801">
+    <!-- Favicon que aparece en la pestaña del navegador -->
     <link rel="icon" type="x-icon" href="../public/images/favicon.ico">
-    <link href="/frontend/public/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="sityles_views.css">
-
+    <link rel="stylesheet" href="../public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        /* Fondo plano sobrio */
+
+        :root {
+            --color-primary: #39A900;
+            --color-primary-dark: #007832;
+            --color-secondary: #00304D;
+            --color-accent: #71277A;
+            --color-highlight: #50E5F9;
+            --color-warning: #FDC300;
+            --color-black: #000000;
+        }
+        
         body {
-            background: #e3f0e3; /* Verde oscuro sobrio */
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, rgba(0, 48, 77, 0.8) 0%, rgba(113, 39, 122, 0.6) 100%);
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: white;
+            overflow-x: hidden;
         }
-
-        /* Contenedor principal con color plano */
-        .info-container {
-            max-width: 900px;
-            margin: 60px auto;
-            background: linear-gradient(135deg, rgba(80, 229, 249, 0.3), rgba(255, 255, 255, 0.9), rgba(253, 195, 0, 0.3) );
-            padding: 40px;
-            border-radius: 25px;
-            box-shadow: 0 10px 35px rgba(113, 39, 122, 0.2);
-            position: relative;
-            overflow: hidden;
-            animation: pulse 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.02); }
-        }
-
-        .info-header {
-            background: #39A900;
-            color: #ececec; /* Color oscuro para mayor contraste */
-            padding: 30px;
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .header-section {
             text-align: center;
-            font-size: 2.2rem;
-            font-weight: 800; /* Mayor peso para legibilidad */
-            margin-bottom: 40px;
+            padding: 2rem 0;
             position: relative;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); /* Sombra para resaltar */
         }
-
-        .info-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            animation: shine 2.5s infinite;
+        
+        .logo-badge {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+            width: 95px;
+            height: 95px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            box-shadow: 0 0 30px rgba(57, 169, 0, 0.4);
+            animation: pulse 2s infinite;
         }
-
-        @keyframes shine {
-            0% { left: -100%; }
-            50% { left: 100%; }
-            100% { left: 100%; }
+        
+        .logo-badge i {
+            font-size: 2rem;
+            color: white;
         }
-
-        .info-card {
-            background: linear-gradient(135deg, #ffffff, rgba(57, 169, 0, 0.2));
-            border: 3px solid #FDC300;
+        
+        .version-tag {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.25rem 0.75rem;
             border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .info-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 25px rgba(80, 229, 249, 0.3);
-            border-color: #39A900;
-        }
-
-        .info-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(113, 39, 122, 0.1), transparent);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .info-card:hover::before {
-            opacity: 1;
-        }
-
-        .info-card h3 {
-            color: #2e2f30; /* Color más oscuro para contraste */
-            font-weight: 800; /* Mayor peso para legibilidad */
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-            position: relative;
+            font-size: 0.875rem;
             display: inline-block;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* Sombra para resaltar */
+            margin-top: 0.5rem;
         }
-
-        .info-card h3::after {
+        
+        .description-text {
+            line-height: 1.6;
+            font-size: 1.1rem;
+            margin: 1.5rem 0;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .developer-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .developer-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.05);
+            border-color: rgba(80, 229, 249, 0.3);
+        }
+        
+        .developer-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-highlight), var(--color-warning));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            color: var(--color-black);
+            font-weight: bold;
+        }
+        
+        .developer-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .license-section {
+            background: linear-gradient(135deg, rgba(57, 169, 0, 0.2), rgba(0, 120, 50, 0.2));
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-link {
+            color: var(--color-highlight);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-link:hover {
+            color: var(--color-warning);
+            text-decoration: underline;
+            transform: translateX(5px);
+        }
+        
+        .floating-element {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(57, 169, 0, 0.4); }
+            50% { box-shadow: 0 0 50px rgba(57, 169, 0, 0.6); }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .stagger-item:nth-child(1) { animation-delay: 0.1s; }
+        .stagger-item:nth-child(2) { animation-delay: 0.2s; }
+        .stagger-item:nth-child(3) { animation-delay: 0.3s; }
+        .stagger-item:nth-child(4) { animation-delay: 0.4s; }
+        .stagger-item:nth-child(5) { animation-delay: 0.5s; }
+        
+        .copyright-text {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+        
+        .team-section {
+            margin: 3rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .section-title::after {
             content: '';
             position: absolute;
-            bottom: -6px;
-            left: 0;
-            width: 60%;
-            height: 4px;
-            background: linear-gradient(90deg, #50E5F9, #FDC300);
-            transition: width 0.4s ease;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, var(--color-primary), var(--color-highlight));
+            border-radius: 2px;
         }
-
-        .info-card:hover h3::after {
-            width: 100%;
-        }
-
-        .info-card p {
-            color: #1a1a1a; /* Color más oscuro para mayor contraste */
-            font-size: 1.2rem;
-            line-height: 1.8;
-            font-weight: 500; /* Peso medio para mejor legibilidad */
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Sombra sutil */
-        }
-
-        .contact-section {
-            background: linear-gradient(135deg, rgba(113, 39, 122, 0.9), rgba(155, 71, 157, 0.7));
+        
+        .mac-style {
             border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            color: #ffffff;
-            margin-top: 30px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-            position: relative;
-            animation: bounceIn 1.5s ease-in-out;
+            overflow: hidden;
         }
-
-        @keyframes bounceIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            60% { transform: scale(1.05); opacity: 1; }
-            100% { transform: scale(1); }
+        
+        .mac-header {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            display: flex;
+            gap: 0.5rem;
         }
-
-        .contact-section a {
-            color: #FDC300;
-            text-decoration: none;
-            font-weight: 700;
-            transition: color 0.3s ease, transform 0.3s ease;
+        
+        .mac-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
         }
-
-        .contact-section a:hover {
-            color: #39A900;
-            transform: scale(1.05);
-        }
-
-        .contact-section h3, .contact-section p {
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4); /* Sombra para mayor contraste */
-            font-weight: 600; /* Peso para legibilidad */
-        }
-
-        .back-arrow {
-            position: absolute;
-            top: 25px;
-            left: 25px;
-            font-size: 45px;
-            cursor: pointer;
-            color: #FDC300;
-            transition: color 0.3s ease, transform 0.3s ease;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra para contraste */
-        }
-
-        .back-arrow:hover {
-            color: #50E5F9;
-            transform: rotate(-10deg) scale(1.15);
-        }
-
-        .feature-list li {
-            margin-bottom: 12px;
-            position: relative;
-            padding-left: 30px;
-            font-size: 1.2rem;
-            color: #1a1a1a; /* Color oscuro para contraste */
-            font-weight: 500;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Sombra sutil */
-        }
-
-        .feature-list li::before {
-            content: '🚗';
-            position: absolute;
-            left: 0;
-            color: #39A900;
-            font-size: 1.3rem;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Sombra para contraste */
-        }
-
-        .highlight {
-            color: #00304D; /* Color más oscuro y vibrante para resaltar */
-            font-weight: 700;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Sombra para contraste */
-        }
-
-        @media (max-width: 768px) {
-            .info-container {
-                width: 95%;
-                padding: 25px;
-            }
-
-            .info-header {
-                font-size: 1.8rem;
-                padding: 20px;
-            }
-
-            .info-card {
-                padding: 20px;
-                border-width: 2px;
-            }
-
-            .info-card h3 {
-                font-size: 1.5rem;
-            }
-
-            .back-arrow {
-                font-size: 35px;
-                left: 15px;
-                top: 15px;
-            }
-
-            .contact-section {
-                padding: 20px;
-            }
+        
+        .red-button { background: #ff5f57; }
+        .yellow-button { background: #ffbd2e; }
+        .green-button { background: #28c940; }
+        
+        .content-wrapper {
+            padding: 2rem;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Flecha de retroceso -->
-        <a href="./../login.php" class="back-arrow">&#8678;</a>
-
-        <!-- Contenedor principal -->
-        <div class="info-container">
-            <div class="info-header">
-                ¡Explora el Sistema de Parqueadero!
+    <div class="container py-5">
+        <div class="glass-card mac-style fade-in">
+            <div class="mac-header">
+                <div class="mac-button red-button"></div>
+                <div class="mac-button yellow-button"></div>
+                <div class="mac-button green-button"></div>
             </div>
+            <div class="content-wrapper">
+                <!-- Header Section -->
+                <div class="header-section">
+                    <div class="logo-badge floating-element">
+                        <img src="../../frontend/public/images/logo.png" alt="Logo SENAParking"
+        style="max-width: 100%; height: auto; display: block; margin: 0 auto; margin-left: 10px;">
+                    </div>
+                    <h1 class="display-5 fw-bold">SENAParking</h1>
+                    <div class="version-tag">v1.0-alfa</div>
+                    <p class="text-muted">Sistema de Gestión de Parqueaderos del SENA</p>
+                </div>
 
-            <!-- Card: Propósito del Sistema -->
-            <div class="info-card">
-                <h3>Nuestra Misión</h3>
-                <p>
-                    Revolucionamos la gestión de estacionamientos con una plataforma <span class="highlight">moderna, colorida y eficiente</span>. Facilitamos el control de vehículos, accesos y reportes, asegurando una experiencia <span class="highlight">fluida y segura</span> para todos los usuarios.
-                </p>
-            </div>
+                <!-- Description -->
+                <div class="text-center description-text fade-in" style="animation-delay: 0.3s;">
+                    SENAParking es una solución desarrollada para optimizar y controlar la gestión del parqueadero del Instituto Educativo SENA. Permite registrar vehículos, gestionar accesos y generar reportes de uso de manera eficiente y segura.
+                </div>
 
-            <!-- Card: Características Principales -->
-            <div class="info-card">
-                <h3>¿Por Qué Elegirnos?</h3>
-                <ul class="feature-list">
-                    <li>Gestión <span class="highlight">intuitiva</span> de usuarios y vehículos.</li>
-                    <li>Control de accesos y salidas en <span class="highlight">tiempo real</span>.</li>
-                    <li>Reportes <span class="highlight">vibrantes</span> y personalizables.</li>
-                    <li>Diseño <span class="highlight">responsivo</span> para cualquier dispositivo.</li>
-                    <li><span class="highlight">Seguridad</span> avanzada con validación de datos.</li>
-                </ul>
-            </div>
+                <!-- Team Section -->
+                <div class="team-section">
+                    <h2 class="section-title">Desarrollado por</h2>
+                    <div class="row g-4">
+                        <div class="col-12 col-md-6 col-lg-4 stagger-item fade-in">
+                            <div class="developer-card">
+                                <div class="developer-avatar">CR</div>
+                                <div class="developer-name">Cristian Ruiz</div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 stagger-item fade-in">
+                            <div class="developer-card">
+                                <div class="developer-avatar">NB</div>
+                                <div class="developer-name">Nicol Barragán</div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 stagger-item fade-in">
+                            <div class="developer-card">
+                                <div class="developer-avatar">FC</div>
+                                <div class="developer-name">Felipe Colmenares</div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 stagger-item fade-in">
+                            <div class="developer-card">
+                                <div class="developer-avatar">JH</div>
+                                <div class="developer-name">Juan Harrington</div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 stagger-item fade-in">
+                            <div class="developer-card">
+                                <div class="developer-avatar">JV</div>
+                                <div class="developer-name">José Villaveces</div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 stagger-item fade-in">
+                            <div class="developer-card">
+                                <div class="developer-avatar">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <div class="developer-name">DeveloperSOLUTIONS801</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            <!-- Card: Contacto -->
-            <div class="contact-section">
-                <h3>¡Hablemos!</h3>
-                <p>
-                    ¿Listo para llevar tu estacionamiento al siguiente nivel? Contáctanos:<br>
-                    <a href="mailto:soporte@parqueadero.com">soporte@parqueadero.com</a><br>
-                    Teléfono: <span class="highlight">+123 456 7890</span><br>
-                    <a>v1.0-alfa</a>
-                </p>
+                <!-- License Section -->
+                <div class="license-section fade-in" style="animation-delay: 0.8s;">
+                    <h3 class="text-center mb-3">Licencia</h3>
+                    <p class="text-center mb-3">Licencia de Propiedad Privada</p>
+                    <p class="text-center mb-3">© 2025 DeveloperSOLUTIONS801. Todos los derechos reservados.</p>
+                    <p class="text-center mb-3">
+                        Este software, incluyendo su código fuente, documentación y diseño, es propiedad exclusiva de DeveloperSOLUTIONS801. 
+                        Su uso está limitado a personas o entidades autorizadas. Cualquier reproducción, modificación o distribución no autorizada está prohibida.
+                    </p>
+                    <div class="text-center">
+                        <a href="../../LICENSE" class="contact-link">
+                            <i class="fas fa-file-contract me-2"></i>Ver Licencia Completa
+                        </a>
+                        <p class="mt-2">
+                            o contacta a: 
+                            <a href="soporte-info@developersolutions801.com" class="contact-link">
+                                soporte-info@developersolutions801.com
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Copyright -->
+                <div class="text-center copyright-text fade-in" style="animation-delay: 1s;">
+                    Diseñado con ❤️ para el SENA • Sistema de Gestión de Parqueaderos
+                </div>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Add staggered animation to all fade-in elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach((element, index) => {
+                if (!element.style.animationDelay) {
+                    element.style.animationDelay = (index * 0.1) + 's';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
