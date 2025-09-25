@@ -9,6 +9,7 @@ $accesosHoy = $modelo->contarAccesosHoy();
 $salidasHoy = $modelo->contarSalidasHoy();
 
 $actividades = $modelo->obtenerActividadesRecientes(); // puedes pasar un número si quieres otro límite
+$vehiculosHoy = $modelo->obtenerVehiculosHoy(); 
 
 
 // Reporte dinámico

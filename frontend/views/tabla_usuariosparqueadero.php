@@ -72,7 +72,7 @@ $usuarios = $usuarioPark->obtenerUsuarios();
             "searching": true,
             "info": false,
             "lengthChange": false,
-            "pageLength": 4
+            "pageLength": 3
         });
     </script>
 </body>
