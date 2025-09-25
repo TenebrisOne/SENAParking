@@ -128,13 +128,13 @@ require_once('../../backend/config/conexion.php');
                         <!-- Elemento de navegación para cerrar sesión -->
                         <li class="nav-item">
                             <a class="nav-link" href="/SENAParking/logout.php">
-        <!-- Ícono de cerrar sesión usando SVG -->
-        <svg xmlns=" http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="feather feather-log-out">
-                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                                <polyline points="16 17 21 12 16 7" />
-                                <line x1="21" y1="12" x2="9" y2="12" />
+                                <!-- Ícono de cerrar sesión usando SVG -->
+                                <svg xmlns=" http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-log-out">
+                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                                    <polyline points="16 17 21 12 16 7" />
+                                    <line x1="21" y1="12" x2="9" y2="12" />
                                 </svg>
                                 Cerrar sesión
                             </a>
@@ -165,7 +165,7 @@ require_once('../../backend/config/conexion.php');
                                     <p><strong>Cupos Disponibles:</strong> <span class="text-success font-weight-bold" id="cupos-disponibles">35</span></p> -->
 
 
-                                    <div class="card-body"  
+                                    <div class="card-body"
                                         <div class="row mb-4">
                                         <div class="card card-resumen-general border-0 w-100" style="background: linear-gradient(135deg, #71277A, #9B479D);">
                                             <div class="card-body" style="color: #FFEA80;">
@@ -201,85 +201,95 @@ require_once('../../backend/config/conexion.php');
 
                         <!-- Tarjeta de Registro de Acceso -->
                         <div class="col-md-8">
-                        <div class="card card-gestion-usuarios">
-                            <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="mb-0">Gestión de Usuarios Parqueadero</h5>
+                            <div class="card card-gestion-usuarios">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">Gestión de Usuarios Parqueadero</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p class="text-muted">Administrar los usuarios con acceso al parqueadero (servidor público, contratista,
+                                        trabajador oficial, visitante autorizado, aprendiz).</p>
+                                    <?php include 'tabla_usuariosparqueadero.php'; ?>
+                                    <a href="/SENAParking/frontend/views/reg_userParking.php" class="btn btn-registrar-usuario btn-sm mt-2">Registrar Nuevo Usuario</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- vehículos ingresados -->
+                    <div class="col-md-12">
+                        <div class="card card-cupos-resumen">
+                            <div class="card-header">
+                                Vehículos ingresados
                             </div>
                             <div class="card-body">
-                                <p class="text-muted">Administrar los usuarios con acceso al parqueadero (servidor público, contratista,
-                                    trabajador oficial, visitante autorizado, aprendiz).</p>
-                                <?php include 'tabla_usuariosparqueadero.php'; ?>
-                                <a href="/SENAParking/frontend/views/reg_userParking.php" class="btn btn-registrar-usuario btn-sm mt-2">Registrar Nuevo Usuario</a>
+                                <!-- Información de los vehículos ingresados -->
+                                <?php if (!empty($vehiculosHoy)): ?>
+                                    <table id="tablaVehiculos" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                                        <thead>
+                                            <tr>
+                                                <th style="background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Usuario</th>
+                                                <th style="background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Placa</th>
+                                                <th style="background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Tipo</th>
+                                                <th style="background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Modelo</th>
+                                                <th style="background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Color</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($vehiculosHoy as $vehiculo): ?>
+                                                <tr>
+                                                    <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">
+                                                        <?= htmlspecialchars($vehiculo['Usuario']) ?>
+                                                    </td>
+                                                    <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">
+                                                        <?= htmlspecialchars($vehiculo['Placa']) ?>
+                                                    </td>
+                                                    <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">
+                                                        <?= htmlspecialchars($vehiculo['Tipo']) ?>
+                                                    </td>
+                                                    <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">
+                                                        <?= htmlspecialchars($vehiculo['Modelo']) ?>
+                                                    </td>
+                                                    <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">
+                                                        <?= htmlspecialchars($vehiculo['Color']) ?>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+
+
+                                    <!-- Botones -->
+                                    <div id="paginacion">
+                                        <button id="btnAnterior">Anterior</button>
+                                        <button id="btnSiguiente">Siguiente</button>
+                                        <span id="infoPagina"></span>
+                                    </div>
+
+
+                                <?php else: ?>
+                                    <p style="margin-top: 15px;">No hay vehículos ingresados recientemente.</p>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
-                    </div>
 
-
-<!-- vehículos ingresados -->
-<div class="col-md-12">
-    <div class="card card-cupos-resumen">
-        <div class="card-header">
-            Vehículos ingresados
-        </div>
-        <div class="card-body">
-            <!-- Información de los vehículos ingresados -->
-            <?php if (!empty($vehiculosHoy)): ?>
-                <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-                    <thead>
-                        <tr>
-                            <th style="background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Usuario</th>
-                            <th style="background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Placa</th>
-                            <th style="background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Tipo</th>
-                            <th style="background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Modelo</th>
-                            <th style="background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Color</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($vehiculosHoy as $vehiculo): ?>
-                            <tr>
-                                <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">
-                                    <?= htmlspecialchars($vehiculo['Usuario']) ?>
-                                </td>
-                                <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">
-                                    <?= htmlspecialchars($vehiculo['Placa']) ?>
-                                </td>
-                                <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">
-                                    <?= htmlspecialchars($vehiculo['Tipo']) ?>
-                                </td>
-                                <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">
-                                    <?= htmlspecialchars($vehiculo['Modelo']) ?>
-                                </td>
-                                <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">
-                                    <?= htmlspecialchars($vehiculo['Color']) ?>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            <?php else: ?>
-                <p style="margin-top: 15px;">No hay vehículos ingresados recientemente.</p>
-            <?php endif; ?>
+                </div>
         </div>
     </div>
-</div>
-
-                                </div>
-                            </div>
-                        </div>
 
 
 
 
 
-                                </div>
-                            </div>
-                        </div>
+    </div>
+    </div>
+    </div>
 
-                        
-                    <div class="row">
-                        <!-- Tarjeta de Registro de Salida -->
-                        <!--<div class="col-md-6">
+
+    <div class="row">
+        <!-- Tarjeta de Registro de Salida -->
+        <!--<div class="col-md-6">
                             <div class="card card-registro-salida">
                                 <div class="card-header">
                                     Registro de Salida
@@ -289,7 +299,7 @@ require_once('../../backend/config/conexion.php');
                                         <div class="form-group">
                                             <label for="placa-salida">Placa del Vehículo:</label>
                                             <input type="text" class="form-control" id="placa-salida" required> Campo para ingresar la placa -->
-                                       <!-- </div>
+        <!-- </div>
                                         <button type="submit" class="btn btn-registro-salida">Registrar Salida</button>
                                     </form>
                                 </div>
@@ -297,7 +307,7 @@ require_once('../../backend/config/conexion.php');
                         </div>
 
                         Tarjeta de Usuarios Registrados -->
-                        <!--<div class="col-md-6">
+        <!--<div class="col-md-6">
                             <div class="card card-usuarios">
                                 <div class="card-header">
                                     Usuarios del Parqueadero
@@ -311,10 +321,10 @@ require_once('../../backend/config/conexion.php');
                                 </div>
                             </div>
                         </div>-->
-                    </div>
-                </div>
-            </main>
-        </div>
+    </div>
+    </div>
+    </main>
+    </div>
     </div>
 
     <!-- Función para insertar el header dinámicamente -->
@@ -323,8 +333,8 @@ require_once('../../backend/config/conexion.php');
     <!-- Cargar los scripts necesarios de jQuery y Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="/frontend/public/js/bootstrap.min.js"></script>
-    <script src="script.js"></script> <!-- Script principal -->
+    <script src="./../public/js/bootstrap.min.js"></script>
+    <script src="./../public/js/nextPrev_tb.js"></script>
 
     <!-- script para que cuando se cierre la sesion refresque la ventana -->
     <script src="../public/js/ref_cierre.js"></script>

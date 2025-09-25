@@ -85,7 +85,7 @@ public function obtenerActividadesRecientes($limite = 7) {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-public function obtenerVehiculosHoy($limite = 4) {
+public function obtenerVehiculosHoy() {
         $sql = "SELECT 
                     a.id_userPark AS UsuarioID,
                     CONCAT(u.nombres_park, ' ', u.apellidos_park) AS Usuario,
@@ -96,10 +96,10 @@ public function obtenerVehiculosHoy($limite = 4) {
                 FROM tb_vehiculos a
                 INNER JOIN tb_userpark u ON a.id_userPark = u.id_userPark 
                 ORDER BY a.id_vehiculo DESC
-                LIMIT :limite";
+                ";
 
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindValue(':limite', (int)$limite, PDO::PARAM_INT);
+        
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
