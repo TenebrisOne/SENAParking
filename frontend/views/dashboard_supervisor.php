@@ -162,7 +162,7 @@ require_once('../../backend/config/conexion.php');
                                     </div>
 
                                     <div class="card card-resumen-general border-0 w-100" style="background: linear-gradient(135deg, #FFD700, #FFEA80);">
-                                        <div class="card-body">
+                                        <div class="card-body" style="color: #71277A;">
                                             <h5 class="card-title">Accesos Hoy</h5>
                                             <p class="card-text font-weight-bold" style="font-size: 1.5em;">
                                                 <?php echo isset($accesosHoy) ? $accesosHoy : 0; ?>
@@ -172,7 +172,7 @@ require_once('../../backend/config/conexion.php');
 
 
                                     <div class="card card-resumen-general border-0 w-100" style="background: linear-gradient(135deg, #71277A, #9B479D);">
-                                        <div class="card-body">
+                                        <div class="card-body" style="color: #FFEA80;">
                                             <h5 class="card-title">Salidas Hoy</h5>
                                             <p class="card-text font-weight-bold" style="font-size: 1.5em;">
                                                 <?php echo isset($salidasHoy) ? $salidasHoy : 0; ?>
