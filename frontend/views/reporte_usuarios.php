@@ -14,7 +14,10 @@ if (!isset($_SESSION['rol'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reporte de Usuarios | SENAParking</title>
-    <link rel="icon" type="x-icon" href="../public/images/favicon.ico">
+    <meta name="author" content="AdsoDeveloperSolutions801"> <!-- Define al autor de la página -->
+    <meta name="course" content="ADSO 2873801"> <!-- Define el curso -->
+    <!-- Favicon que se muestra en la pestaña del navegador -->
+    <link rel="icon" type="x-icon" href="../../frontend/public/images/favicon.ico">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../public/css/sityles_views.css">
@@ -100,6 +103,9 @@ if (!isset($_SESSION['rol'])) {
             color: white;
         }
     </style>
+
+
+
 </head>
 
 <body class="bg-light">
@@ -111,7 +117,7 @@ if (!isset($_SESSION['rol'])) {
                 <button class="btn btn-secondary" onclick="goBack()">
                     <i class="fas fa-arrow-left me-2"></i>Volver
                 </button>
-                <img src="../public/images/logo_sena.png" alt="Logo SENA" style="width: 80px;">
+                <img src="../../frontend/public/images/logo_sena.png" alt="Logo SENA" style="width: 80px;">
             </div>
 
             <div class="header-section text-center">
@@ -183,10 +189,34 @@ if (!isset($_SESSION['rol'])) {
         </div>
     </div>
 
+    
+    <script>
+
+    // Cargar el contenido del header desde un archivo HTML externo
+fetch("../../frontend/views/layouts/header.php")
+
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('header-container').innerHTML = data;
+    })
+    .catch(error => console.error('Error al cargar el header:', error));
+    
+
+// Función para retroceder en el historial del navegador
+function goBack() {
+    window.history.back();
+
+}
+
+    </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="../public/js/scriptsDOM.js"></script>
 
     <script>
+
+
+
         // Funciones JS básicas para navegación y UI, el contenido dinámico lo inyecta el controlador PHP
         document.addEventListener('DOMContentLoaded', function() {
             if (typeof loadHeader === 'function') {

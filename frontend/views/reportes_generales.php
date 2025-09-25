@@ -13,7 +13,14 @@ if (!isset($_SESSION['rol'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reportes Generales | SENAParking</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+        <meta name="author" content="AdsoDeveloperSolutions801"> <!-- Define al autor de la página -->
+    <meta name="course" content="ADSO 2873801"> <!-- Define el curso -->
+
+    <!-- Favicon que se muestra en la pestaña del navegador -->
+    <link rel="icon" type="x-icon" href="../../frontend/public/images/favicon.ico">
+
+    <!-- Enlace al archivo de Bootstrap para proporcionar estilos prediseñados -->
+    <link rel="stylesheet" href="../../frontend/public/css/bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../public/css/sityles_views.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -99,6 +106,11 @@ if (!isset($_SESSION['rol'])) {
 </head>
 
 <body class="bg-light">
+
+    <!-- Contenedor donde se insertará el header dinámicamente -->
+    <div id="header-container"></div>
+
+
     <div id="loadingIndicator" class="loading-overlay" style="display: none;">
         <div class="spinner-border text-primary" role="status">
             <span class="visually-hidden">Cargando...</span>
@@ -112,7 +124,7 @@ if (!isset($_SESSION['rol'])) {
                 <button class="btn btn-secondary" onclick="goBack()">
                     <i class="fas fa-arrow-left me-2"></i>Volver a Usuarios
                 </button>
-                <img src="../public/images/logo_sena.png" alt="Logo SENA" style="width: 80px;">
+                <img src="../../frontend/public/images/logo_sena.png" alt="Logo SENA" style="width: 80px;">
             </div>
 
             <div class="header-section text-center">
@@ -158,7 +170,7 @@ if (!isset($_SESSION['rol'])) {
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <script src="../public/js/scriptsDOM.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const generalReportsContent = document.getElementById('generalReportsContent');
@@ -186,6 +198,27 @@ if (!isset($_SESSION['rol'])) {
         <canvas id="graficoReservados"></canvas>
       </div>
     </div>
+
+    
+    <script>
+
+    // Cargar el contenido del header desde un archivo HTML externo
+fetch("../../frontend/views/layouts/header.php")
+
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('header-container').innerHTML = data;
+    })
+    .catch(error => console.error('Error al cargar el header:', error));
+    
+
+// Función para retroceder en el historial del navegador
+function goBack() {
+    window.history.back();
+
+}
+
+    </script>
 
     <!-- Botón para volver a detalle del usuario -->
   
