@@ -11,6 +11,10 @@ if ($_SESSION["rol"] != 3) {
     header("Location: ../../login.php");
 }
 
+// cargamos
+require_once __DIR__ . '/../../backend/controllers/MostrarDatosController.php';
+require_once('../../backend/config/conexion.php');
+
 ?>
 
 <!DOCTYPE html>
@@ -151,21 +155,53 @@ if ($_SESSION["rol"] != 3) {
                     <!-- Fila de tarjetas con la información relevante -->
                     <div class="row">
                         <!-- Tarjeta de Disponibilidad de Cupos -->
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="card card-disponibilidad">
                                 <div class="card-header">
                                     Disponibilidad de Cupos
                                 </div>
                                 <div class="card-body">
-                                    <p><strong>Total de Cupos:</strong> <span id="total-cupos">100</span></p>
+                                    <!-- <p><strong>Total de Cupos:</strong> <span id="total-cupos">100</span></p>
                                     <p><strong>Cupos Ocupados:</strong> <span class="text-danger" id="cupos-ocupados">65</span></p>
-                                    <p><strong>Cupos Disponibles:</strong> <span class="text-success font-weight-bold" id="cupos-disponibles">35</span></p>
+                                    <p><strong>Cupos Disponibles:</strong> <span class="text-success font-weight-bold" id="cupos-disponibles">35</span></p> -->
+
+
+                                    <div class="card-body"
+                                        <div class="row mb-4">
+                                        <div class="card card-resumen-general border-0 w-100" style="background: linear-gradient(135deg, #39A900, #66CC33);">
+                                            <div class="card-body" style="color: #ffffffff;">
+                                                <h5 class="card-title">Usuarios Parqueadero</h5>
+                                                <p class="card-text font-weight-bold" style="font-size: 1.5em;">
+                                                    <?php echo isset($totalUsuariosParqueadero) ?       $totalUsuariosParqueadero : 0; ?>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card card-resumen-general border-0 w-100" style="background: linear-gradient(135deg, #FFD700, #FFEA80);">
+                                        <div class="card-body" style="color: #71277A;">
+                                            <h5 class="card-title">Accesos Hoy</h5>
+                                            <p class="card-text font-weight-bold" style="font-size: 1.5em;">
+                                                <?php echo isset($accesosHoy) ? $accesosHoy : 0; ?>
+                                            </p>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="card card-resumen-general border-0 w-100" style="background: linear-gradient(135deg, #71277A, #9B479D);">
+                                        <div class="card-body" style="color: #FFEA80;">
+                                            <h5 class="card-title">Salidas Hoy</h5>
+                                            <p class="card-text font-weight-bold" style="font-size: 1.5em;">
+                                                <?php echo isset($salidasHoy) ? $salidasHoy : 0; ?>
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Tarjeta de Registro de Acceso -->
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                         <div class="card card-gestion-usuarios">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h5 class="mb-0">Gestión de Usuarios Parqueadero</h5>
@@ -180,6 +216,12 @@ if ($_SESSION["rol"] != 3) {
                     </div>
                     </div>
 
+
+                                </div>
+                            </div>
+                        </div>
+
+                        
                     <div class="row">
                         <!-- Tarjeta de Registro de Salida -->
                         <!--<div class="col-md-6">
