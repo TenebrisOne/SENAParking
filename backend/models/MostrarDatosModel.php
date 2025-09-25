@@ -85,7 +85,7 @@ public function obtenerActividadesRecientes($limite = 7) {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-public function obtenerVehiculosHoy($limite = 7) {
+public function obtenerVehiculosHoy($limite = 4) {
         $sql = "SELECT 
                     a.id_userPark AS UsuarioID,
                     CONCAT(u.nombres_park, ' ', u.apellidos_park) AS Usuario,
