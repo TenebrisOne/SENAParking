@@ -18,7 +18,7 @@ if (isset($_SESSION['correo'])) {
 
     if ($result->num_rows > 0) {
         $usuario = $result->fetch_assoc();
-        $actividadModel->registrarActividad($usuario['id_userSys'], 'Cierre de sesion');
+        $actividadModel->registrarActividad($usuario['id_userSys'], 'Cierre de sesión');
     }
 }
 

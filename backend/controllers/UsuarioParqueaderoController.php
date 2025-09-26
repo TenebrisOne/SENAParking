@@ -1,6 +1,13 @@
 <?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start(); // ✅ solo se ejecuta si no hay sesión activa
+}
+
 require_once('../config/conexion.php');
 require_once('../models/UsuarioParqueaderoModel.php');
+require_once('../models/ActividadModel.php');
+
+$actividadModel = new ActividadModel($conn);
 
 $usuarioPark = new UsuarioParqueadero($conn);
 
@@ -18,10 +25,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre']) && !isset($
     $registrado = $usuarioPark->registrarUsuario($tipo_user, $tipdoc, $documento, $nombre, $apellido, $edificio, $numero, $estado);
 
     if ($registrado) {
-       echo("Registro de usuario exitosamente");
+        $actividadModel->registrarActividad(['id_userSys'], 'Se registró un usuario del parqueadero');
+        echo ("Registro de usuario exitosamente");
         exit;
     } else {
-        echo("Error al registrar usuario");
+        echo ("Error al registrar usuario");
         exit;
     }
 }
@@ -31,7 +39,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id']) && isset($_POST
     $id = $_POST['id'];
     $estado = $_POST['estado']  === 'activo' ? 'activo' : 'inactivo';
 
+
     if ($usuarioPark->cambiarEstado($id, $estado)) {
+        $actividadModel->registrarActividad($usuario['id_userSys'], 'Se cambió el estado de un usuario del parqueadero');        
         header("Location: ../../frontend/views/dashboard_admin.php?mensaje=Estado del usuario actualizado");
     } else {
         header("Location: ../../frontend/views/dashboard_admin.php?mensaje=Error al cambiar estado");
@@ -52,12 +62,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_userPark'])) {
     $resultado = $usuarioPark->actualizarUsuario($id, $tipo_user, $tipdoc, $documento, $nombre, $apellido, $edificio, $numero);
 
     if ($resultado) {
-        echo("Usuario editado exitosamente");
+        $actividadModel->registrarActividad(['id_userSys'], 'Se editó un usuario del parqueadero');
+
+        echo ("Usuario editado exitosamente");
         exit;
     } else {
-        echo("Error al editar usuario");
+        echo ("Error al editar usuario");
         exit;
     }
 }
-
-
