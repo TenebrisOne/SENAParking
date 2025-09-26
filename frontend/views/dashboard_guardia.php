@@ -167,8 +167,8 @@ require_once('../../backend/config/conexion.php');
 
                                     <div class="card-body"
                                         <div class="row mb-4">
-                                        <div class="card card-resumen-general border-0 w-100" style="background: linear-gradient(135deg, #71277A, #9B479D);">
-                                            <div class="card-body" style="color: #FFEA80;">
+                                        <div class="card card-resumen-general border-0 w-100" style="background: linear-gradient(135deg, #007832, #007832);">
+                                            <div class="card-body" style="color: #ffffffff;">
                                                 <h5 class="card-title">Usuarios Parqueadero</h5>
                                                 <p class="card-text font-weight-bold" style="font-size: 1.5em;">
                                                     <?php echo isset($totalUsuariosParqueadero) ?       $totalUsuariosParqueadero : 0; ?>
