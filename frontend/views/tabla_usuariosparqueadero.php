@@ -15,6 +15,7 @@ $usuarios = $usuarioPark->obtenerUsuarios();
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <!-- Enlace al archivo de estilos personalizados -->
+    <title>Usuarios del parqueadero | SENAParking</title>
     <link rel="stylesheet" href="../public/css/styles_dashboard.css">
     <!-- DataTables con Bootstrap 5 -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
