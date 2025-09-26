@@ -54,7 +54,7 @@ if (!isset($_SESSION['rol'])) {
                                 <!-- Etiqueta para el campo de texto, conectada con el input mediante el atributo "for"-->
                     <label for="nombre" class="form-label">Nombres:</label>
                     <input type="text" class="form-control formulario__input" name="nombre" id="nombre" placeholder="Ingrese sus nombres" required>
-                    <p class="formulario__input-error">El nombre tiene que ser de 4 a 80 digitos y solo debe contener letras.</p>
+                    <p class="formulario__input-error">El nombre tiene que ser de 4 a 80 dígitos y solo debe contener letras.</p>
                 </div>
             </div>
 
@@ -62,7 +62,7 @@ if (!isset($_SESSION['rol'])) {
                 <div class="col-12" id="grupo__documento">
                     <label for="cedula" class="form-label">Numero de Documento:</label>
                     <input type="text" class="form-control formulario__input" name="documento" id="documento" placeholder="Ingrese el Numero Documento"required>
-                    <p class="formulario__input-error">El documento tiene que ser de 6 a 10 dígitos y solo debe contener numeros.</p>
+                    <p class="formulario__input-error">El documento tiene que ser de 6 a 10 dígitos y solo debe contener números.</p>
                 </div>
             </div>
             <div class="text-center">

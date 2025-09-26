@@ -91,7 +91,7 @@ if ($_SESSION['rol'] == 3) {
                     <input type="text" class="form-control formulario__input" name="documento" id="documento"
                         placeholder="Ingrese su documento" required>
                     <p class="formulario__input-error">El documento tiene que ser de 6 a 10 dígitos y solo puede
-                        contener numeros.</p>
+                        contener números.</p>
                 </div>
             </div>
             <!--Campo para solicitar el núm de contacto-->
@@ -100,8 +100,8 @@ if ($_SESSION['rol'] == 3) {
                     <label for="numero_contacto" class="form-label">Número contacto:</label>
                     <input type="text" class="form-control formulario__input" name="numero" id="numero"
                         placeholder="Ingrese número de contacto" required>
-                    <p class="formulario__input-error">El numero de contacto tiene que ser de 7 a 14 digitos y solo
-                        puede contener numeros.</p>
+                    <p class="formulario__input-error">El numero de contacto tiene que ser de 7 a 14 dígitos y solo
+                        puede contener números.</p>
                 </div>
                 <!--Campo para solicitar el tipo de usuario-->
                 <div class="col-md-6">

@@ -61,6 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         !empty($vehicle->modelo)
     ) {
         if ($vehicle->update()) {
+            $actividadModel->registrarActividad($usuario['id_userSys'], 'Editó un vehículo');
             echo '<script type="text/javascript">';
             echo 'alert("Vehículo actualizado con éxito.");';
             echo 'window.location.href="../../frontend/views/crud_vehiculos.php";'; // Redirige de vuelta a la lista

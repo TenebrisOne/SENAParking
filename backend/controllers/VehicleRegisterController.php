@@ -31,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         !empty($vehicle->modelo)
     ) {
         if ($vehicle->create()) {
+            $actividadModel->registrarActividad($usuario['id_userSys'], 'Registró un vehículo');
             echo '<script type="text/javascript">';
             echo 'alert("Vehículo registrado con éxito.");';
             echo 'window.location.href="../../frontend/views/crud_vehiculos.php";';

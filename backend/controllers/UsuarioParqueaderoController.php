@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre']) && !isset($
     $registrado = $usuarioPark->registrarUsuario($tipo_user, $tipdoc, $documento, $nombre, $apellido, $edificio, $numero, $estado);
 
     if ($registrado) {
-        $actividadModel->registrarActividad(['id_userSys'], 'Se registró un usuario del parqueadero');
+        $actividadModel->registrarActividad(['id_userSys'], 'Se registró a ' . $nombre . ' ' . $apellido . ' como usuario del parqueadero');
         echo ("Registro de usuario exitosamente");
         exit;
     } else {
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id']) && isset($_POST
 
 
     if ($usuarioPark->cambiarEstado($id, $estado)) {
-        $actividadModel->registrarActividad($usuario['id_userSys'], 'Se cambió el estado de un usuario del parqueadero');        
+        $actividadModel->registrarActividad(['id_userSys'], 'Se cambió el estado del usuario del parqueadero ' . $id . ' a ' . $estado);
         header("Location: ../../frontend/views/dashboard_admin.php?mensaje=Estado del usuario actualizado");
     } else {
         header("Location: ../../frontend/views/dashboard_admin.php?mensaje=Error al cambiar estado");
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_userPark'])) {
     $resultado = $usuarioPark->actualizarUsuario($id, $tipo_user, $tipdoc, $documento, $nombre, $apellido, $edificio, $numero);
 
     if ($resultado) {
-        $actividadModel->registrarActividad(['id_userSys'], 'Se editó un usuario del parqueadero');
+        $actividadModel->registrarActividad(['id_userSys'], 'Modificación realizada en el perfil del usuario del parqueadero: ' . $nombre . ' ' . $apellido);
 
         echo ("Usuario editado exitosamente");
         exit;

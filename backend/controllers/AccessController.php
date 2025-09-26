@@ -62,6 +62,8 @@ if (!empty($id_vehiculo) && !empty($tipo_accion)) {
 
     if ($access->create()) {
         $message = "Acceso registrado exitosamente para el vehículo ID: " . $id_vehiculo . ". Tipo: " . $tipo_accion . ". Espacio asignado: " . $access->espacio_asignado . ". Fecha: " . $access->fecha_hora;
+        $actividadModel->registrarActividad($usuario['id_userSys'], 'Otorgó acceso al vehículo ' . $id_vehiculo);
+
         echo '<script type="text/javascript">';
         echo 'alert("' . $message . '");';
         echo 'window.location.href="../../frontend/views/crud_vehiculos.php";';
@@ -81,4 +83,3 @@ if (!empty($id_vehiculo) && !empty($tipo_accion)) {
     echo '</script>';
     exit();
 }
-?>

@@ -18,7 +18,8 @@ if (!isset($_SESSION['rol'])) {
     <meta name="course" content="ADSO 2873801"> <!-- Define el curso -->
     <!-- Favicon que se muestra en la pestaña del navegador -->
     <link rel="icon" type="x-icon" href="../../frontend/public/images/favicon.ico">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Enlace al archivo de Bootstrap para proporcionar estilos prediseñados -->
+    <link rel="stylesheet" href="../public/css/bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../public/css/sityles_views.css">
     <style>
