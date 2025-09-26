@@ -257,7 +257,7 @@ if (!isset($_SESSION['rol'])) {
         style="max-width: 100%; height: auto; display: block; margin: 0 auto; margin-left: 10px;">
                     </div>
                     <h1 class="display-5 fw-bold">SENAParking</h1>
-                    <div class="version-tag">v1.0-alfa</div>
+                    <div class="version-tag">v1.1.3-alfa</div>
                     <p class="text-muted">Sistema de Gestión de Parqueaderos del SENA</p>
                 </div>
 
