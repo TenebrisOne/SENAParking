@@ -151,7 +151,7 @@ require_once('../../backend/config/conexion.php');
 
                                     <div class="card-body"
                                         <div class="row mb-4">
-                                        <div class="card card-resumen-general border-0 w-100" style="background: linear-gradient(135deg, #39A900, #66CC33);">
+                                        <div class="card card-resumen-general border-0 w-100" style="background: linear-gradient(135deg, #4CAF50, rgba(124, 199, 86, 1));">
                                             <div class="card-body" style="color: #ffffffff;">
                                                 <h5 class="card-title">Usuarios Parqueadero</h5>
                                                 <p class="card-text font-weight-bold" style="font-size: 1.5em;">
