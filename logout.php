@@ -27,6 +27,6 @@ session_unset();
 session_destroy();
 
 // Redirigir al login
-header("Location: index.html");
+header("Location: index.php");
 exit();
 ?>
