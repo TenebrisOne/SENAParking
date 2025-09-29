@@ -242,12 +242,19 @@ if (!isset($_SESSION['rol'])) {
     </style>
 </head>
 <body>
-                        <!-- Flecha de retroceso -->
-    <div class="col-2 col-md-1 text-start">
-        <div class="back-arrow" onclick="goBack()">
-            <i class="fas fa-arrow-left"></i>
-            <a class="nav-link" href="/SENAParking/frontend/views/dashboard_admin.php"></a>
-        </div>
+      <!-- Flecha de retroceso -->
+<div class="col-2 col-md-1 text-start">
+    <div class="back-arrow" onclick="goBack()">
+        <i class="fas fa-arrow-left"></i>
+    </div>
+</div>
+
+<script>
+    function goBack() {
+        // Esto regresa a la página anterior en el historial
+        window.history.back();
+    }
+</script>
     </div>
     <div class="container py-5">
         <div class="glass-card mac-style fade-in">
