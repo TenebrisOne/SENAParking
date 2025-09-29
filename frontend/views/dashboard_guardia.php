@@ -66,7 +66,7 @@ require_once('../../backend/config/conexion.php');
 
                         <!-- Item de navegación para usuarios -->
                         <li class="nav-item">
-                            <a class="nav-link" href="/SENAParking/frontend/views/reg_userSystem.php">
+                            <a class="nav-link" href="/SENAParking/frontend/views/reg_userParking.php">
                                 <!-- Ícono de usuarios usando SVG -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -209,7 +209,7 @@ require_once('../../backend/config/conexion.php');
                                     <p class="text-muted">Administrar los usuarios con acceso al parqueadero (servidor público, contratista,
                                         trabajador oficial, visitante autorizado, aprendiz).</p>
                                     <?php include 'tabla_usuariosparqueadero.php'; ?>
-                                    <a href="/SENAParking/frontend/views/reg_userSystem.php" class="btn btn-registrar-usuario btn-sm mt-2">Registrar Nuevo Usuario</a>
+                                    <a href="/SENAParking/frontend/views/reg_userParking.php" class="btn btn-registrar-usuario btn-sm mt-2">Registrar Nuevo Usuario</a>
                                 </div>
                             </div>
                         </div>
