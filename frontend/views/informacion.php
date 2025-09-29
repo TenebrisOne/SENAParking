@@ -242,6 +242,13 @@ if (!isset($_SESSION['rol'])) {
     </style>
 </head>
 <body>
+                        <!-- Flecha de retroceso -->
+    <div class="col-2 col-md-1 text-start">
+        <div class="back-arrow" onclick="goBack()">
+            <i class="fas fa-arrow-left"></i>
+            <a class="nav-link" href="/SENAParking/frontend/views/dashboard_admin.php"></a>
+        </div>
+    </div>
     <div class="container py-5">
         <div class="glass-card mac-style fade-in">
             <div class="mac-header">
@@ -249,6 +256,7 @@ if (!isset($_SESSION['rol'])) {
                 <div class="mac-button yellow-button"></div>
                 <div class="mac-button green-button"></div>
             </div>
+    
             <div class="content-wrapper">
                 <!-- Header Section -->
                 <div class="header-section">
@@ -260,6 +268,8 @@ if (!isset($_SESSION['rol'])) {
                     <div class="version-tag">v1.1.3-alfa</div>
                     <p class="text-muted">Sistema de Gestión de Parqueaderos del SENA</p>
                 </div>
+
+     
 
                 <!-- Description -->
                 <div class="text-center description-text fade-in" style="animation-delay: 0.3s;">
