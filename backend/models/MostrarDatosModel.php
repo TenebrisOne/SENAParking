@@ -17,8 +17,8 @@ class MostrarDatosModel {
         return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
     }
 
-    public function contarUsuariosParqueadero() {
-        $sql = "SELECT COUNT(*) AS total FROM tb_userpark";
+    public function contarVehiculos() {
+        $sql = "SELECT COUNT(*) AS total FROM tb_vehiculos";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
@@ -46,8 +46,16 @@ class MostrarDatosModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function obtenerUsuariosParqueadero() {
-        $sql = "SELECT id_userPark AS Usuario, nombres_park AS Nombres, apellidos_park AS Apellidos, numero_documento, tipo_user AS tipo_usuario, edificio FROM tb_userpark";
+    public function obtenerVehiculos() {
+        $sql = "SELECT 
+                CONCAT(u.nombres_park, ' ', u.apellidos_park) AS propietario,
+                v.placa,
+                v.tarjeta_propiedad,
+                v.tipo,
+                v.modelo,
+                v.color
+            FROM tb_vehiculos v
+            INNER JOIN tb_userpark u ON v.id_userPark = u.id_userPark";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

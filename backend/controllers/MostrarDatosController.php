@@ -4,13 +4,9 @@ $modelo = new MostrarDatosModel();
 
 // Totales
 $totalUsuariosSistema = $modelo->contarUsuariosSistema();
-$totalUsuariosParqueadero = $modelo->contarUsuariosParqueadero();
+$totalVehiculos = $modelo->contarVehiculos();
 $accesosHoy = $modelo->contarAccesosHoy();
 $salidasHoy = $modelo->contarSalidasHoy();
-
-$actividades = $modelo->obtenerActividadesRecientes(); // puedes pasar un número si quieres otro límite
-$vehiculosHoy = $modelo->obtenerVehiculosHoy(); 
-
 
 // Reporte dinámico
 $tipo = $_POST['tipo'] ?? '';
@@ -19,9 +15,9 @@ switch ($tipo) {
         $titulo = "Usuarios del Sistema";
         $tabla = $modelo->obtenerUsuariosSistema();
         break;
-    case 'usuarios_parqueadero':
-        $titulo = "Usuarios del Parqueadero";
-        $tabla = $modelo->obtenerUsuariosParqueadero();
+    case 'vehiculos_parqueadero':
+        $titulo = "Vehículos del Parqueadero";
+        $tabla = $modelo->obtenerVehiculos();
         break;
     case 'accesos_hoy':
         $titulo = "Accesos del Día";
@@ -36,8 +32,6 @@ switch ($tipo) {
         $tabla = [];
         break;
 }
-
-
 
 ?>
 

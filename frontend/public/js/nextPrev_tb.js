@@ -51,3 +51,46 @@ document.addEventListener("DOMContentLoaded", function () {
     // Mostrar la primera página al cargar
     mostrarPagina(paginaActual);
 });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const filasPorPagina = 5; // 👈 Cambia este valor según lo que necesites
+    let paginaActual = 1;
+
+    const tabla = document.getElementById("tablaDinamica").getElementsByTagName("tbody")[0];
+    const filas = tabla.getElementsByTagName("tr");
+    const totalPaginas = Math.ceil(filas.length / filasPorPagina);
+
+    const btnAnterior = document.getElementById("btnAnterior");
+    const btnSiguiente = document.getElementById("btnSiguiente");
+    const infoPagina = document.getElementById("infoPagina");
+
+    function mostrarPagina(pagina) {
+      const inicio = (pagina - 1) * filasPorPagina;
+      const fin = inicio + filasPorPagina;
+
+      for (let i = 0; i < filas.length; i++) {
+        filas[i].style.display = (i >= inicio && i < fin) ? "" : "none";
+      }
+
+      infoPagina.textContent = `Página ${pagina} de ${totalPaginas}`;
+      btnAnterior.disabled = (pagina === 1);
+      btnSiguiente.disabled = (pagina === totalPaginas);
+    }
+
+    btnAnterior.addEventListener("click", function () {
+      if (paginaActual > 1) {
+        paginaActual--;
+        mostrarPagina(paginaActual);
+      }
+    });
+
+    btnSiguiente.addEventListener("click", function () {
+      if (paginaActual < totalPaginas) {
+        paginaActual++;
+        mostrarPagina(paginaActual);
+      }
+    });
+
+    mostrarPagina(paginaActual); // Inicializar
+  });

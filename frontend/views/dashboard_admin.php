@@ -175,12 +175,12 @@ require_once('../../backend/config/conexion.php');
 
                         <div class="col-md-3">
                             <form method="POST">
-                                <input type="hidden" name="tipo" value="usuarios_parqueadero">
+                                <input type="hidden" name="tipo" value="vehiculos_parqueadero">
                                 <button type="submit" class="card card-resumen-general bg-resumen-usuarios-parqueadero border-0 w-100">
                                     <div class="card-body">
-                                        <h5 class="card-title">Usuarios Parqueadero</h5>
+                                        <h5 class="card-title">Vehiculos Parqueadero</h5>
                                         <p class="card-text font-weight-bold" style="font-size: 1.5em;">
-                                            <?php echo isset($totalUsuariosParqueadero) ? $totalUsuariosParqueadero : 0; ?>
+                                            <?php echo isset($totalVehiculos) ? $totalVehiculos : 0; ?>
                                         </p>
                                     </div>
                                 </button>
@@ -284,12 +284,12 @@ require_once('../../backend/config/conexion.php');
     <script src="../public/js/usuarios.js"></script>
     <script src="../public/js/usuariosParqueadero.js"></script>
 
-
     <!-- Script de tu dashboard dinámico -->
     <script src="../public/js/dashboard_admin.js"></script>
 
     <!-- script para que cuando se cierre la sesion refresque la ventana -->
     <script src="../public/js/ref_cierre.js"></script>
+
 
 </body>
 
