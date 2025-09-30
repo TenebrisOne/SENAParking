@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre']) && !isset($
     );
 
     if ($registro) {
-        $actividadModel->registrarActividad(['id_userSys'], 'Se registró a ' . $nombre . ' ' . $apellido . ' como usuario del sistema');
+        $actividadModel->registrarActividad($_SESSION['id_userSys'], 'Se registró a ' . $nombre . ' ' . $apellido . ' como usuario del sistema');
 
         echo ("Registro de usuario exitosamente");
     } else {
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_userSys'], $_POST[
     $id = intval($_POST['id_userSys']);
 
     if ($usuarioModel->cambiarEstadoUsuario($id, $estado)) {
-        $actividadModel->registrarActividad(['id_userSys'], 'Se cambió el estado del usuario del sistema ' . $id . ' a ' . $estado);
+        $actividadModel->registrarActividad($_SESSION['id_userSys'], 'Se cambió el estado del usuario del sistema ' . $id . ' a ' . $estado);
         header("Location: ../../frontend/views/dashboard_admin.php?mensaje=Estado del usuario actualizado");
     } else {
         header("Location: ../../frontend/views/dashboard_admin.php?mensaje=Error al cambiar estado");
@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_userSys'])) {
     $resultado = $usuarioModel->actualizarUsuarioS($id, $nombre, $apellido, $tipdoc, $documento, $id_rol, $correo, $numero, $username);
 
     if ($resultado) {
-        $actividadModel->registrarActividad(['id_userSys'], 'Modificación realizada en el perfil del usuario del sistema: ' . $nombre . ' ' . $apellido);
+        $actividadModel->registrarActividad($_SESSION['id_userSys'], 'Modificación realizada en el perfil del usuario del sistema: ' . $nombre . ' ' . $apellido);
         echo ("Usuario actualizado exitosamente");
         exit;
     } else {

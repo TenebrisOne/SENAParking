@@ -12,6 +12,7 @@ error_reporting(E_ALL);
 
 include_once '../config/conexion.php';
 include_once '../models/Access.php';
+include_once '../models/ActividadModel.php';
 
 $database = new Database();
 $db = $database->getConnection();
@@ -62,7 +63,7 @@ if (!empty($id_vehiculo) && !empty($tipo_accion)) {
 
     if ($access->create()) {
         $message = "Acceso registrado exitosamente para el vehículo ID: " . $id_vehiculo . ". Tipo: " . $tipo_accion . ". Espacio asignado: " . $access->espacio_asignado . ". Fecha: " . $access->fecha_hora;
-        $actividadModel->registrarActividad($usuario['id_userSys'], 'Otorgó acceso al vehículo ' . $id_vehiculo);
+        $actividadModel->registrarActividad($_SESSION['id_userSys'], 'Otorgó acceso al vehículo ' . $id_vehiculo);
 
         echo '<script type="text/javascript">';
         echo 'alert("' . $message . '");';
