@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['correo'])) {
 
     switch ($registro) {
         case "activo":
-            $actividadModel->registrarActividad($_SESSION['id_userSys'], 'Inicio de sesion');
+            $actividadModel->registrarActividad($_SESSION['id_userSys'], 'Inicio de sesión');
             echo ($_SESSION['rol']);
             exit();
         case "inactivo":
