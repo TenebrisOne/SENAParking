@@ -8,6 +8,7 @@ $totalUsuariosParqueadero = $modelo->contarUsuariosParqueadero();
 $accesosHoy = $modelo->contarAccesosHoy();
 $salidasHoy = $modelo->contarSalidasHoy();
 
+// CÓDIGO AGREGADO POR CRISTIAN 👀⚠️🚧
 $actividades = $modelo->obtenerActividadesRecientes(); // puedes pasar un número si quieres otro límite
 $vehiculosHoy = $modelo->obtenerVehiculosHoy(); 
 

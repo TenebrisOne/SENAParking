@@ -223,6 +223,7 @@ require_once('../../backend/config/conexion.php');
                                 Vehículos ingresados
                             </div>
                             <div class="card-body">
+                                <!-- Código agregado por Cristian 👀⚠️🚧 -->
                                 <!-- Información de los vehículos ingresados -->
                                 <?php if (!empty($vehiculosHoy)): ?>
                                     <table id="tablaVehiculos" style="width: 100%; border-collapse: collapse; margin-top: 20px;">

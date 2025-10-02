@@ -67,6 +67,7 @@ class MostrarDatosModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // CÓDIGO AGREGADO POR CRISTIAN 👀⚠️🚧
     // 🔹 NUEVA FUNCIÓN INTEGRADA: Actividades recientes
 public function obtenerActividadesRecientes($limite = 7) {
     $sql = "SELECT 

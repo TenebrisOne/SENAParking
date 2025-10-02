@@ -182,7 +182,7 @@ require_once('../../backend/config/conexion.php');
                                 </div>
                             </div>
                         </div>
-
+                        <!-- Código agregado por Cristian 👀⚠️🚧 -->
                         <!-- Detalles adicionales de las actividades recientes -->
                         <div class="col-md-8">
                             <div class="card card-cupos-resumen">
