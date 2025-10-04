@@ -2,51 +2,36 @@
 
 session_start();
 
-// Habilitar errores para depuración (eliminar en producción)
+$_SESSION['id_userSys'] = $usuario['id_userSys'];
+
+// Mostrar errores (quitar en producción)
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Ya no se requiere header("Content-Type: application/json; charset=UTF-8"); si no se devuelve JSON
-// Ya no se requieren los headers CORS si no se está haciendo una API pura
-// header("Access-Control-Allow-Methods: POST");
-// header("Access-Control-Max-Age: 3600");
-// header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-
-include_once '../config/conexion.php';
+// Conexiones y modelos
+include_once '../config/conexion.php'; // Crea $conn (MySQLi)
 include_once '../models/Access.php';
 include_once '../models/ActividadModel.php';
 
-$database = new Database();
-$db = $database->getConnection();
-
-$access = new Access($db);
-
-$actividadModel = new ActividadModel($db);
+// Crear instancias de los modelos con mysqli
+$access = new Access($conn);
+$actividadModel = new ActividadModel($conn);
 
 // --- INICIO DE LA MODIFICACIÓN PARA id_userSys ---
 
+// Obtener id_userSys desde la base de datos
 $id_userSys = null;
-// Intenta obtener un id_userSys existente de la tabla tb_usersys
-try {
-    $query_user = "SELECT id_userSys FROM tb_usersys LIMIT 1"; // Selecciona el primer usuario
-    $stmt_user = $db->prepare($query_user);
-    $stmt_user->execute();
-    $row_user = $stmt_user->fetch(PDO::FETCH_ASSOC);
+$query_user = "SELECT id_userSys FROM tb_usersys LIMIT 1";
+$result_user = $conn->query($query_user);
 
-    if ($row_user) {
-        $id_userSys = $row_user['id_userSys'];
-    } else {
-        // Manejar el caso donde no hay usuarios en tb_usersys
-        echo '<script type="text/javascript">';
-        echo 'alert("Error: No se encontró ningún usuario de sistema (tb_usersys) para asignar el acceso. Por favor, crea al menos un usuario en la tabla tb_usersys.");';
-        echo 'window.history.back();';
-        echo '</script>';
-        exit();
-    }
-} catch (PDOException $e) {
+if ($result_user && $result_user->num_rows > 0) {
+    $row_user = $result_user->fetch_assoc();
+    $id_userSys = $row_user['id_userSys'];
+    $_SESSION['id_userSys'] = $id_userSys;
+} else {
     echo '<script type="text/javascript">';
-    echo 'alert("Error al intentar obtener id_userSys: ' . $e->getMessage() . '");';
+    echo 'alert("Error: No se encontró ningún usuario en tb_usersys.");';
     echo 'window.history.back();';
     echo '</script>';
     exit();
@@ -68,7 +53,7 @@ if (!empty($id_vehiculo) && !empty($tipo_accion)) {
 
     if ($access->create()) {
         $message = "Acceso registrado exitosamente para el vehículo ID: " . $id_vehiculo . ". Tipo: " . $tipo_accion . ". Espacio asignado: " . $access->espacio_asignado . ". Fecha: " . $access->fecha_hora;
-        $actividadModel->registrarActividad($_SESSION['id_userSys'], 'Otorgó acceso al vehículo ' . $id_vehiculo);
+        $actividadModel->registrarActividad($_SESSION['id_userSys'], 'Otorgó acceso al vehículo ' . $placa);
 
         echo '<script type="text/javascript">';
         echo 'alert("' . $message . '");';
