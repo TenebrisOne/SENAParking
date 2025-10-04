@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 // Habilitar errores para depuración (eliminar en producción)
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -18,6 +21,8 @@ $database = new Database();
 $db = $database->getConnection();
 
 $access = new Access($db);
+
+$actividadModel = new ActividadModel($db);
 
 // --- INICIO DE LA MODIFICACIÓN PARA id_userSys ---
 

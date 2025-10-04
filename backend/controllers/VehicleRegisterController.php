@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // Habilitar errores para depuración (eliminar en producción)
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -7,9 +9,10 @@ error_reporting(E_ALL);
 // ¡CORRECCIÓN AQUÍ! Cambiado de database.php a conexion.php
 include_once '../config/conexion.php'; 
 include_once '../models/VehicleRegisterModel.php';
-
+include_once '../models/ActividadModel.php'; // Asegúrate de incluir esto si usas $actividadModel
 $database = new Database();
 $db = $database->getConnection();
+$actividadModel = new ActividadModel($db);
 
 $vehicle = new Vehicle($db);
 
@@ -31,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         !empty($vehicle->modelo)
     ) {
         if ($vehicle->create()) {
-            $actividadModel->registrarActividad($usuario['id_userSys'], 'Registró un vehículo');
+            $actividadModel->registrarActividad($_SESSION['id_userSys'], 'Registró un vehículo');
             echo '<script type="text/javascript">';
             echo 'alert("Vehículo registrado con éxito.");';
             echo 'window.location.href="../../frontend/views/crud_vehiculos.php";';

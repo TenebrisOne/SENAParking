@@ -1,5 +1,6 @@
 <?php
-class Access {
+class Access
+{
     private $conn;
     private $table_name = "tb_accesos";
 
@@ -10,15 +11,17 @@ class Access {
     public $fecha_hora;
     public $espacio_asignado;
 
-    public function __construct($db) {
+    public function __construct($db)
+    {
         $this->conn = $db;
     }
 
-    public function create() {
+    public function create()
+    {
         $query = "INSERT INTO " . $this->table_name . "
-                  SET id_vehiculo=:id_vehiculo, id_userSys=:id_userSys,
-                      tipo_accion=:tipo_accion, fecha_hora=:fecha_hora,
-                      espacio_asignado=:espacio_asignado";
+                SET id_vehiculo=:id_vehiculo, id_userSys=:id_userSys,
+                    tipo_accion=:tipo_accion, fecha_hora=:fecha_hora,
+                    espacio_asignado=:espacio_asignado";
 
         $stmt = $this->conn->prepare($query);
 
@@ -42,4 +45,32 @@ class Access {
         return false;
     }
 }
-?>
+
+class GetPlaca {
+
+    private $conn;
+
+    public function __construct($db)
+    {
+        $this->conn = $db;
+    }
+
+    public function getPlacaPorValor($placa)
+    {
+        try {
+            $query = "SELECT placa FROM tb_vehiculos WHERE placa = :placa";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':placa', $placa, PDO::PARAM_STR);
+            $stmt->execute();
+
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $row ? $row['placa'] : null;
+
+        } catch (PDOException $e) {
+            // Manejo de error: puedes loguearlo o relanzarlo
+            error_log("Error al obtener la placa: " . $e->getMessage());
+            return null;
+        }
+    }
+}       
+?>   
