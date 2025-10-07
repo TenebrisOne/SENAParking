@@ -36,7 +36,7 @@ $roles = [1 => "Administrador", 2 => "Supervisor", 3 => "Guardia de Seguridad"];
                 <?php if ($_SESSION['rol'] == 2): ?>
                     <?php if ($usuario['id_rol'] == 3): ?>
                         <tr>
-                            <td><?= htmlspecialchars($usuario['username']) ?></td>
+                            <td><?= htmlspecialchars($usuario['username'] . ' ' . $usuario['apellido']) ?></td>
                             <td>
                                 <?php
                                 $roles = [1 => "Administrador", 2 => "Supervisor", 3 => "Guardia de Seguridad"];
@@ -62,7 +62,7 @@ $roles = [1 => "Administrador", 2 => "Supervisor", 3 => "Guardia de Seguridad"];
                 <?php endif; ?>
                 <?php if ($_SESSION['rol'] != 2): ?>
                     <tr>
-                        <td><?= htmlspecialchars($usuario['username']) ?></td>
+                        <td><?= htmlspecialchars($usuario['username'] . ' ' . $usuario['apellidos_sys']) ?></td>
                         <td>
                             <?php
                             $roles = [1 => "Administrador", 2 => "Supervisor", 3 => "Guardia de Seguridad"];
