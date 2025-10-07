@@ -4,7 +4,7 @@ $modelo = new MostrarDatosModel();
 
 // Totales
 $totalUsuariosSistema = $modelo->contarUsuariosSistema();
-$totalUsuariosParqueadero = $modelo->contarUsuariosParqueadero();
+$totalVehiculosParqueadero = $modelo->contarVehiculosParqueadero();
 $accesosHoy = $modelo->contarAccesosHoy();
 $salidasHoy = $modelo->contarSalidasHoy();
 
@@ -20,9 +20,9 @@ switch ($tipo) {
         $titulo = "Usuarios del Sistema";
         $tabla = $modelo->obtenerUsuariosSistema();
         break;
-    case 'usuarios_parqueadero':
-        $titulo = "Usuarios del Parqueadero";
-        $tabla = $modelo->obtenerUsuariosParqueadero();
+    case 'vehiculos_parqueadero':
+        $titulo = "Vehículos del Parqueadero";
+        $tabla = $modelo->obtenerVehiculosParqueadero();
         break;
     case 'accesos_hoy':
         $titulo = "Accesos del Día";
