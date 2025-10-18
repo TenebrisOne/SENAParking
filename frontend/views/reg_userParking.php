@@ -40,7 +40,6 @@ if (!isset($_SESSION['rol'])) {
     <div class="col-2 col-md-1 text-start">
         <div class="back-arrow" onclick="goBack()">
             <i class="fas fa-arrow-left"></i>
-            <a class="nav-link" href="/SENAParking/frontend/views/dashboard_admin.php"></a>
         </div>
     </div>
 
@@ -130,7 +129,7 @@ if (!isset($_SESSION['rol'])) {
             </div>
         </form>
     </div>
-
+    
     <!-- Cargar el footer-->
     <!-- Función para llamar al Header-->
     <script src="./../public/js/scriptsDOM.js"></script>

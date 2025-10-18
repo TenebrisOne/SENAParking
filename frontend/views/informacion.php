@@ -19,8 +19,10 @@ if (!isset($_SESSION['rol'])) {
     <meta name="course" content="ADSO 2873801">
     <!-- Favicon que aparece en la pestaña del navegador -->
     <link rel="icon" type="x-icon" href="../public/images/favicon.ico">
+    <link rel="stylesheet" href="../public/css/sityles_views.css">
     <link rel="stylesheet" href="../public/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+     <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
     <style>
 
@@ -249,12 +251,7 @@ if (!isset($_SESSION['rol'])) {
     </div>
 </div>
 
-<script>
-    function goBack() {
-        // Esto regresa a la página anterior en el historial
-        window.history.back();
-    }
-</script>
+
     </div>
     <div class="container py-5">
         <div class="glass-card mac-style fade-in">
@@ -272,7 +269,7 @@ if (!isset($_SESSION['rol'])) {
         style="max-width: 100%; height: auto; display: block; margin: 0 auto; margin-left: 10px;">
                     </div>
                     <h1 class="display-5 fw-bold">SENAParking</h1>
-                    <div class="version-tag">v1.1.3-alfa</div>
+                    <div class="version-tag">v1.1.4-alfa</div>
                     <p class="text-muted">Sistema de Gestión de Parqueaderos del SENA</p>
                 </div>
 
@@ -370,5 +367,13 @@ if (!isset($_SESSION['rol'])) {
             });
         });
     </script>
-</body>
+
+    <script>  
+        function goBack() {
+        // Esta funcion regresa a la página anterior en el historial //
+        window.history.back();
+    }
+     </script>  
+    
+t</body>
 </html>

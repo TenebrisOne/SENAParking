@@ -22,6 +22,7 @@ if (!isset($_SESSION['rol'])) {
   <link rel="stylesheet" href="../public/css/bootstrap.min.css">
   <!-- Enlace a los estilos personalizados del proyecto -->
   <link rel="stylesheet" href="../public/css/styles_dashboard.css">
+  <link rel="stylesheet" href="../public/css/sityles_views.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 

@@ -92,7 +92,9 @@ formulario.addEventListener('submit', (e) => {
 });
 
 //=== funcion para redirigir al dashboard_supervisor desde la flecha de retroceso !
-function goBack() {
-   window.location.href = "/frontend/views/dashboard_admin.php";
-}
+        function goBack() {
+        // Esta funcion regresa a la página anterior en el historial //
+        window.history.back();
+    }
+    
 
