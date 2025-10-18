@@ -39,6 +39,16 @@ require_once('../../backend/config/conexion.php');
 </head>
 
 <body>
+     <?php
+    if (isset($_GET['mensaje'])) {
+        echo "<script>
+            alert('" . htmlspecialchars($_GET['mensaje']) . "');
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.pathname);
+            }
+        </script>";
+    }
+    ?>
     <!-- Contenedor donde se insertará el header dinámicamente -->
     <div id="header-container"></div>
 
