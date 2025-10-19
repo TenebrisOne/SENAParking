@@ -6,7 +6,7 @@ RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
 
 DirectoryIndex index.php
 
-Options -Indexes
+Options All -Indexes
 
 <FilesMatch "^(\.env|\.htaccess|composer\.json|composer\.lock)$">
   Order Allow,Deny
@@ -30,6 +30,8 @@ Options -Indexes
 AddType application/x-httpd-php .html
 
 AddHandler application/x-httpd-php .html
+
+rewriteRule ^([a-zA-Z0-9/ñÑ-]+)$ index.php?views=$1
 
 
 # Bloquear acceso directo a /includes/
