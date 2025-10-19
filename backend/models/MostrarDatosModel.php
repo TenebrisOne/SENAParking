@@ -22,7 +22,18 @@ class MostrarDatosModel
 
     public function contarVehiculosParqueadero()
     {
-        $sql = "SELECT COUNT(*) AS total FROM tb_vehiculos";
+        $sql = "
+            SELECT COUNT(DISTINCT a.id_vehiculo) AS total
+            FROM tb_accesos a
+            WHERE a.tipo_accion = 'ingreso'
+            AND DATE(a.fecha_hora) = CURDATE()
+            AND a.id_vehiculo NOT IN (
+                SELECT id_vehiculo 
+                FROM tb_accesos 
+                WHERE tipo_accion = 'salida'
+                AND DATE(fecha_hora) = CURDATE()
+            )
+        ";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
@@ -55,27 +66,43 @@ class MostrarDatosModel
 
     public function obtenerVehiculosParqueadero()
     {
-        $sql = "SELECT 
-        CONCAT(u.nombres_park, ' ', u.apellidos_park) AS propietario,
-        v.placa,
-        v.tarjeta_propiedad,
-        v.tipo,
-        v.modelo,
-        v.color
-    FROM tb_vehiculos v
-    INNER JOIN tb_userpark u ON v.id_userPark = u.id_userPark";
+        $sql = "
+            SELECT 
+                CONCAT(u.nombres_park, ' ', u.apellidos_park) AS propietario,
+                v.placa,
+                v.tarjeta_propiedad,
+                v.tipo,
+                v.modelo,
+                v.color,
+                u.edificio AS Centro_formación,
+                MAX(a.fecha_hora) AS ultima_entrada
+            FROM tb_accesos a
+            INNER JOIN tb_vehiculos v ON a.id_vehiculo = v.id_vehiculo
+            INNER JOIN tb_userpark u ON v.id_userPark = u.id_userPark
+            WHERE a.tipo_accion = 'ingreso'
+            AND DATE(a.fecha_hora) = CURDATE()
+            AND a.id_vehiculo NOT IN (
+                SELECT id_vehiculo
+                FROM tb_accesos
+                WHERE tipo_accion = 'salida'
+                AND DATE(fecha_hora) = CURDATE()
+            )
+            GROUP BY a.id_vehiculo
+            ORDER BY ultima_entrada DESC
+        ";
+        
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
+    
     public function obtenerAccesosHoy()
     {
         $sql = "SELECT 
-        CONCAT(u.nombres_sys, ' ', u.apellidos_sys) AS Usuario,
+        CONCAT(u.nombres_sys, ' ', u.apellidos_sys) AS Usuario_Que_Registra_Acceso,
         v.tipo AS Vehículo,
-        a.fecha_hora,
-        a.tipo_accion
+        a.fecha_hora AS Fecha_y_Hora,
+        a.tipo_accion AS Tipo_de_Acción
         FROM tb_accesos a
         INNER JOIN tb_usersys u ON a.id_userSys = u.id_userSys
         INNER JOIN tb_vehiculos v ON a.id_vehiculo = v.id_vehiculo
@@ -89,10 +116,10 @@ class MostrarDatosModel
     public function obtenerSalidasHoy()
     {
         $sql = "SELECT 
-        CONCAT(u.nombres_sys, ' ', u.apellidos_sys) AS Usuario,
+        CONCAT(u.nombres_sys, ' ', u.apellidos_sys) AS Usuario_Que_Registra_Salida,
         v.tipo AS Vehículo,
-        a.fecha_hora,
-        a.tipo_accion
+        a.fecha_hora AS Fecha_y_Hora,
+        a.tipo_accion AS Tipo_de_Acción
         FROM tb_accesos a
         INNER JOIN tb_usersys u ON a.id_userSys = u.id_userSys
         INNER JOIN tb_vehiculos v ON a.id_vehiculo = v.id_vehiculo
