@@ -33,8 +33,35 @@ $roles = [1 => "Administrador", 2 => "Supervisor", 3 => "Guardia de Seguridad"];
         </thead>
         <tbody>
             <?php foreach ($usuarios as $usuario): ?>
-                <?php if ($_SESSION['rol'] == 2): ?>
-                    <?php if ($usuario['id_rol'] == 3): ?>
+                <?php if ($_SESSION['id_userSys'] != $usuario['id_userSys']): ?>
+                    <?php if ($_SESSION['rol'] == 2): ?>
+                        <?php if ($usuario['id_rol'] == 3): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($usuario['username'] . ' ' . $usuario['apellidos_sys']) ?></td>
+                                <td>
+                                    <?php
+                                    $roles = [1 => "Administrador", 2 => "Supervisor", 3 => "Guardia de Seguridad"];
+                                    echo $roles[$usuario['id_rol']] ?? 'Desconocido';
+                                    ?>
+                                </td>
+                                <td>
+                                    <form action="../../backend/controllers/UsuarioSistemaController.php" method="POST">
+                                        <input type="hidden" name="id_userSys" value="<?= $usuario['id_userSys'] ?>">
+                                        <input type="hidden" name="estado" value="<?= $usuario['estado'] === 'activo' ? 'inactivo' : 'activo' ?>">
+                                        <!-- Botón Editar -->
+                                        <a href="editar_userSys.php?id=<?= $usuario['id_userSys'] ?>" class="btn btn-editar btn-sm">
+                                            Editar
+                                        </a>
+                                        <label class="switch">
+                                            <input type="checkbox" onchange="this.form.submit()" <?= $usuario['estado'] === 'activo' ? 'checked' : '' ?>>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    <?php if ($_SESSION['rol'] != 2): ?>
                         <tr>
                             <td><?= htmlspecialchars($usuario['username'] . ' ' . $usuario['apellidos_sys']) ?></td>
                             <td>
@@ -59,31 +86,6 @@ $roles = [1 => "Administrador", 2 => "Supervisor", 3 => "Guardia de Seguridad"];
                             </td>
                         </tr>
                     <?php endif; ?>
-                <?php endif; ?>
-                <?php if ($_SESSION['rol'] != 2): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($usuario['username'] . ' ' . $usuario['apellidos_sys']) ?></td>
-                        <td>
-                            <?php
-                            $roles = [1 => "Administrador", 2 => "Supervisor", 3 => "Guardia de Seguridad"];
-                            echo $roles[$usuario['id_rol']] ?? 'Desconocido';
-                            ?>
-                        </td>
-                        <td>
-                            <form action="../../backend/controllers/UsuarioSistemaController.php" method="POST">
-                                <input type="hidden" name="id_userSys" value="<?= $usuario['id_userSys'] ?>">
-                                <input type="hidden" name="estado" value="<?= $usuario['estado'] === 'activo' ? 'inactivo' : 'activo' ?>">
-                                <!-- Botón Editar -->
-                                <a href="editar_userSys.php?id=<?= $usuario['id_userSys'] ?>" class="btn btn-editar btn-sm">
-                                    Editar
-                                </a>
-                                <label class="switch">
-                                    <input type="checkbox" onchange="this.form.submit()" <?= $usuario['estado'] === 'activo' ? 'checked' : '' ?>>
-                                    <span class="slider round"></span>
-                                </label>
-                            </form>
-                        </td>
-                    </tr>
                 <?php endif; ?>
             <?php endforeach; ?>
         </tbody>
