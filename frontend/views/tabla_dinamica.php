@@ -1,3 +1,17 @@
+<?php
+session_status();
+
+if (!isset($_SESSION['rol'])) {
+    header("location: ../../login.php");
+    exit();
+}
+
+// Mostrar vista dependiendo del estado de la sesion
+if (isset($_SESSION['rol'])) {
+    header("Location: ../../login.php");
+}
+?>
+
 <style>
   /* ======== Estilos optimizados para tabla compacta ======== */
 

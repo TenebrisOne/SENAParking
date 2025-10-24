@@ -2,11 +2,11 @@
 session_start();
 
 if (!isset($_SESSION['rol'])) {
-    header("location: ../login.php");
+    header("location: ../../login.php");
     exit();
 }
 if ($_SESSION['rol'] == 3) {
-    header("location: ../dashboard_guardia.php");
+    header("location: ./dashboard_guardia.php");
     exit();
 }
 ?>

@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['rol'])) {
-    header("location: ../login.php");
+    header("location: ../../login.php");
     exit();
 }
 ?>
