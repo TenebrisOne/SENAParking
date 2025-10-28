@@ -291,6 +291,9 @@ require_once('../../backend/config/conexion.php');
     <!-- script para que cuando se cierre la sesion refresque la ventana -->
     <script src="../public/js/ref_cierre.js"></script>
 
+    <!-- Script externo de la rueda de carga-->
+<script src="../js/loader.js"></script>
+
 </body>
 
 </html>

@@ -128,11 +128,6 @@ body {
     padding: 0 10px;
 }
 
-
-
-
-
-
 /* Botón Acceso */
 .btn-registro-acceso {
     background-color: #FDC300;
@@ -185,11 +180,6 @@ input.form-control:focus {
 .text-danger {
     color: #dc3545 !important;
 }
-
-
-
-
-/* ====================== DASHBOARD SUPERVISOR ======================= */
 
 /* Sidebar */
 .sidebar-supervisor {

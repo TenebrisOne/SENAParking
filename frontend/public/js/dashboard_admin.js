@@ -16,3 +16,4 @@ function cargarDatosDashboard() {
 
 cargarDatosDashboard();
 setInterval(cargarDatosDashboard, 5000);
+
