@@ -21,7 +21,7 @@ if (!isset($_SESSION['rol'])) {
     <link rel="icon" type="x-icon" href="../public/images/favicon.ico">
     <link rel="stylesheet" href="../public/css/sityles_views.css">
     <link rel="stylesheet" href="../public/css/bootstrap.min.css">
-     <!-- Font Awesome -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
     <style>
@@ -244,7 +244,7 @@ if (!isset($_SESSION['rol'])) {
     </style>
 </head>
 <body>
-      <!-- Flecha de retroceso -->
+    <!-- Flecha de retroceso -->
 <div class="col-2 col-md-1 text-start">
     <div class="back-arrow" onclick="goBack()">
         <i class="fas fa-arrow-left"></i>
@@ -269,11 +269,11 @@ if (!isset($_SESSION['rol'])) {
         style="max-width: 100%; height: auto; display: block; margin: 0 auto; margin-left: 10px;">
                     </div>
                     <h1 class="display-5 fw-bold">SENAParking</h1>
-                    <div class="version-tag">v1.1.4-alfa</div>
+                    <div class="version-tag">v1.2.1-alfa</div>
                     <p class="text-muted">Sistema de Gestión de Parqueaderos del SENA</p>
                 </div>
 
-     
+    
 
                 <!-- Description -->
                 <div class="text-center description-text fade-in" style="animation-delay: 0.3s;">
