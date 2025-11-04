@@ -1,11 +1,3 @@
-<?php
-session_start();
-
-if (!isset($_SESSION['rol'])) {
-    header("location: ../../login.php");
-    exit();
-}
-?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -13,22 +5,13 @@ if (!isset($_SESSION['rol'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reportes Generales | SENAParking</title>
-        <meta name="author" content="AdsoDeveloperSolutions801"> <!-- Define al autor de la página -->
-    <meta name="course" content="ADSO 2873801"> <!-- Define el curso -->
-
-    <!-- Favicon que se muestra en la pestaña del navegador -->
-    <link rel="icon" type="x-icon" href="../../frontend/public/images/favicon.ico">
-
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../public/css/sityles_views.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .header-section {
-            background: linear-gradient(135deg, #4CAF50 0%, #4CAF50 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 1.5rem 0;
             margin-bottom: 2rem;
@@ -108,11 +91,6 @@ if (!isset($_SESSION['rol'])) {
 </head>
 
 <body class="bg-light">
-
-    <!-- Contenedor donde se insertará el header dinámicamente -->
-    <div id="header-container"></div>
-
-
     <div id="loadingIndicator" class="loading-overlay" style="display: none;">
         <div class="spinner-border text-primary" role="status">
             <span class="visually-hidden">Cargando...</span>
@@ -126,7 +104,7 @@ if (!isset($_SESSION['rol'])) {
                 <button class="btn btn-secondary" onclick="goBack()">
                     <i class="fas fa-arrow-left me-2"></i>Volver a Usuarios
                 </button>
-                <img src="../../frontend/public/images/logo_sena.png" alt="Logo SENA" style="width: 80px;">
+                <img src="../public/images/logo_sena.png" alt="Logo SENA" style="width: 80px;">
             </div>
 
             <div class="header-section text-center">
@@ -158,12 +136,14 @@ if (!isset($_SESSION['rol'])) {
 
             <div id="generalReportsContent">
                 <div class="text-center py-5">
+                    <i class="fas fa-spinner fa-spin fa-3x mb-3 text-primary"></i>
+                    <h4>Cargando reportes generales...</h4>
                 </div>
             </div>
 
             <div class="row mt-4 mb-5">
                 <div class="col-12 text-center">
-                    <a href="../../frontend/views/reporte_usuarios.php" class="btn btn-secondary btn-lg px-5">
+                    <a href="reporte_usuarios.php" class="btn btn-secondary btn-lg px-5">
                         <i class="fas fa-users me-2"></i>Volver a Reporte de Usuarios
                     </a>
                 </div>
@@ -172,7 +152,7 @@ if (!isset($_SESSION['rol'])) {
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-
+    <script src="../public/js/scriptsDOM.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const generalReportsContent = document.getElementById('generalReportsContent');
@@ -189,64 +169,6 @@ if (!isset($_SESSION['rol'])) {
         function showLoading(show) {
             loadingIndicator.style.display = show ? 'flex' : 'none';
         }
-        </script>
-
-
-    <div class="row">
-      <div class="col-md-6">
-        <canvas id="graficoEntradasSalidas"></canvas>
-      </div>
-      <div class="col-md-6">
-        <canvas id="graficoReservados"></canvas>
-      </div>
-    </div>
-
-    
-    <script>
-
-    // Cargar el contenido del header desde un archivo HTML externo
-fetch("../../frontend/views/layouts/header.php")
-
-    .then(response => response.text())
-    .then(data => {
-        document.getElementById('header-container').innerHTML = data;
-    })
-    .catch(error => console.error('Error al cargar el header:', error));
-    
-
-// Función para retroceder en el historial del navegador
-function goBack() {
-    window.history.back();
-
-}
-
-    </script>
-
-    <!-- Botón para volver a detalle del usuario -->
-  
-
-
-
-
-  <script>
-    //const ctx1 = document.getElementById('graficoEntradasSalidas').getContext('2d');
-    const grafico1 = new Chart(ctx1, {
-  type: 'bar',
-  data: {
-    labels: ['Entradas', 'Salidas'],
-    datasets: [{
-      label: 'Cantidad de Vehículos',
-      data: [120, 100],
-      backgroundColor: ['#0d6efd', '#dc3545']
-    }]
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      title: { display: true, text: 'Flujo de Vehículos' }
-    }
-  }
-}); 
 
         async function loadGeneralReports(startDate = '', endDate = '') {
             showLoading(true);
