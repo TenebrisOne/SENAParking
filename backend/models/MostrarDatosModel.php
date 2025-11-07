@@ -70,7 +70,7 @@ class MostrarDatosModel
             SELECT 
                 CONCAT(u.nombres_park, ' ', u.apellidos_park) AS propietario,
                 v.placa,
-                v.tarjeta_propiedad,
+                v.tarjeta_propiedad AS Tarjeta__de_Propiedad_o_Serial,
                 v.tipo,
                 v.modelo,
                 v.color,
