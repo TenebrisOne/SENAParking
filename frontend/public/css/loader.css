@@ -36,3 +36,18 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+#error-message {
+  font-weight: 500;
+  font-size: 15px;
+  color: #dc3545; /* rojo Bootstrap */
+  margin-top: 10px;
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+

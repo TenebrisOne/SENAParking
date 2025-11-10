@@ -66,14 +66,20 @@ if (isset($_SESSION['rol'])) {
                     <p class="formulario__input-error">La contraseña tiene que ser de 4 a 12 dígitos.</p>
                 </div>
             </div>
-            <!-- Botón de envío -->
-            <div class="row">
-                <div class="col-12">
-                    <button type="submit" class="btn btn-dark py-2 btn-hover" id="singbtn">Ingresar</button>
-                </div>
-            </div>
-            <a href="./forgot_password.html" class="text-muted mt-3" style="font-size: 14px;">¿Olvidaste tu contraseña?</a>
-        </form>
+            
+        <form id="formulario" class="formulario" action="backend/controllers/LoginController.php" method="POST">
+    <!-- ... tus campos ... -->
+    <div class="row">
+        <div class="col-12">
+            <button type="submit" class="btn btn-dark py-2 btn-hover" id="singbtn">Ingresar</button>
+        </div>
+    </div>
+    <a href="./forgot_password.html" class="text-muted mt-3" style="font-size: 14px;">¿Olvidaste tu contraseña?</a>
+</form>
+
+<!-- Aquí aparecerá el mensaje de error -->
+<p id="error-message" class="text-danger mt-3" style="text-align:center; display:none;"></p>
+
     </div>
 
 
