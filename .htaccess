@@ -1,0 +1,42 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+
+DirectoryIndex index.php
+
+Options All -Indexes
+
+<FilesMatch "^(\.env|\.htaccess|composer\.json|composer\.lock)$">
+  Order Allow,Deny
+  Deny from all
+</FilesMatch>
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
+</IfModule>
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+
+AddType application/x-httpd-php .html
+
+AddHandler application/x-httpd-php .html
+
+rewriteRule ^([a-zA-Z0-9/ñÑ-]+)$ index.php?views=$1
+
+
+# Bloquear acceso directo a /includes/
+RewriteRule ^includes/ - [F,L]
+
+# Bloquear acceso a cualquier archivo .php dentro de /private/
+RewriteRule ^private/.*\.php$ - [F,L]
+

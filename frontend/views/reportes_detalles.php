@@ -1,0 +1,123 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['rol'])) {
+    header("location: ../../login.php");
+    exit();
+}
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"> <!-- Define la codificación de caracteres como UTF-8 -->
+    <meta name="viewport" content="width=, initial-scale=1.0"> <!-- Establece el ancho y escala de la vista para dispositivos móviles -->
+    <meta name="author" content="AdsoDeveloperSolutions801"> <!-- Define el autor de la página -->
+    <meta name="course" content="ADSO 2873801"> <!-- Define el curso asociado -->
+    <!-- Favicon que aparece en la pestaña del navegador -->
+    <link rel="icon" type="x-icon" href="../public/images/favicon.ico">
+    <!-- Enlace al archivo CSS de Bootstrap para aplicar estilos prediseñados -->
+    <!-- Enlace al archivo de Bootstrap para proporcionar estilos prediseñados -->
+    <link rel="stylesheet" href="../public/css/bootstrap.min.css">
+    <!-- Enlace a los estilos personalizados del proyecto -->
+    <link rel="stylesheet" href="../public/css/styles_dashboard.css"">
+    <title>Detalles de Usuario | SENAParking</title>
+</head>
+<body>
+  <!-- Contenedor del header (se carga dinámicamente con JS externo) -->
+  <div id="header-container"></div>
+<div class="container mt-5">
+  <h2 id="tituloUsuario">Detalle del Usuario</h2>
+
+  <div class="mt-4">
+    <canvas id="graficoEstadia" width="400" height="200"></canvas>
+  </div>
+
+  <a href="reportes.php" class="btn btn-secondary mt-4">Volver</a>
+</div>
+
+
+
+
+
+
+<script>
+  // Simulación de base de datos
+  const usuarios = {
+    "12345678": {
+      nombre: "Juan",
+      apellido: "Pérez",
+      estadias: [
+        { fecha: "2024-05-01", entrada: "08:00", salida: "17:00" },
+        { fecha: "2024-05-02", entrada: "09:00", salida: "16:30" },
+        { fecha: "2024-05-03", entrada: "07:45", salida: "17:15" }
+      ]
+    },
+    "87654321": {
+      nombre: "María",
+      apellido: "López",
+      estadias: [
+        { fecha: "2024-05-01", entrada: "09:00", salida: "18:00" },
+        { fecha: "2024-05-02", entrada: "10:15", salida: "17:45" },
+        { fecha: "2024-05-03", entrada: "08:30", salida: "17:00" }
+      ]
+    }
+  };
+
+  // Obtener cédula desde la URL
+  const params = new URLSearchParams(window.location.search);
+  const cedula = params.get("cedula");
+  const usuario = usuarios[cedula];
+
+  if (!usuario) {
+    document.getElementById('tituloUsuario').innerText = "Usuario no encontrado";
+  } else {
+    document.getElementById('tituloUsuario').innerText = `Estadía de ${usuario.nombre} ${usuario.apellido}`;
+
+    // Preparar datos para la gráfica
+    const fechas = usuario.estadias.map(e => e.fecha);
+    const duraciones = usuario.estadias.map(e => {
+      const entrada = parseHora(e.entrada);
+      const salida = parseHora(e.salida);
+      return (salida - entrada) / 60; // en horas
+    });
+
+    // Crear gráfica con Chart.js
+    new Chart(document.getElementById("graficoEstadia"), {
+      type: "bar",
+      data: {
+        labels: fechas,
+        datasets: [{
+          label: "Horas en el parqueadero",
+          data: duraciones,
+          backgroundColor: "rgba(54, 162, 235, 0.6)",
+          borderColor: "rgba(54, 162, 235, 1)",
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Horas'
+            }
+          }
+        }
+      }
+    });
+  }
+
+  function parseHora(horaStr) {
+    const [h, m] = horaStr.split(":").map(Number);
+    return h * 60 + m;
+  }
+</script>
+ <!-- JS que carga el header dinámicamente -->
+<script src="./../public/js/scriptsDOM.js"></script>
+
+<!-- script para que cuando se cierre la sesion refresque la ventana -->
+<script src="../public/js/ref_cierre.js"></script>
+</body>
+</html>

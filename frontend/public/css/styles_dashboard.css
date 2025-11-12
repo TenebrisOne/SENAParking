@@ -9,11 +9,13 @@ body {
     padding: 20px;
 }
 
+/* ====================== DASHBOARD SUPERVISOR ======================= */
 /* Sidebar */
 .sidebar-guardia {
     background-color: #007832;
     color: #F6F6F6;
     padding-top: 20px;
+    min-height: 100vh;
 }
 
 .sidebar-guardia .nav-link {
@@ -44,7 +46,7 @@ body {
 /* Cards generales */
 .card {
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     margin-bottom: 20px;
 }
 
@@ -82,6 +84,48 @@ body {
     padding: 10px 20px;
     font-weight: bold;
     transition: background-color 0.3s, border-color 0.3s;
+}
+
+
+.btnscont {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+#paginacion button {
+    background-color: #f0f0f3;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.1),
+                -2px -2px 6px rgba(255,255,255,0.8);
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+#paginacion button:hover {
+    background-color: #e5e5e9;
+    box-shadow: inset 2px 2px 4px rgba(0,0,0,0.1),
+                inset -2px -2px 4px rgba(255,255,255,0.8);
+}
+
+#paginacion button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+#infoPagina {
+    font-size: 14px;
+    color: #666;
+    padding: 0 10px;
 }
 
 /* Botón Acceso */
@@ -137,8 +181,6 @@ input.form-control:focus {
     color: #dc3545 !important;
 }
 
-/* ====================== DASHBOARD SUPERVISOR ======================= */
-
 /* Sidebar */
 .sidebar-supervisor {
     background: linear-gradient(180deg, #71277A, #8F3A9B);
@@ -151,8 +193,7 @@ input.form-control:focus {
     color: white;
     font-weight: 600;
     border-radius: 6px;
-    margin-bottom: 8px;
-    padding: 10px 15px;
+    padding: 10px 20px;
     transition: all 0.3s ease;
 }
 
@@ -164,6 +205,7 @@ input.form-control:focus {
 .sidebar-supervisor .nav-item.active .nav-link {
     background-color: #FFD700;
     color: #71277A;
+    margin-top: 15px
 }
 
 /* ✅ Header estilo limpio y profesional */
@@ -273,7 +315,7 @@ input.form-control:focus {
 /* ====================== DASHBOARD ADMINISTRADOR ======================= */
 
 /* Estilos generales para efecto glassmorphism */
-.card, .list-group-item-reporte, .sidebar-admin {
+.list-group-item-reporte {
     backdrop-filter: blur(10px);
     background-color: rgba(255, 255, 255, 0.15);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
@@ -282,8 +324,31 @@ input.form-control:focus {
     transition: all 0.3s ease-in-out;
 }
 
-.card:hover, .list-group-item-reporte:hover {
+.card,
+.card:hover,
+.list-group-item-reporte:hover {
     transform: translateY(-4px);
+    border-radius: 10px;
+
+}
+
+.paginacion-sencilla {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.5rem;
+}
+
+.paginacion-sencilla a {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 0 0.5rem;
+    text-decoration: none;
+    color: #007bff;
+}
+
+.paginacion-sencilla a:hover {
+    color: #0056b3;
 }
 
 /* Estilos del sidebar del administrador */
@@ -309,7 +374,7 @@ input.form-control:focus {
     color: white !important;
     border-radius: 12px;
     font-weight: bold;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Tarjetas resumen */
@@ -323,7 +388,7 @@ input.form-control:focus {
     background: linear-gradient(135deg, #00304D, #00567A);
 }
 
-.bg-resumen-usuarios-parqueadero {
+.bg-resumen-vehiculos-parqueadero {
     background: linear-gradient(135deg, #71277A, #9B479D);
 }
 
@@ -343,7 +408,10 @@ input.form-control:focus {
     color: #000;
     border-bottom: 2px solid #00304D;
     font-weight: bold;
+    width: 100%;
+    /* o 90% si quieres algo más controlado */
 }
+
 
 /* Botón registrar usuario */
 .btn-registrar-usuario {
@@ -380,3 +448,61 @@ input.form-control:focus {
     color: #71277A;
 }
 
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ff0000;
+    border-radius: 25px;
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+input:checked+.slider {
+    background-color: #4CAF50;
+    /* Verde cuando está activado */
+}
+
+input:checked+.slider:before {
+    transform: translateX(25px);
+}
+
+.btn-editar {
+    border: 2px solid purple;
+    color: purple;
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-editar:hover {
+    background-color: #71277A;
+    color: white;
+    border-color: #71277A;
+}
