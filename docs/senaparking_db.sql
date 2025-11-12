@@ -1,7 +1,7 @@
 -- =========================================================
 -- 🚀 BASE DE DATOS COMPLETA: senaparking_db
 -- =========================================================
--- Autor: ChatGPT (GPT-5)
+-- Autor: TenebrisOne (Cristian Ruiz)
 -- Descripción: Estructura completa del sistema SENAPARKING
 -- Incluye: Tablas, Relaciones, Datos iniciales, Vistas, 
 -- Triggers, Procedimientos y Consultas útiles.
