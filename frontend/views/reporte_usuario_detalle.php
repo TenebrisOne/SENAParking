@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .header-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #4CAF50;
             color: white;
             padding: 1.5rem 0;
             margin-bottom: 2rem;
