@@ -10,7 +10,7 @@ include_once '../models/ReportAccess.php';
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-$database = new DataBase();
+$database = new dataBase();
 $db = $database->getConnection();
 
 $access = new Access($db);
