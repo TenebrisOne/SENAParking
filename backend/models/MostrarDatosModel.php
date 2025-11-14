@@ -23,15 +23,15 @@ class MostrarDatosModel
     public function contarVehiculosParqueadero()
     {
         $sql = "
-            SELECT COUNT(DISTINCT a.id_vehiculo) AS total
-            FROM tb_accesos a
-            WHERE a.tipo_accion = 'ingreso'
-            AND DATE(a.fecha_hora) = CURDATE()
-            AND a.id_vehiculo NOT IN (
+            SELECT COUNT(DISTINCT acceso.id_vehiculo) AS total
+            FROM tb_accesos acceso
+            WHERE acceso.tipoAccionAcc = 'ingreso'
+            AND DATE(acceso.fechaHoraAcc) = CURDATE()
+            AND acceso.id_vehiculo NOT IN (
                 SELECT id_vehiculo 
                 FROM tb_accesos 
-                WHERE tipo_accion = 'salida'
-                AND DATE(fecha_hora) = CURDATE()
+                WHERE tipoAccionAcc = 'salida'
+                AND DATE(fechaHoraAcc) = CURDATE()
             )
         ";
         $stmt = $this->conn->prepare($sql);
@@ -41,7 +41,7 @@ class MostrarDatosModel
 
     public function contarAccesosHoy()
     {
-        $sql = "SELECT COUNT(*) AS total FROM tb_accesos WHERE tipo_accion = 'ingreso' AND DATE(fecha_hora) = CURDATE()";
+        $sql = "SELECT COUNT(*) AS total FROM tb_accesos WHERE tipoAccionAcc = 'ingreso' AND DATE(fechaHoraAcc) = CURDATE()";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
@@ -49,7 +49,7 @@ class MostrarDatosModel
 
     public function contarSalidasHoy()
     {
-        $sql = "SELECT COUNT(*) AS total FROM tb_accesos WHERE tipo_accion = 'salida' AND DATE(fecha_hora) = CURDATE()";
+        $sql = "SELECT COUNT(*) AS total FROM tb_accesos WHERE tipoAccionAcc = 'salida' AND DATE(fechaHoraAcc) = CURDATE()";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
@@ -58,7 +58,7 @@ class MostrarDatosModel
     // Reportes dinámicos
     public function obtenerUsuariosSistema()
     {
-        $sql = "SELECT id_userSys AS Usuario, nombres_sys AS Nombres, apellidos_sys AS Apellidos, numero_documento FROM tb_usersys";
+        $sql = "SELECT id_userSys AS Usuario, nombresUsys AS Nombres, apellidosUsys AS Apellidos, numeroDocumentoUsys FROM tb_usersys";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -68,20 +68,20 @@ class MostrarDatosModel
     {
         $sql = "
             SELECT 
-                CONCAT(u.nombres_park, ' ', u.apellidos_park) AS propietario,
-                v.placa,
-                v.tarjeta_propiedad AS Tarjeta__de_Propiedad_o_Serial,
-                v.tipo,
-                v.modelo,
-                v.color,
-                u.edificio AS Centro_formación,
-                MAX(a.fecha_hora) AS ultima_entrada
-            FROM tb_accesos a
-            INNER JOIN tb_vehiculos v ON a.id_vehiculo = v.id_vehiculo
-            INNER JOIN tb_userpark u ON v.id_userPark = u.id_userPark
-            WHERE a.tipo_accion = 'ingreso'
-            AND DATE(a.fecha_hora) = CURDATE()
-            AND a.id_vehiculo NOT IN (
+                CONCAT(userpark.nombresUpark, ' ', userpark.apellidosUpark) AS propietario,
+                vehiculo.placa,
+                vehiculo.tarjeta_propiedad AS Tarjeta__de_Propiedad_o_Serial,
+                vehiculo.tipo,
+                vehiculo.modelo,
+                vehiculo.color,
+                userpark.edificio AS Centro_formación,
+                MAX(accesos.fechaHoraAcc) AS ultima_entrada
+            FROM tb_accesos acessos
+            INNER JOIN tb_vehiculos vehiculo ON acceso.id_vehiculo = vehiculo.id_vehiculo
+            INNER JOIN tb_userpark userpark ON vehiculo.id_userPark = userpark.id_userPark
+            WHERE acceso.tipoAccionAcc = 'ingreso'
+            AND DATE(accesos.fechaHoraAcc) = CURDATE()
+            AND accesos.id_vehiculo NOT IN (
                 SELECT id_vehiculo
                 FROM tb_accesos
                 WHERE tipo_accion = 'salida'
