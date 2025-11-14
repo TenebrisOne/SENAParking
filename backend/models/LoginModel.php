@@ -11,7 +11,7 @@ class login
 
     public function validar_login($correo, $password)
     {
-        $sql = "SELECT * FROM tb_userSys WHERE correo = ?";
+        $sql = "SELECT * FROM tb_userSys WHERE correoUsys = ?";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bind_param("s", $correo);
         $stmt->execute();
@@ -20,12 +20,12 @@ class login
         if ($result->num_rows > 0) {
             $usuario = $result->fetch_assoc();
 
-            if (password_verify($password, $usuario["password"])) {
+            if (password_verify($password, $usuario["passwordUsys"])) {
 
-                if ($usuario['estado'] === 'activo') {
+                if ($usuario['estadoUsys'] === 'activo') {
                     $_SESSION['correo'] = $correo;
-                    $_SESSION['nombre'] = $usuario['nombres_sys'];
-                    $_SESSION['rol'] = $usuario['id_rol'];
+                    $_SESSION['nombre'] = $usuario['nombresUsys'];
+                    $_SESSION['rol'] = $usuario['rolUsys'];
                     $_SESSION['id_userSys'] = $usuario['id_userSys'];
                     return "activo"; // Login exitoso
                 } else {

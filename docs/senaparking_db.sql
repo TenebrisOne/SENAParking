@@ -82,7 +82,7 @@ CREATE TABLE tb_vehiculos (
   id_userPark INT NOT NULL,
   placaVeh VARCHAR(10) NOT NULL,
   tarjetaPropiedadVeh VARCHAR(100) DEFAULT NULL,
-  tipoVeh ENUM('Oficial','Automóvil','Motocicleta','Moto','Otro') NOT NULL,
+  tipoVeh ENUM('Oficial','Automóvil','Bicicleta','Motocicleta','Otro') NOT NULL,
   modeloVeh VARCHAR(50) DEFAULT NULL,
   colorVeh VARCHAR(50) DEFAULT NULL,
   PRIMARY KEY (id_vehiculo),

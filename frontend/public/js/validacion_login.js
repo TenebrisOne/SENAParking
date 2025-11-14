@@ -77,17 +77,17 @@ formulario.addEventListener("submit", (e) => {
       .then((response) => response.text())
       .then((data) => {
         switch (data) {
-          case "1":
+          case "admin":
             window.location.href = "frontend/views/dashboard_admin.php";
             break;
-          case "2":
+          case "supervisor":
             window.location.href = "frontend/views/dashboard_supervisor.php";
             break;
-          case "3":
+          case "guardia":
             window.location.href = "frontend/views/dashboard_guardia.php";
             break;
           default:
-            alert(data);
+            alert("hola");
         }
       })
     formulario.reset();
