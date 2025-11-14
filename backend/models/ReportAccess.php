@@ -21,14 +21,14 @@ class Access {
     public function getUserAccessStats($id_userPark) {
         // Necesitamos unir tb_accesos con tb_vehiculos para filtrar por id_userPark
         $query = "SELECT
-                    SUM(CASE WHEN a.tipo_accion = 'ingreso' THEN 1 ELSE 0 END) as ingresos,
-                    SUM(CASE WHEN a.tipo_accion = 'salida' THEN 1 ELSE 0 END) as salidas
+                    SUM(CASE WHEN acceso.tipoAccionAcc = 'ingreso' THEN 1 ELSE 0 END) as ingresos,
+                    SUM(CASE WHEN acceso.tipoAccionAcc = 'salida' THEN 1 ELSE 0 END) as salidas
                   FROM
-                    " . $this->table_name . " a
+                    " . $this->table_name . " acceso
                   JOIN
-                    " . $this->vehicle_table . " v ON a.id_vehiculo = v.id_vehiculo
+                    " . $this->vehicle_table . " vehiculo ON acceso.id_vehiculo = vehiculo.id_vehiculo
                   WHERE
-                    v.id_userPark = :id_userPark";
+                    vehiculo.id_userPark = :id_userPark";
 
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id_userPark', $id_userPark, PDO::PARAM_INT);
@@ -41,18 +41,18 @@ class Access {
     // Obtener la lista detallada de accesos para un usuario
     public function getUserAccesses($id_userPark) {
         $query = "SELECT
-                    a.fecha_hora,
-                    a.tipo_accion,
-                    v.placa,
-                    a.espacio_asignado
+                    acceso.fechaHoraAcc,
+                    acceso.tipoAccionAcc,
+                    vehiculo.placa,
+                    acceso.espacioAsignadoAcc
                   FROM
-                    " . $this->table_name . " a
+                    " . $this->table_name . " acceso
                   JOIN
-                    " . $this->vehicle_table . " v ON a.id_vehiculo = v.id_vehiculo
+                    " . $this->vehicle_table . " vehiculo ON acceso.id_vehiculo = vehiculo.id_vehiculo
                   WHERE
-                    v.id_userPark = :id_userPark
+                    vehiculo.id_userPark = :id_userPark
                   ORDER BY
-                    a.fecha_hora DESC"; // Más reciente primero
+                    acceso.fechaHoraAcc DESC"; // Más reciente primero
 
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id_userPark', $id_userPark, PDO::PARAM_INT);
@@ -64,8 +64,8 @@ class Access {
     // Métodos para reportes generales (se usarán en la tercera pantalla)
     public function getGeneralAccessStats($startDate = null, $endDate = null) {
         $query = "SELECT
-                    SUM(CASE WHEN tipo_accion = 'ingreso' THEN 1 ELSE 0 END) as total_ingresos,
-                    SUM(CASE WHEN tipo_accion = 'salida' THEN 1 ELSE 0 END) as total_salidas
+                    SUM(CASE WHEN tipoAccionAcc = 'ingreso' THEN 1 ELSE 0 END) as total_ingresos,
+                    SUM(CASE WHEN tipoAccionAcc = 'salida' THEN 1 ELSE 0 END) as total_salidas
                   FROM
                     " . $this->table_name;
         
@@ -73,11 +73,11 @@ class Access {
         $params = [];
 
         if ($startDate) {
-            $conditions[] = "fecha_hora >= :startDate";
+            $conditions[] = "fechaHoraAcc >= :startDate";
             $params[':startDate'] = $startDate;
         }
         if ($endDate) {
-            $conditions[] = "fecha_hora <= :endDate";
+            $conditions[] = "fechaHoraAcc <= :endDate";
             $params[':endDate'] = $endDate;
         }
 
@@ -95,23 +95,23 @@ class Access {
 
     public function getVehicleTypeAccessStats($startDate = null, $endDate = null) {
         $query = "SELECT
-                    v.tipo,
-                    SUM(CASE WHEN a.tipo_accion = 'ingreso' THEN 1 ELSE 0 END) as ingresos,
-                    SUM(CASE WHEN a.tipo_accion = 'salida' THEN 1 ELSE 0 END) as salidas
+                    vehiculo.tipo,
+                    SUM(CASE WHEN acceso.tipoAccionAcc = 'ingreso' THEN 1 ELSE 0 END) as ingresos,
+                    SUM(CASE WHEN acceso.tipoAccionAcc = 'salida' THEN 1 ELSE 0 END) as salidas
                   FROM
-                    " . $this->table_name . " a
+                    " . $this->table_name . " acceso 
                   JOIN
-                    " . $this->vehicle_table . " v ON a.id_vehiculo = v.id_vehiculo";
+                    " . $this->vehicle_table . " vehiculo ON acceso.id_vehiculo = vehiculo.id_vehiculo";
         
         $conditions = [];
         $params = [];
 
         if ($startDate) {
-            $conditions[] = "a.fecha_hora >= :startDate";
+            $conditions[] = "acceso.fechaHoraAcc >= :startDate";
             $params[':startDate'] = $startDate;
         }
         if ($endDate) {
-            $conditions[] = "a.fecha_hora <= :endDate";
+            $conditions[] = "acceso.fechaHoraAcc <= :endDate";
             $params[':endDate'] = $endDate;
         }
 
@@ -119,7 +119,7 @@ class Access {
             $query .= " WHERE " . implode(" AND ", $conditions);
         }
 
-        $query .= " GROUP BY v.tipo";
+        $query .= " GROUP BY vehiculo.tipo";
 
         $stmt = $this->conn->prepare($query);
         foreach ($params as $key => &$val) {
@@ -155,18 +155,18 @@ class Access {
     // Para el reporte GENERAL, la ocupación se podría entender como (Ingresos - Salidas) / Capacidad, pero eso es engañoso.
     // Vamos a añadir un método para contar los vehículos que tienen un 'ingreso' como su última acción y no tienen una 'salida' posterior
     public function getCurrentOccupancyCount() {
-        $query = "SELECT COUNT(DISTINCT a.id_vehiculo) as current_occupancy_count
-                  FROM " . $this->table_name . " a
-                  WHERE a.tipo_accion = 'ingreso' AND NOT EXISTS (
-                      SELECT 1 FROM " . $this->table_name . " a2
-                      WHERE a2.id_vehiculo = a.id_vehiculo
-                      AND a2.fecha_hora > a.fecha_hora
-                      AND a2.tipo_accion = 'salida'
+        $query = "SELECT COUNT(DISTINCT acceso.id_vehiculo) as current_occupancy_count
+                  FROM " . $this->table_name . " acceso
+                  WHERE acceso.tipoAccionAcc = 'ingreso' AND NOT EXISTS (
+                      SELECT 1 FROM " . $this->table_name . " acceso2
+                      WHERE acceso2.id_vehiculo = acceso.id_vehiculo
+                      AND acceso2.fechaHoraAcc > acceso.fechaHoraAcc
+                      AND acceso2.tipoAccionAcc = 'salida'
                   ) AND EXISTS ( -- Asegura que es el último ingreso
-                      SELECT 1 FROM " . $this->table_name . " a3
-                      WHERE a3.id_vehiculo = a.id_vehiculo
-                      GROUP BY a3.id_vehiculo
-                      HAVING MAX(a3.fecha_hora) = a.fecha_hora
+                      SELECT 1 FROM " . $this->table_name . " acceso3
+                      WHERE acceso3.id_vehiculo = acceso.id_vehiculo
+                      GROUP BY acceso3.id_vehiculo
+                      HAVING MAX(acceso3.fechaHoraAcc) = acceso.fechaHoraAcc
                   )";
 
         $stmt = $this->conn->prepare($query);
@@ -178,13 +178,13 @@ class Access {
     // Métodos para gráficos diarios (para la tercera pantalla)
     public function getDailyAccessStats($startDate, $endDate) {
         $query = "SELECT
-                    DATE(fecha_hora) as access_date,
-                    SUM(CASE WHEN tipo_accion = 'ingreso' THEN 1 ELSE 0 END) as daily_ingresos,
-                    SUM(CASE WHEN tipo_accion = 'salida' THEN 1 ELSE 0 END) as daily_salidas
+                    DATE(fechaHoraAcc) as access_date,
+                    SUM(CASE WHEN tipoAccionAcc = 'ingreso' THEN 1 ELSE 0 END) as daily_ingresos,
+                    SUM(CASE WHEN tipoAccionAcc = 'salida' THEN 1 ELSE 0 END) as daily_salidas
                   FROM
                     " . $this->table_name . "
                   WHERE
-                    fecha_hora >= :startDate AND fecha_hora <= :endDate
+                    fechaHoraAcc >= :startDate AND fechaHoraAcc <= :endDate
                   GROUP BY
                     access_date
                   ORDER BY
@@ -200,13 +200,13 @@ class Access {
     // Métodos para gráficos por hora (para la tercera pantalla)
     public function getHourlyAccessStats($startDate, $endDate) {
         $query = "SELECT
-                    HOUR(fecha_hora) as access_hour,
-                    SUM(CASE WHEN tipo_accion = 'ingreso' THEN 1 ELSE 0 END) as hourly_ingresos,
-                    SUM(CASE WHEN tipo_accion = 'salida' THEN 1 ELSE 0 END) as hourly_salidas
+                    HOUR(fechaHoraAcc) as access_hour,
+                    SUM(CASE WHEN tipoAccionAcc = 'ingreso' THEN 1 ELSE 0 END) as hourly_ingresos,
+                    SUM(CASE WHEN tipoAccionAcc = 'salida' THEN 1 ELSE 0 END) as hourly_salidas
                   FROM
                     " . $this->table_name . "
                   WHERE
-                    fecha_hora >= :startDate AND fecha_hora <= :endDate
+                    fechaHoraAcc >= :startDate AND fechaHoraAcc <= :endDate
                   GROUP BY
                     access_hour
                   ORDER BY

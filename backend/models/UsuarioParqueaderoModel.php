@@ -8,7 +8,7 @@ class UsuarioParqueadero {
 
     // Registrar usuario del parqueadero
     public function registrarUsuario($tipo_user, $tipo_documento, $numero_documento, $nombres, $apellidos, $edificio, $numero_contacto, $estado = 'activo') {
-        $sql = "INSERT INTO tb_userpark (tipo_user, tipo_documento, numero_documento, nombres_park, apellidos_park, edificio, numero_contacto, estado)
+        $sql = "INSERT INTO tb_userpark (tipoUserUpark, tipoDocumentoUpark, numeroDocumentoUpark, nombresUpark, apellidosUpark, edificioUpark, numeroContactoUpark, estadoUpark)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bind_param("ssssssss", $tipo_user, $tipo_documento, $numero_documento, $nombres, $apellidos, $edificio, $numero_contacto, $estado);
@@ -43,7 +43,7 @@ class UsuarioParqueadero {
 
     // Cambiar estado (activo/inactivo)
     public function cambiarEstado($id, $estado) {
-        $sql = "UPDATE tb_userpark SET estado = ? WHERE id_userPark = ?";
+        $sql = "UPDATE tb_userpark SET estadoUpark = ? WHERE id_userPark = ?";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bind_param("si", $estado, $id);
         return $stmt->execute();
@@ -60,7 +60,7 @@ class UsuarioParqueadero {
 
     // Editar usuario
     public function actualizarUsuario($id, $tipo_user, $tipo_documento, $numero_documento, $nombres, $apellidos, $edificio, $numero_contacto) {
-        $sql = "UPDATE tb_userpark SET tipo_user = ?, tipo_documento = ?, numero_documento = ?, nombres_park = ?, apellidos_park = ?, edificio = ?, numero_contacto = ?
+        $sql = "UPDATE tb_userpark SET tipoUserUpark = ?, tipoDocumentoUpark = ?, numeroDocumentoUpark = ?, nombresUpark = ?, apellidosUpark = ?, edificioUpark = ?, numeroContactoUpark = ?
                 WHERE id_userPark = ?";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bind_param("sssssssi", $tipo_user, $tipo_documento, $numero_documento, $nombres, $apellidos, $edificio, $numero_contacto, $id);

@@ -14,7 +14,7 @@ class UserPark {
     }
 
     public function readAll() {
-        $query = "SELECT id_userPark, nombres_park, apellidos_park FROM " . $this->table_name . " ORDER BY nombres_park ASC";
+        $query = "SELECT id_userPark, nombresUpark, apellidosUpark FROM " . $this->table_name . " ORDER BY nombresUpark ASC";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;

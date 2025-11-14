@@ -85,7 +85,7 @@ class MostrarDatosModel
                 SELECT id_vehiculo
                 FROM tb_accesos
                 WHERE tipo_accion = 'salida'
-                AND DATE(fecha_hora) = CURDATE()
+                AND DATE(fechaHoraAcc) = CURDATE()
             )
             GROUP BY a.id_vehiculo
             ORDER BY ultima_entrada DESC
@@ -99,15 +99,15 @@ class MostrarDatosModel
     public function obtenerAccesosHoy()
     {
         $sql = "SELECT 
-        CONCAT(u.nombres_sys, ' ', u.apellidos_sys) AS Usuario_Que_Registra_Acceso,
-        v.tipo AS Vehículo,
-        a.fecha_hora AS Fecha_y_Hora,
-        a.tipo_accion AS Tipo_de_Acción
-        FROM tb_accesos a
-        INNER JOIN tb_usersys u ON a.id_userSys = u.id_userSys
-        INNER JOIN tb_vehiculos v ON a.id_vehiculo = v.id_vehiculo
-        WHERE a.tipo_accion = 'ingreso'
-        AND DATE(a.fecha_hora) = CURDATE()";
+        CONCAT(usersys.nombresUsys, ' ', usersys.apellidosUsys) AS Usuario_Que_Registra_Acceso,
+        vehiculo.tipo AS Vehículo,
+        acceso.fechaHoraAcc AS Fecha_y_Hora,
+        a.tipoAccionAcc AS Tipo_de_Acción
+        FROM tb_accesos acceso
+        INNER JOIN tb_usersys usersys ON a.id_userSys = u.id_userSys
+        INNER JOIN tb_vehiculos vehiculo ON a.id_vehiculo = v.id_vehiculo
+        WHERE acceso.tipoAccionAcc = 'ingreso'
+        AND DATE(acceso.fechaHoraAcc) = CURDATE()";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -116,15 +116,15 @@ class MostrarDatosModel
     public function obtenerSalidasHoy()
     {
         $sql = "SELECT 
-        CONCAT(u.nombres_sys, ' ', u.apellidos_sys) AS Usuario_Que_Registra_Salida,
-        v.tipo AS Vehículo,
-        a.fecha_hora AS Fecha_y_Hora,
-        a.tipo_accion AS Tipo_de_Acción
-        FROM tb_accesos a
-        INNER JOIN tb_usersys u ON a.id_userSys = u.id_userSys
-        INNER JOIN tb_vehiculos v ON a.id_vehiculo = v.id_vehiculo
-        WHERE a.tipo_accion = 'salida'
-        AND DATE(a.fecha_hora) = CURDATE()";
+        CONCAT(usersys.nombresUsys, ' ', usersys.apellidosUsys) AS Usuario_Que_Registra_Salida,
+        vehiculo.tipo AS Vehículo,
+        acceso.fechaHoraAcc AS Fecha_y_Hora,
+        acceso.tipoAccionAcc AS Tipo_de_Acción
+        FROM tb_accesos acceso
+        INNER JOIN tb_usersys usersys ON a.id_userSys = u.id_userSys
+        INNER JOIN tb_vehiculos vehiculo ON a.id_vehiculo = v.id_vehiculo
+        WHERE acceso.tipoAccionAcc = 'salida'
+        AND DATE(acceso.fechaHoraAcc) = CURDATE()";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -135,13 +135,13 @@ class MostrarDatosModel
     public function obtenerActividadesRecientes($limite = 7)
     {
         $sql = "SELECT 
-                a.id_userSys AS UsuarioID,
-                CONCAT(u.nombres_sys, ' ', u.apellidos_sys) AS Usuario,
-                a.accion AS Accion,
-                a.fecha_hora AS Fecha
-            FROM tb_actividades a
-            INNER JOIN tb_usersys u ON a.id_userSys = u.id_userSys WHERE id_rol = 3
-            ORDER BY a.fecha_hora DESC
+                actividad.id_userSys AS UsuarioID,
+                CONCAT(usersys.nombresUsys, ' ', usersys.apellidosUsys) AS Usuario,
+                actividad.accionActi AS Accion,
+                actividad.fechaHoraActi AS Fecha
+            FROM tb_actividades actividad
+            INNER JOIN tb_usersys usersys ON actividad.id_userSys = usersys.id_userSys WHERE rolUsys = 'guardia'
+            ORDER BY actividad.fechaHoraActi DESC
             LIMIT :limite";
 
         $stmt = $this->conn->prepare($sql);
@@ -153,15 +153,15 @@ class MostrarDatosModel
     public function obtenerVehiculosHoy()
     {
         $sql = "SELECT 
-                    a.id_userPark AS UsuarioID,
-                    CONCAT(u.nombres_park, ' ', u.apellidos_park) AS Usuario,
-                    a.placa AS Placa,
-                    a.tipo AS Tipo,
-                    a.modelo AS Modelo,
-                    a.color AS Color
-                FROM tb_vehiculos a
-                INNER JOIN tb_userpark u ON a.id_userPark = u.id_userPark 
-                ORDER BY a.id_vehiculo DESC
+                    vehiculo.id_userPark AS UsuarioID,
+                    CONCAT(userpark.nombresUpark, ' ', userpark.apellidosUpark) AS Usuario,
+                    vehiculo.placaVeh AS Placa,
+                    vehiculo.tipoVeh AS Tipo,
+                    vehiculo.modeloVeh AS Modelo,
+                    vehiculo.colorVeh AS Color
+                FROM tb_vehiculos vehiculo
+                INNER JOIN tb_userpark userpark ON vehiculo.id_userPark = userpark.id_userPark 
+                ORDER BY vehiculo.id_vehiculo DESC
                 ";
 
         $stmt = $this->conn->prepare($sql);

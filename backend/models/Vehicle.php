@@ -21,31 +21,31 @@ class Vehicle {
     // Método para leer vehículos, incluyendo la información del propietario
     public function read($search_term = "") {
         $query = "SELECT 
-                    v.id_vehiculo, 
-                    v.id_userPark, 
-                    v.placa, 
-                    v.tarjeta_propiedad,
-                    v.tipo, 
-                    v.modelo, 
-                    v.color, 
-                    up.nombres_park,    
-                    up.apellidos_park   
+                    vehiculo.id_vehiculo, 
+                    vehiculo.id_userPark, 
+                    vehiculo.placa, 
+                    vehiculo.tarjeta_propiedad,
+                    vehiculo.tipo, 
+                    vehiculo.modelo, 
+                    vehiculo.color, 
+                    userpark.nombresUpark,    
+                    userpark.apellidosUpark   
                   FROM 
-                    " . $this->table_name . " v
+                    " . $this->table_name . " vehiculo
                   JOIN 
-                    " . $this->user_park_table . " up 
+                    " . $this->user_park_table . " userpark
                   ON 
-                    v.id_userPark = up.id_userPark"; 
+                    vehiculo.id_userPark = userpark.id_userPark"; 
         
         if (!empty($search_term)) {
             
             $query .= " WHERE 
-                            up.nombres_park LIKE :search_term 
-                            OR up.apellidos_park LIKE :search_term 
+                            userpark.nombresUpark LIKE :search_term 
+                            OR userpark.apellidosUpark LIKE :search_term 
                             OR v.placa LIKE :search_term";
         }
         
-        $query .= " ORDER BY v.placa ASC";
+        $query .= " ORDER BY vehiculo.placa ASC";
 
         $stmt = $this->conn->prepare($query);
 
