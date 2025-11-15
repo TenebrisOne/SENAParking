@@ -8,7 +8,6 @@ require_once('../models/UsuarioParqueaderoModel.php');
 require_once('../models/ActividadModel.php');
 
 $actividadModel = new ActividadModel($conn);
-
 $usuarioPark = new UsuarioParqueadero($conn);
 
 // ✅ REGISTRAR USUARIO

@@ -1,6 +1,7 @@
 <?php
+require_once __DIR__ . '/../config/conexion.php';
 require_once __DIR__ . '/../models/MostrarDatosModel.php';
-$modelo = new MostrarDatosModel();
+$modelo = new MostrarDatosModel($conn);
 
 // Totales
 $totalUsuariosSistema = $modelo->contarUsuariosSistema();
