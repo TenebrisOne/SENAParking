@@ -87,7 +87,7 @@ formulario.addEventListener("submit", (e) => {
             window.location.href = "frontend/views/dashboard_guardia.php";
             break;
           default:
-            alert("hola");
+            alert("Usuario o contraseña incorrectos");
         }
       })
     formulario.reset();

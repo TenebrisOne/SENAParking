@@ -5,7 +5,7 @@ if (!isset($_SESSION['rol'])) {
     header("location: ../../login.php");
     exit();
 }
-if ($_SESSION['rol'] == 3) {
+if ($_SESSION['rol'] == 'guardia') {
     header("location: ./dashboard_guardia.php");
     exit();
 }

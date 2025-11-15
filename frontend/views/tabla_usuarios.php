@@ -6,7 +6,7 @@ require_once('../../backend/models/UsuarioSistemaModel.php');
 
 $usuarioModel = new Usuario($conn);
 $usuarios = $usuarioModel->obtenerUsuarios();
-$roles = [1 => "Administrador", 2 => "Supervisor", 3 => "Guardia de Seguridad"];
+$roles = ['admin' => "Administrador", 'supervisor' => "Supervisor", 'guardia' => "Guardia de Seguridad"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,26 +36,26 @@ $roles = [1 => "Administrador", 2 => "Supervisor", 3 => "Guardia de Seguridad"];
         <tbody>
             <?php foreach ($usuarios as $usuario): ?>
                 <?php if ($_SESSION['id_userSys'] != $usuario['id_userSys']): ?>
-                    <?php if ($_SESSION['rol'] == 2): ?>
-                        <?php if ($usuario['id_rol'] == 3): ?>
+                    <?php if ($_SESSION['rol'] == 'supervisor'): ?>
+                        <?php if ($usuario['rolUsys'] == 'guardia'): ?>
                             <tr>
-                                <td><?= htmlspecialchars($usuario['username'] . ' ' . $usuario['apellidos_sys']) ?></td>
+                                <td><?= htmlspecialchars($usuario['nombresUsys'] . ' ' . $usuario['apellidosUsys']) ?></td>
                                 <td>
                                     <?php
-                                    $roles = [1 => "Administrador", 2 => "Supervisor", 3 => "Guardia de Seguridad"];
-                                    echo $roles[$usuario['id_rol']] ?? 'Desconocido';
+                                    $roles = ['admin' => "Administrador", 'supervisor' => "Supervisor", 'guardia' => "Guardia de Seguridad"];
+                                    echo $roles[$usuario['rolUsys']] ?? 'Desconocido';
                                     ?>
                                 </td>
                                 <td>
                                     <form action="../../backend/controllers/UsuarioSistemaController.php" method="POST">
                                         <input type="hidden" name="id_userSys" value="<?= $usuario['id_userSys'] ?>">
-                                        <input type="hidden" name="estado" value="<?= $usuario['estado'] === 'activo' ? 'inactivo' : 'activo' ?>">
+                                        <input type="hidden" name="estado" value="<?= $usuario['estadoUsys'] === 'activo' ? 'inactivo' : 'activo' ?>">
                                         <!-- Botón Editar -->
                                         <a href="editar_userSys.php?id=<?= $usuario['id_userSys'] ?>" class="btn btn-editar btn-sm">
                                             Editar
                                         </a>
                                         <label class="switch">
-                                            <input type="checkbox" onchange="this.form.submit()" <?= $usuario['estado'] === 'activo' ? 'checked' : '' ?>>
+                                            <input type="checkbox" onchange="this.form.submit()" <?= $usuario['estadoUsys'] === 'activo' ? 'checked' : '' ?>>
                                             <span class="slider round"></span>
                                         </label>
                                     </form>
@@ -63,25 +63,25 @@ $roles = [1 => "Administrador", 2 => "Supervisor", 3 => "Guardia de Seguridad"];
                             </tr>
                         <?php endif; ?>
                     <?php endif; ?>
-                    <?php if ($_SESSION['rol'] != 2): ?>
+                    <?php if ($_SESSION['rol'] != 'supervisor'): ?>
                         <tr>
-                            <td><?= htmlspecialchars($usuario['username'] . ' ' . $usuario['apellidos_sys']) ?></td>
+                            <td><?= htmlspecialchars($usuario['nombresUsys'] . ' ' . $usuario['apellidosUsys']) ?></td>
                             <td>
                                 <?php
-                                $roles = [1 => "Administrador", 2 => "Supervisor", 3 => "Guardia de Seguridad"];
-                                echo $roles[$usuario['id_rol']] ?? 'Desconocido';
+                                $roles = ['admin' => "Administrador", 'supervisor' => "Supervisor", 'guardia' => "Guardia de Seguridad"];
+                                echo $roles[$usuario['rolUsys']] ?? 'Desconocido';
                                 ?>
                             </td>
                             <td>
                                 <form action="../../backend/controllers/UsuarioSistemaController.php" method="POST">
                                     <input type="hidden" name="id_userSys" value="<?= $usuario['id_userSys'] ?>">
-                                    <input type="hidden" name="estado" value="<?= $usuario['estado'] === 'activo' ? 'inactivo' : 'activo' ?>">
+                                    <input type="hidden" name="estado" value="<?= $usuario['estadoUsys'] === 'activo' ? 'inactivo' : 'activo' ?>">
                                     <!-- Botón Editar -->
                                     <a href="editar_userSys.php?id=<?= $usuario['id_userSys'] ?>" class="btn btn-editar btn-sm">
                                         Editar
                                     </a>
                                     <label class="switch">
-                                        <input type="checkbox" onchange="this.form.submit()" <?= $usuario['estado'] === 'activo' ? 'checked' : '' ?>>
+                                        <input type="checkbox" onchange="this.form.submit()" <?= $usuario['estadoUsys'] === 'activo' ? 'checked' : '' ?>>
                                         <span class="slider round"></span>
                                     </label>
                                 </form>

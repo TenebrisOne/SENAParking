@@ -12,7 +12,7 @@ class Usuario
     {
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
         $sql = "INSERT INTO tb_usersys 
-                (nombresUsys, apellidosUsys, tipoDocumentoUsys, numerDocumentoUsys, rolUsys, correoUsys, numeroContactoUsys, usernameUsys, passwordUsys, estadoUsys) 
+                (nombresUsys, apellidosUsys, tipoDocumentoUsys, numeroDocumentoUsys, rolUsys, correoUsys, numeroContactoUsys, usernameUsys, passwordUsys, estadoUsys) 
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         $stmt = $this->conexion->prepare($sql);
