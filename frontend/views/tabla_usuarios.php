@@ -35,7 +35,7 @@ $roles = ['admin' => "Administrador", 'supervisor' => "Supervisor", 'guardia' =>
         </thead>
         <tbody>
             <?php foreach ($usuarios as $usuario): ?>
-                <?php if ($_SESSION['id_userSys'] != $usuario['id_userSys']): ?>
+               <!-- <?php if ($_SESSION['id_userSys'] != $usuario['id_userSys']): ?> -->
                     <?php if ($_SESSION['rol'] == 'supervisor'): ?>
                         <?php if ($usuario['rolUsys'] == 'guardia'): ?>
                             <tr>
@@ -88,7 +88,7 @@ $roles = ['admin' => "Administrador", 'supervisor' => "Supervisor", 'guardia' =>
                             </td>
                         </tr>
                     <?php endif; ?>
-                <?php endif; ?>
+               <!-- <?php endif; ?> -->
             <?php endforeach; ?>
         </tbody>
     </table>

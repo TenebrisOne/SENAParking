@@ -93,11 +93,11 @@ if ($_SESSION['rol'] == 'guardia') {
                     <label for="rol" class="form-label">Rol:</label>
                     <select class="form-select" id="rol" name="rol" required>
                         <option value="" selected disabled>Selecciona el rol</option>
-                        <?php if($_SESSION['rol'] == 1):?>
-                        <option value="1">Administrador</option>
-                        <option value="2">Supervisor</option>
+                        <?php if($_SESSION['rol'] == 'admin'):?>
+                        <option value="admin">Administrador</option>
+                        <option value="supervisor">Supervisor</option>
                         <?php endif;?>
-                        <option value="3">Guarda de Seguridad</option>
+                        <option value="guardia">Guarda de Seguridad</option>
                     </select>
                 </div>
             </div>
