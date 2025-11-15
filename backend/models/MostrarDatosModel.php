@@ -5,7 +5,7 @@ class MostrarDatosModel
 {
     private $conn;
 
-    // Constructor recibe la conexión mysqli
+    // Constructor recibe la conexión a la base de datos
     public function __construct($db)
     {
         $this->conn = $db;

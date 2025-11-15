@@ -1,6 +1,6 @@
 <?php
 if (session_status() == PHP_SESSION_NONE) {
-    session_start(); // ✅ solo se ejecuta si no hay sesión activa
+    session_start(); // solo se ejecuta si no hay sesión activa
 }
 
 require_once('../config/conexion.php');
