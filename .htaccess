@@ -38,5 +38,5 @@ rewriteRule ^([a-zA-Z0-9/ñÑ-]+)$ index.php?views=$1
 RewriteRule ^includes/ - [F,L]
 
 # Bloquear acceso a cualquier archivo .php dentro de /private/
-RewriteRule ^private/.*\.php$ - [F,L]
+RewriteRule ON ^private/.*\.php$ - [F,L]
 
