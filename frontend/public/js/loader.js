@@ -8,11 +8,11 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", async (event) => {
     event.preventDefault(); // Evita envío tradicional
 
-    // Limpiar mensaje anterior
+    // Ocultar mensaje previo
     errorMsg.style.display = "none";
     errorMsg.textContent = "";
 
-    // Mostrar el loader
+    // Mostrar loader
     loader.style.display = "flex";
 
     const formData = new FormData(form);
@@ -23,26 +23,34 @@ document.addEventListener("DOMContentLoaded", () => {
         body: formData,
       });
 
+      // Si la respuesta del servidor no es 200-299 → error real
+      if (!response.ok) {
+        throw new Error("Servidor respondió con un estado no exitoso");
+      }
+
       const data = await response.text();
 
-      // Caso: credenciales incorrectas
+      // Validar credenciales incorrectas
       if (data.includes("Usuario inválido") || data.includes("contraseña incorrecta")) {
         loader.style.display = "none";
         errorMsg.textContent = "Usuario o contraseña incorrectos. Intenta de nuevo.";
         errorMsg.style.display = "block";
-      } else {
-        // Login correcto → carga la siguiente vista
-        document.open();
-        document.write(data);
-        document.close();
+        return;
       }
+
+      // Login correcto → renderizar siguiente vista
+      document.open();
+      document.write(data);
+      document.close();
+
     } catch (error) {
+      // Este error solo se mostrará cuando haya error real de red
       loader.style.display = "none";
+
       errorMsg.textContent = "Error de conexión. Intenta nuevamente.";
       errorMsg.style.display = "block";
+
       console.error("Error en la petición:", error);
     }
   });
 });
-
-
