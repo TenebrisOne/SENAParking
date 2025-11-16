@@ -43,7 +43,7 @@ class Access {
         $query = "SELECT
                     acceso.fechaHoraAcc,
                     acceso.tipoAccionAcc,
-                    vehiculo.placa,
+                    vehiculo.placaVeh,
                     acceso.espacioAsignadoAcc
                   FROM
                     " . $this->table_name . " acceso
