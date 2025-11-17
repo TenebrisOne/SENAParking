@@ -6,13 +6,13 @@ class Vehicle {
 
     public $id_vehiculo;
     public $id_userPark;
-    public $placa;
-    public $tarjeta_propiedad;
-    public $tipo;
-    public $modelo;
-    public $color;
-    public $nombres_park;
-    public $apellidos_park; 
+    public $placaVeh;
+    public $tarjetaPropiedadVeh;
+    public $tipoVeh;
+    public $modeloVeh;
+    public $colorVeh;
+    public $nombresUpark;
+    public $apellidosUpark; 
 
     public function __construct($db) {
         $this->conn = $db;
@@ -23,11 +23,11 @@ class Vehicle {
         $query = "SELECT 
                     vehiculo.id_vehiculo, 
                     vehiculo.id_userPark, 
-                    vehiculo.placa, 
-                    vehiculo.tarjeta_propiedad,
-                    vehiculo.tipo, 
-                    vehiculo.modelo, 
-                    vehiculo.color, 
+                    vehiculo.placaVeh, 
+                    vehiculo.tarjetaPropiedadVeh,
+                    vehiculo.tipoVeh, 
+                    vehiculo.modeloVeh, 
+                    vehiculo.colorVeh, 
                     userpark.nombresUpark,    
                     userpark.apellidosUpark   
                   FROM 
@@ -42,10 +42,10 @@ class Vehicle {
             $query .= " WHERE 
                             userpark.nombresUpark LIKE :search_term 
                             OR userpark.apellidosUpark LIKE :search_term 
-                            OR v.placa LIKE :search_term";
+                            OR vehiculo.placaVeh LIKE :search_term";
         }
         
-        $query .= " ORDER BY vehiculo.placa ASC";
+        $query .= " ORDER BY vehiculo.placaVeh ASC";
 
         $stmt = $this->conn->prepare($query);
 

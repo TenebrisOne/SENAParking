@@ -158,21 +158,24 @@ if (!isset($_SESSION['rol'])) {
 
             vehiclesList.innerHTML = vehicles.map(vehicle => `
                <div class="col-12 mb-3">
-                <div class="card vehicle-card h-100" onclick="selectVehicle(this, ${vehicle.id_vehiculo}, '${vehicle.placa}')">
+                <div class="card vehicle-card h-100" onclick="selectVehicle(this, ${vehicle.id_vehiculo}, '${vehicle.placaVeh}')">
                     <div class="card-body position-relative">
                         <div class="d-flex align-items-start">
                             <div class="vehicle-info flex-grow-1">
                                 <div class="d-flex justify-content-between align-items-start mb-3">
                                     <div class="flex-grow-1">
                                         <h5 class="card-title mb-2">
-                                            <i class="${getVehicleIcon(vehicle.tipo)} text-primary me-2"></i>
-                                            ${vehicle.placa}
+                                            <i class="${getVehicleIcon(vehicle.tipoVeh)} text-primary me-2"></i>
+                                            ${vehicle.placaVeh}
                                         </h5>
                                         <p class="card-text mb-1">
-                                            <strong>Modelo:</strong> ${vehicle.modelo}
+                                            <strong>Tarjeta:</strong> ${vehicle.tarjetaPropiedadVeh}
                                         </p>
                                         <p class="card-text mb-1">
-                                            <strong>Color:</strong> ${vehicle.color}
+                                            <strong>Modelo:</strong> ${vehicle.modeloVeh}
+                                        </p>
+                                        <p class="card-text mb-1">
+                                            <strong>Color:</strong> ${vehicle.colorVeh}
                                         </p>
                                         <p class="card-text mb-0">
                                             <strong>Propietario:</strong> ${vehicle.propietario_nombre_completo}
@@ -180,7 +183,6 @@ if (!isset($_SESSION['rol'])) {
                                         <p class="card-text mb-0">
                                             <span class="badge ${getStatusBadgeClass(vehicle.estado)}">${getStatusText(vehicle.estado)}</span>
                                         </p>
-                                 
                                     </div>
                                     <button class="btn btn-outline-primary btn-sm btn-edit" onclick="editVehicle(event, ${vehicle.id_vehiculo})">
                                         <i class="fas fa-edit"></i>
