@@ -17,12 +17,12 @@ $resUsuariosPark = mysqli_query($conn, $sqlUsuariosPark);
 $usuariosParqueadero = mysqli_fetch_assoc($resUsuariosPark)['total'];
 
 // Consulta: Ingresos de hoy
-$sqlIngresosHoy = "SELECT COUNT(*) AS total FROM tb_accesos WHERE tipo_accion='ingreso' AND DATE(fecha_hora) = CURDATE()";
+$sqlIngresosHoy = "SELECT COUNT(*) AS total FROM tb_accesos WHERE tipoAccionAcc='ingreso' AND DATE(fechaHoraAcc) = CURDATE()";
 $resIngresosHoy = mysqli_query($conn, $sqlIngresosHoy);
 $ingresosHoy = mysqli_fetch_assoc($resIngresosHoy)['total'];
 
 // Consulta: Salidas de hoy
-$sqlSalidasHoy = "SELECT COUNT(*) AS total FROM tb_accesos WHERE tipo_accion='salida' AND DATE(fecha_hora) = CURDATE()";
+$sqlSalidasHoy = "SELECT COUNT(*) AS total FROM tb_accesos WHERE tipoAccionAcc='salida' AND DATE(fechaHoraAcc) = CURDATE()";
 $resSalidasHoy = mysqli_query($conn, $sqlSalidasHoy);
 $salidasHoy = mysqli_fetch_assoc($resSalidasHoy)['total'];
 

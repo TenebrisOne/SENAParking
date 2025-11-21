@@ -7,7 +7,7 @@ if (!isset($_SESSION['rol'])) {
 }
 
 // Mostrar vista dependiendo del estado de la sesion
-if ($_SESSION["rol"] != 1) {
+if ($_SESSION["rol"] != "admin") {
     header("Location: ../../login.php");
 }
 
@@ -100,7 +100,7 @@ require_once('../../backend/config/conexion.php');
                         </li>
                         <!-- Se repiten ítems similares para las secciones de reportes y configuración -->
                         <li class="nav-item btn btn-secondary mt-1">
-                            <a class="nav-link" href="/SENAParking/backend/controllers/ReportesUserController.php">
+                            <a class="nav-link" href="/SENAParking/frontend/views/reportes_generales.php">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" class="feather feather-bar-chart-2">

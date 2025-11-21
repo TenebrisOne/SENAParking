@@ -26,9 +26,9 @@ if ($num > 0) {
         extract($row);
         $user_park_item = array(
             "id_userPark" => $id_userPark,
-            "nombres_park" => $nombres_park,
-            "apellidos_park" => $apellidos_park,
-            "nombre_completo" => $nombres_park . ' ' . $apellidos_park
+            "nombres_park" => $nombresUpark,
+            "apellidos_park" => $apellidosUpark,
+            "nombre_completo" => $nombresUpark . ' ' . $apellidosUpark
         );
         array_push($user_parks_arr["data"], $user_park_item);
     }

@@ -7,7 +7,7 @@ if (!isset($_SESSION['rol'])) {
 }
 
 // Mostrar vista dependiendo del estado de la sesion
-if ($_SESSION["rol"] != 3) {
+if ($_SESSION["rol"] != 'guardia') {
     header("Location: ../../login.php");
 }
 

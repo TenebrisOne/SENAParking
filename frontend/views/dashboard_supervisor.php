@@ -11,7 +11,7 @@ if (!isset($_SESSION['rol'])) {
 }
 
 // Mostrar vista dependiendo del estado de la sesion
-if ($_SESSION["rol"] != 2) {
+if ($_SESSION["rol"] != 'supervisor') {
     header("Location: ../../login.php");
 }
 

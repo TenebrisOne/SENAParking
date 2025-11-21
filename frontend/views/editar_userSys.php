@@ -75,13 +75,13 @@ if (!$usuario) {
                 <div class="col-md-6" id="grupo__nombre">
                     <label for="nombre" class="form-label">Nombres:</label>
                     <input type="text" class="form-control formulario__input" name="nombre" id="nombre"
-                        placeholder="Ingrese sus nombres" value="<?= htmlspecialchars($usuario['nombres_sys']) ?>" required>
+                        placeholder="Ingrese sus nombres" value="<?= htmlspecialchars($usuario['nombresUsys']) ?>" required>
                     <p class="formulario__input-error">El nombre tiene que ser de 4 a 16 dígitos y solo puede contener letras.</p>
                 </div>
                 <div class="col-md-6" id="grupo__apellido">
                     <label for="apellido" class="form-label">Apellidos:</label>
                     <input type="text" class="form-control formulario__input" name="apellido" id="apellido"
-                        placeholder="Ingrese sus apellidos" value="<?= htmlspecialchars($usuario['apellidos_sys']) ?>" required>
+                        placeholder="Ingrese sus apellidos" value="<?= htmlspecialchars($usuario['apellidosUsys']) ?>" required>
                     <p class="formulario__input-error">El apellido tiene que ser de 4 a 16 dígitos y solo puede contener letras.</p>
                 </div>
             </div>
@@ -91,16 +91,16 @@ if (!$usuario) {
                     <label for="tipdoc" class="form-label">Tipo de Documento:</label>
                     <select class="form-select" name="tipdoc" id="tipdoc" required>
                         <option value="">Seleccione el tipo de documento</option>
-                        <option value="cedula_ciudadania" <?= $usuario['tipo_documento'] == 'cedula_ciudadania' ? 'selected' : '' ?>>Cédula de Ciudadanía</option>
-                        <option value="cedula_extranjeria" <?= $usuario['tipo_documento'] == 'cedula_extranjeria' ? 'selected' : '' ?>>Cédula de Extranjería</option>
-                        <option value="pasaporte" <?= $usuario['tipo_documento'] == 'pasaporte' ? 'selected' : '' ?>>Pasaporte</option>
-                        <option value="otro" <?= $usuario['tipo_documento'] == 'otro' ? 'selected' : '' ?>>Otros</option>
+                        <option value="cedula_ciudadania" <?= $usuario['tipoDocumentoUsys'] == 'cedula_ciudadania' ? 'selected' : '' ?>>Cédula de Ciudadanía</option>
+                        <option value="cedula_extranjeria" <?= $usuario['tipoDocumentoUsys'] == 'cedula_extranjeria' ? 'selected' : '' ?>>Cédula de Extranjería</option>
+                        <option value="pasaporte" <?= $usuario['tipoDocumentoUsys'] == 'pasaporte' ? 'selected' : '' ?>>Pasaporte</option>
+                        <option value="otro" <?= $usuario['tipoDocumentoUsys'] == 'otro' ? 'selected' : '' ?>>Otros</option>
                     </select>
                 </div>
                 <div class="col-md-6" id="grupo__documento">
                     <label for="cedula" class="form-label">Documento:</label>
                     <input type="text" class="form-control formulario__input" name="documento" id="documento"
-                        placeholder="Ingrese el Documento" value="<?= htmlspecialchars($usuario['numero_documento']) ?>" required>
+                        placeholder="Ingrese el Documento" value="<?= htmlspecialchars($usuario['numeroDocumentoUsys']) ?>" required>
                     <p class="formulario__input-error">El documento debe tener entre 6 y 10 dígitos y solo puede contener números.</p>
                 </div>
             </div>
@@ -110,17 +110,17 @@ if (!$usuario) {
                     <label for="rol" class="form-label">Rol:</label>
                     <select class="form-select" name="rol" id="rol" required>
                         <option value="">Selecciona el rol</option>
-                        <?php if($_SESSION['rol'] == 1):?>
-                        <option value="1" <?= $usuario['id_rol'] == '1' ? 'selected' : '' ?>>Administrador</option>
-                        <option value="2" <?= $usuario['id_rol'] == '2' ? 'selected' : '' ?>>Supervisor</option>
+                        <?php if($_SESSION['rol'] == 'admin'):?>
+                        <option value="admin" <?= $usuario['rolUsys'] == 'admin' ? 'selected' : '' ?>>Administrador</option>
+                        <option value="supervisor" <?= $usuario['rolUsys'] == 'supervisor' ? 'selected' : '' ?>>Supervisor</option>
                         <?php endif; ?>
-                        <option value="3" <?= $usuario['id_rol'] == '3' ? 'selected' : '' ?>>Guarda de Seguridad</option>
+                        <option value="guardia" <?= $usuario['rolUsys'] == 'guardia' ? 'selected' : '' ?>>Guarda de Seguridad</option>
                     </select>
                 </div>
                 <div class="col-md-6" id="grupo__correo">
                     <label for="email" class="form-label">Correo Electrónico:</label>
                     <input type="email" class="form-control formulario__input" name="correo" id="correo"
-                        placeholder="Email" value="<?= htmlspecialchars($usuario['correo']) ?>" required>
+                        placeholder="Email" value="<?= htmlspecialchars($usuario['correoUsys']) ?>" required>
                     <p class="formulario__input-error">El correo solo puede contener letras, números, puntos, guiones y guión bajo.</p>
                 </div>
             </div>
@@ -129,13 +129,13 @@ if (!$usuario) {
                 <div class="col-md-6" id="grupo__numero">
                     <label for="numero" class="form-label">Número de Contacto:</label>
                     <input type="text" class="form-control formulario__input" name="numero" id="numero"
-                        placeholder="Número" value="<?= htmlspecialchars($usuario['numero_contacto']) ?>" required>
+                        placeholder="Número" value="<?= htmlspecialchars($usuario['numeroContactoUsys']) ?>" required>
                     <p class="formulario__input-error">El número tiene que ser de 7 a 14 dígitos y solo puede contener números.</p>
                 </div>
                 <div class="col-md-6" id="grupo__usuario">
                     <label for="usuario" class="form-label">Nombre de Usuario:</label>
                     <input type="text" class="form-control formulario__input" name="usuario" id="usuario"
-                        placeholder="Usuario" value="<?= htmlspecialchars($usuario['username']) ?>" required>
+                        placeholder="Usuario" value="<?= htmlspecialchars($usuario['usernameUsys']) ?>" required>
                     <p class="formulario__input-error">El nombre tiene que ser de 4 a 16 dígitos y solo puede contener letras y números.</p>
                 </div>
             </div>

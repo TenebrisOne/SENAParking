@@ -11,7 +11,7 @@ if (isset($_SESSION['correo'])) {
     $correo = $_SESSION['correo'];
 
     // Buscar ID del usuario por correo
-    $stmt = $conn->prepare("SELECT id_userSys FROM tb_userSys WHERE correo = ?");
+    $stmt = $conn->prepare("SELECT id_userSys FROM tb_userSys WHERE correoUsys = ?");
     $stmt->bind_param("s", $correo);
     $stmt->execute();
     $result = $stmt->get_result();

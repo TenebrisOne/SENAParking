@@ -3,13 +3,13 @@ session_start();
 
 if (isset($_SESSION['rol'])) {
     switch ($_SESSION['rol']) {
-        case 1:
+        case "admin":
             header("location: frontend/views/dashboard_admin.php");
             break;
-        case 2:
+        case "supervisor":
             header("location: frontend/views/dashboard_supervisor.php");
             break;
-        case 3:
+        case "guardia":
             header("location: frontend/views/dashboard_guardia.php");
             break;
         default:
@@ -66,14 +66,20 @@ if (isset($_SESSION['rol'])) {
                     <p class="formulario__input-error">La contraseña tiene que ser de 4 a 12 dígitos.</p>
                 </div>
             </div>
-            <!-- Botón de envío -->
-            <div class="row">
-                <div class="col-12">
-                    <button type="submit" class="btn btn-dark py-2 btn-hover" id="singbtn">Ingresar</button>
-                </div>
-            </div>
-            <a href="./forgot_password.html" class="text-muted mt-3" style="font-size: 14px;">¿Olvidaste tu contraseña?</a>
-        </form>
+            
+        <form id="formulario" class="formulario" action="backend/controllers/LoginController.php" method="POST">
+    <!-- ... tus campos ... -->
+    <div class="row">
+        <div class="col-12">
+            <button type="submit" class="btn btn-dark py-2 btn-hover" id="singbtn">Ingresar</button>
+        </div>
+    </div>
+    <a href="./forgot_password.html" class="text-muted mt-3" style="font-size: 14px;">¿Olvidaste tu contraseña?</a>
+</form>
+
+<!-- Aquí aparecerá el mensaje de error -->
+<p id="error-message" class="text-danger mt-3" style="text-align:center; display:none;"></p>
+
     </div>
 
 

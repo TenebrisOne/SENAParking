@@ -37,19 +37,19 @@ $usuarios = $usuarioPark->obtenerUsuarios();
         <tbody>
             <?php foreach ($usuarios as $usuario): ?>
                 <tr>
-                    <td><?= htmlspecialchars($usuario['nombres_park'] . ' ' . $usuario['apellidos_park']) ?></td>
-                    <td><?= htmlspecialchars($usuario['numero_documento']) ?></td>
+                    <td><?= htmlspecialchars($usuario['nombresUpark'] . ' ' . $usuario['apellidosUpark']) ?></td>
+                    <td><?= htmlspecialchars($usuario['numeroDocumentoUpark']) ?></td>
                     <td>
                         <form action="../../backend/controllers/UsuarioParqueaderoController.php" method="POST">
                             <input type="hidden" name="id" value="<?= $usuario['id_userPark'] ?>">
-                            <input type="hidden" name="estado" value="<?= $usuario['estado'] === 'activo' ? 'inactivo' : 'activo' ?>">
+                            <input type="hidden" name="estado" value="<?= $usuario['estadoUpark'] === 'activo' ? 'inactivo' : 'activo' ?>">
                             <!-- Botón Editar -->
                             <a href="editar_userPark.php?id=<?= $usuario['id_userPark'] ?>" class="btn btn-editar btn-sm">
                                 Editar
                             </a>
                             <?php if ($_SESSION['rol'] != 3): ?>
                             <label class="switch">
-                                <input type="checkbox" onchange="this.form.submit()" <?= $usuario['estado'] === 'activo' ? 'checked' : '' ?>>
+                                <input type="checkbox" onchange="this.form.submit()" <?= $usuario['estadoUpark'] === 'activo' ? 'checked' : '' ?>>
                                 <span class="slider round"></span>
                             </label>
                             <?php endif; ?>

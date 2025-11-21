@@ -67,14 +67,14 @@ if (!$usuario) {
                 <div class="col-md-6" id="grupo__nombre">
                     <label class="form-label">Nombres:</label>
                     <input type="text" class="form-control formulario__input" name="nombre" id="nombre"
-                        placeholder="Ingrese sus nombres" value="<?= htmlspecialchars($usuario['nombres_park']) ?>" required>
+                        placeholder="Ingrese sus nombres" value="<?= htmlspecialchars($usuario['nombresUpark']) ?>" required>
                     <p class="formulario__input-error">El nombre tiene que ser de 4 a 16 dígitos y solo debe contener
                         letras.</p>
                 </div>
                 <div class="col-md-6" id="grupo__apellido">
                     <label class="form-label">Apellidos:</label>
                     <input type="text" class="form-control formulario__input" name="apellido" id="apellido"
-                        placeholder="Ingrese sus apellidos" value="<?= htmlspecialchars($usuario['apellidos_park']) ?>" required>
+                        placeholder="Ingrese sus apellidos" value="<?= htmlspecialchars($usuario['apellidosUpark']) ?>" required>
                     <p class="formulario__input-error">El apellido tiene que ser de 4 a 16 dígitos y solo puede contener
                         letras.</p>
                 </div>
@@ -85,16 +85,16 @@ if (!$usuario) {
                     <label class="form-label">Tipo de documento:</label>
                     <select class="form-select" name="tipdoc" id="tipdoc" required>
                         <option value="">Seleccione tipo de documento</option>
-                        <option value="cedula_ciudadania" <?= $usuario['tipo_documento'] == 'cedula_ciudadania' ? 'selected' : '' ?>>Cédula de Ciudadanía</option>
-                        <option value="cedula_extranjeria" <?= $usuario['tipo_documento'] == 'cedula_extranjeria' ? 'selected' : '' ?>>Cédula de Extranjería</option>
-                        <option value="otro" <?= $usuario['tipo_documento'] == 'otro' ? 'selected' : '' ?>>Pasaporte</option>
-                        <option value="tarjeta_identidad" <?= $usuario['tipo_documento'] == 'tarjeta_identidad' ? 'selected' : '' ?>>Tarjeta Identidad</option>
+                        <option value="cedula_ciudadania" <?= $usuario['tipoDocumentoUpark'] == 'cedula_ciudadania' ? 'selected' : '' ?>>Cédula de Ciudadanía</option>
+                        <option value="cedula_extranjeria" <?= $usuario['tipoDocumentoUpark'] == 'cedula_extranjeria' ? 'selected' : '' ?>>Cédula de Extranjería</option>
+                        <option value="otro" <?= $usuario['tipoDocumentoUpark'] == 'otro' ? 'selected' : '' ?>>Pasaporte</option>
+                        <option value="tarjeta_identidad" <?= $usuario['tipoDocumentoUpark'] == 'tarjeta_identidad' ? 'selected' : '' ?>>Tarjeta Identidad</option>
                     </select>
                 </div>
                 <div class="col-md-6" id="grupo__documento">
                     <label class="form-label">Documento:</label>
                     <input type="text" class="form-control formulario__input" name="documento" id="documento"
-                        placeholder="Ingrese su documento" value="<?= htmlspecialchars($usuario['numero_documento']) ?>" required>
+                        placeholder="Ingrese su documento" value="<?= htmlspecialchars($usuario['numeroDocumentoUpark']) ?>" required>
                     <p class="formulario__input-error">El documento tiene que ser de 6 a 10 dígitos y solo puede
                         contener numeros.</p>
                 </div>
@@ -104,7 +104,7 @@ if (!$usuario) {
                 <div class="col-md-6" id="grupo__numero">
                     <label class="form-label">Teléfono:</label>
                     <input type="text" class="form-control formulario__input" name="numero" id="numero"
-                        placeholder="Ingrese número de contacto" value="<?= htmlspecialchars($usuario['numero_contacto']) ?>" required>
+                        placeholder="Ingrese número de contacto" value="<?= htmlspecialchars($usuario['numeroContactoUpark']) ?>" required>
                     <p class="formulario__input-error">El numero de contacto tiene que ser de 7 a 14 digitos y solo
                         puede contener numeros.</p>
                 </div>
@@ -112,12 +112,12 @@ if (!$usuario) {
                     <label class="form-label">Tipo de Usuario:</label>
                     <select class="form-select" name="tipo_usuario" id="tipo_usuario" required>
                         <option value="">Seleccione tipo</option>
-                        <option value="servidor_público" <?= $usuario['tipo_user'] == 'servidor_público' ? 'selected' : '' ?>>Servidor público</option>
-                        <option value="contratista" <?= $usuario['tipo_user'] == 'contratista' ? 'selected' : '' ?>>Contratista</option>
-                        <option value="trabajador_oficial" <?= $usuario['tipo_user'] == 'trabajador_oficial' ? 'selected' : '' ?>>Trabajador Oficial</option>
-                        <option value="visitante_autorizado" <?= $usuario['tipo_user'] == 'visitante_autorizado' ? 'selected' : '' ?>>Visitante Autorizado</option>
-                        <option value="aprendiz" <?= $usuario['tipo_user'] == 'aprendiz' ? 'selected' : '' ?>>Aprendiz</option>
-                        <option value="instructor" <?= $usuario['tipo_user'] == 'instructor' ? 'selected' : '' ?>>Instructor</option>
+                        <option value="servidor_público" <?= $usuario['tipoUserUpark'] == 'servidor_público' ? 'selected' : '' ?>>Servidor público</option>
+                        <option value="contratista" <?= $usuario['tipoUserUpark'] == 'contratista' ? 'selected' : '' ?>>Contratista</option>
+                        <option value="trabajador_oficial" <?= $usuario['tipoUserUpark'] == 'trabajador_oficial' ? 'selected' : '' ?>>Trabajador Oficial</option>
+                        <option value="visitante_autorizado" <?= $usuario['tipoUserUpark'] == 'visitante_autorizado' ? 'selected' : '' ?>>Visitante Autorizado</option>
+                        <option value="aprendiz" <?= $usuario['tipoUserUpark'] == 'aprendiz' ? 'selected' : '' ?>>Aprendiz</option>
+                        <option value="instructor" <?= $usuario['tipoUserUpark'] == 'instructor' ? 'selected' : '' ?>>Instructor</option>
                     </select>
                     <p class="formulario__input-error">Ingrese un tipo de usuario</p>
                 </div>
@@ -128,9 +128,9 @@ if (!$usuario) {
                     <label class="form-label">Centro:</label>
                     <select class="form-select" name="edificio" id="edificio" required>
                         <option value="">Seleccione centro</option>
-                        <option value="CMD" <?= $usuario['edificio'] == 'CMD' ? 'selected' : '' ?>>Centro de Diseño y Metrología</option>
-                        <option value="CGI" <?= $usuario['edificio'] == 'CGI' ? 'selected' : '' ?>>Centro de Gestión Industrial</option>
-                        <option value="CENIGRAF" <?= $usuario['edificio'] == 'CENIGRAF' ? 'selected' : '' ?>>Cenigraf</option>
+                        <option value="CMD" <?= $usuario['edificioUpark'] == 'CMD' ? 'selected' : '' ?>>Centro de Diseño y Metrología</option>
+                        <option value="CGI" <?= $usuario['edificioUpark'] == 'CGI' ? 'selected' : '' ?>>Centro de Gestión Industrial</option>
+                        <option value="CENIGRAF" <?= $usuario['edificioUpark'] == 'CENIGRAF' ? 'selected' : '' ?>>Cenigraf</option>
                     </select>
                     <p class="formulario__input-error">Por favor seleccione un edificio.</p>
                 </div>
