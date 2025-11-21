@@ -40,8 +40,8 @@ if ($startDatePDF && $endDatePDF) {
 }
 
 $generalStats = $access->getGeneralAccessStats($startDate, $endDate);
-$capacidad_total = $access->getParkingCapacity();
-$ocupacion_actual = $access->getCurrentOccupancyCount();
+// $capacidad_total = $access->getParkingCapacity();
+// $ocupacion_actual = $access->getCurrentOccupancyCount();
 $generalStats['capacidad_total'] = $capacidad_total;
 $generalStats['ocupacion_actual'] = $ocupacion_actual;
 

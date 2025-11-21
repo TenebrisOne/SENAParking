@@ -95,7 +95,7 @@ class Access {
 
     public function getVehicleTypeAccessStats($startDate = null, $endDate = null) {
         $query = "SELECT
-                    vehiculo.tipo,
+                    vehiculo.tipoVeh,
                     SUM(CASE WHEN acceso.tipoAccionAcc = 'ingreso' THEN 1 ELSE 0 END) as ingresos,
                     SUM(CASE WHEN acceso.tipoAccionAcc = 'salida' THEN 1 ELSE 0 END) as salidas
                   FROM
@@ -107,11 +107,11 @@ class Access {
         $params = [];
 
         if ($startDate) {
-            $conditions[] = "acceso.fechaHoraAcc >= :startDate";
+            $conditions[] = "fechaHoraAcc >= :startDate";
             $params[':startDate'] = $startDate;
         }
         if ($endDate) {
-            $conditions[] = "acceso.fechaHoraAcc <= :endDate";
+            $conditions[] = "fechaHoraAcc <= :endDate";
             $params[':endDate'] = $endDate;
         }
 
@@ -119,7 +119,7 @@ class Access {
             $query .= " WHERE " . implode(" AND ", $conditions);
         }
 
-        $query .= " GROUP BY vehiculo.tipo";
+        $query .= " GROUP BY vehiculo.tipoVeh";
 
         $stmt = $this->conn->prepare($query);
         foreach ($params as $key => &$val) {
@@ -130,14 +130,14 @@ class Access {
     }
 
     // Obtener el aforo total del parqueadero de la tabla tb_configPark
-    public function getParkingCapacity() {
-        $query = "SELECT SUM(adelante_carros + adelante_motos + adelante_ciclas + trasera_carros) as total_capacity 
-                  FROM tb_configPark LIMIT 0,1"; // Asumiendo que solo hay una fila de configuración
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $row['total_capacity'] ?? 0;
-    }
+    // public function getParkingCapacity() {
+    //    $query = "SELECT SUM(adelante_carros + adelante_motos + adelante_ciclas + trasera_carros) as total_capacity 
+    //              FROM tb_configPark LIMIT 0,1"; // Asumiendo que solo hay una fila de configuración
+    //     $stmt = $this->conn->prepare($query);
+    //     $stmt->execute();
+    //     $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    //     return $row['total_capacity'] ?? 0;
+    // }
 
     // Obtener la ocupación actual del parqueadero (estimada, vehículos 'dentro')
     // Esto es más complejo ya que implica ver si el último acceso fue un 'ingreso' y no una 'salida'
