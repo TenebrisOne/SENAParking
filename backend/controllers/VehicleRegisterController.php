@@ -12,7 +12,7 @@ include_once '../models/VehicleRegisterModel.php';
 include_once '../models/ActividadModel.php'; // Asegúrate de incluir esto si usas $actividadModel
 $database = new Database();
 $db = $database->getConnection();
-$actividadModel = new ActividadModel($db);
+$actividadModel = new ActividadModel($conn);
 
 $vehicle = new Vehicle($db);
 

@@ -24,11 +24,11 @@ class Vehicle {
       $query = "SELECT 
                   vehiculo.id_vehiculo, 
                   vehiculo.id_userPark, 
-                  vehiculo.placa,
-                  vehiculo.tarjeta_propiedad,
-                  vehiculo.tipo, 
-                  vehiculo.modelo, 
-                  vehiculo.color, 
+                  vehiculo.placaVeh,
+                  vehiculo.tarjetaPropiedadVeh,
+                  vehiculo.tipoVeh, 
+                  vehiculo.modeloVeh, 
+                  vehiculo.colorVeh, 
                   userpark.nombresUpark,    
                   userpark.apellidosUpark   
                 FROM 

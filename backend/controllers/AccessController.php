@@ -29,7 +29,7 @@ $actividadModel = new ActividadModel($conn);
 
 // ✅ 5. Obtener datos del formulario (POST)
 $id_vehiculo = isset($_POST['id_vehiculo']) ? $_POST['id_vehiculo'] : null;
-$tipo_accion = isset($_POST['tipoAccionAcc']) ? $_POST['tipoAccionAcc'] : null;
+$tipo_accion = isset($_POST['tipo_accion']) ? $_POST['tipo_accion'] : null;
 $placa = isset($_POST['placa']) ? $_POST['placa'] : ''; // Asegúrate de que venga la placa si la usas
 
 // ✅ 6. Validar que los datos requeridos estén presentes

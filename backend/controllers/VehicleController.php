@@ -32,7 +32,7 @@ if ($num > 0) {
             "tipo" => $tipoVeh,
             "modelo" => $modeloVeh,
             "color" => $colorVeh,
-            "propietario_nombre_completo" => $nombresUpark . ' ' . $apellidoUpark,
+            "propietario_nombre_completo" => $nombresUpark . ' ' . $apellidosUpark,
         );
         array_push($vehicles_arr["data"], $vehicle_item);
     }
