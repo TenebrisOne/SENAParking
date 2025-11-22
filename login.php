@@ -7,13 +7,13 @@ session_start();
 
 if (isset($_SESSION['rol'])) {
     switch ($_SESSION['rol']) {
-        case 1:
+        case "admin":
             header("location: frontend/views/dashboard_admin.php");
             break;
-        case 2:
+        case "supervisor":
             header("location: frontend/views/dashboard_supervisor.php");
             break;
-        case 3:
+        case "guardia":
             header("location: frontend/views/dashboard_guardia.php");
             break;
         default:

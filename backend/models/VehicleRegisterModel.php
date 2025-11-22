@@ -22,23 +22,23 @@ class Vehicle {
 
     public function readOne() {
       $query = "SELECT 
-                  v.id_vehiculo, 
-                  v.id_userPark, 
-                  v.placa,
-                  v.tarjeta_propiedad,
-                  v.tipo, 
-                  v.modelo, 
-                  v.color, 
-                  up.nombres_park,    
-                  up.apellidos_park   
+                  vehiculo.id_vehiculo, 
+                  vehiculo.id_userPark, 
+                  vehiculo.placaVeh,
+                  vehiculo.tarjetaPropiedadVeh,
+                  vehiculo.tipoVeh, 
+                  vehiculo.modeloVeh, 
+                  vehiculo.colorVeh, 
+                  userpark.nombresUpark,    
+                  userpark.apellidosUpark   
                 FROM 
-                  " . $this->table_name . " v
+                  " . $this->table_name . " vehiculo
                 JOIN 
-                  " . $this->user_park_table . " up 
+                  " . $this->user_park_table . " userpark 
                 ON 
-                  v.id_userPark = up.id_userPark
+                  vehiculo.id_userPark = userpark.id_userPark
                 WHERE 
-                  v.id_vehiculo = :id_vehiculo
+                  vehiculo.id_vehiculo = :id_vehiculo
                 LIMIT 0,1"; 
 
       $stmt = $this->conn->prepare($query);
@@ -50,13 +50,13 @@ class Vehicle {
 
       if ($row) {
           $this->id_userPark = $row['id_userPark'];
-          $this->placa = $row['placa'];
-          $this->tarjeta_propiedad = $row['tarjeta_propiedad'];
-          $this->tipo = $row['tipo'];
-          $this->modelo = $row['modelo'];
-          $this->color = $row['color'];
-          $this->nombres_park = $row['nombres_park'];
-          $this->apellidos_park = $row['apellidos_park'];
+          $this->placa = $row['placaVeh'];
+          $this->tarjeta_propiedad = $row['tarjetaPropiedadVeh'];
+          $this->tipo = $row['tipoVeh'];
+          $this->modelo = $row['modeloVeh'];
+          $this->color = $row['colorVeh'];
+          $this->nombres_park = $row['nombresUpark'];
+          $this->apellidos_park = $row['apellidosUpark'];
           return true;
       }
       return false;
@@ -64,30 +64,30 @@ class Vehicle {
 
     public function read($search_term = "") {
       $query = "SELECT 
-                  v.id_vehiculo, 
-                  v.id_userPark, 
-                  v.placa,
-                  v.tarjeta_propiedad, 
-                  v.tipo, 
-                  v.modelo, 
-                  v.color, 
-                  up.nombres_park,    
-                  up.apellidos_park   
+                  vehiculo.id_vehiculo, 
+                  vehiculo.id_userPark, 
+                  vehiculo.placaVeh,
+                  vehiculo.tarjetaPropiedadVeh, 
+                  vehiculo.tipoVeh, 
+                  vehiculo.modeloVeh, 
+                  vehiculo.colorVeh, 
+                  userpark.nombresUpark,    
+                  userpark.apellidosUpark   
                 FROM 
-                  " . $this->table_name . " v
+                  " . $this->table_name . " vehiculo
                 JOIN 
-                  " . $this->user_park_table . " up 
+                  " . $this->user_park_table . " userpark
                 ON 
-                  v.id_userPark = up.id_userPark"; 
+                  vehiculo.id_userPark = userpark.id_userPark"; 
       
       if (!empty($search_term)) {
           $query .= " WHERE 
-                          up.nombres_park LIKE :search_term 
-                          OR up.apellidos_park LIKE :search_term 
-                          OR v.placa LIKE :search_term";
+                          userpark.nombresUpark LIKE :search_term 
+                          OR userpark.apellidosUpark LIKE :search_term 
+                          OR vehiculo.placaVeh LIKE :search_term";
       }
       
-      $query .= " ORDER BY v.placa ASC";
+      $query .= " ORDER BY vehiculo.placaVeh ASC";
 
       $stmt = $this->conn->prepare($query);
 
@@ -101,7 +101,7 @@ class Vehicle {
   }
   
   public function placaExists() {
-    $query = "SELECT id_vehiculo FROM " . $this->table_name . " WHERE placa = :placa LIMIT 0,1";
+    $query = "SELECT id_vehiculo FROM " . $this->table_name . " WHERE placaVeh = :placa LIMIT 0,1";
     
     $stmt = $this->conn->prepare($query);
     $this->placa = htmlspecialchars(strip_tags($this->placa)); // Limpiar la placa
@@ -123,11 +123,11 @@ public function create() {
   $query = "INSERT INTO " . $this->table_name . "
             SET
               id_userPark=:id_userPark,
-              placa=:placa,
-              tarjeta_propiedad=:tarjeta_propiedad,
-              tipo=:tipo,
-              modelo=:modelo,
-              color=:color";
+              placaVeh=:placa,
+              tarjetaPropiedadVeh=:tarjeta_propiedad,
+              tipoVeh=:tipo,
+              modeloVeh=:modelo,
+              colorVeh=:color";
 
   $stmt = $this->conn->prepare($query);
 
@@ -157,7 +157,7 @@ public function create() {
 public function update() {
   // PRIMERO: Verificar si la placa ya existe para *OTRO* vehículo
   $query_check_placa = "SELECT id_vehiculo FROM " . $this->table_name . " 
-                        WHERE placa = :placa AND id_vehiculo != :id_vehiculo 
+                        WHERE placaVeh = :placa AND id_vehiculo != :id_vehiculo 
                         LIMIT 0,1";
   
   $stmt_check_placa = $this->conn->prepare($query_check_placa);
@@ -181,11 +181,11 @@ public function update() {
   $query = "UPDATE " . $this->table_name . "
             SET
               id_userPark=:id_userPark,
-              placa=:placa,
-              tarjeta_propiedad=:tarjeta_propiedad,
-              tipo=:tipo,
-              modelo=:modelo,
-              color=:color
+              placaVeh=:placa,
+              tarjetaPropiedadVeh=:tarjeta_propiedad,
+              tipoVeh=:tipo,
+              modeloVeh=:modelo,
+              colorVeh=:color
             WHERE
               id_vehiculo = :id_vehiculo"; // Usamos el ID para la condición WHERE
 

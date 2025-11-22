@@ -55,10 +55,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_userSys'], $_POST[
     if ($usuarioModel->cambiarEstadoUsuario($id, $estado)) {
         $actividadModel->registrarActividad($_SESSION['id_userSys'], 'Se cambió el estado del usuario del sistema ' . $id . ' a ' . $estado);
         switch ($_SESSION['rol']) {
-            case 1:
+            case 'admin':
                 header("Location: ../../frontend/views/dashboard_admin.php?mensaje=Estado del usuario actualizado correctamente");
                 break;
-            case 2:
+            case 'supervisor':
                 header("Location: ../../frontend/views/dashboard_supervisor.php?mensaje=Estado del usuario actualizado correctamente");
                 break;
         }

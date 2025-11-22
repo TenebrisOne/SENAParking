@@ -27,12 +27,12 @@ if ($num > 0) {
         $vehicle_item = array(
             "id_vehiculo" => $id_vehiculo,
             "id_userPark" => $id_userPark,
-            "placa" => $placa,
-            "tarjeta_propiedad" => $tarjeta_propiedad,
-            "tipo" => $tipo,
-            "modelo" => $modelo,
-            "color" => $color,
-            "propietario_nombre_completo" => $nombres_park . ' ' . $apellidos_park,
+            "placa" => $placaVeh,
+            "tarjeta_propiedad" => $tarjetaPropiedadVeh,
+            "tipo" => $tipoVeh,
+            "modelo" => $modeloVeh,
+            "color" => $colorVeh,
+            "propietario_nombre_completo" => $nombresUpark . ' ' . $apellidosUpark,
         );
         array_push($vehicles_arr["data"], $vehicle_item);
     }

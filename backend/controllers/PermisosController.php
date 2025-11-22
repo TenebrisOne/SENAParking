@@ -8,7 +8,7 @@ function hasPermission($required_role_id) {
     $user_role_id = $_SESSION['id_rol'];
 
     // Ejemplo: El Rol 1 (Administrador) tiene todos los permisos
-    if ($user_role_id == 1) {
+    if ($user_role_id == "admin") {
         return true;
     }
 

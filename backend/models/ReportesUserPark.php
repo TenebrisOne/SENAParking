@@ -26,13 +26,13 @@ class UserPark {
     public function readAll($limit, $offset, $searchTerm = '') {
         $query = "SELECT
                     id_userPark,
-                    tipo_user,
-                    tipo_documento,
-                    numero_documento,
-                    nombres_park,
-                    apellidos_park,
-                    edificio,
-                    numero_contacto
+                    tipoUserUPark,
+                    tipoDocumentoUpark,
+                    numeroDocumentoUpark,
+                    nombresUpark,
+                    apellidosUpark,
+                    edificioUpark,
+                    numeroContactoUpark
                   FROM
                     " . $this->table_name . " ";
 
@@ -40,7 +40,7 @@ class UserPark {
         $params = [];
 
         if ($searchTerm) {
-            $conditions[] = "(nombres_park LIKE :searchTerm OR apellidos_park LIKE :searchTerm OR numero_documento LIKE :searchTerm)";
+            $conditions[] = "(nombresUpark LIKE :searchTerm OR apellidosUpark LIKE :searchTerm OR numeroDocumentoUpark LIKE :searchTerm)";
             $params[':searchTerm'] = '%' . $searchTerm . '%'; // Para búsqueda parcial
         }
 
@@ -48,7 +48,7 @@ class UserPark {
             $query .= " WHERE " . implode(" AND ", $conditions);
         }
 
-        $query .= " ORDER BY nombres_park ASC LIMIT :limit OFFSET :offset";
+        $query .= " ORDER BY nombresUpark ASC LIMIT :limit OFFSET :offset";
 
         $stmt = $this->conn->prepare($query);
 
@@ -73,7 +73,7 @@ class UserPark {
         $params = [];
 
         if ($searchTerm) {
-            $conditions[] = "(nombres_park LIKE :searchTerm OR apellidos_park LIKE :searchTerm OR numero_documento LIKE :searchTerm)";
+            $conditions[] = "(nombresUpark LIKE :searchTerm OR apellidosUpark LIKE :searchTerm OR numeroDocumentoUpark LIKE :searchTerm)";
             $params[':searchTerm'] = '%' . $searchTerm . '%';
         }
 
@@ -96,14 +96,13 @@ class UserPark {
     public function readOne() {
         $query = "SELECT
                     id_userPark,
-                    tipo_user,
-                    tipo_documento,
-                    numero_documento,
-                    nombres_park,
-                    apellidos_park,
-                    edificio,
-                    tarjeta_propiedad,
-                    numero_contacto
+                    tipoUserUpark,
+                    tipoDocumentoUpark,
+                    numeroDocumentoUpark,
+                    nombresUpark,
+                    apellidosUpark,
+                    edificioUpark,
+                    numeroContactoUpark
                   FROM
                     " . $this->table_name . "
                   WHERE
@@ -118,14 +117,13 @@ class UserPark {
 
         if ($row) {
             $this->id_userPark = $row['id_userPark'];
-            $this->tipo_user = $row['tipo_user'];
-            $this->tipo_documento = $row['tipo_documento'];
-            $this->numero_documento = $row['numero_documento'];
-            $this->nombres_park = $row['nombres_park'];
-            $this->apellidos_park = $row['apellidos_park'];
-            $this->edificio = $row['edificio'];
-            $this->tarjeta_propiedad = $row['tarjeta_propiedad'];
-            $this->numero_contacto = $row['numero_contacto'];
+            $this->tipo_user = $row['tipoUserUpark'];
+            $this->tipo_documento = $row['tipoDocumentoUpark'];
+            $this->numero_documento = $row['numeroDocumentoUpark'];
+            $this->nombres_park = $row['nombresUpark'];
+            $this->apellidos_park = $row['apellidosUpark'];
+            $this->edificio = $row['edificioUpark'];
+            $this->numero_contacto = $row['numeroContactoUpark'];
             return true;
         }
         return false;

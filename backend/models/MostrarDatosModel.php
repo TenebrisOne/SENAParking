@@ -1,172 +1,171 @@
 <?php
-require_once __DIR__ . '/../config/conexion.php';
+
 
 class MostrarDatosModel
 {
     private $conn;
 
-    public function __construct()
+    // Constructor recibe la conexión a la base de datos
+    public function __construct($db)
     {
-        $db = new Database();
-        $this->conn = $db->getConnection();
+        $this->conn = $db;
     }
 
     // Totales
     public function contarUsuariosSistema()
     {
         $sql = "SELECT COUNT(*) AS total FROM tb_usersys";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+        $result = $this->conn->query($sql);
+        $row = $result->fetch_assoc();
+        return $row['total'];
     }
 
     public function contarVehiculosParqueadero()
     {
         $sql = "
-            SELECT COUNT(DISTINCT a.id_vehiculo) AS total
-            FROM tb_accesos a
-            WHERE a.tipo_accion = 'ingreso'
-            AND DATE(a.fecha_hora) = CURDATE()
-            AND a.id_vehiculo NOT IN (
+            SELECT COUNT(DISTINCT acceso.id_vehiculo) AS total
+            FROM tb_accesos acceso
+            WHERE acceso.tipoAccionAcc = 'ingreso'
+            AND DATE(acceso.fechaHoraAcc) = CURDATE()
+            AND acceso.id_vehiculo NOT IN (
                 SELECT id_vehiculo 
                 FROM tb_accesos 
-                WHERE tipo_accion = 'salida'
-                AND DATE(fecha_hora) = CURDATE()
+                WHERE tipoAccionAcc = 'salida'
+                AND DATE(fechaHoraAcc) = CURDATE()
             )
         ";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+        $result = $this->conn->query($sql);
+        $row = $result->fetch_assoc();
+        return $row['total'];
     }
 
     public function contarAccesosHoy()
     {
-        $sql = "SELECT COUNT(*) AS total FROM tb_accesos WHERE tipo_accion = 'ingreso' AND DATE(fecha_hora) = CURDATE()";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+        $sql = "SELECT COUNT(*) AS total 
+                FROM tb_accesos 
+                WHERE tipoAccionAcc = 'ingreso' 
+                AND DATE(fechaHoraAcc) = CURDATE()";
+        $result = $this->conn->query($sql);
+        $row = $result->fetch_assoc();
+        return $row['total'];
     }
 
     public function contarSalidasHoy()
     {
-        $sql = "SELECT COUNT(*) AS total FROM tb_accesos WHERE tipo_accion = 'salida' AND DATE(fecha_hora) = CURDATE()";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+        $sql = "SELECT COUNT(*) AS total 
+                FROM tb_accesos 
+                WHERE tipoAccionAcc = 'salida' 
+                AND DATE(fechaHoraAcc) = CURDATE()";
+        $result = $this->conn->query($sql);
+        $row = $result->fetch_assoc();
+        return $row['total'];
     }
 
     // Reportes dinámicos
     public function obtenerUsuariosSistema()
     {
-        $sql = "SELECT id_userSys AS Usuario, nombres_sys AS Nombres, apellidos_sys AS Apellidos, numero_documento FROM tb_usersys";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $sql = "SELECT id_userSys AS Usuario, nombresUsys AS Nombres, apellidosUsys AS Apellidos, numeroDocumentoUsys As Número_Documento 
+                FROM tb_usersys";
+        $result = $this->conn->query($sql);
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     public function obtenerVehiculosParqueadero()
     {
         $sql = "
             SELECT 
-                CONCAT(u.nombres_park, ' ', u.apellidos_park) AS propietario,
-                v.placa,
-                v.tarjeta_propiedad AS Tarjeta__de_Propiedad_o_Serial,
-                v.tipo,
-                v.modelo,
-                v.color,
-                u.edificio AS Centro_formación,
-                MAX(a.fecha_hora) AS ultima_entrada
-            FROM tb_accesos a
-            INNER JOIN tb_vehiculos v ON a.id_vehiculo = v.id_vehiculo
-            INNER JOIN tb_userpark u ON v.id_userPark = u.id_userPark
-            WHERE a.tipo_accion = 'ingreso'
-            AND DATE(a.fecha_hora) = CURDATE()
-            AND a.id_vehiculo NOT IN (
+                CONCAT(userpark.nombresUpark, ' ', userpark.apellidosUpark) AS propietario,
+                vehiculo.placaVeh AS Placa,
+                vehiculo.tarjetaPropiedadVeh AS Tarjeta_o_Serial,
+                vehiculo.tipoVeh As Tipo_vehículo,
+                vehiculo.modeloVeh AS Modelo_vehículo,
+                vehiculo.colorVeh AS Color_vehículo,
+                userpark.edificioUpark AS Centro_formación,
+                MAX(acceso.fechaHoraAcc) AS ultima_entrada
+            FROM tb_accesos acceso
+            INNER JOIN tb_vehiculos vehiculo ON acceso.id_vehiculo = vehiculo.id_vehiculo
+            INNER JOIN tb_userpark userpark ON vehiculo.id_userPark = userpark.id_userPark
+            WHERE acceso.tipoAccionAcc = 'ingreso'
+            AND DATE(acceso.fechaHoraAcc) = CURDATE()
+            AND acceso.id_vehiculo NOT IN (
                 SELECT id_vehiculo
                 FROM tb_accesos
-                WHERE tipo_accion = 'salida'
-                AND DATE(fecha_hora) = CURDATE()
+                WHERE tipoAccionAcc = 'salida'
+                AND DATE(fechaHoraAcc) = CURDATE()
             )
-            GROUP BY a.id_vehiculo
+            GROUP BY acceso.id_vehiculo
             ORDER BY ultima_entrada DESC
         ";
-        
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $result = $this->conn->query($sql);
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
-    
+
     public function obtenerAccesosHoy()
     {
         $sql = "SELECT 
-        CONCAT(u.nombres_sys, ' ', u.apellidos_sys) AS Usuario_Que_Registra_Acceso,
-        v.tipo AS Vehículo,
-        a.fecha_hora AS Fecha_y_Hora,
-        a.tipo_accion AS Tipo_de_Acción
-        FROM tb_accesos a
-        INNER JOIN tb_usersys u ON a.id_userSys = u.id_userSys
-        INNER JOIN tb_vehiculos v ON a.id_vehiculo = v.id_vehiculo
-        WHERE a.tipo_accion = 'ingreso'
-        AND DATE(a.fecha_hora) = CURDATE()";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    CONCAT(usersys.nombresUsys, ' ', usersys.apellidosUsys) AS Usuario_Que_Registra_Acceso,
+                    vehiculo.tipoVeh AS Vehículo,
+                    acceso.fechaHoraAcc AS Fecha_y_Hora,
+                    acceso.tipoAccionAcc AS Tipo_de_Acción
+                FROM tb_accesos acceso
+                INNER JOIN tb_usersys usersys ON acceso.id_userSys = usersys.id_userSys
+                INNER JOIN tb_vehiculos vehiculo ON acceso.id_vehiculo = vehiculo.id_vehiculo
+                WHERE acceso.tipoAccionAcc = 'ingreso'
+                AND DATE(acceso.fechaHoraAcc) = CURDATE()";
+        $result = $this->conn->query($sql);
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     public function obtenerSalidasHoy()
     {
         $sql = "SELECT 
-        CONCAT(u.nombres_sys, ' ', u.apellidos_sys) AS Usuario_Que_Registra_Salida,
-        v.tipo AS Vehículo,
-        a.fecha_hora AS Fecha_y_Hora,
-        a.tipo_accion AS Tipo_de_Acción
-        FROM tb_accesos a
-        INNER JOIN tb_usersys u ON a.id_userSys = u.id_userSys
-        INNER JOIN tb_vehiculos v ON a.id_vehiculo = v.id_vehiculo
-        WHERE a.tipo_accion = 'salida'
-        AND DATE(a.fecha_hora) = CURDATE()";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    CONCAT(usersys.nombresUsys, ' ', usersys.apellidosUsys) AS Usuario_Que_Registra_Salida,
+                    vehiculo.tipoVeh AS Vehículo,
+                    acceso.fechaHoraAcc AS Fecha_y_Hora,
+                    acceso.tipoAccionAcc AS Tipo_de_Acción
+                FROM tb_accesos acceso
+                INNER JOIN tb_usersys usersys ON acceso.id_userSys = usersys.id_userSys
+                INNER JOIN tb_vehiculos vehiculo ON acceso.id_vehiculo = vehiculo.id_vehiculo
+                WHERE acceso.tipoAccionAcc = 'salida'
+                AND DATE(acceso.fechaHoraAcc) = CURDATE()";
+        $result = $this->conn->query($sql);
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    // CÓDIGO AGREGADO POR CRISTIAN 👀⚠️🚧
-    // 🔹 NUEVA FUNCIÓN INTEGRADA: Actividades recientes
     public function obtenerActividadesRecientes($limite = 7)
     {
         $sql = "SELECT 
-                a.id_userSys AS UsuarioID,
-                CONCAT(u.nombres_sys, ' ', u.apellidos_sys) AS Usuario,
-                a.accion AS Accion,
-                a.fecha_hora AS Fecha
-            FROM tb_actividades a
-            INNER JOIN tb_usersys u ON a.id_userSys = u.id_userSys WHERE id_rol = 3
-            ORDER BY a.fecha_hora DESC
-            LIMIT :limite";
-
+                    actividad.id_userSys AS UsuarioID,
+                    CONCAT(usersys.nombresUsys, ' ', usersys.apellidosUsys) AS Usuario,
+                    actividad.accionActi AS Accion,
+                    actividad.fechaHoraActi AS Fecha
+                FROM tb_actividades actividad
+                INNER JOIN tb_usersys usersys ON actividad.id_userSys = usersys.id_userSys 
+                WHERE rolUsys = 'guardia'
+                ORDER BY actividad.fechaHoraActi DESC
+                LIMIT ?";
+        
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindValue(':limite', (int)$limite, PDO::PARAM_INT);
+        $stmt->bind_param("i", $limite);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     public function obtenerVehiculosHoy()
     {
         $sql = "SELECT 
-                    a.id_userPark AS UsuarioID,
-                    CONCAT(u.nombres_park, ' ', u.apellidos_park) AS Usuario,
-                    a.placa AS Placa,
-                    a.tipo AS Tipo,
-                    a.modelo AS Modelo,
-                    a.color AS Color
-                FROM tb_vehiculos a
-                INNER JOIN tb_userpark u ON a.id_userPark = u.id_userPark 
-                ORDER BY a.id_vehiculo DESC
-                ";
-
-        $stmt = $this->conn->prepare($sql);
-
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    vehiculo.id_userPark AS UsuarioID,
+                    CONCAT(userpark.nombresUpark, ' ', userpark.apellidosUpark) AS Usuario,
+                    vehiculo.placaVeh AS Placa,
+                    vehiculo.tipoVeh AS Tipo,
+                    vehiculo.modeloVeh AS Modelo,
+                    vehiculo.colorVeh AS Color
+                FROM tb_vehiculos vehiculo
+                INNER JOIN tb_userpark userpark ON vehiculo.id_userPark = userpark.id_userPark 
+                ORDER BY vehiculo.id_vehiculo DESC";
+        $result = $this->conn->query($sql);
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 }
+?>

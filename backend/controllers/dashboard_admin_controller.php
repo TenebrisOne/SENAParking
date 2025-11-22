@@ -17,19 +17,19 @@ $resUsuariosPark = mysqli_query($conn, $sqlUsuariosPark);
 $usuariosParqueadero = mysqli_fetch_assoc($resUsuariosPark)['total'];
 
 // Consulta: Ingresos de hoy
-$sqlIngresosHoy = "SELECT COUNT(*) AS total FROM tb_accesos WHERE tipo_accion='ingreso' AND DATE(fecha_hora) = CURDATE()";
+$sqlIngresosHoy = "SELECT COUNT(*) AS total FROM tb_accesos WHERE tipoAccionAcc='ingreso' AND DATE(fechaHoraAcc) = CURDATE()";
 $resIngresosHoy = mysqli_query($conn, $sqlIngresosHoy);
 $ingresosHoy = mysqli_fetch_assoc($resIngresosHoy)['total'];
 
 // Consulta: Salidas de hoy
-$sqlSalidasHoy = "SELECT COUNT(*) AS total FROM tb_accesos WHERE tipo_accion='salida' AND DATE(fecha_hora) = CURDATE()";
+$sqlSalidasHoy = "SELECT COUNT(*) AS total FROM tb_accesos WHERE tipoAccionAcc='salida' AND DATE(fechaHoraAcc) = CURDATE()";
 $resSalidasHoy = mysqli_query($conn, $sqlSalidasHoy);
 $salidasHoy = mysqli_fetch_assoc($resSalidasHoy)['total'];
 
 // Consulta: Capacidad total configurada (opcional)
-$sqlCapacidad = "SELECT adelante_carros + adelante_motos + adelante_ciclas + trasera_carros AS capacidad_total FROM tb_configpark LIMIT 1";
-$resCapacidad = mysqli_query($conn, $sqlCapacidad);
-$capacidadTotal = mysqli_fetch_assoc($resCapacidad)['capacidad_total'] ?? 0;
+//$sqlCapacidad = "SELECT adelante_carros + adelante_motos + adelante_ciclas + trasera_carros AS capacidad_total FROM tb_configpark LIMIT 1";
+//$resCapacidad = mysqli_query($conn, $sqlCapacidad);
+//$capacidadTotal = mysqli_fetch_assoc($resCapacidad)['capacidad_total'] ?? 0;
 
 // Salida JSON
 echo json_encode([
@@ -37,5 +37,5 @@ echo json_encode([
   'usuariosParqueadero' => $usuariosParqueadero,
   'ingresosHoy' => $ingresosHoy,
   'salidasHoy' => $salidasHoy,
-  'capacidadTotal' => $capacidadTotal
+  //'capacidadTotal' => $capacidadTotal
 ]);

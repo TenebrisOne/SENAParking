@@ -231,11 +231,11 @@
                         const row = `
                             <tr>
                                 <td>${user.id_userPark}</td>
-                                <td>${user.tipo_user}</td>
-                                <td>${user.numero_documento}</td>
-                                <td>${user.nombres_park}</td>
-                                <td>${user.apellidos_park}</td>
-                                <td>${user.numero_contacto || 'N/A'}</td>
+                                <td>${user.tipoUserUpark}</td>
+                                <td>${user.numeroDocumentoUpark}</td>
+                                <td>${user.nombresUpark}</td>
+                                <td>${user.apellidosUpark}</td>
+                                <td>${user.numeroContactoUpark || 'N/A'}</td>
                                 <td class="text-center">
                                     <a href="reporte_usuario_detalle.php?id=${user.id_userPark}" class="btn btn-info btn-sm btn-detail">
                                         <i class="fas fa-info-circle me-1"></i>Ver Detalles

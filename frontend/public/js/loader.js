@@ -47,7 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
       // Este error solo se mostrará cuando haya error real de red
       loader.style.display = "none";
 
-      errorMsg.textContent = "Error de conexión. Intenta nuevamente.";
       errorMsg.style.display = "block";
 
       console.error("Error en la petición:", error);

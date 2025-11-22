@@ -169,6 +169,9 @@ if (!isset($_SESSION['rol'])) {
                                             ${vehicle.placa}
                                         </h5>
                                         <p class="card-text mb-1">
+                                            <strong>Tarjeta:</strong> ${vehicle.tarjeta_propiedad}
+                                        </p>
+                                        <p class="card-text mb-1">
                                             <strong>Modelo:</strong> ${vehicle.modelo}
                                         </p>
                                         <p class="card-text mb-1">
@@ -180,7 +183,6 @@ if (!isset($_SESSION['rol'])) {
                                         <p class="card-text mb-0">
                                             <span class="badge ${getStatusBadgeClass(vehicle.estado)}">${getStatusText(vehicle.estado)}</span>
                                         </p>
-                                 
                                     </div>
                                     <button class="btn btn-outline-primary btn-sm btn-edit" onclick="editVehicle(event, ${vehicle.id_vehiculo})">
                                         <i class="fas fa-edit"></i>

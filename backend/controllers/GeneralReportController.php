@@ -43,15 +43,15 @@ $response_data = [
 try {
     // 1. Métricas Generales (Ingresos, Salidas, Ocupación)
     $response_data['generalStats'] = $access->getGeneralAccessStats($startDate, $endDate);
-    $response_data['generalStats']['capacidad_total'] = $access->getParkingCapacity();
-    $response_data['generalStats']['ocupacion_actual'] = $access->getCurrentOccupancyCount();
+    //$response_data['generalStats']['capacidad_total'] = $access->getParkingCapacity();
+    //$response_data['generalStats']['ocupacion_actual'] = $access->getCurrentOccupancyCount();
 
     // 2. Estadísticas por Tipo de Vehículo
     $vehicleTypeStatsRaw = $access->getVehicleTypeAccessStats($startDate, $endDate);
     $response_data['vehicleTypeStatsRaw'] = $vehicleTypeStatsRaw; // Guarda los datos tal cual vienen
     
     foreach ($vehicleTypeStatsRaw as $item) {
-        $response_data['vehicleTypeStats'][$item['tipo']] = [
+        $response_data['vehicleTypeStats'][$item['tipoVeh']] = [
             'ingresos' => $item['ingresos'],
             'salidas' => $item['salidas']
         ];

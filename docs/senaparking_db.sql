@@ -81,7 +81,7 @@ CREATE TABLE tb_vehiculos (
   id_vehiculo INT NOT NULL AUTO_INCREMENT,
   id_userPark INT NOT NULL,
   placaVeh VARCHAR(10) NOT NULL,
-  tarjetaPropiedadVeh VARCHAR(20) DEFAULT NULL,
+  tarjetaPropiedadVeh VARCHAR(100) DEFAULT NULL,
   tipoVeh ENUM('Oficial','Automóvil','Bicicleta','Motocicleta','Otro') NOT NULL,
   modeloVeh VARCHAR(50) DEFAULT NULL,
   colorVeh VARCHAR(50) DEFAULT NULL,

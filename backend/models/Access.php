@@ -20,7 +20,7 @@ class Access
     public function create()
     {
         $query = "INSERT INTO " . $this->table_name . " 
-                  (id_vehiculo, id_userSys, tipo_accion, fecha_hora, espacio_asignado)
+                  (id_vehiculo, id_userSys, tipoAccionAcc, fechaHoraAcc, espacioAsignadoAcc)
                   VALUES (?, ?, ?, ?, ?)";
 
         $stmt = $this->conn->prepare($query);

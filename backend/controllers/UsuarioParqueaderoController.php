@@ -1,6 +1,6 @@
 <?php
 if (session_status() == PHP_SESSION_NONE) {
-    session_start(); // ✅ solo se ejecuta si no hay sesión activa
+    session_start(); // solo se ejecuta si no hay sesión activa
 }
 
 require_once('../config/conexion.php');
@@ -8,7 +8,6 @@ require_once('../models/UsuarioParqueaderoModel.php');
 require_once('../models/ActividadModel.php');
 
 $actividadModel = new ActividadModel($conn);
-
 $usuarioPark = new UsuarioParqueadero($conn);
 
 // ✅ REGISTRAR USUARIO
