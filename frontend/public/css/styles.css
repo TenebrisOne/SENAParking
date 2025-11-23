@@ -12,7 +12,7 @@ body {
 .bg-index {
     margin: 0;
     line-height: normal;
-    background: url('../images/backgrounds/bg_index.png') repeat-x center / cover, lightgray;
+    background: url('../images/backgrounds/bg_index.webp') repeat-x center / cover, lightgray;
     width: 100%;
     height: 100vh;
     flex-shrink: 0;
@@ -62,7 +62,7 @@ body {
 .bg-login {
     margin: 0;
     line-height: normal;
-    background: url('../images/backgrounds/background_login.png') repeat-x center / cover, lightgray;
+    background: url('../images/backgrounds/background_login.webp') repeat-x center / cover, lightgray;
     width: 100%;
     height: 50vh;
     flex-shrink: 0;
