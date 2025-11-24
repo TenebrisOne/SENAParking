@@ -1,5 +1,6 @@
 RewriteEngine On
 
+# Router principal
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
@@ -28,15 +29,13 @@ Options All -Indexes
 </IfModule>
 
 AddType application/x-httpd-php .html
-
 AddHandler application/x-httpd-php .html
 
-rewriteRule ^([a-zA-Z0-9/ñÑ-]+)$ index.php?views=$1
-
+# REGEX adicional (corregido)
+RewriteRule ^([a-zA-Z0-9/ñÑ-]+)$ index.php?views=$1 [L,QSA]
 
 # Bloquear acceso directo a /includes/
 RewriteRule ^includes/ - [F,L]
 
-# Bloquear acceso a cualquier archivo .php dentro de /private/
-RewriteRule ON ^private/.*\.php$ - [F,L]
-
+# Bloquear PHP en /private/ (corregido)
+RewriteRule ^private/.*\.php$ - [F,L]
