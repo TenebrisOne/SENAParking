@@ -17,7 +17,7 @@ $access = new Access($db);
 $startDate = isset($_GET['startDate']) && $_GET['startDate'] !== '' ? $_GET['startDate'] . ' 00:00:00' : null;
 $endDate = isset($_GET['endDate']) && $_GET['endDate'] !== '' ? $_GET['endDate'] . ' 23:59:59' : null;
 
-// Si no se especifican fechas, usar un rango por defecto (ej. últimos 30 días o todo el historial)
+// Usar rango de fechas predeterminado de últimos 30 días si no se especifican fechas
 if (!$startDate && !$endDate) {
     $endDate = date('Y-m-d 23:59:59'); // Hasta hoy
     $startDate = date('Y-m-d 00:00:00', strtotime('-30 days')); // Desde hace 30 días
