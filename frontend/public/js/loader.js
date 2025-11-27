@@ -39,9 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       // Login correcto → renderizar siguiente vista
-      document.open();
-      document.write(data);
-      document.close();
+      document.body.innerHTML = data;
 
     } catch (error) {
       // Este error solo se mostrará cuando haya error real de red
