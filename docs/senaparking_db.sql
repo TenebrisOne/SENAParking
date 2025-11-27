@@ -73,6 +73,8 @@ CREATE TABLE tb_userpark (
   UNIQUE KEY uq_documento_upark (tipoDocumentoUpark, numeroDocumentoUpark),
   KEY idx_edificio (edificioUpark)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+ALTER TABLE tb_userpark
+ADD UNIQUE KEY uq_num_doc_upark (numeroDocumentoUpark);
 
 -- =========================================================
 -- 🧱 TABLA: tb_vehiculos
