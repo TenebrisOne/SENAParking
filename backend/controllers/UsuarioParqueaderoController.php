@@ -23,12 +23,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre']) && !isset($
 
     $registrado = $usuarioPark->registrarUsuario($tipo_user, $tipdoc, $documento, $nombre, $apellido, $edificio, $numero, $estado);
 
-    if ($registrado) {
-        $actividadModel->registrarActividad($_SESSION['id_userSys'], 'Se registró a ' . $nombre . ' ' . $apellido . ' como usuario del parqueadero');
-        echo ("Registro de usuario exitosamente");
+    if ($registrado === true) {
+
+        $actividadModel->registrarActividad(
+            $_SESSION['id_userSys'],
+            'Se registró a ' . $nombre . ' ' . $apellido . ' como usuario del parqueadero'
+        );
+
+        echo "Registro de usuario exitosamente";
+        exit;
+    } elseif ($registrado === "duplicado") {
+
+        echo "Número de documento existente";
         exit;
     } else {
-        echo ("Error al registrar usuario");
+
+        echo "Error al registrar usuario";
         exit;
     }
 }

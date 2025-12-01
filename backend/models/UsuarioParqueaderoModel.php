@@ -1,22 +1,39 @@
 <?php
-class UsuarioParqueadero {
+class UsuarioParqueadero
+{
     private $conexion;
 
-    public function __construct($conexion) {
+    public function __construct($conexion)
+    {
         $this->conexion = $conexion;
     }
 
     // Registrar usuario del parqueadero
-    public function registrarUsuario($tipo_user, $tipo_documento, $numero_documento, $nombres, $apellidos, $edificio, $numero_contacto, $estado = 'activo') {
+    public function registrarUsuario($tipo_user, $tipo_documento, $numero_documento, $nombres, $apellidos, $edificio, $numero_contacto, $estado = 'activo')
+    {
         $sql = "INSERT INTO tb_userpark (tipoUserUpark, tipoDocumentoUpark, numeroDocumentoUpark, nombresUpark, apellidosUpark, edificioUpark, numeroContactoUpark, estadoUpark)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
         $stmt = $this->conexion->prepare($sql);
         $stmt->bind_param("ssssssss", $tipo_user, $tipo_documento, $numero_documento, $nombres, $apellidos, $edificio, $numero_contacto, $estado);
-        return $stmt->execute();
+
+        try {
+            $stmt->execute();
+            return true;
+        } catch (mysqli_sql_exception $e) {
+
+            if ($e->getCode() == 1062) {
+                return "duplicado"; // ← mensaje especial para documento repetido
+            }
+
+            return false;
+        }
     }
 
+
     // Obtener todos los usuarios del parqueadero
-    public function obtenerUsuarios() {
+    public function obtenerUsuarios()
+    {
         $sql = "SELECT * FROM tb_userpark";
         $result = $this->conexion->query($sql);
         $usuarios = [];
@@ -26,7 +43,8 @@ class UsuarioParqueadero {
         return $usuarios;
     }
 
-    public function obtenerUsuariosPaginados($limit, $offset) {
+    public function obtenerUsuariosPaginados($limit, $offset)
+    {
         $sql = "SELECT * FROM tb_userpark ORDER BY id_userPark ASC LIMIT ? OFFSET ?";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bind_param("ii", $limit, $offset);
@@ -34,7 +52,8 @@ class UsuarioParqueadero {
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function contarUsuarios() {
+    public function contarUsuarios()
+    {
         $sql = "SELECT COUNT(*) as total FROM tb_userpark";
         $resultado = $this->conexion->query($sql);
         $fila = $resultado->fetch_assoc();
@@ -42,7 +61,8 @@ class UsuarioParqueadero {
     }
 
     // Cambiar estado (activo/inactivo)
-    public function cambiarEstado($id, $estado) {
+    public function cambiarEstado($id, $estado)
+    {
         $sql = "UPDATE tb_userpark SET estadoUpark = ? WHERE id_userPark = ?";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bind_param("si", $estado, $id);
@@ -50,7 +70,8 @@ class UsuarioParqueadero {
     }
 
     // Obtener usuario por ID (para edición)
-    public function obtenerUsuarioPorId($id) {
+    public function obtenerUsuarioPorId($id)
+    {
         $sql = "SELECT * FROM tb_userpark WHERE id_userPark = ?";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bind_param("i", $id);
@@ -59,7 +80,8 @@ class UsuarioParqueadero {
     }
 
     // Editar usuario
-    public function actualizarUsuario($id, $tipo_user, $tipo_documento, $numero_documento, $nombres, $apellidos, $edificio, $numero_contacto) {
+    public function actualizarUsuario($id, $tipo_user, $tipo_documento, $numero_documento, $nombres, $apellidos, $edificio, $numero_contacto)
+    {
         $sql = "UPDATE tb_userpark SET tipoUserUpark = ?, tipoDocumentoUpark = ?, numeroDocumentoUpark = ?, nombresUpark = ?, apellidosUpark = ?, edificioUpark = ?, numeroContactoUpark = ?
                 WHERE id_userPark = ?";
         $stmt = $this->conexion->prepare($sql);
@@ -67,9 +89,3 @@ class UsuarioParqueadero {
         return $stmt->execute();
     }
 }
-
-
-
-
-
-

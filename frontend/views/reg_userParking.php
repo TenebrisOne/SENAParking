@@ -34,7 +34,6 @@ if (!isset($_SESSION['rol'])) {
     <!-- Logo SENA -->
     <img src="../public/images/logo_sena.png" alt="Logo SENA"
         style="position: absolute; top: 100px; right: 70px; width: 100px;">
-    </div>
 
     <!-- Flecha de retroceso -->
     <div class="col-2 col-md-1 text-start">
@@ -44,8 +43,8 @@ if (!isset($_SESSION['rol'])) {
     </div>
 
     <div class="register-container">
-        <h2>
-            <center>Registrar Usuario Parqueadero</center>
+        <h2 class="text-center">
+            Registrar Usuario Parqueadero
         </h2><br>
         <form id="formulario" class="formulario">
             <div class="row mb-3">
@@ -112,18 +111,19 @@ if (!isset($_SESSION['rol'])) {
                     <p class="formulario__input-error">Ingrese un tipo de usuario</p>
                 </div>
             </div>
-            <div class="col-md-6" id="grupo__edificio">
-                <label for="edificio" class="form-label">Centro:</label>
-                <select class="form-select" name="edificio" id="edificio" required>
-                    <option value="" selected disabled>Seleccione una opción</option>
-                    <option value="CMD">Centro de Diseño y Metrología</option>
-                    <option value="CGI">Centro de Gestión Industrial</option>
-                    <option value="CENIGRAF">Cenigraf</option>
-                </select>
-                <p class="formulario__input-error">Por favor seleccione un edificio.</p>
+            <div class="row mb-3">
+                <div class="col-md-6" id="grupo__edificio">
+                    <label for="edificio" class="form-label">Centro:</label>
+                    <select class="form-select" name="edificio" id="edificio" required>
+                        <option value="" selected disabled>Seleccione una opción</option>
+                        <option value="CMD">Centro de Diseño y Metrología</option>
+                        <option value="CGI">Centro de Gestión Industrial</option>
+                        <option value="CENIGRAF">Cenigraf</option>
+                    </select>
+                    <p class="formulario__input-error">Por favor seleccione un edificio.</p>
+                </div>
             </div>
             <br>
-            <!-- Botón Confirmar -->
             <div class="text-center">
                 <button type="submit" class="btn btn-confirmar">Confirmar</button>
             </div>
