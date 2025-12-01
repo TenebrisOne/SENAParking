@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<phpunit bootstrap="integration/bootstrap.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false">
+    <testsuites>
+        <testsuite name="Integration Tests">
+            <directory>integration</directory>
+        </testsuite>
+    </testsuites>
+    <logging>
+        <junit outputFile="backend/utils/integration/reports/junit.xml"/>
+    </logging>
+</phpunit>

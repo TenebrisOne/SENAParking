@@ -5,7 +5,7 @@ date_default_timezone_set('America/Bogota');
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "senaparking_db";
+$dbname = defined('TEST_DB_NAME') ? TEST_DB_NAME : "senaparking_db";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -20,6 +20,12 @@ class Database {
     private $username = "root";
     private $password = ""; 
     public $conn;
+
+    public function __construct() {
+        if (defined('TEST_DB_NAME')) {
+            $this->db_name = TEST_DB_NAME;
+        }
+    }
 
     public function getConnection() {
         $this->conn = null;

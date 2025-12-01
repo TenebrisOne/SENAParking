@@ -49,10 +49,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre']) && !isset($
 
         echo "Número de documento existente";
     } else {
-
-        echo "Error al registrar usuario";
+        echo ("Error al registrar usuario");
     }
-    exit;
+    return;
 
     // 🟢 Cambio de estado del usuario (activo/inactivo)
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_userSys'], $_POST['estado'])) {
@@ -92,10 +91,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre']) && !isset($
         if ($resultado) {
             $actividadModel->registrarActividad($_SESSION['id_userSys'], 'Modificación realizada en el perfil del usuario del sistema: ' . $nombre . ' ' . $apellido);
             echo ("Usuario actualizado exitosamente");
-            exit;
+            return;
         } else {
             echo ("Error al actualizar usuario");
-            exit;
+            return;
         }
     }
 }

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<phpunit bootstrap="unit/bootstrap.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false">
+    <testsuites>
+        <testsuite name="Unit Tests">
+            <directory>unit</directory>
+        </testsuite>
+    </testsuites>
+    <logging>
+        <junit outputFile="backend/utils/unit/reports/junit.xml"/>
+    </logging>
+</phpunit>

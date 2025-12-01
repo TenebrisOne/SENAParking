@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<phpunit bootstrap="e2e/bootstrap.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false">
+    <testsuites>
+        <testsuite name="E2E Tests">
+            <directory>e2e</directory>
+        </testsuite>
+    </testsuites>
+    <logging>
+        <junit outputFile="backend/utils/e2e/reports/junit.xml"/>
+    </logging>
+</phpunit>

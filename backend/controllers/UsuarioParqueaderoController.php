@@ -31,15 +31,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre']) && !isset($
         );
 
         echo "Registro de usuario exitosamente";
-        exit;
+        return;
     } elseif ($registrado === "duplicado") {
 
         echo "Número de documento existente";
-        exit;
+        return;
     } else {
 
         echo "Error al registrar usuario";
-        exit;
+        return;
     }
 }
 
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id']) && isset($_POST
     } else {
         header("Location: ../../frontend/views/dashboard_admin.php?mensaje=Error al cambiar estado");
     }
-    exit;
+    return;
 }
 // ✅ ACTUALIZAR USUARIO
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_userPark'])) {
@@ -74,9 +74,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_userPark'])) {
         $actividadModel->registrarActividad($_SESSION['id_userSys'], 'Modificación realizada en el perfil del usuario del parqueadero: ' . $nombre . ' ' . $apellido);
 
         echo ("Usuario editado exitosamente");
-        exit;
+        return;
     } else {
         echo ("Error al editar usuario");
-        exit;
+        return;
     }
 }

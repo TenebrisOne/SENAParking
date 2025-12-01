@@ -1,6 +1,8 @@
 <?php
 
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 // ✅ 1. Verificar que el usuario esté autenticado
 if (!isset($_SESSION['id_userSys'])) {
@@ -8,7 +10,7 @@ if (!isset($_SESSION['id_userSys'])) {
     echo 'alert("Error: Usuario no autenticado. Inicia sesión.");';
     echo 'window.location.href = "../../frontend/views/login.php";'; // Ajusta la ruta si es necesario
     echo '</script>';
-    exit();
+    return;
 }
 
 $id_userSys = $_SESSION['id_userSys']; // ✅ Tomamos el ID del usuario autenticado
@@ -59,7 +61,7 @@ if (!empty($id_vehiculo) && !empty($tipo_accion)) {
         echo 'alert("' . $message . '");';
         echo 'window.location.href="../../frontend/views/crud_vehiculos.php";';
         echo '</script>';
-        exit();
+        return;
 
     } else {
         // Error al guardar el acceso
@@ -67,7 +69,7 @@ if (!empty($id_vehiculo) && !empty($tipo_accion)) {
         echo 'alert("Error: No se pudo registrar el acceso.");';
         echo 'window.history.back();';
         echo '</script>';
-        exit();
+        return;
     }
 
 } else {
@@ -76,5 +78,5 @@ if (!empty($id_vehiculo) && !empty($tipo_accion)) {
     echo 'alert("Error: Datos incompletos para registrar el acceso.");';
     echo 'window.history.back();';
     echo '</script>';
-    exit();
+    return;
 }

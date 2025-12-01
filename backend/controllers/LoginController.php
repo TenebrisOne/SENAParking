@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['correo'])) {
         case "activo":
             $actividadModel->registrarActividad($_SESSION['id_userSys'], 'Inicio de sesión');
             echo ($_SESSION['rol']);
-            exit();
+            return;
         case "inactivo":
             echo ("Usuario inactivo. Contacta al administrador.");
             break;
@@ -31,5 +31,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['correo'])) {
             echo ("Error al iniciar sesión. Inténtalo de nuevo.");
             break;
     }
-    exit;
+    return;
 }

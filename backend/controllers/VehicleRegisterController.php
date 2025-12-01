@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Habilitar errores para depuración (eliminar en producción)
 ini_set('display_errors', 1);
@@ -39,26 +41,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo 'alert("Vehículo registrado con éxito.");';
             echo 'window.location.href="../../frontend/views/crud_vehiculos.php";';
             echo '</script>';
-            exit();
+            return;
         } else {
             echo '<script type="text/javascript">';
             echo 'alert("Error al registrar el vehículo. La placa podría ya existir o hay un problema con la base de datos.");';
             echo 'window.location.href="../../frontend/views/reg_vehiculos.php";';
             echo '</script>';
-            exit();
+            return;
         }
     } else {
         echo '<script type="text/javascript">';
         echo 'alert("Error: Por favor, complete todos los campos obligatorios.");';
         echo 'window.location.href="../../frontend/views/reg_vehiculos.php";';
         echo '</script>';
-        exit();
+        return;
     }
 } else {
     echo '<script type="text/javascript">';
     echo 'alert("Acceso no permitido. Este script solo acepta solicitudes POST.");';
     echo 'window.location.href="../../frontend/views/crud_vehiculos.php";';
     echo '</script>';
-    exit();
+    return;
 }
 ?>
