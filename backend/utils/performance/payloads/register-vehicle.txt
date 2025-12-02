@@ -1,0 +1,1 @@
+propietario=12&placa=ABC123&tarjeta_propiedad=TP123456&tipo=Automóvil&modelo=2024&color=Negro

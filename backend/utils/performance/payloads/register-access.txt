@@ -1,0 +1,1 @@
+id_vehiculo=1&tipo_accion=ingreso&espacio_asignado=25

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumen de Pruebas de Rendimiento - SENAParking</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+        tr:hover {
+            background: #f8f9fa;
+        }
+        .metric {
+            font-weight: bold;
+        }
+        .good {
+            color: #27ae60;
+        }
+        .warning {
+            color: #f39c12;
+        }
+        .bad {
+            color: #e74c3c;
+        }
+        .timestamp {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        .summary-box {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>📊 Resumen de Pruebas de Rendimiento - SENAParking</h1>
+    <p class="timestamp">Generado: 2025-12-02 14:38:20</p>
+    
+    <div class="summary-box">
+        <h3>Leyenda de Niveles de Carga</h3>
+        <ul>
+            <li><strong>Baja:</strong> 100 requests, 10 concurrentes</li>
+            <li><strong>Media:</strong> 500 requests, 50 concurrentes</li>
+            <li><strong>Alta:</strong> 1000 requests, 100 concurrentes</li>
+            <li><strong>Estrés:</strong> 2000 requests, 200 concurrentes</li>
+        </ul>
+    </div><h2>Login</h2><table>
+        <tr>
+            <th>Escenario</th>
+            <th>Requests/seg</th>
+            <th>Tiempo Medio (ms)</th>
+            <th>Total Requests</th>
+            <th>Fallidos</th>
+            <th>Estado</th>
+        </tr><tr>
+                <td class="metric">Low</td>
+                <td>970.58</td>
+                <td>10.30</td>
+                <td>100</td>
+                <td class="good">0</td>
+                <td class="good">✅ OK</td>
+            </tr><tr>
+                <td class="metric">Medium</td>
+                <td>1,577.21</td>
+                <td>31.70</td>
+                <td>500</td>
+                <td class="good">0</td>
+                <td class="good">✅ OK</td>
+            </tr><tr>
+                <td class="metric">High</td>
+                <td>899.05</td>
+                <td>111.23</td>
+                <td>1,000</td>
+                <td class="good">0</td>
+                <td class="good">✅ OK</td>
+            </tr><tr>
+                <td class="metric">Stress</td>
+                <td>1,058.24</td>
+                <td>188.99</td>
+                <td>2,000</td>
+                <td class="good">0</td>
+                <td class="good">✅ OK</td>
+            </tr></table><h2>Vehicle Registration</h2><table>
+        <tr>
+            <th>Escenario</th>
+            <th>Requests/seg</th>
+            <th>Tiempo Medio (ms)</th>
+            <th>Total Requests</th>
+            <th>Fallidos</th>
+            <th>Estado</th>
+        </tr><tr>
+                <td class="metric">Low</td>
+                <td>32.04</td>
+                <td>312.12</td>
+                <td>100</td>
+                <td class="good">0</td>
+                <td class="good">✅ OK</td>
+            </tr><tr>
+                <td class="metric">Medium</td>
+                <td>25.57</td>
+                <td>1,955.27</td>
+                <td>500</td>
+                <td class="good">0</td>
+                <td class="good">✅ OK</td>
+            </tr><tr>
+                <td class="metric">High</td>
+                <td>18.77</td>
+                <td>5,328.89</td>
+                <td>1,000</td>
+                <td class="good">0</td>
+                <td class="good">✅ OK</td>
+            </tr><tr>
+                <td class="metric">Stress</td>
+                <td>28.26</td>
+                <td>7,077.34</td>
+                <td>2,000</td>
+                <td class="good">0</td>
+                <td class="good">✅ OK</td>
+            </tr></table>
+    <div class="summary-box">
+        <h3>Recomendaciones</h3>
+        <ul>
+            <li>Si hay requests fallidos, revisa los logs de PHP y MySQL</li>
+            <li>Tiempo de respuesta > 1000ms indica posibles cuellos de botella</li>
+            <li>Considera implementar caché para mejorar RPS</li>
+            <li>Optimiza queries SQL si el tiempo de respuesta es alto</li>
+        </ul>
+    </div>
+</body>
+</html>
