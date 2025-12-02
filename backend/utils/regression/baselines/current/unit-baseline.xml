@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="" tests="34" assertions="60" errors="0" warnings="0" failures="0" skipped="0" time="0.407782">
+    <testsuite name="Unit Tests" tests="34" assertions="60" errors="0" warnings="0" failures="0" skipped="0" time="0.407782">
+      <testsuite name="ControllersTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\controllers\ControllersTest.php" tests="14" assertions="14" errors="0" warnings="0" failures="0" skipped="0" time="0.015447">
+        <testsuite name="ControllersTest::testControllerFileExists" tests="7" assertions="7" errors="0" warnings="0" failures="0" skipped="0" time="0.013001">
+          <testcase name="testControllerFileExists with data set #0" class="ControllersTest" classname="ControllersTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\controllers\ControllersTest.php" line="22" assertions="1" time="0.010986"/>
+          <testcase name="testControllerFileExists with data set #1" class="ControllersTest" classname="ControllersTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\controllers\ControllersTest.php" line="22" assertions="1" time="0.000505"/>
+          <testcase name="testControllerFileExists with data set #2" class="ControllersTest" classname="ControllersTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\controllers\ControllersTest.php" line="22" assertions="1" time="0.000153"/>
+          <testcase name="testControllerFileExists with data set #3" class="ControllersTest" classname="ControllersTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\controllers\ControllersTest.php" line="22" assertions="1" time="0.000461"/>
+          <testcase name="testControllerFileExists with data set #4" class="ControllersTest" classname="ControllersTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\controllers\ControllersTest.php" line="22" assertions="1" time="0.000111"/>
+          <testcase name="testControllerFileExists with data set #5" class="ControllersTest" classname="ControllersTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\controllers\ControllersTest.php" line="22" assertions="1" time="0.000392"/>
+          <testcase name="testControllerFileExists with data set #6" class="ControllersTest" classname="ControllersTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\controllers\ControllersTest.php" line="22" assertions="1" time="0.000393"/>
+        </testsuite>
+        <testsuite name="ControllersTest::testControllerIsReadable" tests="7" assertions="7" errors="0" warnings="0" failures="0" skipped="0" time="0.002446">
+          <testcase name="testControllerIsReadable with data set #0" class="ControllersTest" classname="ControllersTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\controllers\ControllersTest.php" line="31" assertions="1" time="0.000916"/>
+          <testcase name="testControllerIsReadable with data set #1" class="ControllersTest" classname="ControllersTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\controllers\ControllersTest.php" line="31" assertions="1" time="0.000352"/>
+          <testcase name="testControllerIsReadable with data set #2" class="ControllersTest" classname="ControllersTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\controllers\ControllersTest.php" line="31" assertions="1" time="0.000223"/>
+          <testcase name="testControllerIsReadable with data set #3" class="ControllersTest" classname="ControllersTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\controllers\ControllersTest.php" line="31" assertions="1" time="0.000195"/>
+          <testcase name="testControllerIsReadable with data set #4" class="ControllersTest" classname="ControllersTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\controllers\ControllersTest.php" line="31" assertions="1" time="0.000356"/>
+          <testcase name="testControllerIsReadable with data set #5" class="ControllersTest" classname="ControllersTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\controllers\ControllersTest.php" line="31" assertions="1" time="0.000177"/>
+          <testcase name="testControllerIsReadable with data set #6" class="ControllersTest" classname="ControllersTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\controllers\ControllersTest.php" line="31" assertions="1" time="0.000227"/>
+        </testsuite>
+      </testsuite>
+      <testsuite name="LoginControllerTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\controllers\LoginControllerTest.php" tests="3" assertions="5" errors="0" warnings="0" failures="0" skipped="0" time="0.001870">
+        <testcase name="testLoginControllerExists" class="LoginControllerTest" classname="LoginControllerTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\controllers\LoginControllerTest.php" line="6" assertions="1" time="0.000095"/>
+        <testcase name="testLoginControllerHasDependencies" class="LoginControllerTest" classname="LoginControllerTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\controllers\LoginControllerTest.php" line="12" assertions="2" time="0.001591"/>
+        <testcase name="testLoginStates" class="LoginControllerTest" classname="LoginControllerTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\controllers\LoginControllerTest.php" line="21" assertions="2" time="0.000185"/>
+      </testsuite>
+      <testsuite name="AccessTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\models\AccessTest.php" tests="2" assertions="6" errors="0" warnings="0" failures="0" skipped="0" time="0.019711">
+        <testcase name="testAccessClassExists" class="AccessTest" classname="AccessTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\models\AccessTest.php" line="6" assertions="3" time="0.001375">
+          <system-out>&#13;
+</system-out>
+        </testcase>
+        <testcase name="testAccessHasRequiredProperties" class="AccessTest" classname="AccessTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\models\AccessTest.php" line="16" assertions="3" time="0.018336"/>
+      </testsuite>
+      <testsuite name="ActividadModelTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\models\ActividadModelTest.php" tests="2" assertions="4" errors="0" warnings="0" failures="0" skipped="0" time="0.001392">
+        <testcase name="testActividadModelClassExists" class="ActividadModelTest" classname="ActividadModelTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\models\ActividadModelTest.php" line="6" assertions="2" time="0.000630"/>
+        <testcase name="testActivityDataStructure" class="ActividadModelTest" classname="ActividadModelTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\models\ActividadModelTest.php" line="15" assertions="2" time="0.000762"/>
+      </testsuite>
+      <testsuite name="LoginModelTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\models\LoginModelTest.php" tests="2" assertions="4" errors="0" warnings="0" failures="0" skipped="0" time="0.245783">
+        <testcase name="testPasswordHashingWorks" class="LoginModelTest" classname="LoginModelTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\models\LoginModelTest.php" line="6" assertions="2" time="0.182877"/>
+        <testcase name="testPasswordHashIsSecure" class="LoginModelTest" classname="LoginModelTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\models\LoginModelTest.php" line="15" assertions="2" time="0.062906"/>
+      </testsuite>
+      <testsuite name="MostrarDatosModelTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\models\MostrarDatosModelTest.php" tests="3" assertions="6" errors="0" warnings="0" failures="0" skipped="0" time="0.001587">
+        <testcase name="testMostrarDatosModelClassExists" class="MostrarDatosModelTest" classname="MostrarDatosModelTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\models\MostrarDatosModelTest.php" line="6" assertions="2" time="0.000563"/>
+        <testcase name="testCounterReturnTypes" class="MostrarDatosModelTest" classname="MostrarDatosModelTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\models\MostrarDatosModelTest.php" line="15" assertions="3" time="0.000964"/>
+        <testcase name="testArrayReturnTypes" class="MostrarDatosModelTest" classname="MostrarDatosModelTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\models\MostrarDatosModelTest.php" line="22" assertions="1" time="0.000061"/>
+      </testsuite>
+      <testsuite name="UsuarioParqueaderoModelTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\models\UsuarioParqueaderoModelTest.php" tests="2" assertions="8" errors="0" warnings="0" failures="0" skipped="0" time="0.000781">
+        <testcase name="testUsuarioParqueaderoClassExists" class="UsuarioParqueaderoModelTest" classname="UsuarioParqueaderoModelTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\models\UsuarioParqueaderoModelTest.php" line="6" assertions="2" time="0.000685"/>
+        <testcase name="testPaginationParameters" class="UsuarioParqueaderoModelTest" classname="UsuarioParqueaderoModelTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\models\UsuarioParqueaderoModelTest.php" line="15" assertions="6" time="0.000096"/>
+      </testsuite>
+      <testsuite name="UsuarioSistemaModelTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\models\UsuarioSistemaModelTest.php" tests="3" assertions="5" errors="0" warnings="0" failures="0" skipped="0" time="0.120161">
+        <testcase name="testUsuarioClassExists" class="UsuarioSistemaModelTest" classname="UsuarioSistemaModelTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\models\UsuarioSistemaModelTest.php" line="6" assertions="2" time="0.000557"/>
+        <testcase name="testPasswordHashingInRegistration" class="UsuarioSistemaModelTest" classname="UsuarioSistemaModelTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\models\UsuarioSistemaModelTest.php" line="15" assertions="2" time="0.119391"/>
+        <testcase name="testDuplicateDetection" class="UsuarioSistemaModelTest" classname="UsuarioSistemaModelTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\models\UsuarioSistemaModelTest.php" line="25" assertions="1" time="0.000214"/>
+      </testsuite>
+      <testsuite name="VehicleRegisterModelTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\models\VehicleRegisterModelTest.php" tests="3" assertions="8" errors="0" warnings="0" failures="0" skipped="0" time="0.001049">
+        <testcase name="testDataSanitization" class="VehicleRegisterModelTest" classname="VehicleRegisterModelTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\models\VehicleRegisterModelTest.php" line="6" assertions="3" time="0.000068"/>
+        <testcase name="testPlacaFormat" class="VehicleRegisterModelTest" classname="VehicleRegisterModelTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\models\VehicleRegisterModelTest.php" line="17" assertions="2" time="0.000062"/>
+        <testcase name="testVehicleProperties" class="VehicleRegisterModelTest" classname="VehicleRegisterModelTest" file="C:\xampp\htdocs\SENAParking\backend\utils\unit\models\VehicleRegisterModelTest.php" line="25" assertions="3" time="0.000918"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

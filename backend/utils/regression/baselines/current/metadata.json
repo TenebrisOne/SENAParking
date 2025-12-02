@@ -1,0 +1,16 @@
+{
+    "timestamp": "2025-12-02 15:15:18",
+    "git_branch": "test",
+    "git_commit": "0be2aeba153491429abf81dfc947a677a9d0b1fe",
+    "git_commit_short": "0be2aeb",
+    "php_version": "8.0.30",
+    "phpunit_version": "",
+    "user": "CristianRuiz",
+    "hostname": "DESKTOP-R9NBBLI",
+    "test_counts": {
+        "unit": 34,
+        "integration": 0,
+        "e2e": 0
+    },
+    "total_tests": 34
+}
