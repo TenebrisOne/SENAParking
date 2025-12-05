@@ -1,8 +1,8 @@
 <?php
 session_start();
+require_once './backend/config/conexion.php';
 
 // Conexión a la base de datos
-$conn = new mysqli("localhost", "root", "", "senaparking_db");
 require_once __DIR__ . '/./backend/models/ActividadModel.php';
 $actividadModel = new ActividadModel($conn);
 
