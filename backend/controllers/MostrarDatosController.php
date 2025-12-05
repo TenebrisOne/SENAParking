@@ -38,9 +38,4 @@ switch ($tipo) {
         $tabla = [];
         break;
 }
-
-
-
 ?>
-
-
