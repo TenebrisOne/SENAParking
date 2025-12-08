@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reporte de Usuarios | SENAParking</title>
+    <link rel="icon" type="x-icon" href="../public/images/favicon.ico">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../public/css/sityles_views.css">
@@ -154,7 +155,7 @@
                     <table class="table table-hover table-striped">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <!-- <th>ID</th> -->
                                 <th>Tipo Usuario</th>
                                 <th>Documento</th>
                                 <th>Nombres</th>
@@ -230,7 +231,6 @@
                     data.users.forEach(user => {
                         const row = `
                             <tr>
-                                <td>${user.id_userPark}</td>
                                 <td>${user.tipoUserUpark}</td>
                                 <td>${user.numeroDocumentoUpark}</td>
                                 <td>${user.nombresUpark}</td>

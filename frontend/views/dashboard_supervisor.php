@@ -88,11 +88,11 @@ require_once('../../backend/config/conexion.php');
                             </a>
                         </li>
                         <!-- Elemento de navegación para los informes de los guardias -->
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="/SENAParking/frontend/views/reportes.php">
-                                <!-- Ícono de archivo de texto usando SVG -->
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                <Ícono de archivo de texto usando SVG -->
+                                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" -->
+                                    <!-- fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" class="feather feather-file-text">
                                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                                     <polyline points="14 2 14 8 20 8"></polyline>
@@ -101,8 +101,8 @@ require_once('../../backend/config/conexion.php');
                                     <polyline points="10 9 9 9 8 9"></polyline>
                                 </svg>
                                 Informes Guardias
-                            </a>
-                        </li>
+                            </a> -->
+                        <!-- </li> -->
                         <!-- Elemento de navegación para la disponibilidad -->
                         <!-- <li class="nav-item"> -->
                         <!-- <a class="nav-link" href="#"> -->
