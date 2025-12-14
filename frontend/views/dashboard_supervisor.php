@@ -35,11 +35,13 @@ require_once('../../backend/config/conexion.php');
     <link rel="stylesheet" href="../public/css/bootstrap.min.css">
     <!-- Enlace a los estilos personalizados del proyecto -->
     <link rel="stylesheet" href="../public/css/styles_dashboard.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <title>Supervisor DASHBOARD | SENAParking</title> <!-- Título que aparece en la pestaña del navegador -->
 </head>
 
 <body>
-     <?php
+    <?php
     if (isset($_GET['mensaje'])) {
         echo "<script>
             alert('" . htmlspecialchars($_GET['mensaje']) . "');
@@ -91,8 +93,8 @@ require_once('../../backend/config/conexion.php');
                         <!-- <li class="nav-item">
                             <a class="nav-link" href="/SENAParking/frontend/views/reportes.php">
                                 <Ícono de archivo de texto usando SVG -->
-                                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" -->
-                                    <!-- fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" -->
+                        <!-- fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" class="feather feather-file-text">
                                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                                     <polyline points="14 2 14 8 20 8"></polyline>
@@ -144,141 +146,118 @@ require_once('../../backend/config/conexion.php');
                     <h1 class="h2 bg-supervisor-header py-2 px-3 rounded">Panel del Supervisor</h1> <!-- Título principal del panel -->
                 </div>
 
-                <div id="dashboard-content">
-                    <!-- Resumen de los cupos disponibles -->
-                    <div class="row mb-4">
-                        <div class="col-md-4">
-                            <div class="card card-cupos-resumen">
-                                <div class="card-header">
-                                    Resumen de Cupos
-                                </div>
-                                <div class="card-body">
-                                    <!-- Información de los cupos disponibles -->
-                                    <!-- <p class="mb-1"><strong class="text-secondary">Total:</strong> <span class="font-weight-bold" id="total-cupos-sup">100</span></p>
-                                    <p class="mb-1"><strong class="text-danger">Ocupados:</strong> <span class="font-weight-bold" id="cupos-ocupados-sup">65</span></p>
-                                    <p class="mb-0"><strong class="text-success">Disponibles:</strong> <span class="font-weight-bold" id="cupos-disponibles-sup">35</span></p> -->
-
-
-                                    <div class="card-body"
+                    <div id="dashboard-content">
+                        <!-- Resumen de los cupos disponibles -->
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <div class="card card-cupos-resumen">
+                                    <div class="card-header">
+                                        Resumen de Cupos
+                                    </div>
+                                    <div class="card-body">
                                         <div class="row mb-4">
-                                        <div class="card card-resumen-general border-0 w-100" style="background: linear-gradient(135deg, #4CAF50, rgba(124, 199, 86, 1));">
-                                            <div class="card-body" style="color: #ffffffff;">
-                                                <h5 class="card-title">Usuarios Parqueadero</h5>
-                                                <p class="card-text font-weight-bold" style="font-size: 1.5em;">
-                                                    <?php echo isset($totalUsuariosParqueadero) ?       $totalUsuariosParqueadero : 0; ?>
-                                                </p>
+                                            <!-- Usuarios Parqueadero -->
+                                            <div class="col-md-4">
+                                                <div class="card card-resumen-general border-0 h-100"
+                                                    style="background: linear-gradient(135deg, #4CAF50, rgba(124, 199, 86, 1));">
+                                                    <div class="card-body text-white">
+                                                        <h5 class="card-title">Usuarios Parqueadero</h5>
+                                                        <p class="card-text font-weight-bold" style="font-size: 1.5em;">
+                                                            <?php echo isset($totalUsuariosParqueadero) ? $totalUsuariosParqueadero : 0; ?>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Accesos Hoy -->
+                                            <div class="col-md-4">
+                                                <div class="card card-resumen-general border-0 h-100"
+                                                    style="background: linear-gradient(135deg, #FFD700, #FFEA80);">
+                                                    <div class="card-body" style="color: #71277A;">
+                                                        <h5 class="card-title">Accesos Hoy</h5>
+                                                        <p class="card-text font-weight-bold" style="font-size: 1.5em;">
+                                                            <?php echo isset($accesosHoy) ? $accesosHoy : 0; ?>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Salidas Hoy -->
+                                            <div class="col-md-4">
+                                                <div class="card card-resumen-general border-0 h-100"
+                                                    style="background: linear-gradient(135deg, #71277A, #9B479D);">
+                                                    <div class="card-body" style="color: #FFEA80;">
+                                                        <h5 class="card-title">Salidas Hoy</h5>
+                                                        <p class="card-text font-weight-bold" style="font-size: 1.5em;">
+                                                            <?php echo isset($salidasHoy) ? $salidasHoy : 0; ?>
+                                                        </p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="card card-resumen-general border-0 w-100" style="background: linear-gradient(135deg, #FFD700, #FFEA80);">
-                                        <div class="card-body" style="color: #71277A;">
-                                            <h5 class="card-title">Accesos Hoy</h5>
-                                            <p class="card-text font-weight-bold" style="font-size: 1.5em;">
-                                                <?php echo isset($accesosHoy) ? $accesosHoy : 0; ?>
-                                            </p>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="card card-resumen-general border-0 w-100" style="background: linear-gradient(135deg, #71277A, #9B479D);">
-                                        <div class="card-body" style="color: #FFEA80;">
-                                            <h5 class="card-title">Salidas Hoy</h5>
-                                            <p class="card-text font-weight-bold" style="font-size: 1.5em;">
-                                                <?php echo isset($salidasHoy) ? $salidasHoy : 0; ?>
-                                            </p>
-                                        </div>
-                                    </div>
                                 </div>
+                <!-- Informes de actividades de los guardias -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card card-gestion-usuarios">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Gestión de Usuarios del Sistema</h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-muted">Administrar los usuarios con acceso al sistema (guardas de seguridad).</p>
+                                <?php include 'tabla_usuarios.php'; ?>
                             </div>
                         </div>
-                        <!-- Código agregado por Cristian 👀⚠️🚧 -->
-                        <!-- Detalles adicionales de las actividades recientes -->
-                        <div class="col-md-8">
-                            <div class="card card-cupos-resumen">
-                                <div class="card-header">
-                                    Actividades de Usuarios
-                                </div>
-                                <div class="card-body">
-                                    <!-- Información de los cupos disponibles -->
-                                    <?php if (!empty($actividades)): ?>
-                                        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-                                            <thead>
-                                                <tr>
-                                                    <th style=" background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Usuario</th>
-                                                    <th style=" background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Acción</th>
-                                                    <th style=" background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Fecha </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php foreach ($actividades as $actividad): ?>
-                                                    <tr>
-                                                        <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;"><?= htmlspecialchars($actividad['Usuario']) ?></td>
-                                                        <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;"><?= htmlspecialchars($actividad['Accion']) ?></td>
-                                                        <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;"><?= strftime("%d de %B de %Y - %I:%M %p", strtotime($actividad['Fecha'])) ?>
-
-                                                        </td>
-                                                    </tr>
-                                                <?php endforeach; ?>
-                                            </tbody>
-                                        </table>
-                                    <?php else: ?>
-                                        <p>No hay actividades registradas.</p>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-                        </div>
-
-
-
                     </div>
 
-                    <!-- Informes de actividades de los guardias -->
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card card-gestion-usuarios">
-                                <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h5 class="mb-0">Gestión de Usuarios del Sistema</h5>
-                                </div>
-                                <div class="card-body">
-                                    <p class="text-muted">Administrar los usuarios con acceso al sistema (guardas de seguridad).</p>
-                                    <?php include 'tabla_usuarios.php'; ?>
-                                </div>
+                    <!-- Código agregado por Cristian 👀⚠️🚧 -->
+                    <!-- Detalles adicionales de las actividades recientes -->
+                    <div class="col-md-6">
+                        <div class="card card-cupos-resumen">
+                            <div class="card-header">
+                                Actividades de Usuarios
                             </div>
-                        </div>
-                        <!-- Detalles adicionales de la disponibilidad de cupos -->
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    Disponibilidad Detallada
-                                </div>
-                                <div class="card-body">
-                                    <p class="text-muted">Información detallada sobre la disponibilidad de cupos.</p>
-                                    <!-- Lista con información de las zonas y cupos disponibles -->
-                                    <ul class="list-group">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Zona A
-                                            <span class="badge badge-primary badge-pill">10/20</span> <!-- Cupos de la zona A -->
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Zona B
-                                            <span class="badge badge-warning badge-pill">15/30</span> <!-- Cupos de la zona B -->
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Motos
-                                            <span class="badge badge-success badge-pill">5/10</span> <!-- Cupos para motos -->
-                                        </li>
-                                    </ul>
-                                    <!-- Botón para ver más detalles sobre cada zona -->
-                                    <!--<button class="btn btn-sm btn-outline-secondary mt-2">Ver Detalles por Zona</button>-->
-                                </div>
+                            <div class="card-body">
+                                <!-- Información de los cupos disponibles -->
+                                <?php if (!empty($actividades)): ?>
+                                    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;" class="table table-striped" id="Table">
+                                        <thead>
+                                            <tr>
+                                                <th style=" padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Usuario</th>
+                                                <th style=" padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Acción</th>
+                                                <th style=" padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Fecha </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($actividades as $actividad): ?>
+                                                <tr>
+                                                    <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;"><?= htmlspecialchars($actividad['Usuario']) ?></td>
+                                                    <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;"><?= htmlspecialchars($actividad['Accion']) ?></td>
+                                                    <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;"><?= strftime("%d de %B de %Y - %I:%M %p", strtotime($actividad['Fecha'])) ?>
+
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                <?php else: ?>
+                                    <p>No hay actividades registradas.</p>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- Botón para ver más detalles sobre cada zona -->
+                <!--<button class="btn btn-sm btn-outline-secondary mt-2">Ver Detalles por Zona</button>-->
         </div>
-        <!-- Fila de tarjetas para el registro de guardia y los informes -->
-        <!--<div class="row">
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <!-- Fila de tarjetas para el registro de guardia y los informes -->
+    <!--<div class="row">
                         <!- Registro de un nuevo guardia 
                         <div class="col-md-6">
                             <div class="card card-registro-guardia">
@@ -301,14 +280,29 @@ require_once('../../backend/config/conexion.php');
                                             <input type="password" class="form-control" id="password-guardia" required> <!- Campo para ingresar la contraseña 
                                         </div>
                                         <button type="submit" class="btn btn-registro-guardia">Registrar Guardia</button> <!- Botón de registro -->
-        <!-- </form>
+    <!-- </form>
                                 </div>
                             </div>
                         </div> -->
-        </main>
+    </main>
     </div>
     </div>
 
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $('#Table').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
+            },
+            "paging": true,
+            "searching": true,
+            "info": false,
+            "lengthChange": false,
+            "pageLength": 10
+        });
+    </script>
     <!-- Función para llamar al Header dinámicamente -->
     <script src="./../public/js/scriptsDOM.js"></script>
 
