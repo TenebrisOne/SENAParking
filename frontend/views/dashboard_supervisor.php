@@ -156,7 +156,7 @@ require_once('../../backend/config/conexion.php');
                                     </div>
                                     <div class="card-body">
                                         <div class="row mb-4">
-                                            <!-- Usuarios Parqueadero -->
+                                            <!-- Vehiculos Parqueadero -->
                                             <div class="col-md-4">
                                                 <div class="card card-resumen-general border-0 h-100"
                                                     style="background: linear-gradient(135deg, #4CAF50, rgba(124, 199, 86, 1));">

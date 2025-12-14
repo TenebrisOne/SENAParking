@@ -165,34 +165,34 @@ require_once('../../backend/config/conexion.php');
                                     <p><strong>Cupos Disponibles:</strong> <span class="text-success font-weight-bold" id="cupos-disponibles">35</span></p> -->
 
 
-                                    <div class="card-body"
-                                        <div class="row mb-4">
-                                        <div class="card card-resumen-general border-0 w-100" style="background: linear-gradient(135deg, #007832, #007832);">
-                                            <div class="card-body" style="color: #ffffffff;">
-                                                <h5 class="card-title">Usuarios Parqueadero</h5>
+                                    <div class="card-body">
+                                        <div class="row-mb-4">
+                                            <div class="card card-resumen-general border-0 w-100" style="background: linear-gradient(135deg, #007832, #007832);">
+                                                <div class="card-body" style="color: #ffffffff;">
+                                                    <h5 class="card-title">Vehiculos Parqueadero</h5>
+                                                    <p class="card-text font-weight-bold" style="font-size: 1.5em;">
+                                                        <?php echo isset($totalVehiculosParqueadero) ? $totalVehiculosParqueadero : 0; ?>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="card card-resumen-general border-0 w-100" style="background: linear-gradient(135deg, #FFD700, #FFEA80);">
+                                            <div class="card-body" style="color: #71277A;">
+                                                <h5 class="card-title">Accesos Hoy</h5>
                                                 <p class="card-text font-weight-bold" style="font-size: 1.5em;">
-                                                    <?php echo isset($totalUsuariosParqueadero) ?       $totalUsuariosParqueadero : 0; ?>
+                                                    <?php echo isset($accesosHoy) ? $accesosHoy : 0; ?>
                                                 </p>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="card card-resumen-general border-0 w-100" style="background: linear-gradient(135deg, #FFD700, #FFEA80);">
-                                        <div class="card-body" style="color: #71277A;">
-                                            <h5 class="card-title">Accesos Hoy</h5>
-                                            <p class="card-text font-weight-bold" style="font-size: 1.5em;">
-                                                <?php echo isset($accesosHoy) ? $accesosHoy : 0; ?>
-                                            </p>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="card card-resumen-general border-0 w-100" style="background: linear-gradient(135deg, #39A900, #66CC33);">
-                                        <div class="card-body" style="color: #ffffffff;">
-                                            <h5 class="card-title">Salidas Hoy</h5>
-                                            <p class="card-text font-weight-bold" style="font-size: 1.5em;">
-                                                <?php echo isset($salidasHoy) ? $salidasHoy : 0; ?>
-                                            </p>
+                                        <div class="card card-resumen-general border-0 w-100" style="background: linear-gradient(135deg, #39A900, #66CC33);">
+                                            <div class="card-body" style="color: #ffffffff;">
+                                                <h5 class="card-title">Salidas Hoy</h5>
+                                                <p class="card-text font-weight-bold" style="font-size: 1.5em;">
+                                                    <?php echo isset($salidasHoy) ? $salidasHoy : 0; ?>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -200,6 +200,7 @@ require_once('../../backend/config/conexion.php');
                         </div>
 
                         <!-- Tarjeta de Registro de Acceso -->
+
                         <div class="col-md-8">
                             <div class="card card-gestion-usuarios">
                                 <div class="card-header d-flex justify-content-between align-items-center">
@@ -213,84 +214,69 @@ require_once('../../backend/config/conexion.php');
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-
-                    <!-- vehículos ingresados -->
-                    <div class="col-md-12">
-                        <div class="card card-cupos-resumen">
-                            <div class="card-header">
-                                Vehículos ingresados
-                            </div>
-                            <div class="card-body">
-                                <!-- Código agregado por Cristian 👀⚠️🚧 -->
-                                <!-- Información de los vehículos ingresados -->
-                                <?php if (!empty($vehiculosHoy)): ?>
-                                    <table id="tablaVehiculos" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-                                        <thead>
-                                            <tr>
-                                                <th style="background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Usuario</th>
-                                                <th style="background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Placa</th>
-                                                <th style="background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Tipo</th>
-                                                <th style="background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Modelo</th>
-                                                <th style="background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Color</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php foreach ($vehiculosHoy as $vehiculo): ?>
+                        <!-- vehículos ingresados -->
+                        <div class="col-md-12">
+                            <div class="card card-cupos-resumen">
+                                <div class="card-header">
+                                    Vehículos ingresados
+                                </div>
+                                <div class="card-body">
+                                    <!-- Código agregado por Cristian 👀⚠️🚧 -->
+                                    <!-- Información de los vehículos ingresados -->
+                                    <?php if (!empty($vehiculosHoy)): ?>
+                                        <table id="tablaVehiculos" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                                            <thead>
                                                 <tr>
-                                                    <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">
-                                                        <?= htmlspecialchars($vehiculo['Usuario']) ?>
-                                                    </td>
-                                                    <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">
-                                                        <?= htmlspecialchars($vehiculo['Placa']) ?>
-                                                    </td>
-                                                    <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">
-                                                        <?= htmlspecialchars($vehiculo['Tipo']) ?>
-                                                    </td>
-                                                    <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">
-                                                        <?= htmlspecialchars($vehiculo['Modelo']) ?>
-                                                    </td>
-                                                    <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">
-                                                        <?= htmlspecialchars($vehiculo['Color']) ?>
-                                                    </td>
+                                                    <th style="background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Usuario</th>
+                                                    <th style="background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Placa</th>
+                                                    <th style="background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Tipo</th>
+                                                    <th style="background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Modelo</th>
+                                                    <th style="background-color: #f2f2f2; padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">Color</th>
                                                 </tr>
-                                            <?php endforeach; ?>
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                                <?php foreach ($vehiculosHoy as $vehiculo): ?>
+                                                    <tr>
+                                                        <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">
+                                                            <?= htmlspecialchars($vehiculo['Usuario']) ?>
+                                                        </td>
+                                                        <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">
+                                                            <?= htmlspecialchars($vehiculo['Placa']) ?>
+                                                        </td>
+                                                        <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">
+                                                            <?= htmlspecialchars($vehiculo['Tipo']) ?>
+                                                        </td>
+                                                        <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">
+                                                            <?= htmlspecialchars($vehiculo['Modelo']) ?>
+                                                        </td>
+                                                        <td style="padding: 10px; border-bottom: 1px solid #ccc; text-align: left;">
+                                                            <?= htmlspecialchars($vehiculo['Color']) ?>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
 
+                                        <!-- Botones -->
+                                        <div id="paginacion">
+                                            <button id="btnAnterior">Anterior</button>
+                                            <button id="btnSiguiente">Siguiente</button>
+                                            <span id="infoPagina"></span>
+                                        </div>
 
-                                    <!-- Botones -->
-                                    <div id="paginacion">
-                                        <button id="btnAnterior">Anterior</button>
-                                        <button id="btnSiguiente">Siguiente</button>
-                                        <span id="infoPagina"></span>
-                                    </div>
-
-
-                                <?php else: ?>
-                                    <p style="margin-top: 15px;">No hay vehículos ingresados recientemente.</p>
-                                <?php endif; ?>
+                                    <?php else: ?>
+                                        <p style="margin-top: 15px;">No hay vehículos ingresados recientemente.</p>
+                                    <?php endif; ?>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
-        </div>
-    </div>
 
-
-
-
-
-    </div>
-    </div>
-    </div>
-
-
-    <div class="row">
-        <!-- Tarjeta de Registro de Salida -->
-        <!--<div class="col-md-6">
+                <div class="row">
+                    <!-- Tarjeta de Registro de Salida -->
+                    <!--<div class="col-md-6">
                             <div class="card card-registro-salida">
                                 <div class="card-header">
                                     Registro de Salida
@@ -300,7 +286,7 @@ require_once('../../backend/config/conexion.php');
                                         <div class="form-group">
                                             <label for="placa-salida">Placa del Vehículo:</label>
                                             <input type="text" class="form-control" id="placa-salida" required> Campo para ingresar la placa -->
-        <!-- </div>
+                    <!-- </div>
                                         <button type="submit" class="btn btn-registro-salida">Registrar Salida</button>
                                     </form>
                                 </div>
@@ -308,7 +294,7 @@ require_once('../../backend/config/conexion.php');
                         </div>
 
                         Tarjeta de Usuarios Registrados -->
-        <!--<div class="col-md-6">
+                    <!--<div class="col-md-6">
                             <div class="card card-usuarios">
                                 <div class="card-header">
                                     Usuarios del Parqueadero
@@ -322,10 +308,9 @@ require_once('../../backend/config/conexion.php');
                                 </div>
                             </div>
                         </div>-->
-    </div>
-    </div>
-    </main>
-    </div>
+                </div>
+            </main>
+        </div>
     </div>
 
     <!-- Función para insertar el header dinámicamente -->
