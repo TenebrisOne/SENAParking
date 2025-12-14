@@ -161,10 +161,10 @@ require_once('../../backend/config/conexion.php');
                                                 <div class="card card-resumen-general border-0 h-100"
                                                     style="background: linear-gradient(135deg, #4CAF50, rgba(124, 199, 86, 1));">
                                                     <div class="card-body text-white">
-                                                        <h5 class="card-title">Usuarios Parqueadero</h5>
+                                                        <h5 class="card-title">Vehiculos Parqueadero</h5>
                                                         <p class="card-text font-weight-bold" style="font-size: 1.5em;">
-                                                            <?php echo isset($totalUsuariosParqueadero) ? $totalUsuariosParqueadero : 0; ?>
-                                                        </p>
+                                                       <?php echo isset($totalVehiculosParqueadero) ? $totalVehiculosParqueadero : 0; ?>
+                                                       </p>
                                                     </div>
                                                 </div>
                                             </div>
