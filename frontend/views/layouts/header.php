@@ -185,7 +185,6 @@ session_start();
         ?></button>
             <div class="menu" id="menu">
                 <div class="menu-items">
-                    <button onclick="accion1()">Ayuda</button>
                     <a href="../views/informacion.php"><button type="button">Información</button></a>
                     <form action="../../../SENAParking/logout.php" method="get">
                         <button type="sumbit">Cerrar sesión</button>
