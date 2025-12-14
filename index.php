@@ -37,14 +37,10 @@
                 <div class="d-flex justify-content-center gap-5">
                     <!-- Botón(negro) con padding vertical de 3 y un efecto hover personalizado -->
                     <button type="button" onclick="window.location.href='./login.php'" class="btn btn-dark py-2 btn-hover">⭐ Iniciar Sesión</button>
-                    <!-- Botón(verde) con el mismo estilo anterior -->
-                    <button class="btn btn-success py-2 btn-hover">⭐ ¿Ayuda?</button>
                 </div>
             </div>
         </div>
     </div>
-
-
     <!-- Función para llamar al Header-->
     <script src="./frontend/public/js/scriptsDOM.js"></script>
 
