@@ -29,17 +29,17 @@
     <div id="messages"></div>
     
     <form action="./process_forgot_password.php" method="POST">
-        <div class="row mb-3" id="grupo__correo">
+        <div class="row mb-3" id="grupo__documento">
             <div class="col-12">
-                <label for="correo" class="form-label">Correo electrónico:</label>
-                <input type="email" class="form-control formulario__input" name="correo" id="correo" placeholder="correo@ejemplo.com" required>
-                <small class="form-text text-muted">Ingresa el correo registrado en el sistema</small>
+                <label for="numeroDocumento" class="form-label">Número de identificación:</label>
+                <input type="text" class="form-control formulario__input" name="numeroDocumento" id="numeroDocumento" placeholder="Ej: 1098765432" pattern="[0-9]+" title="Solo números" required>
+                <small class="form-text text-muted">Ingresa tu número de documento registrado en el sistema</small>
             </div>
         </div>
         <!-- Botón de envío -->
         <div class="row">
             <div class="col-12">
-                <button type="submit" class="btn btn-dark py-2 btn-hover w-100" id="singbtn">Restablecer contraseña</button>
+                <button type="submit" class="btn btn-dark py-2 btn-hover w-100" id="singbtn">Enviar enlace de recuperación</button>
             </div>
         </div>
         <div class="row mt-3">

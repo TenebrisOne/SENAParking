@@ -78,7 +78,7 @@ if (isset($_SESSION['rol'])) {
             <button type="submit" class="btn btn-dark py-2 btn-hover" id="singbtn">Ingresar</button>
         </div>
     </div>
-    <a href="./forgot_password.html" class="text-muted mt-3" style="font-size: 14px;">¿Olvidaste tu contraseña?</a>
+    <a href="./forgot_password.php" class="text-muted mt-3" style="font-size: 14px;">¿Olvidaste tu contraseña?</a>
 </form>
 
 <!-- Aquí aparecerá el mensaje de error -->
