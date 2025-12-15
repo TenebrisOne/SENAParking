@@ -3,6 +3,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require 'vendor/autoload.php';
+require_once __DIR__ . '/backend/config/email_config.php';
 
 session_start();
 
@@ -14,60 +15,65 @@ $password = '';
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo->exec("set names utf8mb4");
 } catch (PDOException $e) {
     die("Error de conexión: " . $e->getMessage());
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    // Corrección: El formulario envía 'correo', no 'email'
+    $email = filter_var($_POST['correo'], FILTER_SANITIZE_EMAIL);
 
-    // Verificar si el correo existe
-    $stmt = $pdo->prepare("SELECT * FROM tb_usersys WHERE correo = ?");
+    // Verificar si el correo existe - CORRECCIÓN: usar correoUsys
+    $stmt = $pdo->prepare("SELECT * FROM tb_usersys WHERE correoUsys = ?");
     $stmt->execute([$email]);
     $user = $stmt->fetch();
 
     if ($user) {
         // Generar token único
         $token = bin2hex(random_bytes(32));
-        $expires = date('Y-m-d H:i:s', strtotime('+1 hour'));
 
-        // Guardar token en la base de datos
-        $stmt = $pdo->prepare("INSERT INTO password_resets (correo, token) VALUES (?, ?)");
+        // Guardar token en la base de datos - CORRECCIÓN: usar correoUsys
+        $stmt = $pdo->prepare("INSERT INTO password_resets (correoUsys, token) VALUES (?, ?)");
         $stmt->execute([$email, $token]);
 
-        // Enviar correo con PHPMailer
-        $mail = new PHPMailer(true);
+        // Enviar correo con PHPMailer usando configuración centralizada
+        $mail = EmailConfig::getMailer();
         try {
-            // Configuración del servidor SMTP
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'your_email@gmail.com';
-            $mail->Password = 'your_app_password'; // Usa una contraseña de aplicación
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 587;
-
             // Destinatario
-            $mail->setFrom('your_email@gmail.com', 'Tu App');
             $mail->addAddress($email);
 
             // Contenido
-            $mail->isHTML(true);
-            $mail->Subject = 'Restablecer tu contraseña';
-            $resetLink = "http://yourdomain.com/reset_password.php?email=" . urlencode($email) . "&token=$token";
-            $mail->Body = "Haz clic en el siguiente enlace para restablecer tu contraseña: <a href='$resetLink'>Restablecer contraseña</a>";
-            $mail->AltBody = "Copia y pega este enlace en tu navegador: $resetLink";
+            $mail->Subject = 'Restablecer tu contraseña - SENA Parking';
+            $resetLink = EmailConfig::getResetPasswordUrl($email, $token);
+            
+            $mail->Body = "
+                <html>
+                <body style='font-family: Arial, sans-serif;'>
+                    <h2>Recuperación de Contraseña</h2>
+                    <p>Has solicitado restablecer tu contraseña en el sistema SENA Parking.</p>
+                    <p>Haz clic en el siguiente enlace para crear una nueva contraseña:</p>
+                    <p><a href='$resetLink' style='background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;'>Restablecer Contraseña</a></p>
+                    <p>Este enlace expirará en 1 hora.</p>
+                    <p>Si no solicitaste este cambio, ignora este correo.</p>
+                    <hr>
+                    <p style='font-size: 12px; color: #666;'>SENA Parking - Sistema de Gestión de Parqueadero</p>
+                </body>
+                </html>
+            ";
+            $mail->AltBody = "Copia y pega este enlace en tu navegador: $resetLink\n\nEste enlace expirará en 1 hora.";
 
             $mail->send();
             $_SESSION['message'] = "Se ha enviado un enlace de restablecimiento a tu correo.";
         } catch (Exception $e) {
             $_SESSION['error'] = "No se pudo enviar el correo. Error: {$mail->ErrorInfo}";
+            error_log("Error enviando email de reset: " . $mail->ErrorInfo);
         }
     } else {
         $_SESSION['error'] = "El correo no está registrado.";
     }
 
-    header("Location: forgot_password.html");
+    header("Location: forgot_password.php");
     exit;
 }
 ?>

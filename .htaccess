@@ -1,21 +1,115 @@
+# =============================================
+# SENAParking - .htaccess Configuration
+# =============================================
+
+# Activar motor de reescritura
 RewriteEngine On
 
-# Router principal
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+# Base del proyecto (ajustar si está en subdirectorio)
+RewriteBase /SENAParking/
 
-DirectoryIndex index.php
+# =============================================
+# 1. SEGURIDAD - PROTECCIÓN DE CARPETAS
+# =============================================
 
-Options All -Indexes
+# Desactivar listado de directorios en TODO el sitio
+Options -Indexes -ExecCGI
 
-<FilesMatch "^(\.env|\.htaccess|composer\.json|composer\.lock)$">
-  Order Allow,Deny
-  Deny from all
+# Bloquear acceso a archivos sensibles
+<FilesMatch "\.(env|git|gitignore|htaccess|htpasswd|ini|log|sh|sql|bak|backup|old|config|lock|json|md)$">
+    Order Allow,Deny
+    Deny from all
 </FilesMatch>
 
+# Permitir JSON para APIs (si es necesario)
+<FilesMatch "^(manifest\.json|package\.json)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+# =============================================
+# 2. BLOQUEAR ACCESO DIRECTO A CARPETAS BACKEND
+# =============================================
+
+# Bloquear acceso directo a backend/config
+RewriteRule ^backend/config(/.*)?$ - [F,L]
+
+# Bloquear acceso directo a backend/models
+RewriteRule ^backend/models(/.*)?$ - [F,L]
+
+# Bloquear acceso directo a backend/lib
+RewriteRule ^backend/lib(/.*)?$ - [F,L]
+
+# Bloquear acceso directo a backend/utils
+RewriteRule ^backend/utils(/.*)?$ - [F,L]
+
+# Bloquear acceso directo a controllers (solo permitir via router)
+RewriteRule ^backend/controllers(/.*)?$ - [F,L]
+
+# Bloquear acceso a carpeta docs (documentación interna)
+RewriteRule ^docs(/.*)?$ - [F,L]
+
+# Bloquear carpeta .git
+RewriteRule ^\.git(/.*)?$ - [F,L]
+
+# =============================================
+# 3. URLs LIMPIAS Y ROUTING
+# =============================================
+
+# Establecer index.php como archivo por defecto
+DirectoryIndex index.php index.html
+
+# No reescribir si es un archivo o directorio existente
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Excluir archivos estáticos de la reescritura
+RewriteCond %{REQUEST_URI} !\.(css|js|jpg|jpeg|png|gif|ico|svg|woff|woff2|ttf|eot|map)$ [NC]
+
+# Router principal - redirigir todas las peticiones a index.php
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+
+# =============================================
+# 4. PROTECCIÓN DE ENDPOINTS API
+# =============================================
+
+# Permitir solo POST/GET a rutas de API específicas
+<FilesMatch "^(process_forgot_password|login|logout|reset_password)\.php$">
+    <LimitExcept GET POST>
+        Order Allow,Deny
+        Deny from all
+    </LimitExcept>
+</FilesMatch>
+
+# =============================================
+# 5. HEADERS DE SEGURIDAD
+# =============================================
+
+<IfModule mod_headers.c>
+    # Prevenir clickjacking
+    Header always set X-Frame-Options "SAMEORIGIN"
+    
+    # Prevenir sniffing de MIME type
+    Header always set X-Content-Type-Options "nosniff"
+    
+    # Habilitar protección XSS del navegador
+    Header always set X-XSS-Protection "1; mode=block"
+    
+    # Política de referencia
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Ocultar versión de PHP
+    Header always unset X-Powered-By
+</IfModule>
+
+# =============================================
+# 6. OPTIMIZACIÓN Y COMPRESIÓN
+# =============================================
+
 <IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
+    AddOutputFilterByType DEFLATE application/javascript application/json
+    AddOutputFilterByType DEFLATE application/x-javascript text/javascript
 </IfModule>
 
 <IfModule mod_expires.c>
@@ -24,18 +118,35 @@ Options All -Indexes
     ExpiresByType image/jpeg "access plus 1 year"
     ExpiresByType image/gif "access plus 1 year"
     ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
     ExpiresByType text/css "access plus 1 month"
     ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType application/x-font-woff "access plus 1 year"
+    ExpiresByType application/font-woff2 "access plus 1 year"
 </IfModule>
 
-AddType application/x-httpd-php .html
-AddHandler application/x-httpd-php .html
+# =============================================
+# 7. PREVENIR EJECUCIÓN DE PHP EN UPLOADS
+# =============================================
 
-# REGEX adicional (corregido)
-RewriteRule ^([a-zA-Z0-9/ñÑ-]+)$ index.php?views=$1 [L,QSA]
+# Si tienes carpeta de uploads, bloquear ejecución de PHP
+<IfModule mod_rewrite.c>
+    RewriteRule ^(uploads|files|media)/.*\.php$ - [F,L]
+</IfModule>
 
-# Bloquear acceso directo a /includes/
-RewriteRule ^includes/ - [F,L]
+# =============================================
+# 8. ERROR PAGES PERSONALIZADAS
+# =============================================
 
-# Bloquear PHP en /private/ (corregido)
-RewriteRule ^private/.*\.php$ - [F,L]
+ErrorDocument 403 /SENAParking/404.html
+ErrorDocument 404 /SENAParking/404.html
+ErrorDocument 500 /SENAParking/404.html
+
+# =============================================
+# 9. LIMITAR MÉTODOS HTTP
+# =============================================
+
+<LimitExcept GET POST HEAD>
+    Order Allow,Deny
+    Deny from all
+</LimitExcept>
