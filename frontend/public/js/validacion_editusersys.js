@@ -106,7 +106,7 @@ formulario.addEventListener("submit", (e) => {
     formData.append("usuario", usuario);
 
     fetch(
-      "../../../SENAParking/backend/controllers/UsuarioSistemaController.php",
+      "../../backend/controllers/UsuarioSistemaController.php",
       {
         method: "POST",
         body: formData,
