@@ -155,7 +155,7 @@
                     <table class="table table-hover table-striped">
                         <thead>
                             <tr>
-                                <!-- <th>ID</th> -->
+                                <th>ID</th>
                                 <th>Tipo Usuario</th>
                                 <th>Documento</th>
                                 <th>Nombres</th>
@@ -231,6 +231,7 @@
                     data.users.forEach(user => {
                         const row = `
                             <tr>
+                                <td>${user.id_userPark}</td>
                                 <td>${user.tipoUserUpark}</td>
                                 <td>${user.numeroDocumentoUpark}</td>
                                 <td>${user.nombresUpark}</td>
