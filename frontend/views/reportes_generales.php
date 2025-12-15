@@ -215,46 +215,23 @@
 
             generalReportsContent.innerHTML = `
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="card-metric">
                             <i class="fas fa-arrow-alt-circle-down fa-2x text-success mb-2"></i>
-                            <h5>Vehículos Ingresados</h5>
+                            <h5>Ingresos de vehículos</h5>
                             <div class="value">${generalStats.total_ingresos}</div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="card-metric">
                             <i class="fas fa-arrow-alt-circle-up fa-2x text-danger mb-2"></i>
-                            <h5>Vehículos Salidos</h5>
+                            <h5>Salidas de vehículos</h5>
                             <div class="value">${generalStats.total_salidas}</div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card-metric">
-                            <i class="fas fa-chart-pie fa-2x text-info mb-2"></i>
-                            <h5>Ocupación Actual</h5>
-                            <div class="value">${ocupacion_porcentaje}</div>
-                            <p class="mt-2 text-muted" style="font-size: 0.8rem;">(${generalStats.ocupacion_actual} de ${generalStats.capacidad_total} espacios ocupados)</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card-metric">
-                            <i class="fas fa-motorcycle fa-2x text-warning mb-2"></i>
-                            <h5>Ingresos de Motos</h5>
-                            <div class="value">${data.vehicleTypeStats.Motocicleta.ingresos}</div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card-metric">
-                            <i class="fas fa-bicycle fa-2x text-secondary mb-2"></i>
-                            <h5>Ingresos de Bicicletas</h5>
-                            <div class="value">${data.vehicleTypeStats.Bicicleta.ingresos}</div>
-                        </div>
-                    </div>
-                </div>
+                
 
                 <div class="row">
                     <div class="col-lg-6">
