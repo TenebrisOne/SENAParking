@@ -108,7 +108,7 @@ $roles = ['admin' => "Administrador", 'supervisor' => "Supervisor", 'guardia' =>
             "searching": true,
             "info": false,
             "lengthChange": false,
-            "pageLength": 5
+            "pageLength": 10
         });
     </script>
 </body>

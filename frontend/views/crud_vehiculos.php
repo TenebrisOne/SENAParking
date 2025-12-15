@@ -180,8 +180,11 @@ if (!isset($_SESSION['rol'])) {
                                         <p class="card-text mb-0">
                                             <strong>Propietario:</strong> ${vehicle.propietario_nombre_completo}
                                         </p>
-                                        <p class="card-text mb-0">
+                                        <p class="card-text mb-1">
                                             <span class="badge ${getStatusBadgeClass(vehicle.estado)}">${getStatusText(vehicle.estado)}</span>
+                                        </p>
+                                        <p class="card-text mb-0">
+                                            <span class="badge ${getLocationBadgeClass(vehicle.ultimoTipoAccion)}">${getLocationText(vehicle.ultimoTipoAccion)}</span>
                                         </p>
                                     </div>
                                     <button class="btn btn-outline-primary btn-sm btn-edit" onclick="editVehicle(event, ${vehicle.id_vehiculo})">
@@ -236,6 +239,18 @@ if (!isset($_SESSION['rol'])) {
 
         function getStatusText(estado) {
             return estado === 'activo' ? 'Activo' : 'Inactivo';
+        }
+
+        function getLocationBadgeClass(ultimoTipoAccion) {
+            return ultimoTipoAccion === 'ingreso' ? 'bg-info' : 'bg-warning';
+        }
+
+        function getLocationText(ultimoTipoAccion) {
+            if (ultimoTipoAccion === 'ingreso') {
+                return '<i class="fas fa-location-dot me-1"></i>Dentro del parqueadero';
+            } else {
+                return '<i class="fas fa-map-pin me-1"></i>Fuera del parqueadero';
+            }
         }
 
         // Buscar vehículos
@@ -297,10 +312,15 @@ if (!isset($_SESSION['rol'])) {
                 selectedVehicle = null;
             } else {
                 cardElement.classList.add('selected');
+                
+                // Buscar el vehículo en allVehicles para obtener ultimoTipoAccion
+                const vehicleData = allVehicles.find(vehicle => vehicle.id_vehiculo == vehicleId);
+                
                 selectedVehicle = {
                     element: cardElement,
                     id: vehicleId,
-                    plateNumber: plateNumber
+                    plateNumber: plateNumber,
+                    ultimoTipoAccion: vehicleData ? vehicleData.ultimoTipoAccion : null
                 };
             }
 
@@ -330,6 +350,24 @@ if (!isset($_SESSION['rol'])) {
 
             const toggle = document.getElementById('movementToggle');
             const movementType = toggle.checked ? 'salida' : 'ingreso';
+            const ultimoTipo = selectedVehicle.ultimoTipoAccion;
+
+            // Validar según el tipo de movimiento
+            if (movementType === 'ingreso') {
+                // Si el vehículo ya tiene una entrada registrada sin salida, no permitir otra entrada
+                if (ultimoTipo === 'ingreso') {
+                    showAlert('❌ No se puede registrar entrada: el vehículo ya ha ingresado y aún no ha salido del parqueadero.', 'danger');
+                    return;
+                }
+                // Si ultimoTipo es null o 'salida', se puede registrar entrada
+            } else if (movementType === 'salida') {
+                // Si el vehículo no tiene registros o el último registro es salida, no permitir otra salida
+                if (ultimoTipo === null || ultimoTipo === 'salida') {
+                    showAlert('❌ No se puede registrar salida: el vehículo no ha ingresado aún al parqueadero.', 'danger');
+                    return;
+                }
+                // Si ultimoTipo es 'ingreso', se puede registrar salida
+            }
 
             if (!confirm(`¿Continuar con el proceso de ${movementType} para el vehículo ${selectedVehicle.plateNumber}?`)) {
                 return;

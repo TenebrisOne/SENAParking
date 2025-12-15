@@ -8,8 +8,8 @@ include_once '../config/conexion.php';
 include_once '../models/ReportesUserPark.php';
 include_once '../models/ReportAccess.php';
 
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+ini_set('display_errors', 0);
+error_reporting(0);
 
 $database = new DataBase();
 $db = $database->getConnection();

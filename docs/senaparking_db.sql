@@ -40,6 +40,9 @@ CREATE TABLE tb_usersys (
   UNIQUE KEY uq_correo_usys (correoUsys),
   KEY idx_username (usernameUsys)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+ALTER TABLE tb_usersys
+ADD UNIQUE KEY uq_num_doc_usys (numeroDocumentoUsys);
+
 
 -- =========================================================
 -- 🧱 TABLA: password_resets

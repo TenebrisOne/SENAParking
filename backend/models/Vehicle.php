@@ -18,7 +18,7 @@ class Vehicle {
         $this->conn = $db;
     }
 
-    // Método para leer vehículos, incluyendo la información del propietario
+    // Método para leer vehículos, incluyendo la información del propietario y el último tipo de acción
     public function read($search_term = "") {
         $query = "SELECT 
                     vehiculo.id_vehiculo, 
@@ -29,7 +29,14 @@ class Vehicle {
                     vehiculo.modeloVeh, 
                     vehiculo.colorVeh, 
                     userpark.nombresUpark,    
-                    userpark.apellidosUpark   
+                    userpark.apellidosUpark,
+                    (
+                        SELECT tipoAccionAcc 
+                        FROM tb_accesos 
+                        WHERE id_vehiculo = vehiculo.id_vehiculo 
+                        ORDER BY id_acceso DESC 
+                        LIMIT 1
+                    ) AS ultimoTipoAccion
                   FROM 
                     " . $this->table_name . " vehiculo
                   JOIN 

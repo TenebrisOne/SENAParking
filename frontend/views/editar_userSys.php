@@ -139,14 +139,6 @@ if (!$usuario) {
                     <p class="formulario__input-error">El nombre tiene que ser de 4 a 16 dígitos y solo puede contener letras y números.</p>
                 </div>
             </div>
-
-            <!--<div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="contrasena" class="form-label">Contraseña:</label>
-                    <input type="password" class="form-control" name="contrasena" value="<?= htmlspecialchars($usuario['password']) ?>" required>
-                </div>
-            </div>-->
-
             <button type="submit" class="btn btn-success">Guardar cambios</button>
             <a href="dashboard_admin.php" class="btn btn-secondary">Cancelar</a>
         </form>

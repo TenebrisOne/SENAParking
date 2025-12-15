@@ -7,8 +7,8 @@ use Dompdf\Options;
 include_once '../config/conexion.php';
 include_once '../models/ReportAccess.php';
 
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+ini_set('display_errors', 0);
+error_reporting(0);
 
 $database = new dataBase();
 $db = $database->getConnection();
@@ -40,8 +40,8 @@ if ($startDatePDF && $endDatePDF) {
 }
 
 $generalStats = $access->getGeneralAccessStats($startDate, $endDate);
-// $capacidad_total = $access->getParkingCapacity();
-// $ocupacion_actual = $access->getCurrentOccupancyCount();
+$capacidad_total = 0; // $access->getParkingCapacity(); // Table missing
+$ocupacion_actual = $access->getCurrentOccupancyCount();
 $generalStats['capacidad_total'] = $capacidad_total;
 $generalStats['ocupacion_actual'] = $ocupacion_actual;
 
@@ -100,35 +100,15 @@ $pdfHtml = '
 
     <div class="metric-grid">
         <div class="metric-item">
-            <p><span class="text-success">&#9660;</span></p>
-            <h5>Vehículos Ingresados</h5>
+            <h5>Ingresos de vehículos</h5>
             <div class="value">' . htmlspecialchars($generalStats['total_ingresos'] ?? 0) . '</div>
         </div>
         <div class="metric-item">
-            <p><span class="text-danger">&#9650;</span></p>
-            <h5>Vehículos Salidos</h5>
+            <h5>Salidas de vehículos</h5>
             <div class="value">' . htmlspecialchars($generalStats['total_salidas'] ?? 0) . '</div>
-        </div>
-        <div class="metric-item">
-            <p><span class="text-info">&#9679;</span></p>
-            <h5>Ocupación Actual</h5>
-            <div class="value">' . htmlspecialchars($ocupacion_porcentaje) . '</div>
-            <p class="sub-value">(' . htmlspecialchars($generalStats['ocupacion_actual'] ?? 0) . ' de ' . htmlspecialchars($generalStats['capacidad_total'] ?? 0) . ' espacios)</p>
         </div>
     </div>
 
-    <div class="metric-grid" style="margin-top: 10px;">
-        <div class="metric-item" style="width: 50%;">
-            <p><span class="text-warning">&#9999;</span></p>
-            <h5>Ingresos de Motos</h5>
-            <div class="value">' . htmlspecialchars($vehicleTypeStatsForCards['Motocicleta']['ingresos'] ?? 0) . '</div>
-        </div>
-        <div class="metric-item" style="width: 50%;">
-            <p><span class="text-secondary">&#9702;</span></p>
-            <h5>Ingresos de Bicicletas</h5>
-            <div class="value">' . htmlspecialchars($vehicleTypeStatsForCards['Bicicleta']['ingresos'] ?? 0) . '</div>
-        </div>
-    </div>
 
     <div class="section-title">Actividad Diaria (Ingresos vs. Salidas)</div>';
     if (!empty($dailyAccessData)) {
