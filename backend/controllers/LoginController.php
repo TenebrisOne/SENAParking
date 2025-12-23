@@ -1,5 +1,21 @@
 <?php
+// Asegurar que la sesión esté iniciada
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Capturar errores
+error_reporting(E_ALL);
+ini_set('display_errors', 0); // No mostrar errores en la respuesta
+
 require_once('../config/conexion.php');
+
+// Verificar conexión a BD
+if ($conn->connect_error) {
+    echo "Error de conexión a la base de datos";
+    exit;
+}
+
 require_once('../models/ActividadModel.php');
 require_once('../models/LoginModel.php');
 $actividadModel = new ActividadModel($conn);

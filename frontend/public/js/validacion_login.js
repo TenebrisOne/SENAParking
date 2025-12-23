@@ -56,19 +56,37 @@ inputs.forEach((input) => {
 formulario.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  if (
-    campos.correo &&
-    campos.password
-  ) {
-    const correo = document.getElementById("correo").value.trim();
-    const password = document.getElementById("password").value.trim();
+  const correo = document.getElementById("correo").value.trim();
+  const password = document.getElementById("password").value.trim();
 
+  // Validar directamente los valores (no depender de los eventos keyup/blur)
+  const correoValido = expresiones.correo.test(correo);
+  const passwordValido = expresiones.password.test(password);
+
+  // Actualizar estado visual
+  if (correoValido) {
+    document.getElementById("grupo__correo").classList.remove("formulario__grupo-incorrecto");
+    document.getElementById("grupo__correo").classList.add("formulario__grupo-correcto");
+  } else {
+    document.getElementById("grupo__correo").classList.add("formulario__grupo-incorrecto");
+  }
+
+  if (passwordValido) {
+    document.getElementById("grupo__password").classList.remove("formulario__grupo-incorrecto");
+    document.getElementById("grupo__password").classList.add("formulario__grupo-correcto");
+  } else {
+    document.getElementById("grupo__password").classList.add("formulario__grupo-incorrecto");
+  }
+
+  if (correoValido && passwordValido) {
     const formData = new FormData();
     formData.append("correo", correo);
     formData.append("password", password);
 
+    const errorMessage = document.getElementById("error-message");
+
     fetch(
-      "../../../SENAParking/backend/controllers/LoginController.php",
+      "backend/controllers/LoginController.php",
       {
         method: "POST",
         body: formData,
@@ -76,7 +94,10 @@ formulario.addEventListener("submit", (e) => {
     )
       .then((response) => response.text())
       .then((data) => {
-        switch (data) {
+        // Limpiar espacios en blanco
+        const respuesta = data.trim();
+
+        switch (respuesta) {
           case "admin":
             window.location.href = "frontend/views/dashboard_admin.php";
             break;
@@ -87,9 +108,23 @@ formulario.addEventListener("submit", (e) => {
             window.location.href = "frontend/views/dashboard_guardia.php";
             break;
           default:
-            alert("Usuario o contraseña incorrectos");
+            // Mostrar el mensaje de error específico del servidor
+            if (errorMessage) {
+              errorMessage.textContent = respuesta || "Usuario o contraseña incorrectos";
+              errorMessage.style.display = "block";
+            } else {
+              alert(respuesta || "Usuario o contraseña incorrectos");
+            }
         }
       })
-    formulario.reset();
+      .catch((error) => {
+        console.error("Error de conexión:", error);
+        if (errorMessage) {
+          errorMessage.textContent = "Error de conexión. Intenta de nuevo.";
+          errorMessage.style.display = "block";
+        } else {
+          alert("Error de conexión. Intenta de nuevo.");
+        }
+      });
   }
 });

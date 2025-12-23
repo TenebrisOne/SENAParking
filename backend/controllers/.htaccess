@@ -1,3 +1,9 @@
-# Denegar todo acceso a esta carpeta
-Order Allow,Deny
-Deny from all
+# Desactivar listado de directorios
+Options -Indexes
+
+# Permitir acceso a archivos PHP
+<FilesMatch "\.php$">
+    <RequireAll>
+        Require all granted
+    </RequireAll>
+</FilesMatch>

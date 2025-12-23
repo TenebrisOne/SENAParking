@@ -38,7 +38,6 @@ if (isset($_SESSION['rol'])) {
     <link rel="stylesheet" href="./frontend/public/css/loader.css">
     <link href="./frontend/public/css/bootstrap.min.css" rel="stylesheet">
     <meta name="theme-color" content="#000000">
-    <meta http-equiv="refresh" content="60">
     <title>Login | SENAParking</title>
 </head>
 
@@ -70,16 +69,14 @@ if (isset($_SESSION['rol'])) {
                     <p class="formulario__input-error">La contraseña tiene que ser de 4 a 12 dígitos.</p>
                 </div>
             </div>
-            
-        <form id="formulario" class="formulario" action="backend/controllers/LoginController.php" method="POST">
-    <!-- ... tus campos ... -->
-    <div class="row">
-        <div class="col-12">
-            <button type="submit" class="btn btn-dark py-2 btn-hover" id="singbtn">Ingresar</button>
-        </div>
-    </div>
-    <a href="./forgot_password.php" class="text-muted mt-3" style="font-size: 14px;">¿Olvidaste tu contraseña?</a>
-</form>
+
+            <div class="row">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-dark py-2 btn-hover" id="singbtn">Ingresar</button>
+                </div>
+            </div>
+            <a href="./forgot_password.php" class="text-muted mt-3" style="font-size: 14px;">¿Olvidaste tu contraseña?</a>
+        </form>
 
 <!-- Aquí aparecerá el mensaje de error -->
 <p id="error-message" class="text-danger mt-3" style="text-align:center; display:none;"></p>

@@ -1,88 +1,125 @@
 # =============================================
+
 # SENAParking - .htaccess Configuration
+
 # =============================================
 
 # Activar motor de reescritura
+
 RewriteEngine On
 
 # Base del proyecto (ajustar si está en subdirectorio)
+
 RewriteBase /SENAParking/
 
 # =============================================
+
 # 1. SEGURIDAD - PROTECCIÓN DE CARPETAS
+
 # =============================================
 
 # Desactivar listado de directorios en TODO el sitio
+
 Options -Indexes -ExecCGI
 
 # Bloquear acceso a archivos sensibles
+
 <FilesMatch "\.(env|git|gitignore|htaccess|htpasswd|ini|log|sh|sql|bak|backup|old|config|lock|json|md)$">
-    Order Allow,Deny
-    Deny from all
+Order Allow,Deny
+Deny from all
 </FilesMatch>
 
 # Permitir JSON para APIs (si es necesario)
+
 <FilesMatch "^(manifest\.json|package\.json)$">
-    Order Allow,Deny
-    Allow from all
+Order Allow,Deny
+Allow from all
 </FilesMatch>
 
 # =============================================
+
 # 2. BLOQUEAR ACCESO DIRECTO A CARPETAS BACKEND
+
 # =============================================
 
 # Bloquear acceso directo a backend/config
-RewriteRule ^backend/config(/.*)?$ - [F,L]
+
+RewriteRule ^backend/config(/.\*)?$ - [F,L]
 
 # Bloquear acceso directo a backend/models
-RewriteRule ^backend/models(/.*)?$ - [F,L]
+
+RewriteRule ^backend/models(/.\*)?$ - [F,L]
 
 # Bloquear acceso directo a backend/lib
-RewriteRule ^backend/lib(/.*)?$ - [F,L]
+
+RewriteRule ^backend/lib(/.\*)?$ - [F,L]
 
 # Bloquear acceso directo a backend/utils
-RewriteRule ^backend/utils(/.*)?$ - [F,L]
+
+RewriteRule ^backend/utils(/.\*)?$ - [F,L]
 
 # Bloquear acceso directo a controllers (solo permitir via router)
-RewriteRule ^backend/controllers(/.*)?$ - [F,L]
+
+# NOTA: Deshabilitado temporalmente para permitir fetch directo al LoginController
+
+# Si deseas reactivar, implementa un router que maneje las peticiones de login
+
+# RewriteRule ^backend/controllers(/.\*)?$ - [F,L]
 
 # Bloquear acceso a carpeta docs (documentación interna)
-RewriteRule ^docs(/.*)?$ - [F,L]
+
+RewriteRule ^docs(/.\*)?$ - [F,L]
 
 # Bloquear carpeta .git
-RewriteRule ^\.git(/.*)?$ - [F,L]
+
+RewriteRule ^\.git(/.\*)?$ - [F,L]
 
 # =============================================
+
 # 3. URLs LIMPIAS Y ROUTING
+
 # =============================================
 
 # Establecer index.php como archivo por defecto
+
 DirectoryIndex index.php index.html
 
 # No reescribir si es un archivo o directorio existente
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
 # Excluir archivos estáticos de la reescritura
+
 RewriteCond %{REQUEST_URI} !\.(css|js|jpg|jpeg|png|gif|ico|svg|woff|woff2|ttf|eot|map)$ [NC]
 
+# Excluir controladores del routing (permitir acceso directo)
+
+RewriteCond %{REQUEST_URI} !^/SENAParking/backend/controllers/ [NC]
+
 # Router principal - redirigir todas las peticiones a index.php
-RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+
+RewriteRule ^(.\*)$ index.php?url=$1 [QSA,L]
 
 # =============================================
+
 # 4. PROTECCIÓN DE ENDPOINTS API
+
 # =============================================
 
 # Permitir solo POST/GET a rutas de API específicas
+
 <FilesMatch "^(process_forgot_password|login|logout|reset_password)\.php$">
-    <LimitExcept GET POST>
-        Order Allow,Deny
-        Deny from all
-    </LimitExcept>
+<LimitExcept GET POST>
+Order Allow,Deny
+Deny from all
+</LimitExcept>
 </FilesMatch>
 
 # =============================================
+
 # 5. HEADERS DE SEGURIDAD
+
 # =============================================
 
 <IfModule mod_headers.c>
@@ -103,7 +140,9 @@ RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 </IfModule>
 
 # =============================================
+
 # 6. OPTIMIZACIÓN Y COMPRESIÓN
+
 # =============================================
 
 <IfModule mod_deflate.c>
@@ -126,16 +165,21 @@ RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 </IfModule>
 
 # =============================================
+
 # 7. PREVENIR EJECUCIÓN DE PHP EN UPLOADS
+
 # =============================================
 
 # Si tienes carpeta de uploads, bloquear ejecución de PHP
+
 <IfModule mod_rewrite.c>
     RewriteRule ^(uploads|files|media)/.*\.php$ - [F,L]
 </IfModule>
 
 # =============================================
+
 # 8. ERROR PAGES PERSONALIZADAS
+
 # =============================================
 
 ErrorDocument 403 /SENAParking/404.html
@@ -143,7 +187,9 @@ ErrorDocument 404 /SENAParking/404.html
 ErrorDocument 500 /SENAParking/404.html
 
 # =============================================
+
 # 9. LIMITAR MÉTODOS HTTP
+
 # =============================================
 
 <LimitExcept GET POST HEAD>
