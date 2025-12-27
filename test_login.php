@@ -30,7 +30,7 @@ echo "<p>Password: $password</p>";
 
 // Simular exactamente lo que hace el LoginModel
 echo "<h2>Ejecutando consulta...</h2>";
-$sql = "SELECT * FROM tb_userSys WHERE correoUsys = ?";
+$sql = "SELECT * FROM tb_usersys WHERE correoUsys = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $correo);
 $stmt->execute();
@@ -83,8 +83,8 @@ if ($result->num_rows > 0) {
     echo "<p style='color: red; font-size: 18px;'>❌ USUARIO NO ENCONTRADO</p>";
     
     // Listar todos los usuarios
-    echo "<h3>Usuarios existentes en tb_userSys:</h3>";
-    $allUsers = $conn->query("SELECT id_userSys, correoUsys, rolUsys, estadoUsys FROM tb_userSys");
+    echo "<h3>Usuarios existentes en tb_usersys:</h3>";
+    $allUsers = $conn->query("SELECT id_userSys, correoUsys, rolUsys, estadoUsys FROM tb_usersys");
     if ($allUsers && $allUsers->num_rows > 0) {
         echo "<table border='1' cellpadding='5'>";
         echo "<tr><th>ID</th><th>Correo</th><th>Rol</th><th>Estado</th></tr>";

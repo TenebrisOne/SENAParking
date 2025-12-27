@@ -85,6 +85,11 @@ formulario.addEventListener("submit", (e) => {
 
     const errorMessage = document.getElementById("error-message");
 
+    // Mostrar loader
+    if (typeof showLoader === 'function') {
+      showLoader();
+    }
+
     fetch(
       "backend/controllers/LoginController.php",
       {
@@ -94,6 +99,10 @@ formulario.addEventListener("submit", (e) => {
     )
       .then((response) => response.text())
       .then((data) => {
+        // Ocultar loader
+        if (typeof hideLoader === 'function') {
+          hideLoader();
+        }
         // Limpiar espacios en blanco
         const respuesta = data.trim();
 
@@ -118,6 +127,10 @@ formulario.addEventListener("submit", (e) => {
         }
       })
       .catch((error) => {
+        // Ocultar loader
+        if (typeof hideLoader === 'function') {
+          hideLoader();
+        }
         console.error("Error de conexión:", error);
         if (errorMessage) {
           errorMessage.textContent = "Error de conexión. Intenta de nuevo.";

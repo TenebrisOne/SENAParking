@@ -21,7 +21,7 @@ $rol = "admin";
 $estado = "activo";
 
 // Verificar si el usuario ya existe
-$checkSql = "SELECT id_userSys FROM tb_userSys WHERE correoUsys = ?";
+$checkSql = "SELECT id_userSys FROM tb_usersys WHERE correoUsys = ?";
 $checkStmt = $conn->prepare($checkSql);
 $checkStmt->bind_param("s", $correo);
 $checkStmt->execute();
@@ -29,7 +29,7 @@ $checkResult = $checkStmt->get_result();
 
 if ($checkResult->num_rows > 0) {
     // Si existe, actualizar la contraseña
-    $updateSql = "UPDATE tb_userSys SET passwordUsys = ?, estadoUsys = ? WHERE correoUsys = ?";
+    $updateSql = "UPDATE tb_usersys SET passwordUsys = ?, estadoUsys = ? WHERE correoUsys = ?";
     $updateStmt = $conn->prepare($updateSql);
     $updateStmt->bind_param("sss", $passwordHash, $estado, $correo);
     
@@ -44,7 +44,7 @@ if ($checkResult->num_rows > 0) {
     $updateStmt->close();
 } else {
     // Si no existe, crear el usuario
-    $insertSql = "INSERT INTO tb_userSys (correoUsys, passwordUsys, nombresUsys, apellidosUsys, rolUsys, estadoUsys) 
+    $insertSql = "INSERT INTO tb_usersys (correoUsys, passwordUsys, nombresUsys, apellidosUsys, rolUsys, estadoUsys) 
                   VALUES (?, ?, ?, ?, ?, ?)";
     $insertStmt = $conn->prepare($insertSql);
     
@@ -52,9 +52,9 @@ if ($checkResult->num_rows > 0) {
         // Si la tabla tiene campos diferentes, mostrar la estructura
         echo "<h2 style='color: orange;'>⚠️ Error al preparar la consulta</h2>";
         echo "<p>Error: " . $conn->error . "</p>";
-        echo "<h3>Estructura de la tabla tb_userSys:</h3>";
+        echo "<h3>Estructura de la tabla tb_usersys:</h3>";
         
-        $descResult = $conn->query("DESCRIBE tb_userSys");
+        $descResult = $conn->query("DESCRIBE tb_usersys");
         if ($descResult) {
             echo "<table border='1' cellpadding='10'>";
             echo "<tr><th>Campo</th><th>Tipo</th><th>Null</th><th>Key</th><th>Default</th></tr>";

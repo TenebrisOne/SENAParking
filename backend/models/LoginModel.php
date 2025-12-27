@@ -13,7 +13,7 @@ class login
 
     public function validar_login($correo, $password)
     {
-        $sql = "SELECT * FROM tb_userSys WHERE correoUsys = ?";
+        $sql = "SELECT * FROM tb_usersys WHERE correoUsys = ?";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bind_param("s", $correo);
         $stmt->execute();

@@ -19,7 +19,7 @@ echo "<p style='color: green;'>✅ Conexión OK</p>";
 
 // Primero obtener la estructura exacta de la tabla
 echo "<h2>Estructura de la tabla:</h2>";
-$descResult = $conn->query("DESCRIBE tb_userSys");
+$descResult = $conn->query("DESCRIBE tb_usersys");
 $campos = [];
 if ($descResult) {
     echo "<table border='1' cellpadding='5'>";
@@ -47,7 +47,7 @@ echo "<h2>Intentando insertar usuario...</h2>";
 echo "<p>Hash generado: " . htmlspecialchars($passwordHash) . "</p>";
 
 // Intentar inserción directa con SQL raw
-$sql = "INSERT INTO tb_userSys (correoUsys, passwordUsys, nombresUsys, apellidosUsys, rolUsys, estadoUsys) 
+$sql = "INSERT INTO tb_usersys (correoUsys, passwordUsys, nombresUsys, apellidosUsys, rolUsys, estadoUsys) 
         VALUES ('$correo', '$passwordHash', 'Administrador', 'Sistema', 'admin', 'activo')";
 
 echo "<p>SQL a ejecutar:</p>";
@@ -63,7 +63,7 @@ if ($conn->query($sql) === TRUE) {
     // Si hay error de duplicado, intentar actualizar
     if (strpos($conn->error, 'Duplicate') !== false) {
         echo "<p>El usuario ya existe, actualizando contraseña...</p>";
-        $updateSql = "UPDATE tb_userSys SET passwordUsys = '$passwordHash', estadoUsys = 'activo' WHERE correoUsys = '$correo'";
+        $updateSql = "UPDATE tb_usersys SET passwordUsys = '$passwordHash', estadoUsys = 'activo' WHERE correoUsys = '$correo'";
         if ($conn->query($updateSql) === TRUE) {
             echo "<h2 style='color: green;'>✅ Contraseña actualizada!</h2>";
         } else {
@@ -74,7 +74,7 @@ if ($conn->query($sql) === TRUE) {
 
 // Verificar que se insertó
 echo "<h2>Verificación final:</h2>";
-$verifyResult = $conn->query("SELECT * FROM tb_userSys WHERE correoUsys = '$correo'");
+$verifyResult = $conn->query("SELECT * FROM tb_usersys WHERE correoUsys = '$correo'");
 if ($verifyResult && $verifyResult->num_rows > 0) {
     $user = $verifyResult->fetch_assoc();
     echo "<p style='color: green;'>✅ Usuario encontrado en la base de datos:</p>";

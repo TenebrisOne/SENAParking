@@ -4,7 +4,7 @@ include_once '../config/conexion.php';
 class Vehicle {
     private $conn;
     private $table_name = "tb_vehiculos";
-    private $user_park_table = "tb_userPark";
+    private $user_park_table = "tb_userpark";
 
     public $id_vehiculo; // Asegúrate de que esta propiedad exista
     public $id_userPark; 

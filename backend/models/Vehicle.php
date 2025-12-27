@@ -2,7 +2,7 @@
 class Vehicle {
     private $conn;
     private $table_name = "tb_vehiculos";
-    private $user_park_table = "tb_userPark"; 
+    private $user_park_table = "tb_userpark"; 
 
     public $id_vehiculo;
     public $id_userPark;

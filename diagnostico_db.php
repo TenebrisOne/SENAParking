@@ -16,8 +16,8 @@ if ($conn->connect_error) {
 echo "<p style='color: green;'>✅ Conexión exitosa a la base de datos</p>";
 
 // Mostrar estructura de la tabla
-echo "<h2>Estructura de la tabla tb_userSys:</h2>";
-$descResult = $conn->query("DESCRIBE tb_userSys");
+echo "<h2>Estructura de la tabla tb_usersys:</h2>";
+$descResult = $conn->query("DESCRIBE tb_usersys");
 if ($descResult) {
     echo "<table border='1' cellpadding='5' style='border-collapse: collapse;'>";
     echo "<tr style='background: #333; color: white;'><th>Campo</th><th>Tipo</th><th>Null</th><th>Key</th><th>Default</th></tr>";
@@ -36,8 +36,8 @@ if ($descResult) {
 }
 
 // Mostrar usuarios existentes
-echo "<h2>Usuarios en la tabla tb_userSys:</h2>";
-$usersResult = $conn->query("SELECT id_userSys, correoUsys, nombresUsys, rolUsys, estadoUsys FROM tb_userSys");
+echo "<h2>Usuarios en la tabla tb_usersys:</h2>";
+$usersResult = $conn->query("SELECT id_userSys, correoUsys, nombresUsys, rolUsys, estadoUsys FROM tb_usersys");
 if ($usersResult) {
     if ($usersResult->num_rows > 0) {
         echo "<table border='1' cellpadding='5' style='border-collapse: collapse;'>";
@@ -61,7 +61,7 @@ if ($usersResult) {
 
 // Buscar específicamente el admin
 echo "<h2>Búsqueda específica del admin:</h2>";
-$adminResult = $conn->query("SELECT * FROM tb_userSys WHERE correoUsys = 'admin@senaparking.com'");
+$adminResult = $conn->query("SELECT * FROM tb_usersys WHERE correoUsys = 'admin@senaparking.com'");
 if ($adminResult) {
     if ($adminResult->num_rows > 0) {
         $admin = $adminResult->fetch_assoc();

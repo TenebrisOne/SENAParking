@@ -84,16 +84,15 @@ if (isset($_SESSION['rol'])) {
     </div>
 
 
+    <!-- Loader -->
+    <div id="loader-overlay">
+        <div class="spinner"></div>
+    </div>
+
     <!-- Scripts -->
+    <script src="./frontend/public/js/loader.js"></script>
     <script src="./frontend/public/js/scriptsDOM.js"></script>
     <script src="./frontend/public/js/validacion_login.js"></script>
-
-    <!-- Loader -->
-<div id="loader-overlay">
-  <div class="spinner"></div>
-  <!-- Script loader-->
-<script src="./frontend/public/js/loader.js"></script>
-</div>
 </body>
 
 </html>

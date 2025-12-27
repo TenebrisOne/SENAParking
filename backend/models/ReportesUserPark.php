@@ -3,7 +3,7 @@
 
 class UserPark {
     private $conn;
-    private $table_name = "tb_userPark";
+    private $table_name = "tb_userpark";
 
     // Propiedades del objeto
     public $id_userPark;

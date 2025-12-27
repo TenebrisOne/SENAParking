@@ -3,7 +3,7 @@ include_once '../config/conexion.php';
 
 class UserPark {
     private $conn;
-    private $table_name = "tb_userPark";
+    private $table_name = "tb_userpark";
 
     public $id_userPark;
     public $nombres_park;
